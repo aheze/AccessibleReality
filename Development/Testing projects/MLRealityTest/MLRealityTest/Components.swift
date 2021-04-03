@@ -17,7 +17,7 @@ class CustomBox: Entity, HasModel, HasAnchoring, HasCollision {
     required init(color: UIColor) {
         super.init()
         self.components[ModelComponent] = ModelComponent(
-            mesh: .generateBox(size: 0.5),
+            mesh: .generateBox(size: 0.1),
             materials: [SimpleMaterial(
                 color: color,
                 isMetallic: false)

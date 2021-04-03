@@ -44,14 +44,16 @@ extension ViewController {
                 {
                     
                     print("Detected: \(topLabelObservation.identifier)")
-                    break
+                    
+                    busyProcessingImage = false
+                    return
                 }
                 
             }
             
         }
         
-        
+        print("nothing detected")
         busyProcessingImage = false
     }
 }

@@ -11,11 +11,16 @@ import ARKit
 
 class ViewController: UIViewController {
     
+    // MARK: ARKit
     @IBOutlet var arView: ARView!
     @IBOutlet weak var coachingReferenceView: UIView!
+    var coachingViewActive = false
     
     // MARK: Vision
     var busyProcessingImage = false
+    
+    // MARK: Interface
+    @IBOutlet weak var crosshairView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +34,12 @@ class ViewController: UIViewController {
         addCoaching()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        if let touch = touches.first {
-            let location = touch.location(in: arView)
-            rayCastingMethod(point: location)
-        }
+    @IBAction func addButtonPressed(_ sender: Any) {
+        let middleOfCrossHair = CGPoint(
+            x: crosshairView.frame.origin.x + (crosshairView.frame.width / 2),
+            y: crosshairView.frame.origin.y + (crosshairView.frame.height / 2)
+        )
+        rayCastingMethod(point: middleOfCrossHair)
     }
 }
 
@@ -59,32 +63,14 @@ extension ViewController: ARCoachingOverlayViewDelegate {
         NSLayoutConstraint.activate(constraints)
     }
     
-    public func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
-        
-        let box = CustomBox(color: .yellow, position: [-0.6, -1, -2])
-        arView.installGestures(.all, for: box)
-        box.generateCollisionShapes(recursive: true)
-        arView.scene.anchors.append(box) //self is arView
-        
-        let mesh = MeshResource.generateText(
-            "RealityKit",
-            extrusionDepth: 0.1,
-            font: .systemFont(ofSize: 2),
-            containerFrame: .zero,
-            alignment: .left,
-            lineBreakMode: .byTruncatingTail)
-        
-        let material = SimpleMaterial(color: .red, isMetallic: false)
-        let entity = ModelEntity(mesh: mesh, materials: [material])
-        entity.scale = SIMD3<Float>(0.03, 0.03, 0.1)
-        
-        box.addChild(entity)
-        
-        entity.setPosition(SIMD3<Float>(0, 0.05, 0), relativeTo: box)
+    func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
+        coachingViewActive = true
+    }
+    func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
+        coachingViewActive = false
     }
     
     func rayCastingMethod(point: CGPoint) {
-        
         
         guard let raycastQuery = arView.makeRaycastQuery(from: point,
                                                        allowing: .existingPlaneInfinite,

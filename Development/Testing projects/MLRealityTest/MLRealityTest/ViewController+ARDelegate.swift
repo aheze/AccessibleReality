@@ -10,7 +10,7 @@ import ARKit
 
 extension ViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        if busyProcessingImage == false {
+        if busyProcessingImage == false && coachingViewActive == false {
             busyProcessingImage = true
             processPixelBuffer(frame.capturedImage)
         }
