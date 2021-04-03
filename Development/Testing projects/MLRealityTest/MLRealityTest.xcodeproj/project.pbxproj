@@ -17,6 +17,7 @@
 		3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */; };
 		3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */; };
 		3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */; };
+		3C9EB77D261839CD00BBEAEA /* DetectedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+DetectObjects.swift"; sourceTree = "<group>"; };
 		3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARDelegate.swift"; sourceTree = "<group>"; };
 		3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
+		3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				3C9EB74B26180EB100BBEAEA /* ViewController.swift */,
 				3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */,
 				3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */,
+				3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */,
 				3C9EB75E26180F7400BBEAEA /* Components.swift */,
 				3C9EB74D26180EB100BBEAEA /* Experience.rcproject */,
 				3C9EB74F26180EB100BBEAEA /* Main.storyboard */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C9EB77D261839CD00BBEAEA /* DetectedObject.swift in Sources */,
 				3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */,
 				3C9EB74C26180EB100BBEAEA /* ViewController.swift in Sources */,
 				3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */,

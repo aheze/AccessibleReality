@@ -18,9 +18,15 @@ class ViewController: UIViewController {
     
     // MARK: Vision
     var busyProcessingImage = false
+    var currentDetectedObjects = [DetectedObject]()
+    
+    /// converting rects
+    var pixelBufferSize = CGSize.zero
+    var arViewSize = CGSize.zero
     
     // MARK: Interface
     @IBOutlet weak var crosshairView: UIImageView!
+    @IBOutlet weak var drawingView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +38,11 @@ class ViewController: UIViewController {
         arView.scene.anchors.append(boxAnchor)
         arView.session.delegate = self
         addCoaching()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        arViewSize = arView.bounds.size
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
