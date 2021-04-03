@@ -14,6 +14,9 @@
 		3C9EB75326180EB200BBEAEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C9EB75226180EB200BBEAEA /* Assets.xcassets */; };
 		3C9EB75626180EB200BBEAEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C9EB75426180EB200BBEAEA /* LaunchScreen.storyboard */; };
 		3C9EB75F26180F7400BBEAEA /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB75E26180F7400BBEAEA /* Components.swift */; };
+		3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */; };
+		3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */; };
+		3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		3C9EB75526180EB200BBEAEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C9EB75726180EB200BBEAEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C9EB75E26180F7400BBEAEA /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+DetectObjects.swift"; sourceTree = "<group>"; };
+		3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARDelegate.swift"; sourceTree = "<group>"; };
+		3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +66,12 @@
 			children = (
 				3C9EB74926180EB100BBEAEA /* AppDelegate.swift */,
 				3C9EB74B26180EB100BBEAEA /* ViewController.swift */,
+				3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */,
+				3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */,
 				3C9EB75E26180F7400BBEAEA /* Components.swift */,
 				3C9EB74D26180EB100BBEAEA /* Experience.rcproject */,
 				3C9EB74F26180EB100BBEAEA /* Main.storyboard */,
+				3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */,
 				3C9EB75226180EB200BBEAEA /* Assets.xcassets */,
 				3C9EB75426180EB200BBEAEA /* LaunchScreen.storyboard */,
 				3C9EB75726180EB200BBEAEA /* Info.plist */,
@@ -140,8 +149,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */,
 				3C9EB74C26180EB100BBEAEA /* ViewController.swift in Sources */,
+				3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				3C9EB75F26180F7400BBEAEA /* Components.swift in Sources */,
+				3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */,
 				3C9EB74A26180EB100BBEAEA /* AppDelegate.swift in Sources */,
 				3C9EB74E26180EB100BBEAEA /* Experience.rcproject in Sources */,
 			);
