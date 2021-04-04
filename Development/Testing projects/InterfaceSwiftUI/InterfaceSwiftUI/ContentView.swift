@@ -7,15 +7,21 @@
 
 import SwiftUI
 
-struct Card: Identifiable {
+class Card: ObservableObject, Identifiable {
     let id = UUID()
     
-    var added = false
-    var name: String
-    var color: Color
-    var sound: Sound
+    @Published var added = false
+    @Published var name: String
+    @Published var color: Color
+    @Published var sound: Sound
     
+    init(name: String, color: Color, sound: Sound) {
+        self.name = name
+        self.color = color
+        self.sound = sound
+    }
 }
+
 
 struct CardsView: View {
     @State var cards = [
@@ -27,14 +33,20 @@ struct CardsView: View {
             ScrollViewReader { proxy in
                 HStack {
                     ForEach(cards.indices, id: \.self) { index in
-                        CardView(card: $cards[index], addPressed: {
+                        CardView(card: cards[index], addPressed: {
+                            withAnimation(.easeOut) {
                             cards.append(Card(name: "Object", color: .green, sound: Sound(name: "Select a sound")))
+                            }
                             
                             
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                 withAnimation {
                                     proxy.scrollTo(cards.count - 1, anchor: .center)
                                 }
+                            }
+                        }, removePressed: {
+                            withAnimation(.easeOut) {
+                                _ = cards.remove(at: index)
                             }
                         })
                         .frame(width: 300, height: 400)
@@ -61,16 +73,22 @@ struct CardView: View {
     
     ]
     
-    @Binding var card: Card
+    @ObservedObject var card: Card
     
     var addPressed: (() -> Void)?
+    var removePressed: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
             Button(action: {
                 print("press.")
-                card.added = true
-                addPressed?()
+                card.added.toggle()
+                
+                if card.added {
+                    addPressed?()
+                } else {
+                    removePressed?()
+                }
             }) {
                 Text(card.added ? "Remove" : "Add")
                     .foregroundColor(Color.white)
@@ -134,6 +152,7 @@ struct CardView: View {
             .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)))
             .cornerRadius(16)
         }
+        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
     }
 }
 
