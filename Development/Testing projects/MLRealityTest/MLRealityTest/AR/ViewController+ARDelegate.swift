@@ -26,5 +26,12 @@ extension ViewController: ARSessionDelegate {
                 
             }
         }
+        
+        framesSinceLastTrack += 1
+        if framesSinceLastTrack >= 5 {
+            framesSinceLastTrack = 0
+            
+            trackCurrentMarker()
+        }
     }
 }

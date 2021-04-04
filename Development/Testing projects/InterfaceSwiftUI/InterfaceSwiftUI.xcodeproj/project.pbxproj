@@ -12,6 +12,7 @@
 		3CEA450E261967DB007D8A46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA450D261967DB007D8A46 /* Assets.xcassets */; };
 		3CEA4511261967DB007D8A46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CEA4510261967DB007D8A46 /* Preview Assets.xcassets */; };
 		3CEA451A261968F0007D8A46 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA4519261968F0007D8A46 /* Structures.swift */; };
+		3CEA451E261A1D39007D8A46 /* TestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA451D261A1D39007D8A46 /* TestingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		3CEA4510261967DB007D8A46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3CEA4512261967DB007D8A46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CEA4519261968F0007D8A46 /* Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
+		3CEA451D261A1D39007D8A46 /* TestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				3CEA4509261967DA007D8A46 /* InterfaceSwiftUIApp.swift */,
 				3CEA450B261967DA007D8A46 /* ContentView.swift */,
+				3CEA451D261A1D39007D8A46 /* TestingView.swift */,
 				3CEA4519261968F0007D8A46 /* Structures.swift */,
 				3CEA450D261967DB007D8A46 /* Assets.xcassets */,
 				3CEA4512261967DB007D8A46 /* Info.plist */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CEA450C261967DA007D8A46 /* ContentView.swift in Sources */,
+				3CEA451E261A1D39007D8A46 /* TestingView.swift in Sources */,
 				3CEA451A261968F0007D8A46 /* Structures.swift in Sources */,
 				3CEA450A261967DA007D8A46 /* InterfaceSwiftUIApp.swift in Sources */,
 			);

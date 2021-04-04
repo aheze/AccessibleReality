@@ -34,8 +34,10 @@ extension ViewController {
             let transformation = Transform(matrix: centerResult.worldTransform)
             let box = CustomBox(color: cubeColor, width: distance, height: height)
             
-            addEntity(box: box, transform: transformation, raycastResult: centerResult)
-            
+            let entity = addEntity(box: box, transform: transformation, raycastResult: centerResult)
+            let marker = Marker(name: name, entity: entity)
+            placedMarkers.append(marker)
+            currentTrackingMarker = marker
         }
         
         
@@ -49,7 +51,10 @@ extension ViewController {
             let transformation = Transform(matrix: result.worldTransform)
             let box = CustomBox(color: cubeColor)
             
-            addEntity(box: box, transform: transformation, raycastResult: result)
+            let entity = addEntity(box: box, transform: transformation, raycastResult: result)
+            let marker = Marker(name: "Object", entity: entity)
+            placedMarkers.append(marker)
+            currentTrackingMarker = marker
         }
         
     }
@@ -70,7 +75,7 @@ extension ViewController {
         
     }
     
-    func addEntity(box: CustomBox, transform: Transform, raycastResult: ARRaycastResult) {
+    func addEntity(box: CustomBox, transform: Transform, raycastResult: ARRaycastResult) -> Entity {
         arView.installGestures(.all, for: box)
         box.generateCollisionShapes(recursive: true)
         box.transform = transform
@@ -78,5 +83,7 @@ extension ViewController {
         let raycastAnchor = AnchorEntity(raycastResult: raycastResult)
         raycastAnchor.addChild(box)
         arView.scene.addAnchor(raycastAnchor)
+        
+        return box
     }
 }

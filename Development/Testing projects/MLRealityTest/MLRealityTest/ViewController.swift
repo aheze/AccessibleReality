@@ -30,7 +30,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var crosshairImageView: UIImageView!
     var crosshairBusyCalculating = false
     
-    var currentTargetedObject: DetectedObject?
+    var currentTargetedObject: DetectedObject? /// current object underneath crosshair
+    
+    // MARK: Tracking markers
+    var framesSinceLastTrack = 0 /// only track every 5 frames
+    var currentTrackingMarker: Marker?
+    var placedMarkers = [Marker]() /// current placed markers
+    
     
     
     // MARK: Interface

@@ -10,6 +10,7 @@
 		3C39F309261914F8000CFC30 /* ViewController+CheckOverlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39F308261914F8000CFC30 /* ViewController+CheckOverlap.swift */; };
 		3C39F30C26191759000CFC30 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39F30B26191759000CFC30 /* Utilities.swift */; };
 		3C39F31026191B55000CFC30 /* ViewController+AddMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39F30F26191B55000CFC30 /* ViewController+AddMarker.swift */; };
+		3C8D2ABF261A2B320061CEC3 /* ViewController+TrackMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D2ABE261A2B320061CEC3 /* ViewController+TrackMarker.swift */; };
 		3C9EB74A26180EB100BBEAEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB74926180EB100BBEAEA /* AppDelegate.swift */; };
 		3C9EB74C26180EB100BBEAEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB74B26180EB100BBEAEA /* ViewController.swift */; };
 		3C9EB74E26180EB100BBEAEA /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB74D26180EB100BBEAEA /* Experience.rcproject */; };
@@ -20,7 +21,7 @@
 		3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */; };
 		3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */; };
 		3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */; };
-		3C9EB77D261839CD00BBEAEA /* DetectedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */; };
+		3C9EB77D261839CD00BBEAEA /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB77C261839CD00BBEAEA /* Objects.swift */; };
 		3CEA44F7261965DF007D8A46 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA44F6261965DF007D8A46 /* CardsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		3C39F308261914F8000CFC30 /* ViewController+CheckOverlap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CheckOverlap.swift"; sourceTree = "<group>"; };
 		3C39F30B26191759000CFC30 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		3C39F30F26191B55000CFC30 /* ViewController+AddMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AddMarker.swift"; sourceTree = "<group>"; };
+		3C8D2ABE261A2B320061CEC3 /* ViewController+TrackMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+TrackMarker.swift"; sourceTree = "<group>"; };
 		3C9EB74626180EB100BBEAEA /* MLRealityTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLRealityTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C9EB74926180EB100BBEAEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3C9EB74B26180EB100BBEAEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +42,7 @@
 		3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+DetectObjects.swift"; sourceTree = "<group>"; };
 		3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARDelegate.swift"; sourceTree = "<group>"; };
 		3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
-		3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedObject.swift; sourceTree = "<group>"; };
+		3C9EB77C261839CD00BBEAEA /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		3CEA44F6261965DF007D8A46 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,7 +80,7 @@
 				3C9EB74B26180EB100BBEAEA /* ViewController.swift */,
 				3CEA44F2261965AF007D8A46 /* AR */,
 				3CEA44F5261965BB007D8A46 /* Views */,
-				3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */,
+				3C9EB77C261839CD00BBEAEA /* Objects.swift */,
 				3C9EB75E26180F7400BBEAEA /* Components.swift */,
 				3C39F30B26191759000CFC30 /* Utilities.swift */,
 				3C9EB74D26180EB100BBEAEA /* Experience.rcproject */,
@@ -97,6 +99,7 @@
 				3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */,
 				3C39F308261914F8000CFC30 /* ViewController+CheckOverlap.swift */,
 				3C39F30F26191B55000CFC30 /* ViewController+AddMarker.swift */,
+				3C8D2ABE261A2B320061CEC3 /* ViewController+TrackMarker.swift */,
 				3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */,
 			);
 			path = AR;
@@ -180,7 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C9EB77D261839CD00BBEAEA /* DetectedObject.swift in Sources */,
+				3C9EB77D261839CD00BBEAEA /* Objects.swift in Sources */,
 				3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */,
 				3C9EB74C26180EB100BBEAEA /* ViewController.swift in Sources */,
 				3C39F309261914F8000CFC30 /* ViewController+CheckOverlap.swift in Sources */,
@@ -190,6 +193,7 @@
 				3C9EB75F26180F7400BBEAEA /* Components.swift in Sources */,
 				3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */,
 				3C9EB74A26180EB100BBEAEA /* AppDelegate.swift in Sources */,
+				3C8D2ABF261A2B320061CEC3 /* ViewController+TrackMarker.swift in Sources */,
 				3C39F30C26191759000CFC30 /* Utilities.swift in Sources */,
 				3C9EB74E26180EB100BBEAEA /* Experience.rcproject in Sources */,
 			);
