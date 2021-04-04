@@ -7,15 +7,46 @@
 
 import SwiftUI
 
+struct Card: Identifiable {
+    let id = UUID()
+    
+    var added = false
+    var name: String
+    var color: Color
+    var sound: Sound
+    
+}
+
 struct CardsView: View {
+    @State var cards = [
+        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound")),
+    ]
+    
     var body: some View {
-        CardView()
-            .frame(width: 300, height: 400)
+        ScrollView(.horizontal, showsIndicators: false) {
+            ScrollViewReader { proxy in
+                HStack {
+                    ForEach(cards.indices, id: \.self) { index in
+                        CardView(card: $cards[index], addPressed: {
+                            cards.append(Card(name: "Object", color: .green, sound: Sound(name: "Select a sound")))
+                            
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                withAnimation {
+                                    proxy.scrollTo(cards.count - 1, anchor: .center)
+                                }
+                            }
+                        })
+                        .frame(width: 300, height: 400)
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
     }
 }
 
 struct CardView: View {
-    @State var color = Color.blue
     
     var sounds = [
         Sound(name: "Chimes"),
@@ -30,34 +61,33 @@ struct CardView: View {
     
     ]
     
+    @Binding var card: Card
     
-    @State private var selectedSound = Sound(name: "Select a sound")
+    var addPressed: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
             Button(action: {
-                
+                print("press.")
+                card.added = true
+                addPressed?()
             }) {
-                Text("Add")
+                Text(card.added ? "Remove" : "Add")
                     .foregroundColor(Color.white)
                     .font(.system(size: 18, weight: .semibold))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 10)
-                    .background(Color.green)
+                    .background(card.added ? Color.red : Color.green)
                     .cornerRadius(12, corners: [.topLeft, .topRight])
                     .padding(.horizontal, 16)
             }
             
             VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Text("Pencil")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 32, weight: .semibold, design: .rounded))
+                TextField("Textfield", text: $card.name)
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 32, weight: .semibold, design: .rounded))
                     
-                    Spacer()
-                }
-                
-                .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
                 
                 
                 HStack {
@@ -67,7 +97,7 @@ struct CardView: View {
                     
                     Spacer()
                     
-                    ColorPicker("Set the background color", selection: $color)
+                    ColorPicker("Set the background color", selection: $card.color)
                         .labelsHidden()
                         .scaleEffect(x: 1.2, y: 1.2)
                         .offset(x: -2, y: 0)
@@ -84,7 +114,7 @@ struct CardView: View {
                         .foregroundColor(.white)
                     
                     Spacer()
-                    Picker(selectedSound.name, selection: $selectedSound) {
+                    Picker(card.sound.name, selection: $card.sound) {
                         ForEach(sounds, id: \.self) {
                             Text($0.name)
                         }
