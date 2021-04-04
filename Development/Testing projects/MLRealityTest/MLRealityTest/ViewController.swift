@@ -41,6 +41,9 @@ class ViewController: UIViewController {
     
     // MARK: Interface
     @IBOutlet weak var drawingView: UIView!
+    @IBOutlet weak var cardsReferenceView: UIView!
+    @IBOutlet weak var cardsReferenceHeightC: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +54,19 @@ class ViewController: UIViewController {
         // Add the box anchor to the scene
         arView.scene.anchors.append(boxAnchor)
         arView.session.delegate = self
+        
+        
         addCoaching()
+        setupCardsView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         arViewSize = arView.bounds.size
+        
+        Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
+        cardsReferenceHeightC.constant = Positioning.cardContainerHeight
+        
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {

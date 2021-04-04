@@ -1,5 +1,5 @@
 //
-//  Objects.swift
+//  Structs.swift
 //  MLRealityTest
 //
 //  Created by Zheng on 4/2/21.
@@ -18,5 +18,10 @@ struct Marker {
     var entity: Entity
 }
 
+struct Sound: Identifiable, Hashable {
+    let id = UUID()
+    var name: String
+    var filepath = URL(fileURLWithPath: "")
+}
 
 

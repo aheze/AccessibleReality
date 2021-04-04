@@ -1,6 +1,6 @@
 //
-//  ContentView.swift
-//  InterfaceSwiftUI
+//  CardsView.swift
+//  MLRealityTest
 //
 //  Created by Zheng on 4/3/21.
 //
@@ -32,8 +32,6 @@ class Card: ObservableObject, Identifiable, Hashable {
 
 struct CardsView: View {
     
-    let cardWidth = CGFloat(300)
-    
     @State var cards = [
         Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
     ]
@@ -60,47 +58,13 @@ struct CardsView: View {
                             }
                         })
                         .id(card.id)
-                        .frame(width: cardWidth, height: 400)
+                        .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
                     }
                 }
-                .padding(.horizontal, (UIScreen.main.bounds.width - cardWidth) / 2)
+                .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
             }
         }
-    }
-}
 
-
-struct MyTabView: View {
-    var body: some View {
-        TabView {
-            Text("The First Tab")
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("First")
-                }
-            Text("Another Tab")
-                .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
-                }
-            Text("The Last Tab")
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Third")
-                }
-            
-            Text("When you sync your contacts you will see the ones who are using the app, so you can add them as friends")
-                .font(.system(size: 15))
-                .foregroundColor(Color.gray)
-                .padding(.horizontal,25)
-        }
-        .font(.headline)
-    }
-}
-
-struct MyTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyTabView()
     }
 }
 
@@ -197,6 +161,7 @@ struct CardView: View {
             .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)))
             .cornerRadius(16)
         }
+        .background(Color.orange)
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
     }
 }
