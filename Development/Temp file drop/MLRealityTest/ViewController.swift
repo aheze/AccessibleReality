@@ -5,11 +5,13 @@
 //  Created by Zheng on 4/2/21.
 //
 
+import PlaygroundSupport
 import UIKit
 import RealityKit
 import ARKit
 
-class TheViewController: UIViewController {
+@objc(BookCore_ViewController)
+public class ViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
     
     // MARK: ARKit
     @IBOutlet var arView: ARView!
@@ -45,7 +47,7 @@ class TheViewController: UIViewController {
     @IBOutlet weak var cardsReferenceHeightC: NSLayoutConstraint!
     
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         // Load the "Box" scene from the "Experience" Reality File
@@ -60,7 +62,7 @@ class TheViewController: UIViewController {
 //        setupCardsView()
     }
     
-    override func viewDidLayoutSubviews() {
+    public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         arViewSize = arView.bounds.size
         
@@ -79,7 +81,7 @@ class TheViewController: UIViewController {
     }
 }
 
-extension TheViewController: ARCoachingOverlayViewDelegate {
+extension ViewController: ARCoachingOverlayViewDelegate {
     func addCoaching() {
         
         let coachingOverlay = ARCoachingOverlayView()
@@ -99,10 +101,10 @@ extension TheViewController: ARCoachingOverlayViewDelegate {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
+    public func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
         coachingViewActive = true
     }
-    func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
+    public func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
         coachingViewActive = false
     }
 }
