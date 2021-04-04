@@ -21,6 +21,7 @@
 		3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */; };
 		3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */; };
 		3C9EB77D261839CD00BBEAEA /* DetectedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */; };
+		3CEA44F7261965DF007D8A46 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA44F6261965DF007D8A46 /* CardsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARDelegate.swift"; sourceTree = "<group>"; };
 		3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
 		3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectedObject.swift; sourceTree = "<group>"; };
+		3CEA44F6261965DF007D8A46 /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +76,8 @@
 			children = (
 				3C9EB74926180EB100BBEAEA /* AppDelegate.swift */,
 				3C9EB74B26180EB100BBEAEA /* ViewController.swift */,
-				3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */,
-				3C39F308261914F8000CFC30 /* ViewController+CheckOverlap.swift */,
-				3C39F30F26191B55000CFC30 /* ViewController+AddMarker.swift */,
-				3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */,
+				3CEA44F2261965AF007D8A46 /* AR */,
+				3CEA44F5261965BB007D8A46 /* Views */,
 				3C9EB77C261839CD00BBEAEA /* DetectedObject.swift */,
 				3C9EB75E26180F7400BBEAEA /* Components.swift */,
 				3C39F30B26191759000CFC30 /* Utilities.swift */,
@@ -89,6 +89,25 @@
 				3C9EB75726180EB200BBEAEA /* Info.plist */,
 			);
 			path = MLRealityTest;
+			sourceTree = "<group>";
+		};
+		3CEA44F2261965AF007D8A46 /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */,
+				3C39F308261914F8000CFC30 /* ViewController+CheckOverlap.swift */,
+				3C39F30F26191B55000CFC30 /* ViewController+AddMarker.swift */,
+				3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		3CEA44F5261965BB007D8A46 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3CEA44F6261965DF007D8A46 /* CardsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +186,7 @@
 				3C39F309261914F8000CFC30 /* ViewController+CheckOverlap.swift in Sources */,
 				3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				3C39F31026191B55000CFC30 /* ViewController+AddMarker.swift in Sources */,
+				3CEA44F7261965DF007D8A46 /* CardsView.swift in Sources */,
 				3C9EB75F26180F7400BBEAEA /* Components.swift in Sources */,
 				3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */,
 				3C9EB74A26180EB100BBEAEA /* AppDelegate.swift in Sources */,
