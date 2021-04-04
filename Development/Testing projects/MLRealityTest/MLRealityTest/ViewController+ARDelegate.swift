@@ -14,5 +14,17 @@ extension ViewController: ARSessionDelegate {
             busyProcessingImage = true
             processPixelBuffer(frame.capturedImage)
         }
+        
+        if crosshairBusyCalculating == false {
+            let middleOfCrossHair = crosshairView.center
+            checkOverlap(at: middleOfCrossHair) { detectedObject in
+                
+                
+                self.currentTargetedObject = detectedObject
+                
+                self.crosshairView.backgroundColor = (detectedObject == nil) ? UIColor.clear : UIColor.red.withAlphaComponent(0.5) 
+                
+            }
+        }
     }
 }

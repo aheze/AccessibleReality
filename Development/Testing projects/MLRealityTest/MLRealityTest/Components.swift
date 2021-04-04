@@ -8,9 +8,6 @@
 import UIKit
 import RealityKit
 
-extension ViewController {
-    
-}
 
 class CustomBox: Entity, HasModel, HasAnchoring, HasCollision {
     
@@ -24,6 +21,19 @@ class CustomBox: Entity, HasModel, HasAnchoring, HasCollision {
             ]
         )
     }
+    
+    init(color: UIColor, width: Float, height: Float) {
+        super.init()
+        self.components[ModelComponent] = ModelComponent(
+            mesh: .generateBox(width: width, height: height, depth: height),
+            materials: [SimpleMaterial(
+                color: color,
+                isMetallic: false)
+            ]
+        )
+    }
+    
+    
     
     convenience init(color: UIColor, position: SIMD3<Float>) {
         self.init(color: color)

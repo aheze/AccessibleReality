@@ -20,12 +20,20 @@ class ViewController: UIViewController {
     var busyProcessingImage = false
     var currentDetectedObjects = [DetectedObject]()
     
+    
     /// converting rects
     var pixelBufferSize = CGSize.zero
     var arViewSize = CGSize.zero
     
+    // MARK: Crosshair
+    @IBOutlet weak var crosshairView: UIView!
+    @IBOutlet weak var crosshairImageView: UIImageView!
+    var crosshairBusyCalculating = false
+    
+    var currentTargetedObject: DetectedObject?
+    
+    
     // MARK: Interface
-    @IBOutlet weak var crosshairView: UIImageView!
     @IBOutlet weak var drawingView: UIView!
     
     override func viewDidLoad() {
@@ -46,11 +54,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {
-        let middleOfCrossHair = CGPoint(
-            x: crosshairView.frame.origin.x + (crosshairView.frame.width / 2),
-            y: crosshairView.frame.origin.y + (crosshairView.frame.height / 2)
-        )
-        rayCastingMethod(point: middleOfCrossHair)
+        if let object = currentTargetedObject {
+            addMarker(at: object.convertedBoundingBox, name: object.name)
+        } else {
+            let middleOfCrossHair = crosshairView.center
+            addMarker(at: middleOfCrossHair)
+        }
     }
 }
 
@@ -79,31 +88,5 @@ extension ViewController: ARCoachingOverlayViewDelegate {
     }
     func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
         coachingViewActive = false
-    }
-    
-    func rayCastingMethod(point: CGPoint) {
-        
-        guard let raycastQuery = arView.makeRaycastQuery(from: point,
-                                                       allowing: .existingPlaneInfinite,
-                                                       alignment: .horizontal) else {
-            
-            print("failed first")
-            return
-        }
-        
-        guard let result = arView.session.raycast(raycastQuery).first else {
-            print("failed")
-            return
-        }
-        
-        let transformation = Transform(matrix: result.worldTransform)
-        let box = CustomBox(color: .yellow)
-        arView.installGestures(.all, for: box)
-        box.generateCollisionShapes(recursive: true)
-        box.transform = transformation
-        
-        let raycastAnchor = AnchorEntity(raycastResult: result)
-        raycastAnchor.addChild(box)
-        arView.scene.addAnchor(raycastAnchor)
     }
 }
