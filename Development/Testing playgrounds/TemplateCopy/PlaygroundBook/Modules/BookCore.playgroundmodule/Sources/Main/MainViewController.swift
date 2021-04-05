@@ -8,6 +8,7 @@
 import UIKit
 import PlaygroundSupport
 import ARKit
+import RealityKit
 
 @objc(BookCore_MainViewController)
 public class MainViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
@@ -34,6 +35,8 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
 //    @IBOutlet weak var sceneView: ARSCNView!
     
+    var arView: ARView!
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,33 +47,53 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
 //        let config = ARWorldTrackingConfiguration()
 //        config.planeDetection = .vertical
 //        sceneView.session.run(config)
-        let arKitSceneView = ARSCNView()
+//        let arKitSceneView = ARSCNView()
+//
+//        /// Make voiceover allow directly tapping the scene view.
+//        arKitSceneView.isAccessibilityElement = true
+//        arKitSceneView.accessibilityTraits = .allowsDirectInteraction
+//        arKitSceneView.accessibilityLabel = "Use the rotor to enable Direct Touch"
+//
+//        /// Add the ARKIT scene view as a subview
+//        view.addSubview(arKitSceneView)
+//
+//        /// Positioning constraints
+//        arKitSceneView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            arKitSceneView.topAnchor.constraint(equalTo: view.topAnchor),
+//            arKitSceneView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            arKitSceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//            arKitSceneView.leftAnchor.constraint(equalTo: view.leftAnchor)
+//        ])
+//
+//
+//
+//        /// Configure the AR Session
+//        /// This will make ARKit track the device's position and orientation
+//        let worldTrackingConfiguration = ARWorldTrackingConfiguration()
+//
+//        /// Run the configuration
+//        arKitSceneView.session.run(worldTrackingConfiguration)
         
-        /// Make voiceover allow directly tapping the scene view.
-        arKitSceneView.isAccessibilityElement = true
-        arKitSceneView.accessibilityTraits = .allowsDirectInteraction
-        arKitSceneView.accessibilityLabel = "Use the rotor to enable Direct Touch"
-        
-        /// Add the ARKIT scene view as a subview
-        view.addSubview(arKitSceneView)
+        let arView = ARView(frame: CGRect.zero, cameraMode: .ar, automaticallyConfigureSession: true)
+        view.addSubview(arView)
         
         /// Positioning constraints
-        arKitSceneView.translatesAutoresizingMaskIntoConstraints = false
+        arView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            arKitSceneView.topAnchor.constraint(equalTo: view.topAnchor),
-            arKitSceneView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            arKitSceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            arKitSceneView.leftAnchor.constraint(equalTo: view.leftAnchor)
+            arView.topAnchor.constraint(equalTo: view.topAnchor),
+            arView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            arView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            arView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
         
+        self.arView = arView
         
         
-        /// Configure the AR Session
-        /// This will make ARKit track the device's position and orientation
-        let worldTrackingConfiguration = ARWorldTrackingConfiguration()
-        
-        /// Run the configuration
-        arKitSceneView.session.run(worldTrackingConfiguration)
+//        PlaygroundPage.current.liveView = instantiateLiveView()
+        PlaygroundPage.current.needsIndefiniteExecution = true
+//        let worldTrackingConfiguration = ARWorldTrackingConfiguration()
+//        arView.session.run(worldTrackingConfiguration)
     }
     
     
