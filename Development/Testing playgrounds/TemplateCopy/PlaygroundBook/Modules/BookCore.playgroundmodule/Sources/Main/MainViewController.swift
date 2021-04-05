@@ -33,67 +33,38 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         // Use this method to decode any messages sent as PlaygroundValue values and respond accordingly.
     }
     
-//    @IBOutlet weak var sceneView: ARSCNView!
-    
+
+    // MARK: AR views
     var arView: ARView!
+    var coachingReferenceView: UIView!
+    var coachingViewActive = false
     
+    // MARK: Vision
+    var busyProcessingImage = false
+    var currentDetectedObjects = [DetectedObject]()
+    
+    /// converting rects
+    var pixelBufferSize = CGSize.zero
+    var arViewSize = CGSize.zero
+    
+    // MARK: Crosshair
+    var crosshairView: UIView!
+    var crosshairImageView: UIImageView!
+    var currentTargetedObject: DetectedObject? /// current object underneath crosshair
+    
+    // MARK: Tracking markers
+    var framesSinceLastTrack = 0 /// only track every 5 frames
+    var currentTrackingMarker: Marker?
+    var placedMarkers = [Marker]() /// current placed markers
+    
+    var cardsReferenceView: UIView!
+    var cardsReferenceHeightC: NSLayoutConstraint!
+ 
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-//        sceneView.delegate = self
-//        sceneView.session.delegate = self
-//        sceneView.scene = scene
-
-//        let config = ARWorldTrackingConfiguration()
-//        config.planeDetection = .vertical
-//        sceneView.session.run(config)
-//        let arKitSceneView = ARSCNView()
-//
-//        /// Make voiceover allow directly tapping the scene view.
-//        arKitSceneView.isAccessibilityElement = true
-//        arKitSceneView.accessibilityTraits = .allowsDirectInteraction
-//        arKitSceneView.accessibilityLabel = "Use the rotor to enable Direct Touch"
-//
-//        /// Add the ARKIT scene view as a subview
-//        view.addSubview(arKitSceneView)
-//
-//        /// Positioning constraints
-//        arKitSceneView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            arKitSceneView.topAnchor.constraint(equalTo: view.topAnchor),
-//            arKitSceneView.rightAnchor.constraint(equalTo: view.rightAnchor),
-//            arKitSceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            arKitSceneView.leftAnchor.constraint(equalTo: view.leftAnchor)
-//        ])
-//
-//
-//
-//        /// Configure the AR Session
-//        /// This will make ARKit track the device's position and orientation
-//        let worldTrackingConfiguration = ARWorldTrackingConfiguration()
-//
-//        /// Run the configuration
-//        arKitSceneView.session.run(worldTrackingConfiguration)
+        setupViews()
         
-        let arView = ARView(frame: CGRect.zero, cameraMode: .ar, automaticallyConfigureSession: true)
-        view.addSubview(arView)
-        
-        /// Positioning constraints
-        arView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            arView.topAnchor.constraint(equalTo: view.topAnchor),
-            arView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            arView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            arView.leftAnchor.constraint(equalTo: view.leftAnchor)
-        ])
-        
-        self.arView = arView
-        
-        
-//        PlaygroundPage.current.liveView = instantiateLiveView()
-        PlaygroundPage.current.needsIndefiniteExecution = true
-//        let worldTrackingConfiguration = ARWorldTrackingConfiguration()
-//        arView.session.run(worldTrackingConfiguration)
     }
     
     
