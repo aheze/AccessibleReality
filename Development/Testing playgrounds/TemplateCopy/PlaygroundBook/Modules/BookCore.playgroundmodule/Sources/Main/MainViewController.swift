@@ -7,6 +7,7 @@
 
 import UIKit
 import PlaygroundSupport
+import ARKit
 
 @objc(BookCore_MainViewController)
 public class MainViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
@@ -29,6 +30,47 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         // Implement this method to receive messages sent from the process running Contents.swift.
         // This method is *required* by the PlaygroundLiveViewMessageHandler protocol.
         // Use this method to decode any messages sent as PlaygroundValue values and respond accordingly.
+    }
+    
+//    @IBOutlet weak var sceneView: ARSCNView!
+    
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        sceneView.delegate = self
+//        sceneView.session.delegate = self
+//        sceneView.scene = scene
+
+//        let config = ARWorldTrackingConfiguration()
+//        config.planeDetection = .vertical
+//        sceneView.session.run(config)
+        let arKitSceneView = ARSCNView()
+        
+        /// Make voiceover allow directly tapping the scene view.
+        arKitSceneView.isAccessibilityElement = true
+        arKitSceneView.accessibilityTraits = .allowsDirectInteraction
+        arKitSceneView.accessibilityLabel = "Use the rotor to enable Direct Touch"
+        
+        /// Add the ARKIT scene view as a subview
+        view.addSubview(arKitSceneView)
+        
+        /// Positioning constraints
+        arKitSceneView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            arKitSceneView.topAnchor.constraint(equalTo: view.topAnchor),
+            arKitSceneView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            arKitSceneView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            arKitSceneView.leftAnchor.constraint(equalTo: view.leftAnchor)
+        ])
+        
+        
+        
+        /// Configure the AR Session
+        /// This will make ARKit track the device's position and orientation
+        let worldTrackingConfiguration = ARWorldTrackingConfiguration()
+        
+        /// Run the configuration
+        arKitSceneView.session.run(worldTrackingConfiguration)
     }
     
     
