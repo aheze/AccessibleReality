@@ -10,6 +10,7 @@ import ARKit
 
 extension MainViewController: ARCoachingOverlayViewDelegate {
     func addCoaching() {
+        print("adding!")
         
         let coachingOverlay = ARCoachingOverlayView()
         coachingOverlay.delegate = self

@@ -65,6 +65,9 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         
         setupViews()
         
+        arView.session.delegate = self
+        addCoaching()
+        
     }
     
     
