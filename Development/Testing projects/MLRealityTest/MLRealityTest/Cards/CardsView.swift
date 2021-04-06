@@ -29,7 +29,7 @@ class Card: ObservableObject, Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    static func ==(lhs: Card, rhsBasic: Card) -> Bool {
+    static func ==(lhs: Card, rhs: Card) -> Bool {
         return lhs.id == rhs.id
     }
 }
@@ -87,12 +87,12 @@ struct CardsView: View {
         .onAppear {
             selectedCard = cards.last
         }
-
+        
     }
     
     func updateCardName(name: String) {
         print("cards... \(cards) name \(name)")
-//        print("customized? \(cards.last?.customizedName ).. \(!(cards.last?.customizedName ?? false))")
+        //        print("customized? \(cards.last?.customizedName ).. \(!(cards.last?.customizedName ?? false))")
         /// only update name if not customized
         if !(cards.last?.customizedName ?? false) {
             print("Changing name!!!")
@@ -113,7 +113,7 @@ struct CardView: View {
         Sound(name: "Frédéric Chopin"),
         Sound(name: "R. Nathaniel Dett"),
         Sound(name: "Memento")
-    
+        
     ]
     
     @Binding var selectedCard: Card?
@@ -143,77 +143,92 @@ struct CardView: View {
                     .padding(.horizontal, 16)
             }
             
-            VStack(alignment: .leading, spacing: 0) {
-                TextField("Textfield", text: $card.name) { _ in
+            ZStack {
+                Button(action: {
                     
-                    /// started editing
-                    card.customizedName = true
-                }
-                .foregroundColor(Color.white)
-                .font(.system(size: 32, weight: .semibold, design: .rounded))
+                }) {
+                    Color.clear
+                }.buttonStyle(CardButtonStyle())
                 
-                .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
-
-                HStack {
-                    Text("Color")
-                        .foregroundColor(.white)
-                    
-                    
-                    Spacer()
-                    
-                    ColorPicker("Set the background color", selection: $card.color)
-                        .labelsHidden()
-                        .scaleEffect(x: 1.2, y: 1.2)
-                        .offset(x: -2, y: 0)
-                    
-                }
-                .padding(16)
-                .background(Color(#colorLiteral(red: 0.3725216476, green: 0.6794671474, blue: 0.1888703918, alpha: 1)))
-                .cornerRadius(12)
-                .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
-                
-                
-                HStack {
-                    Text("Sound")
-                        .foregroundColor(.white)
-                    
-                    Spacer()
-                    Picker(card.sound.name, selection: $card.sound) {
-                        ForEach(sounds, id: \.self) {
-                            Text($0.name)
-                        }
+                .shadow(color: selectedCard == card ? Color(#colorLiteral(red: 0.7022804076, green: 1, blue: 0, alpha: 1)) : Color.clear, radius: 12, x: 0, y: 2)
+                VStack(alignment: .leading, spacing: 0) {
+                    TextField("Textfield", text: $card.name) { _ in
+                        
+                        /// started editing
+                        card.customizedName = true
                     }
-                    .pickerStyle(MenuPickerStyle())
-                    .foregroundColor(Color.white.opacity(0.8))
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 32, weight: .semibold, design: .rounded))
+                    
+                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                    
+                    HStack {
+                        Text("Color")
+                            .foregroundColor(.white)
+                        
+                        
+                        Spacer()
+                        
+                        ColorPicker("Set the background color", selection: $card.color)
+                            .labelsHidden()
+                            .scaleEffect(x: 1.2, y: 1.2)
+                            .offset(x: -2, y: 0)
+                        
+                    }
+                    .padding(16)
+                    .background(Color(#colorLiteral(red: 0.3725216476, green: 0.6794671474, blue: 0.1888703918, alpha: 1)))
+                    .cornerRadius(12)
+                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                    
+                    
+                    HStack {
+                        Text("Sound")
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        Picker(card.sound.name, selection: $card.sound) {
+                            ForEach(sounds, id: \.self) {
+                                Text($0.name)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .foregroundColor(Color.white.opacity(0.8))
+                        
+                    }
+                    .padding(16)
+                    .background(Color(#colorLiteral(red: 0.3725216476, green: 0.6794671474, blue: 0.1888703918, alpha: 1)))
+                    .cornerRadius(12)
+                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                    
                     
                 }
-                .padding(16)
-                .background(Color(#colorLiteral(red: 0.3725216476, green: 0.6794671474, blue: 0.1888703918, alpha: 1)))
-                .cornerRadius(12)
-                .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
-                
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)))
-            .cornerRadius(16)
-            .shadow(color: selectedCard == card ? Color(#colorLiteral(red: 0.7022804076, green: 1, blue: 0, alpha: 1)) : Color.clear, radius: 12, x: 0, y: 2)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)), lineWidth: 0.75)
-            )
+            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
         }
-        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
     }
 }
 
 struct CardsView_Previews: PreviewProvider {
     static var previews: some View {
         CardsView()
-            
+        
     }
 }
 
+struct CardButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        Color(configuration.isPressed ? #colorLiteral(red: 0.3632367699, green: 0.662531838, blue: 0.1841629111, alpha: 1) : #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
+            .cornerRadius(16)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)), lineWidth: 0.75)
+            )
+            .scaleEffect(configuration.isPressed ? 1.05 : 1)
+            .animation(.spring())
+    }
+}
 
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
@@ -221,10 +236,10 @@ extension View {
     }
 }
 struct RoundedCorner: Shape {
-
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
