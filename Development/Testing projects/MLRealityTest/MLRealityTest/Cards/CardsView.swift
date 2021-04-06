@@ -14,6 +14,7 @@ class Card: ObservableObject, Identifiable, Hashable {
     @Published var name: String
     @Published var color: Color
     @Published var sound: Sound
+    var marker: Marker?
     
     init(name: String, color: Color, sound: Sound) {
         self.name = name
@@ -36,6 +37,8 @@ struct CardsView: View {
         Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
     ]
     
+    var cardChanged: ((Card) -> Void)?
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in
@@ -52,10 +55,14 @@ struct CardsView: View {
                                     proxy.scrollTo(cards.last?.id ?? card.id, anchor: .center)
                                 }
                             }
+                            
+                            cardChanged?(card)
                         }, removePressed: {
                             withAnimation(.easeOut) {
                                 _ = cards.remove(at: index)
                             }
+                            
+                            cardChanged?(card)
                         })
                         .id(card.id)
                         .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)

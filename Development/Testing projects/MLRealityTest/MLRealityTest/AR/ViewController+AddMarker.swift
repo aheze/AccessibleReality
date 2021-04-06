@@ -10,7 +10,7 @@ import RealityKit
 import ARKit
 
 extension ViewController {
-    func addMarker(at boundingBox: CGRect, name: String) {
+    func addMarker(at boundingBox: CGRect, name: String) -> Marker? {
         
         /// get horizontal distance
         let topLeftPoint = CGPoint(x: boundingBox.minX, y: boundingBox.minY)
@@ -34,16 +34,19 @@ extension ViewController {
             let transformation = Transform(matrix: centerResult.worldTransform)
             let box = CustomBox(color: cubeColor, width: distance, height: height)
             
-            let entity = addEntity(box: box, transform: transformation, raycastResult: centerResult)
-            let marker = Marker(name: name, entity: entity)
+            let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: centerResult)
+            
+            let marker = Marker(name: name, entity: box, anchorEntity: anchorEntity)
             placedMarkers.append(marker)
             currentTrackingMarker = marker
+            
+            return marker
         }
         
-        
+        return nil
     }
     
-    func addMarker(at screenCoordinate: CGPoint) {
+    func addMarker(at screenCoordinate: CGPoint) -> Marker? {
         
         if let result = makeRaycastQuery(at: screenCoordinate) {
             let cubeColor = UIColor.green
@@ -51,11 +54,15 @@ extension ViewController {
             let transformation = Transform(matrix: result.worldTransform)
             let box = CustomBox(color: cubeColor)
             
-            let entity = addEntity(box: box, transform: transformation, raycastResult: result)
-            let marker = Marker(name: "Object", entity: entity)
+            let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: result)
+            let marker = Marker(name: "Object", entity: box, anchorEntity: anchorEntity)
             placedMarkers.append(marker)
             currentTrackingMarker = marker
+            
+            return marker
         }
+        
+        return nil
         
     }
     
@@ -75,7 +82,7 @@ extension ViewController {
         
     }
     
-    func addEntity(box: CustomBox, transform: Transform, raycastResult: ARRaycastResult) -> Entity {
+    func addEntity(box: CustomBox, transform: Transform, raycastResult: ARRaycastResult) -> AnchorEntity {
         arView.installGestures(.all, for: box)
         box.generateCollisionShapes(recursive: true)
         box.transform = transform
@@ -84,6 +91,6 @@ extension ViewController {
         raycastAnchor.addChild(box)
         arView.scene.addAnchor(raycastAnchor)
         
-        return box
+        return raycastAnchor
     }
 }

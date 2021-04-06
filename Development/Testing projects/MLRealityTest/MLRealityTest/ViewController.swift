@@ -69,14 +69,14 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        if let object = currentTargetedObject {
-            addMarker(at: object.convertedBoundingBox, name: object.name)
-        } else {
-            let middleOfCrossHair = crosshairView.center
-            addMarker(at: middleOfCrossHair)
-        }
-    }
+//    @IBAction func addButtonPressed(_ sender: Any) {
+//        if let object = currentTargetedObject {
+//            addMarker(at: object.convertedBoundingBox, name: object.name)
+//        } else {
+//            let middleOfCrossHair = crosshairView.center
+//            addMarker(at: middleOfCrossHair)
+//        }
+//    }
 }
 
 extension ViewController: ARCoachingOverlayViewDelegate {
