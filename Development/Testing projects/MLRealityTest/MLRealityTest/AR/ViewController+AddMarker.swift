@@ -10,7 +10,7 @@ import RealityKit
 import ARKit
 
 extension ViewController {
-    func addMarker(at boundingBox: CGRect, name: String) -> Marker? {
+    func addMarker(at boundingBox: CGRect, name: String, color: UIColor) -> Marker? {
         
         /// get horizontal distance
         let topLeftPoint = CGPoint(x: boundingBox.minX, y: boundingBox.minY)
@@ -30,7 +30,7 @@ extension ViewController {
             let heightOverWidthRatio = boundingBox.height / boundingBox.width
             let height = distance * Float(heightOverWidthRatio)
             
-            let cubeColor = UIColor.yellow.withAlphaComponent(0.3)
+            let cubeColor = color.withAlphaComponent(0.3) /// make partially transparent because it encompasses the detected object
             let transformation = Transform(matrix: centerResult.worldTransform)
             let box = CustomBox(color: cubeColor, width: distance, height: height)
             
@@ -46,10 +46,10 @@ extension ViewController {
         return nil
     }
     
-    func addMarker(at screenCoordinate: CGPoint) -> Marker? {
+    func addMarker(at screenCoordinate: CGPoint, color: UIColor) -> Marker? {
         
         if let result = makeRaycastQuery(at: screenCoordinate) {
-            let cubeColor = UIColor.green
+            let cubeColor = color
             
             let transformation = Transform(matrix: result.worldTransform)
             let box = CustomBox(color: cubeColor)

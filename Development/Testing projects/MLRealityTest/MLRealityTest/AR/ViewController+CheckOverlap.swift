@@ -25,6 +25,9 @@ extension ViewController {
             
             DispatchQueue.main.async {
                 completion(overlappedObject)
+                if let object = overlappedObject {
+                    self.cardsView?.updateCardName(name: object.name.capitalized)
+                }
             }
             
             self.crosshairBusyCalculating = false

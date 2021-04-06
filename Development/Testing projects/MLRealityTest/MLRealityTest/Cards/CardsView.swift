@@ -11,10 +11,14 @@ class Card: ObservableObject, Identifiable, Hashable {
     let id = UUID()
     
     @Published var added = false
+    
     @Published var name: String
     @Published var color: Color
     @Published var sound: Sound
     var marker: Marker?
+    
+    /// if user edited the textfield
+    var customizedName = false
     
     init(name: String, color: Color, sound: Sound) {
         self.name = name
@@ -25,7 +29,7 @@ class Card: ObservableObject, Identifiable, Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    static func ==(lhs: Card, rhs: Card) -> Bool {
+    static func ==(lhs: Card, rhsBasic: Card) -> Bool {
         return lhs.id == rhs.id
     }
 }
@@ -33,6 +37,7 @@ class Card: ObservableObject, Identifiable, Hashable {
 
 struct CardsView: View {
     
+    @State var selectedCard: Card?
     @State var cards = [
         Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
     ]
@@ -44,10 +49,18 @@ struct CardsView: View {
             ScrollViewReader { proxy in
                 HStack {
                     ForEach(Array(cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(card: card, addPressed: {
+                        CardView(selectedCard: $selectedCard, card: card, addPressed: {
                             
                             withAnimation(.easeOut) {
-                                cards.append(Card(name: "Object", color: .green, sound: Sound(name: "Select a sound")))
+                                
+                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
+                                print("new card name: \(newCard.customizedName)")
+                                
+                                /// keep the same color for now
+                                cards.append(newCard)
+                                selectedCard = newCard
+                                
+                                print("cards are now \(cards)")
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -71,7 +84,20 @@ struct CardsView: View {
                 .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
             }
         }
+        .onAppear {
+            selectedCard = cards.last
+        }
 
+    }
+    
+    func updateCardName(name: String) {
+        print("cards... \(cards) name \(name)")
+//        print("customized? \(cards.last?.customizedName ).. \(!(cards.last?.customizedName ?? false))")
+        /// only update name if not customized
+        if !(cards.last?.customizedName ?? false) {
+            print("Changing name!!!")
+            cards.last?.name = name
+        }
     }
 }
 
@@ -90,6 +116,7 @@ struct CardView: View {
     
     ]
     
+    @Binding var selectedCard: Card?
     @ObservedObject var card: Card
     
     var addPressed: (() -> Void)?
@@ -117,13 +144,16 @@ struct CardView: View {
             }
             
             VStack(alignment: .leading, spacing: 0) {
-                TextField("Textfield", text: $card.name)
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 32, weight: .semibold, design: .rounded))
+                TextField("Textfield", text: $card.name) { _ in
                     
-                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                    /// started editing
+                    card.customizedName = true
+                }
+                .foregroundColor(Color.white)
+                .font(.system(size: 32, weight: .semibold, design: .rounded))
                 
-                
+                .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+
                 HStack {
                     Text("Color")
                         .foregroundColor(.white)
@@ -167,8 +197,12 @@ struct CardView: View {
             .padding(.vertical, 16)
             .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)))
             .cornerRadius(16)
+            .shadow(color: selectedCard == card ? Color(#colorLiteral(red: 0.7022804076, green: 1, blue: 0, alpha: 1)) : Color.clear, radius: 12, x: 0, y: 2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)), lineWidth: 0.75)
+            )
         }
-        .background(Color.orange)
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
     }
 }

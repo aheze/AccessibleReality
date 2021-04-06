@@ -5,15 +5,34 @@
 //  Created by Zheng on 4/3/21.
 //
 
+
 import SwiftUI
+
+
+
+
+struct Constants {
+    static var cardContainerHeight = CGFloat(300)
+    static var cardWidth = CGFloat(300)
+}
+struct Positioning {
+    static var cardContainerHeight = Constants.cardContainerHeight
+}
+
 
 class Card: ObservableObject, Identifiable, Hashable {
     let id = UUID()
     
     @Published var added = false
+    @Published var isSelected = false
+    
     @Published var name: String
     @Published var color: Color
     @Published var sound: Sound
+//    var marker: Marker?
+    
+    /// if user edited the textfield
+    var customizedName = false
     
     init(name: String, color: Color, sound: Sound) {
         self.name = name
@@ -32,11 +51,11 @@ class Card: ObservableObject, Identifiable, Hashable {
 
 struct CardsView: View {
     
-    let cardWidth = CGFloat(300)
-    
     @State var cards = [
         Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
     ]
+    
+    var cardChanged: ((Card) -> Void)?
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -46,7 +65,9 @@ struct CardsView: View {
                         CardView(card: card, addPressed: {
                             
                             withAnimation(.easeOut) {
-                                cards.append(Card(name: "Object", color: .green, sound: Sound(name: "Select a sound")))
+                                
+                                /// keep the same color for now
+                                cards.append(Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound")))
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -54,53 +75,31 @@ struct CardsView: View {
                                     proxy.scrollTo(cards.last?.id ?? card.id, anchor: .center)
                                 }
                             }
+                            
+                            cardChanged?(card)
                         }, removePressed: {
                             withAnimation(.easeOut) {
                                 _ = cards.remove(at: index)
                             }
+                            
+                            cardChanged?(card)
                         })
                         .id(card.id)
-                        .frame(width: cardWidth, height: 400)
+                        .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
                     }
                 }
-                .padding(.horizontal, (UIScreen.main.bounds.width - cardWidth) / 2)
+                .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
             }
         }
+
     }
-}
-
-
-struct MyTabView: View {
-    var body: some View {
-        TabView {
-            Text("The First Tab")
-                .tabItem {
-                    Image(systemName: "1.square.fill")
-                    Text("First")
-                }
-            Text("Another Tab")
-                .tabItem {
-                    Image(systemName: "2.square.fill")
-                    Text("Second")
-                }
-            Text("The Last Tab")
-                .tabItem {
-                    Image(systemName: "3.square.fill")
-                    Text("Third")
-                }
-            
-            Text("When you sync your contacts you will see the ones who are using the app, so you can add them as friends")
-                .font(.system(size: 15))
-                .foregroundColor(Color.gray)
-                .padding(.horizontal,25)
+    
+    func updateCardName(name: String) {
+        print("customized? \(cards.last?.customizedName )")
+        /// only update name if not customized
+        if !(cards.last?.customizedName ?? false) {
+            cards.last?.name = name
         }
-        .font(.headline)
-    }
-}
-
-struct MyTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyTabView()
     }
 }
 
@@ -146,13 +145,16 @@ struct CardView: View {
             }
             
             VStack(alignment: .leading, spacing: 0) {
-                TextField("Textfield", text: $card.name)
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 32, weight: .semibold, design: .rounded))
+                TextField("Textfield", text: $card.name) { _ in
                     
-                    .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+                    /// started editing
+                    card.customizedName = true
+                }
+                .foregroundColor(Color.white)
+                .font(.system(size: 32, weight: .semibold, design: .rounded))
                 
-                
+                .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
+
                 HStack {
                     Text("Color")
                         .foregroundColor(.white)
@@ -196,6 +198,8 @@ struct CardView: View {
             .padding(.vertical, 16)
             .background(Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)))
             .cornerRadius(16)
+            .shadow(color: Color(#colorLiteral(red: 0.7022804076, green: 1, blue: 0, alpha: 1)), radius: card.isSelected ? 16 : 0, x: 0, y: 2)
+            
         }
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
     }

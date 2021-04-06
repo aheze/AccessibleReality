@@ -65,7 +65,6 @@ extension ViewController {
             
         }
         
-        print("current: \(detectedObjects)")
         self.currentDetectedObjects = detectedObjects
         
         DispatchQueue.main.async {

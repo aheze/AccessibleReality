@@ -14,28 +14,31 @@ extension ViewController {
             guard let self = self else { return }
             
             if card.added {
-                print("added!")
                 if let object = self.currentTargetedObject {
-                    if let marker = self.addMarker(at: object.convertedBoundingBox, name: object.name) {
+                    if let marker = self.addMarker(
+                        at: object.convertedBoundingBox,
+                        name: object.name,
+                        color: UIColor(card.color)
+                    ) {
                         card.marker = marker
                     }
                 } else {
                     let middleOfCrossHair = self.crosshairView.center
-                    if let marker = self.addMarker(at: middleOfCrossHair) {
+                    if let marker = self.addMarker(
+                        at: middleOfCrossHair,
+                        color: UIColor(card.color)
+                    ) {
                         card.marker = marker
                     }
                 }
             } else {
-                print("removeed!.. \(card.marker)")
                 
                 card.marker?.anchorEntity.removeFromParent()
                 
             }
-            
-//            print("receiver changed. \(card)")
-            
         }
         
+        self.cardsView = cardsView
         
         let hostingController = UIHostingController(rootView: cardsView)
         addChildViewController(hostingController, in: cardsReferenceView)
