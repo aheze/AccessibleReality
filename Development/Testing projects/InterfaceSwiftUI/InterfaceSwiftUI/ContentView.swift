@@ -84,9 +84,7 @@ struct CardsView: View {
                             
                             cardChanged?(card)
                         }, removePressed: {
-//                            withAnimation(.easeOut) {
                                 _ = cards.remove(at: index)
-//                            }
                             
                             cardChanged?(card)
                         })
@@ -106,10 +104,8 @@ struct CardsView: View {
     
     func updateCardName(name: String) {
         print("cards... \(cards) name \(name)")
-        //        print("customized? \(cards.last?.customizedName ).. \(!(cards.last?.customizedName ?? false))")
         /// only update name if not customized
         if !(cards.last?.customizedName ?? false) {
-            print("Changing name!!!")
             cards.last?.name = name
         }
     }

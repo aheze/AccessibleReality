@@ -56,7 +56,6 @@ class ViewController: UIViewController {
         arView.scene.anchors.append(boxAnchor)
         arView.session.delegate = self
         
-        
         addCoaching()
         setupCardsView()
     }
@@ -66,18 +65,9 @@ class ViewController: UIViewController {
         arViewSize = arView.bounds.size
         
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
-        cardsReferenceHeightC.constant = Positioning.cardContainerHeight
+        cardsReferenceHeightC.constant = Positioning.cardContainerHeight + 40
         
     }
-    
-//    @IBAction func addButtonPressed(_ sender: Any) {
-//        if let object = currentTargetedObject {
-//            addMarker(at: object.convertedBoundingBox, name: object.name)
-//        } else {
-//            let middleOfCrossHair = crosshairView.center
-//            addMarker(at: middleOfCrossHair)
-//        }
-//    }
 }
 
 extension ViewController: ARCoachingOverlayViewDelegate {

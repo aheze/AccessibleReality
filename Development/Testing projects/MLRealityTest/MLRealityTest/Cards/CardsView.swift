@@ -47,7 +47,7 @@ struct CardsView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in
-                HStack {
+                HStack(spacing: 20) {
                     ForEach(Array(cards.enumerated()), id: \.1) { (index, card) in
                         CardView(selectedCard: $selectedCard, card: card, addPressed: {
                             
@@ -71,9 +71,7 @@ struct CardsView: View {
                             
                             cardChanged?(card)
                         }, removePressed: {
-                            withAnimation(.easeOut) {
-                                _ = cards.remove(at: index)
-                            }
+                            _ = cards.remove(at: index)
                             
                             cardChanged?(card)
                         })
@@ -82,6 +80,7 @@ struct CardsView: View {
                     }
                 }
                 .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
+                .padding(.vertical, 20)
             }
         }
         .onAppear {
@@ -92,10 +91,9 @@ struct CardsView: View {
     
     func updateCardName(name: String) {
         print("cards... \(cards) name \(name)")
-        //        print("customized? \(cards.last?.customizedName ).. \(!(cards.last?.customizedName ?? false))")
+        
         /// only update name if not customized
         if !(cards.last?.customizedName ?? false) {
-            print("Changing name!!!")
             cards.last?.name = name
         }
     }
@@ -148,9 +146,10 @@ struct CardView: View {
                     
                 }) {
                     Color.clear
-                }.buttonStyle(CardButtonStyle())
-                
+                }
+                .buttonStyle(CardButtonStyle())
                 .shadow(color: selectedCard == card ? Color(#colorLiteral(red: 0.7022804076, green: 1, blue: 0, alpha: 1)) : Color.clear, radius: 12, x: 0, y: 2)
+                
                 VStack(alignment: .leading, spacing: 0) {
                     TextField("Textfield", text: $card.name) { _ in
                         
@@ -205,28 +204,27 @@ struct CardView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
             }
-            .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
         }
+        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
+        .animation(.easeOut)
     }
 }
 
 struct CardsView_Previews: PreviewProvider {
     static var previews: some View {
         CardsView()
-        
     }
 }
 
 struct CardButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
-        Color(configuration.isPressed ? #colorLiteral(red: 0.3632367699, green: 0.662531838, blue: 0.1841629111, alpha: 1) : #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
+        Color(configuration.isPressed ? #colorLiteral(red: 0.3108978095, green: 0.5670673077, blue: 0.1576267889, alpha: 1) : #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
                     .stroke(Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)), lineWidth: 0.75)
             )
             .scaleEffect(configuration.isPressed ? 1.05 : 1)
-            .animation(.spring())
     }
 }
 
