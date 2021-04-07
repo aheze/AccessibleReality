@@ -18,18 +18,19 @@ extension ViewController {
             path.move(to: crosshairCenter)
             path.addLine(to: projectedPoint)
             
-            if let lineLayer = lineLayer {
-                lineLayer.path = path.cgPath
-            } else {
+            /// add lineLayer if nil
+            if lineLayer == nil {
+                path.lineCapStyle = .round
                 let lineLayer = CAShapeLayer()
                 lineLayer.path = path.cgPath
-                lineLayer.strokeColor = currentTrackingMarker.color.cgColor
                 lineLayer.lineWidth = 3
                 
                 drawingView.layer.addSublayer(lineLayer)
-                
                 self.lineLayer = lineLayer
             }
+            
+            self.lineLayer?.path = path.cgPath
+            self.lineLayer?.strokeColor = currentTrackingMarker.color.cgColor
             
         }
     }
