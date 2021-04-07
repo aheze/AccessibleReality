@@ -55,13 +55,11 @@ struct CardsView: View {
                             withAnimation(.easeOut) {
                                 
                                 let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
-                                print("new card name: \(newCard.customizedName)")
                                 
                                 /// keep the same color for now
                                 cards.append(newCard)
                                 selectedCard = newCard
                                 
-                                print("cards are now \(cards)")
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -73,15 +71,11 @@ struct CardsView: View {
                             cardChanged?(card)
                         }, removePressed: {
                             
-                            print("index: \(index)")
-                            
                             /// scroll to nearest index
                             var newIndex = index
                             if index == cards.indices.last {
                                 newIndex = index - 1
                             }
-                            
-                            print("newIndex: \(newIndex)")
                             
                             _ = cards.remove(at: index)
                             

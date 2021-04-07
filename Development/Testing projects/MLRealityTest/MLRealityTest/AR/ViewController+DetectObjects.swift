@@ -57,8 +57,6 @@ extension ViewController {
                     
                     let detectedObject = DetectedObject(name: name, convertedBoundingBox: convertedRect)
                     detectedObjects.append(detectedObject)
-
-                    print("Detected: \(detectedObject), rect: \(convertedRect)")
                 }
                 
             }

@@ -36,7 +36,7 @@ extension ViewController {
             
             let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: centerResult)
             
-            let marker = Marker(name: name, entity: box, anchorEntity: anchorEntity)
+            let marker = Marker(name: name, color: color, entity: box, anchorEntity: anchorEntity)
             placedMarkers.append(marker)
             currentTrackingMarker = marker
             
@@ -49,13 +49,12 @@ extension ViewController {
     func addMarker(at screenCoordinate: CGPoint, color: UIColor) -> Marker? {
         
         if let result = makeRaycastQuery(at: screenCoordinate) {
-            let cubeColor = color
             
             let transformation = Transform(matrix: result.worldTransform)
-            let box = CustomBox(color: cubeColor)
+            let box = CustomBox(color: color)
             
             let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: result)
-            let marker = Marker(name: "Object", entity: box, anchorEntity: anchorEntity)
+            let marker = Marker(name: "Object", color: color, entity: box, anchorEntity: anchorEntity)
             placedMarkers.append(marker)
             currentTrackingMarker = marker
             

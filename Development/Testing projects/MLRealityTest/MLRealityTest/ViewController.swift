@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var crosshairView: UIView!
     @IBOutlet weak var crosshairImageView: UIImageView!
     var crosshairBusyCalculating = false
+    var crosshairCenter = CGPoint.zero
     
     var currentTargetedObject: DetectedObject? /// current object underneath crosshair
     
@@ -36,6 +37,9 @@ class ViewController: UIViewController {
     var framesSinceLastTrack = 0 /// only track every 5 frames
     var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
+    
+    // MARK: Tracking interface
+    var lineLayer: CAShapeLayer?
     
     
     
@@ -63,6 +67,7 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         arViewSize = arView.bounds.size
+        crosshairCenter = crosshairView.center
         
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
         cardsReferenceHeightC.constant = Positioning.cardContainerHeight + 40
