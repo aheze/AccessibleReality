@@ -10,7 +10,10 @@ import SwiftUI
 extension ViewController {
     
     func setupCardsView() {
-        let cardsView = CardsView { [weak self] card in
+        
+        /// add the SwiftUI ContentView
+        self.vm = CardsViewModel()
+        let cardsView = CardsView(vm: self.vm) { [weak self] card in
             guard let self = self else { return }
             
             if card.added {
@@ -41,7 +44,6 @@ extension ViewController {
             self.currentTrackingMarker = card.marker
         }
         
-        self.cardsView = cardsView
         
         let hostingController = UIHostingController(rootView: cardsView)
         addChildViewController(hostingController, in: cardsReferenceView)

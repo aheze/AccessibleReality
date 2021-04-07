@@ -44,7 +44,7 @@ class ViewController: UIViewController {
     
     
     // MARK: Interface
-    var cardsView: CardsView?
+    var vm: CardsViewModel! /// keep reference to cards
     @IBOutlet weak var drawingView: UIView!
     @IBOutlet weak var cardsReferenceView: UIView!
     @IBOutlet weak var cardsReferenceHeightC: NSLayoutConstraint!

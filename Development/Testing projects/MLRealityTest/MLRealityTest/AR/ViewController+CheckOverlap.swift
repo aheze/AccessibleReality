@@ -26,7 +26,10 @@ extension ViewController {
             DispatchQueue.main.async {
                 completion(overlappedObject)
                 if let object = overlappedObject {
-                    self.cardsView?.updateCardName(name: object.name.capitalized)
+                    if self.vm.cards[self.vm.cards.count - 1].customizedName == false {
+                        self.vm.cards[self.vm.cards.count - 1].name = object.name.capitalized
+                    }
+                    
                 }
             }
             

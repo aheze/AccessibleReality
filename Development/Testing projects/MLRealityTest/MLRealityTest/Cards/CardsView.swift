@@ -34,13 +34,19 @@ class Card: ObservableObject, Identifiable, Hashable {
     }
 }
 
+class CardsViewModel: ObservableObject {
+    @Published var cards = [
+        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
+    ]
+}
 
 struct CardsView: View {
     
     @State var selectedCard: Card?
-    @State var cards = [
-        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
-    ]
+//    @State var cards = [
+//        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
+//    ]
+    @ObservedObject var vm: CardsViewModel
     
     var cardChanged: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
@@ -49,7 +55,7 @@ struct CardsView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
-                    ForEach(Array(cards.enumerated()), id: \.1) { (index, card) in
+                    ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
                         CardView(selectedCard: $selectedCard, card: card, addPressed: {
                             
                             withAnimation(.easeOut) {
@@ -57,14 +63,14 @@ struct CardsView: View {
                                 let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
                                 
                                 /// keep the same color for now
-                                cards.append(newCard)
+                                vm.cards.append(newCard)
                                 selectedCard = newCard
                                 
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 withAnimation {
-                                    proxy.scrollTo(cards.last?.id ?? card.id, anchor: .center)
+                                    proxy.scrollTo(vm.cards.last?.id ?? card.id, anchor: .center)
                                 }
                             }
                             
@@ -73,20 +79,20 @@ struct CardsView: View {
                             
                             /// scroll to nearest index
                             var newIndex = index
-                            if index == cards.indices.last {
+                            if index == vm.cards.indices.last {
                                 newIndex = index - 1
                             }
                             
-                            _ = cards.remove(at: index)
+                            _ = vm.cards.remove(at: index)
                             
                             /// refocus if deleted selected card
                             if selectedCard == card {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     withAnimation {
-                                        proxy.scrollTo(cards[newIndex].id, anchor: .center)
+                                        proxy.scrollTo(vm.cards[newIndex].id, anchor: .center)
                                     }
                                 }
-                                selectedCard = cards[newIndex]
+                                selectedCard = vm.cards[newIndex]
                             }
                             
                             cardChanged?(card)
@@ -110,19 +116,19 @@ struct CardsView: View {
             }
         }
         .onAppear {
-            selectedCard = cards.last
+            selectedCard = vm.cards.last
         }
         
     }
     
-    func updateCardName(name: String) {
-        print("cards... \(cards) name \(name)")
-        
-        /// only update name if not customized
-        if !(cards.last?.customizedName ?? false) {
-            cards.last?.name = name
-        }
-    }
+//    func updateCardName(name: String) {
+//        print("cards... \(cards) name \(name)")
+//
+//        /// only update name if not customized
+//        if !(cards.last?.customizedName ?? false) {
+//            cards.last?.name = name
+//        }
+//    }
 }
 
 struct CardView: View {
@@ -245,11 +251,11 @@ struct CardView: View {
     }
 }
 
-struct CardsView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardsView()
-    }
-}
+//struct CardsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardsView()
+//    }
+//}
 
 struct CardButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
