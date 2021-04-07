@@ -9,13 +9,10 @@ import UIKit
 import Vision
 
 extension ViewController {
-    func processPixelBuffer(_ ciImage: CIImage) {
+    func processCurrentFrame(_ ciImage: CIImage) {
         
-        if pixelBufferSize == .zero {
-            
-//            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-            print("size.. \(ciImage)")
-            self.pixelBufferSize = CGSize(width: ciImage.extent.width, height: ciImage.extent.height)
+        if imageFrameSize == .zero {
+            self.imageFrameSize = CGSize(width: ciImage.extent.width, height: ciImage.extent.height)
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -30,7 +27,6 @@ extension ViewController {
                     self?.processResults(for: request, error: error)
                 }
                 
-//                let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .leftMirrored, options: [:])
                 let requestHandler = VNImageRequestHandler(ciImage: ciImage, orientation: .up, options: [:])
                 try requestHandler.perform([objectDetectionRequest])
             } catch {
@@ -47,7 +43,6 @@ extension ViewController {
             error == nil,
             let results = request.results
         {
-            print("result... \(results)")
             for observation in results  {
                 if
                     let objectObservation = observation as? VNRecognizedObjectObservation,
@@ -56,7 +51,7 @@ extension ViewController {
                 {
                     
                     let name = objectLabel.identifier
-                    let convertedRect = getConvertedRect(boundingBox: objectObservation.boundingBox, withImageSize: pixelBufferSize, containedIn: arViewSize)
+                    let convertedRect = getConvertedRect(boundingBox: objectObservation.boundingBox, withImageSize: imageFrameSize, containedIn: arViewSize)
                     
                     let detectedObject = DetectedObject(name: name, convertedBoundingBox: convertedRect)
                     detectedObjects.append(detectedObject)

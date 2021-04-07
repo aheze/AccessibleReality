@@ -13,11 +13,14 @@ extension ViewController: ARSessionDelegate {
         if busyProcessingImage == false && coachingViewActive == false {
             busyProcessingImage = true
             
+            
+            /// get coordinates converted to screen
+            /// from https://stackoverflow.com/a/58817480/14351818
             let imageBuffer = frame.capturedImage
 
             let imageSize = CGSize(width: CVPixelBufferGetWidth(imageBuffer), height: CVPixelBufferGetHeight(imageBuffer))
-            let viewPort = arView.bounds
-            let viewPortSize = arView.bounds.size
+            let viewPort = CGRect(origin: .zero, size: arViewSize)
+
 
             let interfaceOrientation : UIInterfaceOrientation
             if #available(iOS 13.0, *) {
@@ -43,16 +46,15 @@ extension ViewController: ARSessionDelegate {
             // - To view coordinates ("a coordinate space appropriate for rendering the camera image onscreen")
             // See also: https://developer.apple.com/documentation/arkit/arframe/2923543-displaytransform
 
-            let displayTransform = frame.displayTransform(for: interfaceOrientation, viewportSize: viewPortSize)
+            let displayTransform = frame.displayTransform(for: interfaceOrientation, viewportSize: arViewSize)
 
             // 4) Convert to view size
-            let toViewPortTransform = CGAffineTransform(scaleX: viewPortSize.width, y: viewPortSize.height)
+            let toViewPortTransform = CGAffineTransform(scaleX: arViewSize.width, y: arViewSize.height)
 
             // Transform the image and crop it to the viewport
             let transformedImage = image.transformed(by: normalizeTransform.concatenating(flipTransform).concatenating(displayTransform).concatenating(toViewPortTransform)).cropped(to: viewPort)
 
-            processPixelBuffer(transformedImage)
-            
+            processCurrentFrame(transformedImage)
             
         }
         

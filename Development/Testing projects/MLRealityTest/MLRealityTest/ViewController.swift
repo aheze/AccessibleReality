@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     
     
     /// converting rects
-    var pixelBufferSize = CGSize.zero
+    var imageFrameSize = CGSize.zero
     var arViewSize = CGSize.zero
     
     // MARK: Crosshair
