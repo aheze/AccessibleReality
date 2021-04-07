@@ -13,7 +13,7 @@ extension ViewController {
             
             
             let projectedPoint = arView.project(currentTrackingMarker.entity.position)
-            print("point: \(projectedPoint)")
+//            print("point: \(projectedPoint)")
             
             //                DispatchQueue.main.async {
             //

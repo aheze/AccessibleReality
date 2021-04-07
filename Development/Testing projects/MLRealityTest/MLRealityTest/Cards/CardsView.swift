@@ -43,11 +43,12 @@ struct CardsView: View {
     ]
     
     var cardChanged: ((Card) -> Void)?
+    var cardSelected: ((Card) -> Void)?
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in
-                HStack(spacing: 20) {
+                LazyHStack(spacing: 20) {
                     ForEach(Array(cards.enumerated()), id: \.1) { (index, card) in
                         CardView(selectedCard: $selectedCard, card: card, addPressed: {
                             
@@ -71,12 +72,43 @@ struct CardsView: View {
                             
                             cardChanged?(card)
                         }, removePressed: {
+                            
+                            print("index: \(index)")
+                            
+                            /// scroll to nearest index
+                            var newIndex = index
+                            if index == cards.indices.last {
+                                newIndex = index - 1
+                            }
+                            
+                            print("newIndex: \(newIndex)")
+                            
                             _ = cards.remove(at: index)
                             
+                            /// refocus if deleted selected card
+                            if selectedCard == card {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    withAnimation {
+                                        proxy.scrollTo(cards[newIndex].id, anchor: .center)
+                                    }
+                                }
+                                selectedCard = cards[newIndex]
+                            }
+                            
                             cardChanged?(card)
+                        }, selected: {
+                            
+                            withAnimation {
+                                proxy.scrollTo(card.id, anchor: .center)
+                            }
+                            
+                            selectedCard = card
+                            cardSelected?(card)
                         })
                         .id(card.id)
                         .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
+                        .offset(x: 0, y: selectedCard == card ? -20 : 0)
+                        .brightness(selectedCard == card ? 0 : -0.4)
                     }
                 }
                 .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
@@ -119,6 +151,7 @@ struct CardView: View {
     
     var addPressed: (() -> Void)?
     var removePressed: (() -> Void)?
+    var selected: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -143,12 +176,11 @@ struct CardView: View {
             
             ZStack {
                 Button(action: {
-                    
+                    selected?() /// selected this card
                 }) {
                     Color.clear
                 }
                 .buttonStyle(CardButtonStyle())
-                .shadow(color: selectedCard == card ? Color(#colorLiteral(red: 0.7022804076, green: 1, blue: 0, alpha: 1)) : Color.clear, radius: 12, x: 0, y: 2)
                 
                 VStack(alignment: .leading, spacing: 0) {
                     TextField("Textfield", text: $card.name) { _ in
@@ -175,7 +207,7 @@ struct CardView: View {
                         
                     }
                     .padding(16)
-                    .background(Color(#colorLiteral(red: 0.3725216476, green: 0.6794671474, blue: 0.1888703918, alpha: 1)))
+                    .background(Color.white.opacity(0.1))
                     .cornerRadius(12)
                     .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
                     
@@ -195,7 +227,7 @@ struct CardView: View {
                         
                     }
                     .padding(16)
-                    .background(Color(#colorLiteral(red: 0.3725216476, green: 0.6794671474, blue: 0.1888703918, alpha: 1)))
+                    .background(Color.white.opacity(0.1))
                     .cornerRadius(12)
                     .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
                     
@@ -203,6 +235,15 @@ struct CardView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
+                
+                /// add button to entire card to make active
+                if selectedCard != card {
+                    Button(action: {
+                        selected?() /// selected this card
+                    }) {
+                        Color.clear
+                    }
+                }
             }
         }
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
@@ -218,7 +259,7 @@ struct CardsView_Previews: PreviewProvider {
 
 struct CardButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
-        Color(configuration.isPressed ? #colorLiteral(red: 0.3108978095, green: 0.5670673077, blue: 0.1576267889, alpha: 1) : #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))
+        Color(configuration.isPressed ? #colorLiteral(red: 0, green: 0.4430488782, blue: 0.002534600552, alpha: 1) : #colorLiteral(red: 0, green: 0.553125, blue: 0.003164325652, alpha: 1))
             .cornerRadius(16)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)

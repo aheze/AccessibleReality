@@ -36,6 +36,9 @@ extension ViewController {
                 card.marker?.anchorEntity.removeFromParent()
                 
             }
+        } cardSelected: { [weak self] card in
+            guard let self = self else { return }
+            self.currentTrackingMarker = card.marker
         }
         
         self.cardsView = cardsView
