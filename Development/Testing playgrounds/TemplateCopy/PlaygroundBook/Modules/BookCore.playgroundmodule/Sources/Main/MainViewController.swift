@@ -50,6 +50,10 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     // MARK: Crosshair
     var crosshairView: UIView!
     var crosshairImageView: UIImageView!
+
+    var crosshairBusyCalculating = false
+    var crosshairCenter = CGPoint.zero
+    
     var currentTargetedObject: DetectedObject? /// current object underneath crosshair
     
     // MARK: Tracking markers
@@ -57,6 +61,12 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
     
+    // MARK: Tracking interface
+    var lineLayer: CAShapeLayer?
+    
+    // MARK: Interface
+    var cardsView: CardsView?
+    var drawingView: UIView!
     var cardsReferenceView: UIView!
     var cardsReferenceHeightC: NSLayoutConstraint!
  
@@ -67,6 +77,17 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         
         arView.session.delegate = self
         addCoaching()
+        setupCardsView()
+        
+    }
+    
+    override public func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        arViewSize = arView.bounds.size
+        crosshairCenter = crosshairView.center
+        
+        Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
+        cardsReferenceHeightC.constant = Positioning.cardContainerHeight + 40
         
     }
     

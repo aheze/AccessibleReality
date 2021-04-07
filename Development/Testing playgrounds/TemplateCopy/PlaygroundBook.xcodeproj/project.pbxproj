@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C728A2F261D4DB4007A1C7A /* MainVC+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */; };
+		3C728A39261D4DBA007A1C7A /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A38261D4DBA007A1C7A /* CardsView.swift */; };
+		3C728A3F261D4E1B007A1C7A /* Positioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A3E261D4E1B007A1C7A /* Positioning.swift */; };
+		3C728A51261D4F28007A1C7A /* MainVC+AddMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A50261D4F28007A1C7A /* MainVC+AddMarker.swift */; };
+		3C728A57261D4F3B007A1C7A /* MainVC+TrackMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */; };
+		3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */; };
+		3C728A63261D4FAB007A1C7A /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A62261D4FAB007A1C7A /* Objects.swift */; };
+		3C728A69261D50B1007A1C7A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A68261D50B1007A1C7A /* Utilities.swift */; };
 		3C86BDB7261AB1C400610690 /* MainVC+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDB6261AB1C400610690 /* MainVC+ARDelegate.swift */; };
-		3C86BDC1261AB1D600610690 /* MainVC+CheckOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC0261AB1D600610690 /* MainVC+CheckOverlay.swift */; };
+		3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */; };
 		3C86BDC7261AB2CC00610690 /* MainVC+SetupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */; };
 		3C86BDCD261AB33400610690 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDCC261AB33400610690 /* Structs.swift */; };
 		3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */; };
@@ -137,8 +145,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Cards.swift"; sourceTree = "<group>"; };
+		3C728A38261D4DBA007A1C7A /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
+		3C728A3E261D4E1B007A1C7A /* Positioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positioning.swift; sourceTree = "<group>"; };
+		3C728A50261D4F28007A1C7A /* MainVC+AddMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+AddMarker.swift"; sourceTree = "<group>"; };
+		3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+TrackMarker.swift"; sourceTree = "<group>"; };
+		3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+TrackObjects.swift"; sourceTree = "<group>"; };
+		3C728A62261D4FAB007A1C7A /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		3C728A68261D50B1007A1C7A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		3C86BDB6261AB1C400610690 /* MainVC+ARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+ARDelegate.swift"; sourceTree = "<group>"; };
-		3C86BDC0261AB1D600610690 /* MainVC+CheckOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+CheckOverlay.swift"; sourceTree = "<group>"; };
+		3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+CheckOverlap.swift"; sourceTree = "<group>"; };
 		3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupViews.swift"; sourceTree = "<group>"; };
 		3C86BDCC261AB33400610690 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -206,11 +222,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C728A2D261D4DA4007A1C7A /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */,
+				3C728A38261D4DBA007A1C7A /* CardsView.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
 		3C86BDB5261AB1A200610690 /* AR */ = {
 			isa = PBXGroup;
 			children = (
 				3C86BDB6261AB1C400610690 /* MainVC+ARDelegate.swift */,
-				3C86BDC0261AB1D600610690 /* MainVC+CheckOverlay.swift */,
+				3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */,
+				3C728A50261D4F28007A1C7A /* MainVC+AddMarker.swift */,
+				3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */,
+				3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */,
+				3C728A62261D4FAB007A1C7A /* Objects.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -220,8 +249,11 @@
 			children = (
 				3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */,
 				3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */,
+				3C728A68261D50B1007A1C7A /* Utilities.swift */,
 				3C86BDB5261AB1A200610690 /* AR */,
+				3C728A2D261D4DA4007A1C7A /* Cards */,
 				3C86BDCC261AB33400610690 /* Structs.swift */,
+				3C728A3E261D4E1B007A1C7A /* Positioning.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -637,12 +669,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */,
 				3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */,
-				3C86BDC1261AB1D600610690 /* MainVC+CheckOverlay.swift in Sources */,
+				3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */,
+				3C728A69261D50B1007A1C7A /* Utilities.swift in Sources */,
 				3C86BDB7261AB1C400610690 /* MainVC+ARDelegate.swift in Sources */,
+				3C728A57261D4F3B007A1C7A /* MainVC+TrackMarker.swift in Sources */,
+				3C728A51261D4F28007A1C7A /* MainVC+AddMarker.swift in Sources */,
+				3C728A3F261D4E1B007A1C7A /* Positioning.swift in Sources */,
+				3C728A39261D4DBA007A1C7A /* CardsView.swift in Sources */,
+				3C728A2F261D4DB4007A1C7A /* MainVC+Cards.swift in Sources */,
 				3C86BDCD261AB33400610690 /* Structs.swift in Sources */,
 				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
 				3C86BDC7261AB2CC00610690 /* MainVC+SetupViews.swift in Sources */,
+				3C728A63261D4FAB007A1C7A /* Objects.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,7 +839,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -854,7 +894,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

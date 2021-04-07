@@ -15,7 +15,9 @@ struct DetectedObject {
 
 struct Marker {
     var name: String
-    var entity: Entity
+    var color: UIColor
+    var entity: Entity /// the box
+    var anchorEntity: AnchorEntity /// anchor of the box
 }
 
 struct Sound: Identifiable, Hashable {

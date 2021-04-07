@@ -1,14 +1,14 @@
 //
-//  ViewController+TrackMarker.swift
-//  MLRealityTest
+//  MainVC+TrackMarker.swift
+//  BookCore
 //
-//  Created by Zheng on 4/4/21.
+//  Created by Zheng on 4/6/21.
 //
 
 import UIKit
 import RealityKit
 
-extension ViewController {
+extension MainViewController {
     func trackCurrentMarker() {
         if
             let currentTrackingMarker = currentTrackingMarker,
