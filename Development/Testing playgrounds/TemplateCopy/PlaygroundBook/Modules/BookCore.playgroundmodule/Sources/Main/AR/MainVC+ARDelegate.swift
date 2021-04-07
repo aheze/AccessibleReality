@@ -39,9 +39,10 @@ extension MainViewController: ARCoachingOverlayViewDelegate {
 
 extension MainViewController: ARSessionDelegate {
     public func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        print("updating. \(busyProcessingImage) \(coachingViewActive)")
         if busyProcessingImage == false && coachingViewActive == false {
             busyProcessingImage = true
-//            processPixelBuffer(frame.capturedImage)
+            processPixelBuffer(frame.capturedImage)
         }
         
 //        if crosshairBusyCalculating == false {

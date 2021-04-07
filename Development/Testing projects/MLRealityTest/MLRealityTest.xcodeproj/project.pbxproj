@@ -10,6 +10,7 @@
 		3C39F309261914F8000CFC30 /* ViewController+CheckOverlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39F308261914F8000CFC30 /* ViewController+CheckOverlap.swift */; };
 		3C39F30C26191759000CFC30 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39F30B26191759000CFC30 /* Utilities.swift */; };
 		3C39F31026191B55000CFC30 /* ViewController+AddMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C39F30F26191B55000CFC30 /* ViewController+AddMarker.swift */; };
+		3C728A89261D56D3007A1C7A /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */; };
 		3C8D2ABF261A2B320061CEC3 /* ViewController+TrackMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D2ABE261A2B320061CEC3 /* ViewController+TrackMarker.swift */; };
 		3C8D2AC3261A56180061CEC3 /* ViewController+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D2AC2261A56180061CEC3 /* ViewController+Cards.swift */; };
 		3C9EB74A26180EB100BBEAEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB74926180EB100BBEAEA /* AppDelegate.swift */; };
@@ -21,7 +22,6 @@
 		3C9EB75F26180F7400BBEAEA /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB75E26180F7400BBEAEA /* Components.swift */; };
 		3C9EB7632618142A00BBEAEA /* ViewController+DetectObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7622618142A00BBEAEA /* ViewController+DetectObjects.swift */; };
 		3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7652618143C00BBEAEA /* ViewController+ARDelegate.swift */; };
-		3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB7682618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel */; };
 		3C9EB77D261839CD00BBEAEA /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9EB77C261839CD00BBEAEA /* Structs.swift */; };
 		3CA7D6C5261A5A1700A7C3C3 /* Positioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7D6C4261A5A1600A7C3C3 /* Positioning.swift */; };
 		3CEA44F7261965DF007D8A46 /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEA44F6261965DF007D8A46 /* CardsView.swift */; };
@@ -189,12 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C728A89261D56D3007A1C7A /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				3C9EB77D261839CD00BBEAEA /* Structs.swift in Sources */,
 				3C9EB7662618143C00BBEAEA /* ViewController+ARDelegate.swift in Sources */,
 				3C9EB74C26180EB100BBEAEA /* ViewController.swift in Sources */,
 				3C39F309261914F8000CFC30 /* ViewController+CheckOverlap.swift in Sources */,
 				3C8D2AC3261A56180061CEC3 /* ViewController+Cards.swift in Sources */,
-				3C9EB7692618154C00BBEAEA /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				3C39F31026191B55000CFC30 /* ViewController+AddMarker.swift in Sources */,
 				3CEA44F7261965DF007D8A46 /* CardsView.swift in Sources */,
 				3C9EB75F26180F7400BBEAEA /* Components.swift in Sources */,

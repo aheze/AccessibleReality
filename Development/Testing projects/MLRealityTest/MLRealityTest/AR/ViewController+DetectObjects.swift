@@ -9,12 +9,13 @@ import UIKit
 import Vision
 
 extension ViewController {
-    func processPixelBuffer(_ pixelBuffer: CVPixelBuffer) {
+    func processPixelBuffer(_ ciImage: CIImage) {
         
         if pixelBufferSize == .zero {
             
-            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
-            self.pixelBufferSize = CGSize(width: ciImage.extent.height, height: ciImage.extent.width) /// flip
+//            let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+            print("size.. \(ciImage)")
+            self.pixelBufferSize = CGSize(width: ciImage.extent.width, height: ciImage.extent.height)
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -29,7 +30,8 @@ extension ViewController {
                     self?.processResults(for: request, error: error)
                 }
                 
-                let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: [:])
+//                let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .leftMirrored, options: [:])
+                let requestHandler = VNImageRequestHandler(ciImage: ciImage, orientation: .up, options: [:])
                 try requestHandler.perform([objectDetectionRequest])
             } catch {
                 print("Error making model: \(error)")
@@ -45,6 +47,7 @@ extension ViewController {
             error == nil,
             let results = request.results
         {
+            print("result... \(results)")
             for observation in results  {
                 if
                     let objectObservation = observation as? VNRecognizedObjectObservation,
