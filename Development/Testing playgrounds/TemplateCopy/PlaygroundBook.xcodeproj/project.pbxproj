@@ -19,7 +19,8 @@
 		3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */; };
 		3C86BDC7261AB2CC00610690 /* MainVC+SetupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */; };
 		3C86BDCD261AB33400610690 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDCC261AB33400610690 /* Structs.swift */; };
-		3C8D8A01261EB6F600E896FF /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D89D5261EB62500E896FF /* YOLOv3TinyInt8LUT.mlmodel */; };
+		3C8D8A48261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 3C8D8A46261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc */; };
+		3C8D8A4E261EC29000E896FF /* YOLOv3TinyInt8LUT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */; };
 		3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */; };
 		5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */; };
 		5E086DD32051E3A3004D8D25 /* Manifest.plist in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5E086DCF2051DF0F004D8D25 /* Manifest.plist */; };
@@ -158,7 +159,8 @@
 		3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+CheckOverlap.swift"; sourceTree = "<group>"; };
 		3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupViews.swift"; sourceTree = "<group>"; };
 		3C86BDCC261AB33400610690 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
-		3C8D89D6261EB62500E896FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Base; path = Base.lproj/YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
+		3C8D8A47261EC21E00E896FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Base; path = Base.lproj/YOLOv3TinyInt8LUT.mlmodelc; sourceTree = "<group>"; };
+		3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLOv3TinyInt8LUT.swift; sourceTree = "<group>"; };
 		3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundBook.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */,
 				3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */,
 				3C728A62261D4FAB007A1C7A /* Objects.swift */,
+				3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -442,7 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
-				3C8D89D5261EB62500E896FF /* YOLOv3TinyInt8LUT.mlmodel */,
+				3C8D8A46261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc */,
 				5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */,
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
 			);
@@ -609,6 +612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
+				3C8D8A48261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 			);
@@ -672,13 +676,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C8D8A01261EB6F600E896FF /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */,
 				3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */,
 				3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */,
 				3C728A69261D50B1007A1C7A /* Utilities.swift in Sources */,
 				3C86BDB7261AB1C400610690 /* MainVC+ARDelegate.swift in Sources */,
 				3C728A57261D4F3B007A1C7A /* MainVC+TrackMarker.swift in Sources */,
+				3C8D8A4E261EC29000E896FF /* YOLOv3TinyInt8LUT.swift in Sources */,
 				3C728A51261D4F28007A1C7A /* MainVC+AddMarker.swift in Sources */,
 				3C728A3F261D4E1B007A1C7A /* Positioning.swift in Sources */,
 				3C728A39261D4DBA007A1C7A /* CardsView.swift in Sources */,
@@ -737,12 +741,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3C8D89D5261EB62500E896FF /* YOLOv3TinyInt8LUT.mlmodel */ = {
+		3C8D8A46261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3C8D89D6261EB62500E896FF /* Base */,
+				3C8D8A47261EC21E00E896FF /* Base */,
 			);
-			name = YOLOv3TinyInt8LUT.mlmodel;
+			name = YOLOv3TinyInt8LUT.mlmodelc;
 			sourceTree = "<group>";
 		};
 		5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */ = {
