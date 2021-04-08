@@ -15,12 +15,11 @@
 		3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */; };
 		3C728A63261D4FAB007A1C7A /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A62261D4FAB007A1C7A /* Objects.swift */; };
 		3C728A69261D50B1007A1C7A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A68261D50B1007A1C7A /* Utilities.swift */; };
-		3C728A77261D5666007A1C7A /* YOLOv3TinyInt8LUT.mlmodel in Resources */ = {isa = PBXBuildFile; fileRef = 3C728A76261D5666007A1C7A /* YOLOv3TinyInt8LUT.mlmodel */; };
-		3C728A94261D5751007A1C7A /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A76261D5666007A1C7A /* YOLOv3TinyInt8LUT.mlmodel */; };
 		3C86BDB7261AB1C400610690 /* MainVC+ARDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDB6261AB1C400610690 /* MainVC+ARDelegate.swift */; };
 		3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */; };
 		3C86BDC7261AB2CC00610690 /* MainVC+SetupViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */; };
 		3C86BDCD261AB33400610690 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C86BDCC261AB33400610690 /* Structs.swift */; };
+		3C8D8A01261EB6F600E896FF /* YOLOv3TinyInt8LUT.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D89D5261EB62500E896FF /* YOLOv3TinyInt8LUT.mlmodel */; };
 		3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */; };
 		5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */; };
 		5E086DD32051E3A3004D8D25 /* Manifest.plist in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5E086DCF2051DF0F004D8D25 /* Manifest.plist */; };
@@ -155,11 +154,11 @@
 		3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+TrackObjects.swift"; sourceTree = "<group>"; };
 		3C728A62261D4FAB007A1C7A /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		3C728A68261D50B1007A1C7A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		3C728A76261D5666007A1C7A /* YOLOv3TinyInt8LUT.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
 		3C86BDB6261AB1C400610690 /* MainVC+ARDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+ARDelegate.swift"; sourceTree = "<group>"; };
 		3C86BDC0261AB1D600610690 /* MainVC+CheckOverlap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+CheckOverlap.swift"; sourceTree = "<group>"; };
 		3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupViews.swift"; sourceTree = "<group>"; };
 		3C86BDCC261AB33400610690 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		3C8D89D6261EB62500E896FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Base; path = Base.lproj/YOLOv3TinyInt8LUT.mlmodel; sourceTree = "<group>"; };
 		3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundBook.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
@@ -443,7 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
-				3C728A76261D5666007A1C7A /* YOLOv3TinyInt8LUT.mlmodel */,
+				3C8D89D5261EB62500E896FF /* YOLOv3TinyInt8LUT.mlmodel */,
 				5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */,
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
 			);
@@ -612,7 +611,6 @@
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
-				3C728A77261D5666007A1C7A /* YOLOv3TinyInt8LUT.mlmodel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C728A94261D5751007A1C7A /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
+				3C8D8A01261EB6F600E896FF /* YOLOv3TinyInt8LUT.mlmodel in Sources */,
 				3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */,
 				3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */,
 				3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */,
@@ -739,6 +737,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3C8D89D5261EB62500E896FF /* YOLOv3TinyInt8LUT.mlmodel */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C8D89D6261EB62500E896FF /* Base */,
+			);
+			name = YOLOv3TinyInt8LUT.mlmodel;
+			sourceTree = "<group>";
+		};
 		5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -16,24 +16,24 @@ extension MainViewController {
             self.pixelBufferSize = CGSize(width: ciImage.extent.height, height: ciImage.extent.width) /// flip
         }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            do {
-                
-                let configuration = MLModelConfiguration()
-                let detectionModel = try YOLOv3TinyInt8LUT(configuration: configuration)
-                let mlModel = try VNCoreMLModel(for: detectionModel.model)
-                
-                
-                let objectDetectionRequest = VNCoreMLRequest(model: mlModel) { [weak self] request, error in
-                    self?.processResults(for: request, error: error)
-                }
-                
-                let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: [:])
-                try requestHandler.perform([objectDetectionRequest])
-            } catch {
-                print("Error making model: \(error)")
-            }
-        }
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            do {
+//                
+//                let configuration = MLModelConfiguration()
+//                let detectionModel = try YOLOv3TinyInt8LUT(configuration: configuration)
+//                let mlModel = try VNCoreMLModel(for: detectionModel.model)
+//                
+//                
+//                let objectDetectionRequest = VNCoreMLRequest(model: mlModel) { [weak self] request, error in
+//                    self?.processResults(for: request, error: error)
+//                }
+//                
+//                let requestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: [:])
+//                try requestHandler.perform([objectDetectionRequest])
+//            } catch {
+//                print("Error making model: \(error)")
+//            }
+//        }
     }
     
     func processResults(for request: VNRequest, error: Error?) {
