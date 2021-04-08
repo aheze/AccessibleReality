@@ -6,27 +6,10 @@
 //
 
 import UIKit
-import RealityKit
 
 extension MainViewController {
     
     func setupViews() {
-        
-        // MARK: AR View
-        let arView = ARView(frame: CGRect.zero, cameraMode: .ar, automaticallyConfigureSession: true)
-        view.addSubview(arView)
-        
-        /// Positioning constraints
-        arView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            arView.topAnchor.constraint(equalTo: view.topAnchor),
-            arView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            arView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            arView.leftAnchor.constraint(equalTo: view.leftAnchor)
-        ])
-        
-        self.arView = arView
-        
         
         // MARK: Drawing View
         let drawingView = UIView()

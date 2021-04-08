@@ -8,7 +8,6 @@
 import UIKit
 import PlaygroundSupport
 import ARKit
-import RealityKit
 
 @objc(BookCore_MainViewController)
 public class MainViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
@@ -35,7 +34,9 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
 
     // MARK: AR views
-    var arView: ARView!
+//    var arView: ARView!
+    var sceneView: ARSCNView!
+    
     var coachingReferenceView: UIView!
     var coachingViewActive = false
     
@@ -73,9 +74,10 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        setupAR()
         setupViews()
         
-        arView.session.delegate = self
+//        arView.session.delegate = self
         addCoaching()
         setupCardsView()
         
@@ -83,7 +85,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        arViewSize = arView.bounds.size
+        arViewSize = sceneView.bounds.size
         crosshairCenter = crosshairView.center
         
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom

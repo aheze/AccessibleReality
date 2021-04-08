@@ -15,25 +15,25 @@ extension MainViewController {
             
             if card.added {
                 print("added")
-                if let object = self.currentTargetedObject {
-                    if let marker = self.addMarker(
-                        at: object.convertedBoundingBox,
-                        name: object.name,
-                        color: UIColor(card.color)
-                    ) {
-                        card.marker = marker
-                    }
-                } else {
-                    print("nope")
-                    let middleOfCrossHair = self.crosshairView.center
-                    if let marker = self.addMarker(
-                        at: middleOfCrossHair,
-                        color: UIColor(card.color)
-                    ) {
-                        print("yes")
-                        card.marker = marker
-                    }
-                }
+//                if let object = self.currentTargetedObject {
+//                    if let marker = self.addMarker(
+//                        at: object.convertedBoundingBox,
+//                        name: object.name,
+//                        color: UIColor(card.color)
+//                    ) {
+//                        card.marker = marker
+//                    }
+//                } else {
+//                    print("nope")
+//                    let middleOfCrossHair = self.crosshairView.center
+//                    if let marker = self.addMarker(
+//                        at: middleOfCrossHair,
+//                        color: UIColor(card.color)
+//                    ) {
+//                        print("yes")
+//                        card.marker = marker
+//                    }
+//                }
             } else {
                 
                 card.marker?.anchorEntity.removeFromParent()

@@ -14,7 +14,7 @@ extension MainViewController: ARCoachingOverlayViewDelegate {
         
         let coachingOverlay = ARCoachingOverlayView()
         coachingOverlay.delegate = self
-        coachingOverlay.session = arView.session
+        coachingOverlay.session = sceneView.session
         coachingOverlay.goal = .anyPlane
         
         coachingReferenceView.addSubview(coachingOverlay)
