@@ -41,7 +41,8 @@ extension ViewController {
             }
         } cardSelected: { [weak self] card in
             guard let self = self else { return }
-            self.currentTrackingMarker = card.marker
+            self.trackCurrentMarker()
+            self.updateMarkerColor(marker: card.marker, color: UIColor(card.color))
         }
         
         

@@ -38,7 +38,6 @@ extension ViewController {
             
             let marker = Marker(name: name, color: color, entity: box, anchorEntity: anchorEntity)
             placedMarkers.append(marker)
-            currentTrackingMarker = marker
             
             return marker
         }
@@ -56,7 +55,6 @@ extension ViewController {
             let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: result)
             let marker = Marker(name: "Object", color: color, entity: box, anchorEntity: anchorEntity)
             placedMarkers.append(marker)
-            currentTrackingMarker = marker
             
             return marker
         }

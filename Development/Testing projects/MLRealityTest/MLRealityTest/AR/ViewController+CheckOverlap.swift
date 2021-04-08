@@ -26,10 +26,15 @@ extension ViewController {
             DispatchQueue.main.async {
                 completion(overlappedObject)
                 if let object = overlappedObject {
-                    if self.vm.cards[self.vm.cards.count - 1].customizedName == false {
-                        self.vm.cards[self.vm.cards.count - 1].name = object.name.capitalized
+                    if self.vm.selectedCard == self.vm.cards[self.vm.cards.count - 1] { /// only change if focused
+                        if self.vm.cards[self.vm.cards.count - 1].customizedName == false {
+                            self.vm.cards[self.vm.cards.count - 1].name = object.name.capitalized
+                        }
                     }
-                    
+                } else {
+                    if self.vm.cards[self.vm.cards.count - 1].customizedName == false {
+                        self.vm.cards[self.vm.cards.count - 1].name = "Object"
+                    }
                 }
             }
             

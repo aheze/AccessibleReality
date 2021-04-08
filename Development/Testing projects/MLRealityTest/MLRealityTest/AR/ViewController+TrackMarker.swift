@@ -7,11 +7,12 @@
 
 import UIKit
 import RealityKit
+import SwiftUI
 
 extension ViewController {
     func trackCurrentMarker() {
         if
-            let currentTrackingMarker = currentTrackingMarker,
+            let currentTrackingMarker = vm.selectedCard?.marker,
             let projectedPoint = arView.project(currentTrackingMarker.entity.position)
         {
             
@@ -31,7 +32,7 @@ extension ViewController {
             }
             
             self.lineLayer?.path = path.cgPath
-            self.lineLayer?.strokeColor = currentTrackingMarker.color.cgColor
+            self.lineLayer?.strokeColor = UIColor(vm.selectedCard?.color ?? Color.green).cgColor
             
             /// get distance from camera to cube
             let anchorPosition = currentTrackingMarker.entity.transform.translation
@@ -40,6 +41,17 @@ extension ViewController {
             let distance = length(line)
             
             print("dist: \(distance)")
+        } else {
+            /// remove line
+            lineLayer?.removeFromSuperlayer()
+            lineLayer = nil
         }
+    }
+    func updateMarkerColor(marker: Marker?, color: UIColor) {
+        print("updating.. \(marker) \(color)")
+        
+        let modelEntity = marker?.entity.children[0] as! ModelEntity
+        let material = SimpleMaterial(color: color, isMetallic: false)
+        modelEntity.model?.materials = [material]
     }
 }

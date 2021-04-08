@@ -35,7 +35,6 @@ class ViewController: UIViewController {
     
     // MARK: Tracking markers
     var framesSinceLastTrack = 0 /// only track every 5 frames
-    var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
     
     // MARK: Tracking interface

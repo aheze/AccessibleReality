@@ -35,6 +35,8 @@ class Card: ObservableObject, Identifiable, Hashable {
 }
 
 class CardsViewModel: ObservableObject {
+    
+    @Published var selectedCard: Card?
     @Published var cards = [
         Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
     ]
@@ -42,10 +44,6 @@ class CardsViewModel: ObservableObject {
 
 struct CardsView: View {
     
-    @State var selectedCard: Card?
-//    @State var cards = [
-//        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
-//    ]
     @ObservedObject var vm: CardsViewModel
     
     var cardChanged: ((Card) -> Void)?
@@ -56,7 +54,7 @@ struct CardsView: View {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
                     ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(selectedCard: $selectedCard, card: card, addPressed: {
+                        CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
                             
                             withAnimation(.easeOut) {
                                 
@@ -64,7 +62,7 @@ struct CardsView: View {
                                 
                                 /// keep the same color for now
                                 vm.cards.append(newCard)
-                                selectedCard = newCard
+                                vm.selectedCard = newCard
                                 
                             }
                             
@@ -86,13 +84,13 @@ struct CardsView: View {
                             _ = vm.cards.remove(at: index)
                             
                             /// refocus if deleted selected card
-                            if selectedCard == card {
+                            if vm.selectedCard == card {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     withAnimation {
                                         proxy.scrollTo(vm.cards[newIndex].id, anchor: .center)
                                     }
                                 }
-                                selectedCard = vm.cards[newIndex]
+                                vm.selectedCard = vm.cards[newIndex]
                             }
                             
                             cardChanged?(card)
@@ -102,13 +100,13 @@ struct CardsView: View {
                                 proxy.scrollTo(card.id, anchor: .center)
                             }
                             
-                            selectedCard = card
+                            vm.selectedCard = card
                             cardSelected?(card)
                         })
                         .id(card.id)
                         .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
-                        .offset(x: 0, y: selectedCard == card ? -20 : 0)
-                        .brightness(selectedCard == card ? 0 : -0.4)
+                        .offset(x: 0, y: vm.selectedCard == card ? -20 : 0)
+                        .brightness(vm.selectedCard == card ? 0 : -0.4)
                     }
                 }
                 .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
@@ -116,7 +114,7 @@ struct CardsView: View {
             }
         }
         .onAppear {
-            selectedCard = vm.cards.last
+            vm.selectedCard = vm.cards.last
         }
         
     }
@@ -250,12 +248,6 @@ struct CardView: View {
         .animation(.easeOut)
     }
 }
-
-//struct CardsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardsView()
-//    }
-//}
 
 struct CardButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
