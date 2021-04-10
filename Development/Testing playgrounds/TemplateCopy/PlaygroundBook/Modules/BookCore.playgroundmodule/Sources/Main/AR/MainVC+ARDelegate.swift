@@ -97,7 +97,7 @@ extension MainViewController: ARSessionDelegate, ARSCNViewDelegate {
             // Transform the image and crop it to the viewport
             let transformedImage = image.transformed(by: normalizeTransform.concatenating(flipTransform).concatenating(displayTransform).concatenating(toViewPortTransform)).cropped(to: viewPort)
 
-            processCurren`tFrame(transformedImage)
+            processCurrentFrame(transformedImage)
 //            
         }
         
