@@ -54,21 +54,9 @@ struct CardsView: View {
                     ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
                         CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
                             
-                            withAnimation(.easeOut) {
-                                
-                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
-                                
-                                /// keep the same color for now
-                                vm.cards.append(newCard)
-                                vm.selectedCard = newCard
-                                
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation {
-                                    proxy.scrollTo(vm.cards.last?.id ?? card.id, anchor: .center)
-                                }
-                            }
+                            /// keep the same color for now
+                            let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
+                            vm.cards.append(newCard)
                             
                             cardChanged?(card)
                         }, removePressed: {
