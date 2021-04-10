@@ -6,20 +6,15 @@
 //
 
 import UIKit
-import RealityKit
+import ARKit
 import SwiftUI
 
 extension ViewController {
     func trackCurrentMarker() {
-        if
-            let currentTrackingMarker = vm.selectedCard?.marker
-            
-        {
+        if let currentTrackingMarker = vm.selectedCard?.marker {
             let projectedVector = sceneView.projectPoint(currentTrackingMarker.node.position)
-            
-
-//            let projectedPoint = CGPoint(x: projectedVector.x, y: projectedVector.y)
             let projectedPoint = CGPoint(x: CGFloat(projectedVector.x), y: CGFloat(projectedVector.y))
+            
             
             let path = UIBezierPath()
             path.move(to: crosshairCenter)
@@ -41,14 +36,9 @@ extension ViewController {
             
             /// get distance from camera to cube
             let anchorPosition = currentTrackingMarker.node.position
-            let cameraPosition = sceneView.pointOfView?.position
-//            let line = cameraPosition - anchorPosition
-//            let distance = length(line)
-            
-            print("anc \(anchorPosition)")
-            print("cameraPosition \(cameraPosition)")
-            
-//            print("dist: \(distance)")
+            if let cameraPosition = sceneView.pointOfView?.position {
+                let distance = anchorPosition.distance(to: cameraPosition)
+            }
         } else {
             /// remove line
             lineLayer?.removeFromSuperlayer()
@@ -63,3 +53,10 @@ extension ViewController {
 //        modelEntity.model?.materials = [material]
     }
 }
+
+
+extension SCNVector3 {
+     func distance(to vector: SCNVector3) -> Float {
+         return simd_distance(simd_float3(self), simd_float3(vector))
+     }
+ }

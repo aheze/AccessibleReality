@@ -14,6 +14,7 @@ extension ViewController {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
+        sceneView.session.delegate = self
     }
 }
 
