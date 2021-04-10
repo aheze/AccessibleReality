@@ -25,7 +25,12 @@ extension MainViewController {
         ])
         
         let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
+        sceneView.session.delegate = self /// for processing each frame
+        sceneView.delegate = self /// for providing the node
+        sceneView.autoenablesDefaultLighting = true
         self.sceneView = sceneView
     }
+    
 }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RealityKit
+import ARKit
 
 extension ViewController {
     func checkOverlap(at point: CGPoint, completion: @escaping ((DetectedObject?) -> Void)) {

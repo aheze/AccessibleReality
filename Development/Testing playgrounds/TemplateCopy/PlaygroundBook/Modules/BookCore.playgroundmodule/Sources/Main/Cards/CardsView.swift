@@ -17,8 +17,6 @@ class Card: ObservableObject, Identifiable, Hashable {
     @Published var sound: Sound
     var marker: Marker?
     
-    /// if user edited the textfield
-    var customizedName = false
     
     init(name: String, color: Color, sound: Sound) {
         self.name = name
@@ -34,13 +32,17 @@ class Card: ObservableObject, Identifiable, Hashable {
     }
 }
 
+class CardsViewModel: ObservableObject {
+    
+    @Published var selectedCard: Card?
+    @Published var cards = [
+        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
+    ]
+}
 
 struct CardsView: View {
     
-    @State var selectedCard: Card?
-    @State var cards = [
-        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
-    ]
+    @ObservedObject var vm: CardsViewModel
     
     var cardChanged: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
@@ -49,22 +51,22 @@ struct CardsView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
-                    ForEach(Array(cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(selectedCard: $selectedCard, card: card, addPressed: {
+                    ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
+                        CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
                             
                             withAnimation(.easeOut) {
                                 
                                 let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
                                 
                                 /// keep the same color for now
-                                cards.append(newCard)
-                                selectedCard = newCard
+                                vm.cards.append(newCard)
+                                vm.selectedCard = newCard
                                 
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 withAnimation {
-                                    proxy.scrollTo(cards.last?.id ?? card.id, anchor: .center)
+                                    proxy.scrollTo(vm.cards.last?.id ?? card.id, anchor: .center)
                                 }
                             }
                             
@@ -73,20 +75,20 @@ struct CardsView: View {
                             
                             /// scroll to nearest index
                             var newIndex = index
-                            if index == cards.indices.last {
+                            if index == vm.cards.indices.last {
                                 newIndex = index - 1
                             }
                             
-                            _ = cards.remove(at: index)
+                            _ = vm.cards.remove(at: index)
                             
                             /// refocus if deleted selected card
-                            if selectedCard == card {
+                            if vm.selectedCard == card {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     withAnimation {
-                                        proxy.scrollTo(cards[newIndex].id, anchor: .center)
+                                        proxy.scrollTo(vm.cards[newIndex].id, anchor: .center)
                                     }
                                 }
-                                selectedCard = cards[newIndex]
+                                vm.selectedCard = vm.cards[newIndex]
                             }
                             
                             cardChanged?(card)
@@ -96,13 +98,13 @@ struct CardsView: View {
                                 proxy.scrollTo(card.id, anchor: .center)
                             }
                             
-                            selectedCard = card
+                            vm.selectedCard = card
                             cardSelected?(card)
                         })
                         .id(card.id)
                         .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
-                        .offset(x: 0, y: selectedCard == card ? -20 : 0)
-                        .brightness(selectedCard == card ? 0 : -0.4)
+                        .offset(x: 0, y: vm.selectedCard == card ? -20 : 0)
+                        .brightness(vm.selectedCard == card ? 0 : -0.4)
                     }
                 }
                 .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
@@ -110,17 +112,7 @@ struct CardsView: View {
             }
         }
         .onAppear {
-            selectedCard = cards.last
-        }
-        
-    }
-    
-    func updateCardName(name: String) {
-        print("cards... \(cards) name \(name)")
-        
-        /// only update name if not customized
-        if !(cards.last?.customizedName ?? false) {
-            cards.last?.name = name
+            vm.selectedCard = vm.cards.last
         }
     }
 }
@@ -177,14 +169,9 @@ struct CardView: View {
                 .buttonStyle(CardButtonStyle())
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    TextField("Textfield", text: $card.name) { _ in
-                        
-                        /// started editing
-                        card.customizedName = true
-                    }
+                    Text(card.name)
                     .foregroundColor(Color.white)
                     .font(.system(size: 32, weight: .semibold, design: .rounded))
-                    
                     .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
                     
                     HStack {
@@ -242,12 +229,6 @@ struct CardView: View {
         }
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
         .animation(.easeOut)
-    }
-}
-
-struct CardsView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardsView()
     }
 }
 

@@ -34,7 +34,6 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
 
     // MARK: AR views
-//    var arView: ARView!
     var sceneView: ARSCNView!
     
     var coachingReferenceView: UIView!
@@ -46,7 +45,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     /// converting rects
     var pixelBufferSize = CGSize.zero
-    var arViewSize = CGSize.zero
+    var sceneViewSize = CGSize.zero
     
     // MARK: Crosshair
     var crosshairView: UIView!
@@ -66,7 +65,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var lineLayer: CAShapeLayer?
     
     // MARK: Interface
-    var cardsView: CardsView?
+    var vm: CardsViewModel! /// keep reference to cards
     var drawingView: UIView!
     var cardsReferenceView: UIView!
     var cardsReferenceHeightC: NSLayoutConstraint!
@@ -76,8 +75,6 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         
         setupAR()
         setupViews()
-        
-//        arView.session.delegate = self
         addCoaching()
         setupCardsView()
         
@@ -85,7 +82,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        arViewSize = sceneView.bounds.size
+        sceneViewSize = sceneView.bounds.size
         crosshairCenter = crosshairView.center
         
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom

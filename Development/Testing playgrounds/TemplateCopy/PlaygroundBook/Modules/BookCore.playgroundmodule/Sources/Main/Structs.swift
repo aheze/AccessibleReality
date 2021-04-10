@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RealityKit
+import ARKit
 
 struct DetectedObject {
     var name: String
@@ -16,8 +16,10 @@ struct DetectedObject {
 struct Marker {
     var name: String
     var color: UIColor
-    var entity: Entity /// the box
-    var anchorEntity: AnchorEntity /// anchor of the box
+    
+    var hasDescription: Bool /// true if ML detected
+    var box: SCNBox
+    var anchor: ARAnchor
 }
 
 struct Sound: Identifiable, Hashable {

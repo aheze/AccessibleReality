@@ -10,41 +10,39 @@ import SwiftUI
 extension MainViewController {
     
     func setupCardsView() {
-        let cardsView = CardsView { [weak self] card in
+        self.vm = CardsViewModel()
+        let cardsView = CardsView(vm: self.vm) { [weak self] card in
             guard let self = self else { return }
             
             if card.added {
-                print("added")
-//                if let object = self.currentTargetedObject {
-//                    if let marker = self.addMarker(
-//                        at: object.convertedBoundingBox,
-//                        name: object.name,
-//                        color: UIColor(card.color)
-//                    ) {
-//                        card.marker = marker
-//                    }
-//                } else {
-//                    print("nope")
-//                    let middleOfCrossHair = self.crosshairView.center
-//                    if let marker = self.addMarker(
-//                        at: middleOfCrossHair,
-//                        color: UIColor(card.color)
-//                    ) {
-//                        print("yes")
-//                        card.marker = marker
-//                    }
-//                }
+                if let object = self.currentTargetedObject {
+                    if let marker = self.addMarker(
+                        at: object.convertedBoundingBox,
+                        name: object.name,
+                        color: UIColor(card.color)
+                    ) {
+                        card.marker = marker
+                    }
+                } else {
+                    let middleOfCrossHair = self.crosshairView.center
+                    if let marker = self.addMarker(
+                        at: middleOfCrossHair,
+                        color: UIColor(card.color)
+                    ) {
+                        card.marker = marker
+                    }
+                }
             } else {
                 
-                card.marker?.anchorEntity.removeFromParent()
+                if let anchor = card.marker?.anchor {
+                    self.sceneView.session.remove(anchor: anchor)
+                }
                 
             }
         } cardSelected: { [weak self] card in
             guard let self = self else { return }
-            self.currentTrackingMarker = card.marker
+            self.trackCurrentMarker()
         }
-        
-        self.cardsView = cardsView
         
         let hostingController = UIHostingController(rootView: cardsView)
         addChildViewController(hostingController, in: cardsReferenceView)

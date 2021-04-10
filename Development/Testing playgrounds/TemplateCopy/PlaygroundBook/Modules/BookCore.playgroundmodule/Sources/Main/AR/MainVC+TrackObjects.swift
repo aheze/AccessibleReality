@@ -53,7 +53,7 @@ extension MainViewController {
                 {
                     
                     let name = objectLabel.identifier
-                    let convertedRect = getConvertedRect(boundingBox: objectObservation.boundingBox, withImageSize: pixelBufferSize, containedIn: arViewSize)
+                    let convertedRect = getConvertedRect(boundingBox: objectObservation.boundingBox, withImageSize: pixelBufferSize, containedIn: sceneViewSize)
                     
                     let detectedObject = DetectedObject(name: name, convertedBoundingBox: convertedRect)
                     detectedObjects.append(detectedObject)
