@@ -15,6 +15,7 @@ extension ViewController {
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
         sceneView.session.delegate = self
+        sceneView.autoenablesDefaultLighting = true
     }
 }
 
