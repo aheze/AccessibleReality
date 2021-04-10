@@ -44,7 +44,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var currentDetectedObjects = [DetectedObject]()
     
     /// converting rects
-    var pixelBufferSize = CGSize.zero
+    var imageFrameSize = CGSize.zero
     var sceneViewSize = CGSize.zero
     
     // MARK: Crosshair
