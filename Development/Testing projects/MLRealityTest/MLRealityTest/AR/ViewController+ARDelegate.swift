@@ -14,13 +14,21 @@ extension ViewController {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
-        sceneView.session.delegate = self
+        sceneView.session.delegate = self /// for processing each frame
+        sceneView.delegate = self /// for providing the node
         sceneView.autoenablesDefaultLighting = true
     }
 }
 
 
-extension ViewController: ARSessionDelegate {
+extension ViewController: ARSessionDelegate, ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        if let marker = placedMarkers.first(where: {$0.anchor == anchor }) {
+            let node = SCNNode(geometry: marker.box)
+            return node
+        }
+        return nil
+    }
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         if busyProcessingImage == false && coachingViewActive == false {
             busyProcessingImage = true

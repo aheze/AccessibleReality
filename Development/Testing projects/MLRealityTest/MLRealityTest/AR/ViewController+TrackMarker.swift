@@ -12,7 +12,12 @@ import SwiftUI
 extension ViewController {
     func trackCurrentMarker() {
         if let currentTrackingMarker = vm.selectedCard?.marker {
-            let projectedVector = sceneView.projectPoint(currentTrackingMarker.node.position)
+            let anchorPosition = SCNVector3(
+                currentTrackingMarker.anchor.transform.columns.3.x,
+                currentTrackingMarker.anchor.transform.columns.3.y,
+                currentTrackingMarker.anchor.transform.columns.3.z
+            )
+            let projectedVector = sceneView.projectPoint(anchorPosition)
             let projectedPoint = CGPoint(x: CGFloat(projectedVector.x), y: CGFloat(projectedVector.y))
             
             
@@ -35,7 +40,6 @@ extension ViewController {
             self.lineLayer?.strokeColor = UIColor(vm.selectedCard?.color ?? Color.green).cgColor
             
             /// get distance from camera to cube
-            let anchorPosition = currentTrackingMarker.node.position
             if let cameraPosition = sceneView.pointOfView?.position {
                 let distance = anchorPosition.distance(to: cameraPosition)
             }

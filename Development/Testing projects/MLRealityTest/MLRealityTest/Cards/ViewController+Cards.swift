@@ -36,7 +36,9 @@ extension ViewController {
                 }
             } else {
                 
-                card.marker?.node.removeFromParentNode()
+                if let anchor = card.marker?.anchor {
+                    self.sceneView.session.remove(anchor: anchor)
+                }
                 
             }
         } cardSelected: { [weak self] card in

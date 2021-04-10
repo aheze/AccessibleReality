@@ -17,7 +17,8 @@ struct Marker {
     var name: String
     var color: UIColor
     var box: SCNBox
-    var node: SCNNode
+//    var node: SCNNode
+    var anchor: ARAnchor
 //    var entity: Entity /// the box
 //    var anchorEntity: AnchorEntity /// anchor of the box
 }

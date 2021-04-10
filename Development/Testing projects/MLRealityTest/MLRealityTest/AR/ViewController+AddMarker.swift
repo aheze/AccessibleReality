@@ -37,9 +37,10 @@ extension ViewController {
             colorMaterial.diffuse.contents = cubeColor
             box.materials = [colorMaterial]
             
-            let node = addNode(box: box, raycastResult: centerResult)
+            let anchor = ARAnchor(name: "Node Anchor", transform: centerResult.worldTransform)
+            sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: name, color: color, box: box, node: node)
+            let marker = Marker(name: name, color: color, box: box, anchor: anchor)
             placedMarkers.append(marker)
             
             return marker
@@ -51,13 +52,15 @@ extension ViewController {
     func addMarker(at screenCoordinate: CGPoint, color: UIColor) -> Marker? {
         if let result = makeRaycastQuery(at: screenCoordinate) {
             
-            let box = SCNBox(width: 0.2, height: 0.2, length: 0.2, chamferRadius: 0)
+            let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
             let colorMaterial = SCNMaterial()
             colorMaterial.diffuse.contents = color
             box.materials = [colorMaterial]
             
-            let node = addNode(box: box, raycastResult: result)
-            let marker = Marker(name: "Object", color: color, box: box, node: node)
+            let anchor = ARAnchor(name: "Node Anchor", transform: result.worldTransform)
+            sceneView.session.add(anchor: anchor)
+            
+            let marker = Marker(name: "Object", color: color, box: box, anchor: anchor)
             placedMarkers.append(marker)
             
             return marker
@@ -83,19 +86,17 @@ extension ViewController {
         
     }
     
-    func addNode(box: SCNBox, raycastResult: ARRaycastResult) -> SCNNode {
-        
-        let position = SCNVector3(
-            raycastResult.worldTransform.columns.3.x,
-            raycastResult.worldTransform.columns.3.y,
-            raycastResult.worldTransform.columns.3.z
-        )
-        
-        let cubeNode = SCNNode(geometry: box)
-        
-        cubeNode.transform = SCNMatrix4(raycastResult.worldTransform)
-        sceneView.scene.rootNode.addChildNode(cubeNode)
-        
-        return cubeNode
-    }
+    
+//    func addNode(box: SCNBox, raycastResult: ARRaycastResult) -> SCNNode {
+//
+//        let cubeNode = SCNNode(geometry: box)
+//
+//        cubeNode.transform = SCNMatrix4(raycastResult.worldTransform)
+//        sceneView.scene.rootNode.addChildNode(cubeNode)
+//
+//        let anchor = ARAnchor(name: "Node Anchor", transform: raycastResult.worldTransform)
+//        sceneView.session.add(anchor:anchor)
+//
+//        return cubeNode
+//    }
 }
