@@ -11,7 +11,7 @@ import SwiftUI
 struct InterfaceSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            CardsView()
+            CardsView(vm: <#CardsViewModel#>)
         }
     }
 }

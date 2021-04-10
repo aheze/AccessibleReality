@@ -17,8 +17,6 @@ class Card: ObservableObject, Identifiable, Hashable {
     @Published var sound: Sound
     var marker: Marker?
     
-    /// if user edited the textfield
-    var customizedName = false
     
     init(name: String, color: Color, sound: Sound) {
         self.name = name
@@ -116,17 +114,7 @@ struct CardsView: View {
         .onAppear {
             vm.selectedCard = vm.cards.last
         }
-        
     }
-    
-//    func updateCardName(name: String) {
-//        print("cards... \(cards) name \(name)")
-//
-//        /// only update name if not customized
-//        if !(cards.last?.customizedName ?? false) {
-//            cards.last?.name = name
-//        }
-//    }
 }
 
 struct CardView: View {
@@ -181,14 +169,9 @@ struct CardView: View {
                 .buttonStyle(CardButtonStyle())
                 
                 VStack(alignment: .leading, spacing: 0) {
-                    TextField("Textfield", text: $card.name) { _ in
-                        
-                        /// started editing
-                        card.customizedName = true
-                    }
+                    Text(card.name)
                     .foregroundColor(Color.white)
                     .font(.system(size: 32, weight: .semibold, design: .rounded))
-                    
                     .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
                     
                     HStack {

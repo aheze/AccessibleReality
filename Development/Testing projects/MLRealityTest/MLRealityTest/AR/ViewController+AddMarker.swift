@@ -85,18 +85,4 @@ extension ViewController {
         return nil /// nil if no result
         
     }
-    
-    
-//    func addNode(box: SCNBox, raycastResult: ARRaycastResult) -> SCNNode {
-//
-//        let cubeNode = SCNNode(geometry: box)
-//
-//        cubeNode.transform = SCNMatrix4(raycastResult.worldTransform)
-//        sceneView.scene.rootNode.addChildNode(cubeNode)
-//
-//        let anchor = ARAnchor(name: "Node Anchor", transform: raycastResult.worldTransform)
-//        sceneView.session.add(anchor:anchor)
-//
-//        return cubeNode
-//    }
 }

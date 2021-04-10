@@ -66,31 +66,3 @@ class ViewController: UIViewController {
         
     }
 }
-
-extension ViewController: ARCoachingOverlayViewDelegate {
-    func addCoaching() {
-        
-        let coachingOverlay = ARCoachingOverlayView()
-        coachingOverlay.delegate = self
-        coachingOverlay.session = sceneView.session
-        coachingOverlay.goal = .anyPlane
-        
-        coachingReferenceView.addSubview(coachingOverlay)
-        coachingReferenceView.isUserInteractionEnabled = false
-        coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = [
-            coachingOverlay.topAnchor.constraint(equalTo: coachingReferenceView.topAnchor),
-            coachingOverlay.rightAnchor.constraint(equalTo: coachingReferenceView.rightAnchor),
-            coachingOverlay.bottomAnchor.constraint(equalTo: coachingReferenceView.bottomAnchor),
-            coachingOverlay.leftAnchor.constraint(equalTo: coachingReferenceView.leftAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
-    }
-    
-    func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
-        coachingViewActive = true
-    }
-    func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
-        coachingViewActive = false
-    }
-}
