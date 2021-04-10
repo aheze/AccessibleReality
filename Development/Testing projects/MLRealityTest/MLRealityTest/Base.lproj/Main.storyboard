@@ -16,9 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJL-pe-BH9">
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFn-AY-RxX">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </arView>
+                            </arscnView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6R-8T-SUF">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,41 +72,41 @@
                         <viewLayoutGuide key="safeArea" id="O8D-BO-BwW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iJL-pe-BH9" secondAttribute="trailing" id="4D4-5J-tb4"/>
+                            <constraint firstAttribute="trailing" secondItem="oFn-AY-RxX" secondAttribute="trailing" id="1cg-9d-Kf1"/>
+                            <constraint firstAttribute="bottom" secondItem="oFn-AY-RxX" secondAttribute="bottom" id="4br-ki-eDy"/>
                             <constraint firstAttribute="trailing" secondItem="x6R-8T-SUF" secondAttribute="trailing" id="CGo-Dg-H1P"/>
                             <constraint firstItem="T7C-ls-Jzz" firstAttribute="top" secondItem="9xC-Ly-dln" secondAttribute="top" id="DJL-9c-AUq"/>
-                            <constraint firstItem="iJL-pe-BH9" firstAttribute="top" secondItem="9xC-Ly-dln" secondAttribute="top" id="Dav-9d-aX8"/>
                             <constraint firstItem="T7C-ls-Jzz" firstAttribute="leading" secondItem="9xC-Ly-dln" secondAttribute="leading" id="FRj-zv-1yj"/>
                             <constraint firstAttribute="trailing" secondItem="T7C-ls-Jzz" secondAttribute="trailing" id="GuS-5O-FAN"/>
                             <constraint firstItem="x6R-8T-SUF" firstAttribute="leading" secondItem="9xC-Ly-dln" secondAttribute="leading" id="HWf-Hp-pRv"/>
                             <constraint firstItem="x6R-8T-SUF" firstAttribute="top" secondItem="9xC-Ly-dln" secondAttribute="top" id="KXq-q9-6dg"/>
-                            <constraint firstAttribute="bottom" secondItem="iJL-pe-BH9" secondAttribute="bottom" id="NeF-TD-i2D"/>
                             <constraint firstAttribute="trailing" secondItem="hqg-uf-bYQ" secondAttribute="trailing" id="Stf-XH-e4L"/>
                             <constraint firstItem="hqg-uf-bYQ" firstAttribute="leading" secondItem="9xC-Ly-dln" secondAttribute="leading" id="a5x-QN-j2p"/>
+                            <constraint firstItem="oFn-AY-RxX" firstAttribute="leading" secondItem="9xC-Ly-dln" secondAttribute="leading" id="and-Vo-XSz"/>
                             <constraint firstItem="hqg-uf-bYQ" firstAttribute="top" secondItem="9xC-Ly-dln" secondAttribute="top" id="fkE-R0-o7s"/>
                             <constraint firstAttribute="bottom" secondItem="T7C-ls-Jzz" secondAttribute="bottom" id="hm6-ra-u6E"/>
                             <constraint firstAttribute="bottom" secondItem="hqg-uf-bYQ" secondAttribute="bottom" id="m2g-km-fKU"/>
+                            <constraint firstItem="oFn-AY-RxX" firstAttribute="top" secondItem="9xC-Ly-dln" secondAttribute="top" id="qJw-th-xbc"/>
                             <constraint firstAttribute="bottom" secondItem="x6R-8T-SUF" secondAttribute="bottom" id="xvN-Mf-Afw"/>
-                            <constraint firstItem="iJL-pe-BH9" firstAttribute="leading" secondItem="9xC-Ly-dln" secondAttribute="leading" id="yD3-BW-Dcl"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="arView" destination="iJL-pe-BH9" id="JvQ-qk-W4P"/>
                         <outlet property="cardsReferenceHeightC" destination="Vol-qX-tZm" id="c6L-yF-5ah"/>
                         <outlet property="cardsReferenceView" destination="xof-L0-BCA" id="p9o-lz-1Kh"/>
                         <outlet property="coachingReferenceView" destination="x6R-8T-SUF" id="xs2-7r-7Lm"/>
                         <outlet property="crosshairImageView" destination="xNS-L8-8kF" id="2z4-wA-D5f"/>
                         <outlet property="crosshairView" destination="FFQ-1i-owd" id="UuH-Ae-kaJ"/>
                         <outlet property="drawingView" destination="T7C-ls-Jzz" id="ulR-0l-PwG"/>
+                        <outlet property="sceneView" destination="oFn-AY-RxX" id="9Ui-Le-Ock"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="133.92857142857142"/>
+            <point key="canvasLocation" x="362" y="130"/>
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

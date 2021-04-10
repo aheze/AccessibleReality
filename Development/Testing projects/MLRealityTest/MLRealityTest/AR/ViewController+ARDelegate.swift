@@ -8,6 +8,16 @@
 import UIKit
 import ARKit
 
+extension ViewController {
+    func setupAR() {
+        
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration)
+    }
+}
+
+
 extension ViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         if busyProcessingImage == false && coachingViewActive == false {
@@ -19,12 +29,12 @@ extension ViewController: ARSessionDelegate {
             let imageBuffer = frame.capturedImage
 
             let imageSize = CGSize(width: CVPixelBufferGetWidth(imageBuffer), height: CVPixelBufferGetHeight(imageBuffer))
-            let viewPort = CGRect(origin: .zero, size: arViewSize)
+            let viewPort = CGRect(origin: .zero, size: sceneViewSize)
 
 
             let interfaceOrientation : UIInterfaceOrientation
             if #available(iOS 13.0, *) {
-                interfaceOrientation = self.arView.window!.windowScene!.interfaceOrientation
+                interfaceOrientation = self.sceneView.window!.windowScene!.interfaceOrientation
             } else {
                 interfaceOrientation = UIApplication.shared.statusBarOrientation
             }
@@ -46,10 +56,10 @@ extension ViewController: ARSessionDelegate {
             // - To view coordinates ("a coordinate space appropriate for rendering the camera image onscreen")
             // See also: https://developer.apple.com/documentation/arkit/arframe/2923543-displaytransform
 
-            let displayTransform = frame.displayTransform(for: interfaceOrientation, viewportSize: arViewSize)
+            let displayTransform = frame.displayTransform(for: interfaceOrientation, viewportSize: sceneViewSize)
 
             // 4) Convert to view size
-            let toViewPortTransform = CGAffineTransform(scaleX: arViewSize.width, y: arViewSize.height)
+            let toViewPortTransform = CGAffineTransform(scaleX: sceneViewSize.width, y: sceneViewSize.height)
 
             // Transform the image and crop it to the viewport
             let transformedImage = image.transformed(by: normalizeTransform.concatenating(flipTransform).concatenating(displayTransform).concatenating(toViewPortTransform)).cropped(to: viewPort)

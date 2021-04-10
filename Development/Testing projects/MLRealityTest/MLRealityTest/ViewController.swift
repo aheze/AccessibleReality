@@ -6,13 +6,12 @@
 //
 
 import UIKit
-import RealityKit
 import ARKit
 
 class ViewController: UIViewController {
     
     // MARK: ARKit
-    @IBOutlet var arView: ARView!
+    @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var coachingReferenceView: UIView!
     var coachingViewActive = false
     
@@ -23,7 +22,7 @@ class ViewController: UIViewController {
     
     /// converting rects
     var imageFrameSize = CGSize.zero
-    var arViewSize = CGSize.zero
+    var sceneViewSize = CGSize.zero
     
     // MARK: Crosshair
     @IBOutlet weak var crosshairView: UIView!
@@ -52,20 +51,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
-        arView.session.delegate = self
-        
+        setupAR()
         addCoaching()
         setupCardsView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        arViewSize = arView.bounds.size
+        sceneViewSize = sceneView.bounds.size
         crosshairCenter = crosshairView.center
         
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
@@ -79,7 +72,7 @@ extension ViewController: ARCoachingOverlayViewDelegate {
         
         let coachingOverlay = ARCoachingOverlayView()
         coachingOverlay.delegate = self
-        coachingOverlay.session = arView.session
+        coachingOverlay.session = sceneView.session
         coachingOverlay.goal = .anyPlane
         
         coachingReferenceView.addSubview(coachingOverlay)

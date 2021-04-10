@@ -36,7 +36,7 @@ extension ViewController {
                 }
             } else {
                 
-                card.marker?.anchorEntity.removeFromParent()
+                card.marker?.node.removeFromParentNode()
                 
             }
         } cardSelected: { [weak self] card in

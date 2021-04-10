@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealityKit
 import ARKit
 
 extension ViewController {
@@ -25,18 +24,18 @@ extension ViewController {
             let topLeftRealWorldPosition = topLeftResult.worldTransform.columns.3
             let topRightRealWorldPosition = topRightResult.worldTransform.columns.3
             let line = topRightRealWorldPosition - topLeftRealWorldPosition
-            let distance = length(line)
+            let distance = CGFloat(length(line))
             
             let heightOverWidthRatio = boundingBox.height / boundingBox.width
-            let height = distance * Float(heightOverWidthRatio)
+            let height = distance * CGFloat(heightOverWidthRatio)
             
             let cubeColor = color.withAlphaComponent(0.3) /// make partially transparent because it encompasses the detected object
-            let transformation = Transform(matrix: centerResult.worldTransform)
-            let box = CustomBox(color: cubeColor, width: distance, height: height)
             
-            let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: centerResult)
+            let box = SCNBox(width: distance, height: height, length: height, chamferRadius: 0)
             
-            let marker = Marker(name: name, color: color, entity: box, anchorEntity: anchorEntity)
+            let node = addNode(box: box, raycastResult: centerResult)
+            
+            let marker = Marker(name: name, color: color, box: box, node: node)
             placedMarkers.append(marker)
             
             return marker
@@ -46,14 +45,17 @@ extension ViewController {
     }
     
     func addMarker(at screenCoordinate: CGPoint, color: UIColor) -> Marker? {
-        
+        print("adding..")
         if let result = makeRaycastQuery(at: screenCoordinate) {
+            print("makeRaycastQuery..")
             
-            let transformation = Transform(matrix: result.worldTransform)
-            let box = CustomBox(color: color)
+//            let transformation = Transform(matrix: result.worldTransform)
+//            let box = CustomBox(color: color)
             
-            let anchorEntity = addEntity(box: box, transform: transformation, raycastResult: result)
-            let marker = Marker(name: "Object", color: color, entity: box, anchorEntity: anchorEntity)
+            let box = SCNBox(width: 0.2, height: 0.2, length: 0.2, chamferRadius: 0)
+            
+            let node = addNode(box: box, raycastResult: result)
+            let marker = Marker(name: "Object", color: color, box: box, node: node)
             placedMarkers.append(marker)
             
             return marker
@@ -65,29 +67,45 @@ extension ViewController {
     
     func makeRaycastQuery(at screenCoordinate: CGPoint) -> ARRaycastResult? {
         if
-            let raycastQuery = arView.makeRaycastQuery(
+            let raycastQuery = sceneView.raycastQuery(
                 from: screenCoordinate,
                 allowing: .existingPlaneInfinite,
                 alignment: .horizontal
-            ),
-            let result = arView.session.raycast(raycastQuery).first
+            )
         {
-            return result
+            print("Making. \(raycastQuery)")
+            let results = sceneView.session.raycast(raycastQuery)
+            
+            print("res. \(results)")
+            return results.first
         }
         
         return nil /// nil if no result
         
     }
     
-    func addEntity(box: CustomBox, transform: Transform, raycastResult: ARRaycastResult) -> AnchorEntity {
-        arView.installGestures(.all, for: box)
-        box.generateCollisionShapes(recursive: true)
-        box.transform = transform
+    func addNode(box: SCNBox, raycastResult: ARRaycastResult) -> SCNNode {
         
-        let raycastAnchor = AnchorEntity(raycastResult: raycastResult)
-        raycastAnchor.addChild(box)
-        arView.scene.addAnchor(raycastAnchor)
+        print("add node")
+//        arView.installGestures(.all, for: box)
+//        box.generateCollisionShapes(recursive: true)
+//        box.transform = transform
         
-        return raycastAnchor
+//        let raycastAnchor = AnchorEntity(raycastResult: raycastResult)
+//        raycastAnchor.addChild(box)
+//        arView.scene.addAnchor(raycastAnchor)
+        
+        let position = SCNVector3(raycastResult.worldTransform.columns.3.x,
+                                  raycastResult.worldTransform.columns.3.y,
+                                  raycastResult.worldTransform.columns.3.z)
+        
+        print("position. \(position)")
+        let cubeNode = SCNNode(geometry: box)
+        
+        cubeNode.position = position
+        sceneView.scene.rootNode.addChildNode(cubeNode)
+        
+        return cubeNode
+//        return raycastAnchor
     }
 }
