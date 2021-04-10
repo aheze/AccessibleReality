@@ -40,7 +40,7 @@ extension ViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: centerResult.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: name, color: color, box: box, anchor: anchor)
+            let marker = Marker(name: name, color: color, hasDescription: true, box: box, anchor: anchor)
             placedMarkers.append(marker)
             
             return marker
@@ -60,7 +60,7 @@ extension ViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: "Object", color: color, box: box, anchor: anchor)
+            let marker = Marker(name: "Marker", color: color, hasDescription: false, box: box, anchor: anchor)
             placedMarkers.append(marker)
             
             return marker

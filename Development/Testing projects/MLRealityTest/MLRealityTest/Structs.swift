@@ -16,7 +16,11 @@ struct DetectedObject {
 struct Marker {
     var name: String
     var color: UIColor
+    
+    var hasDescription: Bool /// true if ML detected
     var box: SCNBox
+    
+    
 //    var node: SCNNode
     var anchor: ARAnchor
 //    var entity: Entity /// the box

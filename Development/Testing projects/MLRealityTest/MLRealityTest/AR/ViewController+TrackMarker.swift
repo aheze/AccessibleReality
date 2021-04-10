@@ -39,6 +39,16 @@ extension ViewController {
             self.lineLayer?.path = path.cgPath
             self.lineLayer?.strokeColor = UIColor(vm.selectedCard?.color ?? Color.green).cgColor
             
+            
+            var cubeColor = UIColor(vm.selectedCard?.color ?? Color.green)
+            
+            if vm.selectedCard?.marker?.hasDescription ?? false {
+                cubeColor = cubeColor.withAlphaComponent(0.8)
+            }
+            let colorMaterial = SCNMaterial()
+            colorMaterial.diffuse.contents = cubeColor
+            self.vm.selectedCard?.marker?.box.materials = [colorMaterial]
+            
             /// get distance from camera to cube
             if let cameraPosition = sceneView.pointOfView?.position {
                 let distance = anchorPosition.distance(to: cameraPosition)
@@ -48,13 +58,6 @@ extension ViewController {
             lineLayer?.removeFromSuperlayer()
             lineLayer = nil
         }
-    }
-    func updateMarkerColor(marker: Marker?, color: UIColor) {
-        print("updating.. \(marker) \(color)")
-        
-//        let modelEntity = marker?.entity.children[0] as! ModelEntity
-//        let material = SimpleMaterial(color: color, isMetallic: false)
-//        modelEntity.model?.materials = [material]
     }
 }
 
