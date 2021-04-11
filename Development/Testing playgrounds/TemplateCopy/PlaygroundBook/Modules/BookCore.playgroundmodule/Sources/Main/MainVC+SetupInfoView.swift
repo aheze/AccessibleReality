@@ -16,5 +16,9 @@ extension MainViewController {
         infoView.layer.cornerRadius = 12
         infoView.clipsToBounds = true
         infoView.alpha = 0
+        
+        infoBorderView.alpha = 0
+        infoBorderView.layer.borderWidth = 8
+        infoBorderView.layer.borderColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
     }
 }

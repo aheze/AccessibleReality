@@ -64,6 +64,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     // MARK: Tracking interface
     var lineLayer: CAShapeLayer?
     @IBOutlet var infoView: UIView!
+    @IBOutlet weak var infoBorderView: UIView!
     @IBOutlet weak var degreesLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
@@ -71,8 +72,8 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var framesSinceLastTrack = 0 /// only track every 5 frames
     var placedMarkers = [Marker]() /// current placed markers
     var edgePointView: UIView?
-    
-    
+    var degreesAway = ""
+    var cmAway = ""
     
     
     // MARK: Interface
@@ -91,6 +92,8 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         
         addCoaching()
         setupCardsView()
+        
+        setupAccessibility()
         
     }
     

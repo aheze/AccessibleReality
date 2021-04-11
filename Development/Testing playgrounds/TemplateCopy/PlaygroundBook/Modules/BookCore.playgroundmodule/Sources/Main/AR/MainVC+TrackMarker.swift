@@ -88,6 +88,7 @@ extension MainViewController {
                 }
                 
                 distanceLabel?.text = "\(adjustedCentimeters)cm"
+                self.cmAway = "\(adjustedCentimeters)cm"
                 
                 if let cameraTransform = sceneView.pointOfView?.transform {
                     let cameraProjectedPosition = projectedForwardsPosition(from: simd_float4x4(cameraTransform))
@@ -97,6 +98,17 @@ extension MainViewController {
                     
                     let compassText = getAngleText(between: crosshairCenter, and: edgePoint)
                     degreesLabel.text = "\(Int(angleInDegrees))°\(compassText)"
+                    self.degreesAway = "\(Int(angleInDegrees))°\(compassText)"
+                    
+                    UIView.animate(withDuration: 0.2) {
+                        if angleInDegrees < 5 {
+                            self.infoBorderView.alpha = 1
+                            self.degreesLabel.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+                        } else {
+                            self.infoBorderView.alpha = 0
+                            self.degreesLabel.textColor = UIColor.label
+                        }
+                    }
                 }
                 
             }
@@ -203,7 +215,6 @@ func getAngleText(between center: CGPoint, and point: CGPoint) -> String {
     
     /// originally 0 is x axis, add 360 to prevent negatives
     let angleInDegrees = angleInRadians.radiansToDegrees + 90 + 360
-    
     
     let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
     let index = Int((angleInDegrees / 45).rounded()) % 8

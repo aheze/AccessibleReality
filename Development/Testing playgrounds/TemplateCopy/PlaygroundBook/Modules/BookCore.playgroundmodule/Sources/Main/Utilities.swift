@@ -124,3 +124,6 @@ func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
 func DistanceFormula(from: CGPoint, to: CGPoint) -> CGFloat {
     return sqrt(CGPointDistanceSquared(from: from, to: to))
 }
+
+
+

@@ -156,6 +156,8 @@ struct CardView: View {
                     .cornerRadius(12, corners: [.topLeft, .topRight])
                     .padding(.horizontal, 16)
             }
+            .accessibility(hint: Text("\(card.added ? "Remove" : "Add") this node and its configuration card"))
+            
             
             ZStack {
                 Button(action: {
@@ -164,6 +166,8 @@ struct CardView: View {
                     Color.clear
                 }
                 .buttonStyle(CardButtonStyle())
+                .accessibility(label: Text("Configuration card"))
+                .accessibility(hint: Text("Options for the node to be added"))
                 
                 VStack(alignment: .leading, spacing: 0) {
                     Text(card.name)
@@ -175,13 +179,14 @@ struct CardView: View {
                         Text("Color")
                             .foregroundColor(.white)
                         
-                        
                         Spacer()
                         
-                        ColorPicker("Set the background color", selection: $card.color)
+                        ColorPicker("Node color", selection: $card.color)
                             .labelsHidden()
                             .scaleEffect(x: 1.2, y: 1.2)
                             .offset(x: -2, y: 0)
+                            .accessibility(label: Text("Color picker"))
+                            .accessibility(hint: Text("Color of the node"))
                         
                     }
                     .padding(16)
@@ -202,6 +207,8 @@ struct CardView: View {
                         }
                         .pickerStyle(MenuPickerStyle())
                         .foregroundColor(Color.white.opacity(0.8))
+                        .accessibility(label: Text("Sound picker"))
+                        .accessibility(hint: Text("Choose a sound that emits from the node"))
                         
                     }
                     .padding(16)
@@ -213,6 +220,7 @@ struct CardView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
+                .accessibility(hidden: selectedCard != card)
                 
                 /// add button to entire card to make active
                 if selectedCard != card {
@@ -221,6 +229,8 @@ struct CardView: View {
                     }) {
                         Color.clear
                     }
+                    .accessibility(label: Text("Configuration card. Named \(card.name), with color \(UIColor(card.color).hexString), and sound \(card.sound.name)"))
+                    .accessibility(hint: Text("Double-tap to select"))
                 }
             }
         }

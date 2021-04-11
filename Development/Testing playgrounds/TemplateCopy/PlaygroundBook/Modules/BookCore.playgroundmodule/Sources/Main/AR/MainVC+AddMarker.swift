@@ -68,7 +68,7 @@ extension MainViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: "Marker", color: color, hasDescription: false, box: box, anchor: anchor, radius: 0.05)
+            let marker = Marker(name: "Node", color: color, hasDescription: false, box: box, anchor: anchor, radius: 0.05)
             placedMarkers.append(marker)
             
             return marker

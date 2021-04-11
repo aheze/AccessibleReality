@@ -21,6 +21,7 @@
                     <connections>
                         <outlet property="degreesLabel" destination="ez5-wK-rGJ" id="naK-uE-ZnR"/>
                         <outlet property="distanceLabel" destination="jJg-gM-Q8y" id="P0D-to-hUV"/>
+                        <outlet property="infoBorderView" destination="Qys-EE-1dv" id="0wp-7H-gs6"/>
                         <outlet property="infoView" destination="pzg-M6-VOZ" id="Wru-Cj-dGR"/>
                     </connections>
                 </viewController>
@@ -31,7 +32,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qys-EE-1dv">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ezv-mX-U68">
                             <rect key="frame" x="70" y="33.333333333333329" width="100" height="61.333333333333329"/>

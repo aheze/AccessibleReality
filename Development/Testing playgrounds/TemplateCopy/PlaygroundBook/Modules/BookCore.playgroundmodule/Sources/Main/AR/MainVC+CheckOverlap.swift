@@ -31,7 +31,7 @@ extension MainViewController {
                         self.scaleCubeOverlay(up: true)
                     }
                 } else {
-                    self.cvm.cards[self.cvm.cards.count - 1].name = "Marker"
+                    self.cvm.cards[self.cvm.cards.count - 1].name = "Node"
                     
                     self.scaleCubeOverlay(up: false)
                 }

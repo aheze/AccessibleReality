@@ -39,6 +39,10 @@ extension MainViewController {
             return false
         } cardRemoved: { removedCard in
             if let anchor = removedCard.marker?.anchor {
+                if let firstIndex = self.placedMarkers.firstIndex(where: { $0.box == removedCard.marker?.box }) {
+                    print("removing")
+                    self.placedMarkers.remove(at: firstIndex)
+                }
                 self.sceneView.session.remove(anchor: anchor)
             }
             
@@ -65,6 +69,7 @@ extension MainViewController {
         Global.configurationChanged = { [weak self] in
             self?.updateColors()
             self?.updateCubeOverlayColor()
+            self?.updateSceneViewAccessibility()
         }
     }
 }
