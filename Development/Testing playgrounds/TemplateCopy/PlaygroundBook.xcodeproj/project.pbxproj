@@ -22,6 +22,7 @@
 		3C8D8A48261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = 3C8D8A46261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc */; };
 		3C8D8A4E261EC29000E896FF /* YOLOv3TinyInt8LUT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */; };
 		3C8D8A6C261EC4B400E896FF /* MainVC+SetupAR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8D8A6B261EC4B400E896FF /* MainVC+SetupAR.swift */; };
+		3C99271A26227B7F00F46FE5 /* Particles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3C99271926227B7F00F46FE5 /* Particles.sks */; };
 		3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */; };
 		5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */; };
 		5E086DD32051E3A3004D8D25 /* Manifest.plist in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5E086DCF2051DF0F004D8D25 /* Manifest.plist */; };
@@ -163,6 +164,7 @@
 		3C8D8A47261EC21E00E896FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Base; path = Base.lproj/YOLOv3TinyInt8LUT.mlmodelc; sourceTree = "<group>"; };
 		3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLOv3TinyInt8LUT.swift; sourceTree = "<group>"; };
 		3C8D8A6B261EC4B400E896FF /* MainVC+SetupAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupAR.swift"; sourceTree = "<group>"; };
+		3C99271926227B7F00F46FE5 /* Particles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Particles.sks; sourceTree = "<group>"; };
 		3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundBook.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				3C8D8A46261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc */,
 				5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */,
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
+				3C99271926227B7F00F46FE5 /* Particles.sks */,
 			);
 			path = PrivateResources;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 			files = (
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				3C8D8A48261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc in Resources */,
+				3C99271A26227B7F00F46FE5 /* Particles.sks in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 			);
