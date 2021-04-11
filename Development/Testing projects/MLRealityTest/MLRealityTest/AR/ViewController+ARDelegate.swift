@@ -39,8 +39,8 @@ extension ViewController: ARCoachingOverlayViewDelegate {
         ]
         NSLayoutConstraint.activate(constraints)
         
-        cardsReferenceView.isUserInteractionEnabled = false
-        cardsReferenceView.alpha = 0
+//        cardsReferenceView.isUserInteractionEnabled = false
+//        cardsReferenceView.alpha = 0
     }
     
     func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {

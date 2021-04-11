@@ -44,7 +44,10 @@ struct CardsView: View {
     
     @ObservedObject var vm: CardsViewModel
     
-    var cardChanged: ((Card) -> Void)?
+//    var cardChanged: ((Card) -> Void)?
+    
+    var cardShouldAdd: ((Card) -> Bool)?
+    var cardRemoved: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
     
     var body: some View {
@@ -52,25 +55,30 @@ struct CardsView: View {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
                     ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
+                        CardView(selectedCard: $vm.selectedCard, card: card, canAdd: {
+                            let shouldAdd = cardShouldAdd?(card) ?? false
+                            return shouldAdd
+                        }, addPressed: {
                             
-                            withAnimation(.easeOut) {
+                            let shouldAdd = cardShouldAdd?(card) ?? false
+                            if shouldAdd {
+                                withAnimation(.easeOut) {
+                                    
+                                    let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
+                                    
+                                    /// keep the same color for now
+                                    vm.cards.append(newCard)
+                                    vm.selectedCard = newCard
+                                    
+                                }
                                 
-                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
-                                
-                                /// keep the same color for now
-                                vm.cards.append(newCard)
-                                vm.selectedCard = newCard
-                                
-                            }
-                            
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                withAnimation {
-                                    proxy.scrollTo(vm.cards.last?.id ?? card.id, anchor: .center)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    withAnimation {
+                                        proxy.scrollTo(vm.cards.last?.id ?? card.id, anchor: .center)
+                                    }
                                 }
                             }
                             
-                            cardChanged?(card)
                         }, removePressed: {
                             
                             /// scroll to nearest index
@@ -91,7 +99,7 @@ struct CardsView: View {
                                 vm.selectedCard = vm.cards[newIndex]
                             }
                             
-                            cardChanged?(card)
+                            cardRemoved?(card)
                         }, selected: {
                             
                             withAnimation {
@@ -135,6 +143,7 @@ struct CardView: View {
     @Binding var selectedCard: Card?
     @ObservedObject var card: Card
     
+    var canAdd: (() -> Bool)?
     var addPressed: (() -> Void)?
     var removePressed: (() -> Void)?
     var selected: (() -> Void)?
@@ -142,6 +151,8 @@ struct CardView: View {
     var body: some View {
         VStack(spacing: 0) {
             Button(action: {
+                guard canAdd?() ?? false else { return }
+                
                 card.added.toggle()
                 
                 if card.added {
