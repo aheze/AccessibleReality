@@ -41,7 +41,7 @@ extension MainViewController {
             
             var cubeColor = UIColor(vm.selectedCard?.color ?? Color.green)
             
-            if vm.selectedCard?.marker?.hasDescription ?? false {
+            if currentTrackingMarker.hasDescription {
                 cubeColor = cubeColor.withAlphaComponent(0.8)
             }
             let colorMaterial = SCNMaterial()

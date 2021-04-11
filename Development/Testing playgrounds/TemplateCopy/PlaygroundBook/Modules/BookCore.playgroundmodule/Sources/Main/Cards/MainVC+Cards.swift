@@ -21,6 +21,7 @@ extension MainViewController {
                     color: UIColor(addedCard.color)
                 ) {
                     addedCard.marker = marker
+                    self.animateCubeOverlayPlaced(placed: true)
                     return true
                 }
             } else {
@@ -30,6 +31,7 @@ extension MainViewController {
                     color: UIColor(addedCard.color)
                 ) {
                     addedCard.marker = marker
+                    self.animateCubeOverlayPlaced(placed: true)
                     return true
                 }
             }
@@ -39,9 +41,21 @@ extension MainViewController {
             if let anchor = removedCard.marker?.anchor {
                 self.sceneView.session.remove(anchor: anchor)
             }
+            
+            if (self.vm.selectedCard?.marker == nil) ?? false {
+                self.animateCubeOverlayPlaced(placed: false)
+            } else {
+                self.animateCubeOverlayPlaced(placed: true)
+            }
         } cardSelected: { [weak self] card in
             guard let self = self else { return }
             self.trackCurrentMarker()
+            
+            if card.marker == nil {
+                self.animateCubeOverlayPlaced(placed: false)
+            } else {
+                self.animateCubeOverlayPlaced(placed: true)
+            }
         }
         
         let hostingController = UIHostingController(rootView: cardsView)

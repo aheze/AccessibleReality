@@ -96,16 +96,11 @@ extension MainViewController: ARSessionDelegate, ARSCNViewDelegate {
             let transformedImage = image.transformed(by: normalizeTransform.concatenating(flipTransform).concatenating(displayTransform).concatenating(toViewPortTransform)).cropped(to: viewPort)
 
             processCurrentFrame(transformedImage)
-//            
         }
         
         if crosshairBusyCalculating == false {
-            print("cackng..")
             checkOverlap(at: crosshairCenter) { detectedObject in
-                
                 self.currentTargetedObject = detectedObject
-                self.crosshairView.backgroundColor = (detectedObject == nil) ? UIColor.clear : UIColor.red.withAlphaComponent(0.5)
-                
             }
         }
         

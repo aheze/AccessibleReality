@@ -55,6 +55,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var crosshairCenter = CGPoint.zero
     var currentTargetedObject: DetectedObject? /// current object underneath crosshair
     
+    var crosshairContentView: UIView!
     var crosshairCubeSceneView: SCNView!
     var crosshairCubeParticleView: SKView!
     var crosshairCubeNode: SCNNode!

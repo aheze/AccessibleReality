@@ -13,7 +13,7 @@ extension MainViewController {
     func setupCrosshair() {
         // MARK: Crosshair View
         let crosshairView = UIView()
-        crosshairView.backgroundColor = .red
+        crosshairView.backgroundColor = .clear
         crosshairView.isUserInteractionEnabled = false
         view.addSubview(crosshairView)
         
@@ -28,10 +28,27 @@ extension MainViewController {
         
         self.crosshairView = crosshairView
         
+        // MARK: Crosshair content view (contains cube and particles)
+        let crosshairContentView = UIView()
+        crosshairContentView.backgroundColor = .clear
+        crosshairContentView.isUserInteractionEnabled = false
+        view.addSubview(crosshairContentView)
+        
+        /// Positioning constraints
+        crosshairContentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            crosshairContentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            crosshairContentView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            crosshairContentView.widthAnchor.constraint(equalToConstant: 100),
+            crosshairContentView.heightAnchor.constraint(equalToConstant: 100),
+        ])
+        
+        self.crosshairContentView = crosshairContentView
+        
         // MARK: Crosshair cube view
         let crosshairCubeSceneView = SCNView()
         crosshairCubeSceneView.backgroundColor = .clear
-        crosshairView.addSubview(crosshairCubeSceneView)
+        crosshairContentView.addSubview(crosshairCubeSceneView)
         
         /// Positioning constraints
         crosshairCubeSceneView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +93,7 @@ extension MainViewController {
         // MARK: Crosshair particle effect view
         let crosshairCubeParticleView = SKView()
         crosshairCubeParticleView.backgroundColor = .clear
-        crosshairView.addSubview(crosshairCubeParticleView)
+        crosshairContentView.addSubview(crosshairCubeParticleView)
         
         /// Positioning constraints
         crosshairCubeParticleView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +114,8 @@ extension MainViewController {
             sprikeScene.addChild(emitter)
             crosshairCubeParticleView.presentScene(sprikeScene)
         }
+        
+        self.crosshairCubeParticleView = crosshairCubeParticleView
         
         // MARK: Crosshair Image View
         let crosshairImageView = UIImageView()
@@ -119,6 +138,8 @@ extension MainViewController {
         ])
         
         self.crosshairImageView = crosshairImageView
+        
+        scaleCubeOverlay(up: false)
     }
 }
 

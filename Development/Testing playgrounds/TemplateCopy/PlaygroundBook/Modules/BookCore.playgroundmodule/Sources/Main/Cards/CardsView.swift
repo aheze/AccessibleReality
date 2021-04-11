@@ -44,7 +44,7 @@ struct CardsView: View {
     
     @ObservedObject var vm: CardsViewModel
     
-    var cardShouldAdd: ((Card) -> Bool)?
+    var cardAdded: ((Card) -> Bool)? /// Bool is false if didn't succeed
     var cardRemoved: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
     
@@ -53,16 +53,14 @@ struct CardsView: View {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
                     ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(selectedCard: $vm.selectedCard, card: card, canAdd: {
-                            let shouldAdd = cardShouldAdd?(card) ?? false
-                            return shouldAdd
-                        }, addPressed: {
+                        CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
                             
-                            let shouldAdd = cardShouldAdd?(card) ?? false
-                            if shouldAdd {
+                            if cardAdded?(card) ?? false {
                                 let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
                                 vm.cards.append(newCard)
+                                return true
                             }
+                            return false
                             
                         }, removePressed: {
                             
@@ -128,22 +126,22 @@ struct CardView: View {
     @Binding var selectedCard: Card?
     @ObservedObject var card: Card
     
-    var canAdd: (() -> Bool)?
-    var addPressed: (() -> Void)?
+    var addPressed: (() -> Bool)?
     var removePressed: (() -> Void)?
     var selected: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
             Button(action: {
-                guard canAdd?() ?? false else { return }
                 
-                card.added.toggle()
                 
-                if card.added {
-                    addPressed?()
+                if card.added == false {
+                    if addPressed?() ?? false {
+                        card.added = true
+                    }
                 } else {
                     removePressed?()
+                    card.added = false
                 }
             }) {
                 Text(card.added ? "Remove" : "Add")

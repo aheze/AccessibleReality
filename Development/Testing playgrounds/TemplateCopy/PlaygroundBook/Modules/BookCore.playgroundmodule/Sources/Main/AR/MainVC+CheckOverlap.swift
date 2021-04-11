@@ -28,13 +28,59 @@ extension MainViewController {
                 if let object = overlappedObject {
                     if self.vm.selectedCard == self.vm.cards[self.vm.cards.count - 1] { /// only change if focused
                         self.vm.cards[self.vm.cards.count - 1].name = object.name.capitalized
+                        self.scaleCubeOverlay(up: true)
                     }
                 } else {
                     self.vm.cards[self.vm.cards.count - 1].name = "Marker"
+                    
+                    self.scaleCubeOverlay(up: false)
                 }
             }
             
             self.crosshairBusyCalculating = false
         }
+    }
+    
+    func scaleCubeOverlay(up: Bool) {
+        if up {
+            let scaleAction = SCNAction.scale(to: 1.5, duration: 0.1)
+            let fadeAction = SCNAction.fadeOpacity(to: 0.6, duration: 0.1)
+            let group = SCNAction.group([
+                scaleAction,
+                fadeAction
+            ])
+            crosshairCubeNode?.runAction(group)
+            
+            UIView.animate(withDuration: 0.1) {
+                self.crosshairCubeParticleView?.alpha = 1
+            }
+        } else {
+            let scaleAction = SCNAction.scale(to: 1, duration: 0.1)
+            let fadeAction = SCNAction.fadeOpacity(to: 1, duration: 0.1)
+            let group = SCNAction.group([
+                scaleAction,
+                fadeAction
+            ])
+            crosshairCubeNode?.runAction(group)
+            
+            UIView.animate(withDuration: 0.1) {
+                self.crosshairCubeParticleView?.alpha = 0
+            }
+        }
+    }
+    
+    func animateCubeOverlayPlaced(placed: Bool) {
+        if placed {
+            UIView.animate(withDuration: 0.3) {
+                self.crosshairContentView?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                self.crosshairContentView?.alpha = 0
+            }
+        } else {
+            UIView.animate(withDuration: 0.3) {
+                self.crosshairContentView?.transform = CGAffineTransform.identity
+                self.crosshairContentView?.alpha = 1
+            }
+        }
+        
     }
 }
