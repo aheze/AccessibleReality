@@ -62,12 +62,17 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     // MARK: Tracking interface
     var lineLayer: CAShapeLayer?
+    @IBOutlet var infoView: UIView!
+    @IBOutlet weak var degreesLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     // MARK: Tracking markers
     var framesSinceLastTrack = 0 /// only track every 5 frames
     var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
     var edgePointView: UIView?
+    
+    
     
     
     // MARK: Interface
@@ -80,8 +85,10 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         super.viewDidLoad()
         
         setupAR()
-        setupCrosshair()
         setupViews()
+        setupInfoView()
+        setupCrosshair()
+        
         addCoaching()
         setupCardsView()
         

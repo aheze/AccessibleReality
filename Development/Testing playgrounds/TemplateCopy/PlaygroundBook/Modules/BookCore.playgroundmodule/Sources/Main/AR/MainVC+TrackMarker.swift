@@ -38,11 +38,13 @@ extension MainViewController {
             self.lineLayer?.path = path.cgPath
             self.lineLayer?.strokeColor = UIColor(cvm.selectedCard?.color ?? Color.green).cgColor
             
+            let edgePoint: CGPoint
             let edgePointFrame: CGRect
             if let intersection = drawingView.bounds.intersection(with: LineSegment(point1: crosshairCenter, point2: projectedPoint)) {
-                print("Int!!")
+                edgePoint = intersection
                 edgePointFrame = CGRect(origin: intersection, size: CGSize(width: 10, height: 10)).insetBy(dx: -5, dy: -5)
             } else {
+                edgePoint = projectedPoint
                 edgePointFrame = CGRect(origin: projectedPoint, size: CGSize(width: 10, height: 10)).insetBy(dx: -5, dy: -5)
             }
             
@@ -72,6 +74,20 @@ extension MainViewController {
             /// get distance from camera to cube
             if let cameraPosition = sceneView.pointOfView?.position {
                 let distance = anchorPosition.distance(to: cameraPosition)
+                let centimeters = Int(distance * 100)
+                
+                
+                drawingView.bringSubviewToFront(infoView)
+                let midPoint = getMidOf(firstPoint: crosshairCenter, secondPoint: edgePoint)
+                UIView.animate(withDuration: 0.2) {
+                    self.infoView.alpha = 1
+                    self.infoView.center = midPoint
+                    self.infoView.transform = CGAffineTransform.identity
+                }
+                
+                
+                distanceLabel.text = "\(centimeters) cm"
+                
             }
         } else {
             /// remove line
@@ -79,10 +95,21 @@ extension MainViewController {
             lineLayer = nil
             edgePointView?.removeFromSuperview()
             edgePointView = nil
+            
+            UIView.animate(withDuration: 0.2) {
+                self.infoView.alpha = 0
+                self.infoView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            }
         }
     }
+    
+    func getMidOf(firstPoint: CGPoint, secondPoint: CGPoint) -> CGPoint {
+        let xCoordinate = (firstPoint.x + secondPoint.x) / 2
+        let yCoordinate = (firstPoint.y + secondPoint.y) / 2
+        return CGPoint(x: xCoordinate, y: yCoordinate)
+    }
+    
 }
-
 
 
 extension SCNVector3 {
