@@ -24,6 +24,14 @@
                                     <constraint firstAttribute="width" constant="200" id="Ee0-Qs-V2g"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jdc-aO-yjv">
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="6E3-YR-nfN"/>
+                                    <constraint firstAttribute="width" constant="200" id="KrX-2n-6N2"/>
+                                </constraints>
+                            </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Nx0-xr-qv9">
                                 <rect key="frame" x="8" y="94" width="398" height="31"/>
                                 <connections>
@@ -48,18 +56,21 @@
                         <constraints>
                             <constraint firstItem="Nxw-jn-PNA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7rA-YY-ofD"/>
                             <constraint firstItem="OYI-Cu-z6L" firstAttribute="top" secondItem="Nx0-xr-qv9" secondAttribute="bottom" constant="15" id="Em0-zS-l2h"/>
+                            <constraint firstItem="Jdc-aO-yjv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FD4-cW-Bgo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FcG-Vg-x7c" secondAttribute="trailing" constant="10" id="K7V-Hp-LOR"/>
                             <constraint firstItem="FcG-Vg-x7c" firstAttribute="top" secondItem="OYI-Cu-z6L" secondAttribute="bottom" constant="15" id="LSr-u5-H0L"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OYI-Cu-z6L" secondAttribute="trailing" constant="10" id="SEt-oy-dNk"/>
                             <constraint firstItem="FcG-Vg-x7c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="WuI-qi-dOA"/>
                             <constraint firstItem="OYI-Cu-z6L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="XJ9-Oo-m8g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nx0-xr-qv9" secondAttribute="trailing" constant="10" id="Y1R-A2-9gX"/>
+                            <constraint firstItem="Jdc-aO-yjv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aDv-rg-Y4J"/>
                             <constraint firstItem="Nx0-xr-qv9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="dPB-56-wUp"/>
                             <constraint firstItem="Nxw-jn-PNA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="moo-a6-eft"/>
                             <constraint firstItem="Nx0-xr-qv9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="qiQ-LO-qEe"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="particleReferenceView" destination="Jdc-aO-yjv" id="UHa-aD-vQd"/>
                         <outlet property="sceneReferenceView" destination="Nxw-jn-PNA" id="IMm-2z-0tM"/>
                     </connections>
                 </viewController>

@@ -13,6 +13,7 @@
 		3C9926DC26222FED00F46FE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C9926DA26222FED00F46FE5 /* Main.storyboard */; };
 		3C9926DE26222FEF00F46FE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C9926DD26222FEF00F46FE5 /* Assets.xcassets */; };
 		3C9926E126222FEF00F46FE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C9926DF26222FEF00F46FE5 /* LaunchScreen.storyboard */; };
+		3C9926F72622751C00F46FE5 /* Particles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3C9926F62622751C00F46FE5 /* Particles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		3C9926DD26222FEF00F46FE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C9926E026222FEF00F46FE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C9926E226222FEF00F46FE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C9926F62622751C00F46FE5 /* Particles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Particles.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				3C9926D426222FED00F46FE5 /* AppDelegate.swift */,
 				3C9926D626222FED00F46FE5 /* SceneDelegate.swift */,
 				3C9926D826222FED00F46FE5 /* ViewController.swift */,
+				3C9926F62622751C00F46FE5 /* Particles.sks */,
 				3C9926DA26222FED00F46FE5 /* Main.storyboard */,
 				3C9926DD26222FEF00F46FE5 /* Assets.xcassets */,
 				3C9926DF26222FEF00F46FE5 /* LaunchScreen.storyboard */,
@@ -127,6 +130,7 @@
 				3C9926E126222FEF00F46FE5 /* LaunchScreen.storyboard in Resources */,
 				3C9926DE26222FEF00F46FE5 /* Assets.xcassets in Resources */,
 				3C9926DC26222FED00F46FE5 /* Main.storyboard in Resources */,
+				3C9926F72622751C00F46FE5 /* Particles.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
