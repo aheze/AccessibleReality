@@ -40,7 +40,8 @@ extension MainViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: centerResult.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: name, color: color, hasDescription: true, box: box, anchor: anchor)
+            let maxRadius = max(distance, height) / 2
+            let marker = Marker(name: name, color: color, hasDescription: true, box: box, anchor: anchor, radius: maxRadius)
             placedMarkers.append(marker)
             
             return marker
@@ -60,7 +61,7 @@ extension MainViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: "Marker", color: color, hasDescription: false, box: box, anchor: anchor)
+            let marker = Marker(name: "Marker", color: color, hasDescription: false, box: box, anchor: anchor, radius: 0.05)
             placedMarkers.append(marker)
             
             return marker

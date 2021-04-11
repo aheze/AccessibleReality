@@ -20,6 +20,7 @@ struct Marker {
     var hasDescription: Bool /// true if ML detected
     var box: SCNBox
     var anchor: ARAnchor
+    var radius: CGFloat /// distance from center to the outermost edge
 }
 
 struct Sound: Identifiable, Hashable {

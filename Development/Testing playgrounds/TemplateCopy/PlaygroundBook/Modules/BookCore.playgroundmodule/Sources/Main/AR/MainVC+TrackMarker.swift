@@ -62,8 +62,13 @@ extension MainViewController {
              
             /// get distance from camera to cube
             if let cameraPosition = sceneView.pointOfView?.position {
-                let distance = anchorPosition.distance(to: cameraPosition)
-                let centimeters = Int(distance * 100)
+                
+                let distanceToBoxCenter = CGFloat(anchorPosition.distance(to: cameraPosition))
+                let distanceToBoxEdge = distanceToBoxCenter - currentTrackingMarker.radius
+                
+                
+                let edgeCentimeters = Int(distanceToBoxEdge * 100)
+                let adjustedCentimeters = max(0, edgeCentimeters - 10) /// prevent going below 0
                 
                 drawingView.bringSubviewToFront(infoView)
                 
@@ -99,7 +104,7 @@ extension MainViewController {
                     self.infoView.center = infoViewPoint
                     self.infoView.transform = CGAffineTransform.identity
                 }
-                distanceLabel?.text = "\(centimeters) cm"
+                distanceLabel?.text = "\(adjustedCentimeters) cm"
                 
             }
         } else {
