@@ -47,6 +47,7 @@ extension MainViewController {
                 edgePointFrame = CGRect(origin: projectedPoint, size: CGSize(width: 10, height: 10)).insetBy(dx: -5, dy: -5)
             }
             
+            
             if let edgePointView = edgePointView {
                 UIView.animate(withDuration: 0.1) {
                     edgePointView.frame = edgePointFrame
@@ -93,7 +94,9 @@ extension MainViewController {
                     
                     let angle = Angle3d(vertex: cameraPosition, firstPoint: cameraProjectedPosition, secondPoint: anchorPosition)
                     let angleInDegrees = angle.radiansToDegrees
-                    degreesLabel.text = "\(Int(angleInDegrees))°"
+                    
+                    let compassText = getAngleText(between: crosshairCenter, and: edgePoint)
+                    degreesLabel.text = "\(Int(angleInDegrees))°\(compassText)"
                 }
                 
             }
@@ -191,4 +194,24 @@ func projectedForwardsPosition(from transform: matrix_float4x4) -> SCNVector3 {
     
     return newPosition
     
+}
+
+func getAngleText(between center: CGPoint, and point: CGPoint) -> String {
+    let xDifference = point.x - center.x
+    let yDifference = point.y - center.y
+    let angleInRadians = atan2(yDifference, xDifference)
+    
+    /// originally 0 is x axis, add 360 to prevent negatives
+    let angleInDegrees = angleInRadians.radiansToDegrees + 90 + 360
+    
+    
+    let directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
+    let index = Int((angleInDegrees / 45).rounded()) % 8
+    
+    if directions.indices.contains(index) {
+        let direction = directions[index]
+        return direction
+    }
+    
+    return "N"
 }
