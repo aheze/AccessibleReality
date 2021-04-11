@@ -61,5 +61,10 @@ extension MainViewController {
         let hostingController = UIHostingController(rootView: cardsView)
         addChildViewController(hostingController, in: cardsReferenceView)
         hostingController.view.backgroundColor = .clear
+        
+        Global.configurationChanged = { [weak self] in
+            self?.updateColors()
+            self?.updateCubeOverlayColor()
+        }
     }
 }

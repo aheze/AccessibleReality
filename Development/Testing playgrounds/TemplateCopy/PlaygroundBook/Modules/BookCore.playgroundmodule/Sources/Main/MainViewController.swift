@@ -59,6 +59,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var crosshairCubeSceneView: SCNView!
     var crosshairCubeParticleView: SKView!
     var crosshairCubeNode: SCNNode!
+    var crosshairCube: SCNBox!
     
     // MARK: Tracking interface
     var lineLayer: CAShapeLayer?
@@ -68,7 +69,6 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     // MARK: Tracking markers
     var framesSinceLastTrack = 0 /// only track every 5 frames
-    var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
     var edgePointView: UIView?
     

@@ -133,9 +133,11 @@ struct CardView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            
+            
+            let _ = Global.configurationChanged?()
+            
             Button(action: {
-                
-                
                 if card.added == false {
                     if addPressed?() ?? false {
                         card.added = true

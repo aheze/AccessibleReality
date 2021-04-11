@@ -32,7 +32,7 @@ extension MainViewController {
         let crosshairContentView = UIView()
         crosshairContentView.backgroundColor = .clear
         crosshairContentView.isUserInteractionEnabled = false
-        view.addSubview(crosshairContentView)
+        crosshairView.addSubview(crosshairContentView)
         
         /// Positioning constraints
         crosshairContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,10 +71,11 @@ extension MainViewController {
         cameraOrbitNode.eulerAngles = SCNVector3(-35.degreesToRadians, 0, 0)
         cubeScene.rootNode.addChildNode(cameraOrbitNode)
         
-        let cube = SCNBox(width: 2, height: 2, length: 2, chamferRadius: 0)
-        cube.firstMaterial?.diffuse.contents = UIColor(red: 0.149, green: 0.604, blue: 0.859, alpha: 0.9)
+        let crosshairCube = SCNBox(width: 2, height: 2, length: 2, chamferRadius: 0)
+        crosshairCube.firstMaterial?.diffuse.contents = UIColor(red: 0.149, green: 0.604, blue: 0.859, alpha: 0.9)
+        self.crosshairCube = crosshairCube
         
-        let crosshairCubeNode = SCNNode(geometry: cube)
+        let crosshairCubeNode = SCNNode(geometry: crosshairCube)
         cubeScene.rootNode.addChildNode(crosshairCubeNode)
         
         self.crosshairCubeNode = crosshairCubeNode

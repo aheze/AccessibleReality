@@ -36,7 +36,6 @@ extension MainViewController {
             }
             
             self.lineLayer?.path = path.cgPath
-            self.lineLayer?.strokeColor = UIColor(cvm.selectedCard?.color ?? Color.green).cgColor
             
             let edgePoint: CGPoint
             let edgePointFrame: CGRect
@@ -60,17 +59,7 @@ extension MainViewController {
                 drawingView.addSubview(edgePointView)
                 self.edgePointView = edgePointView
             }
-            
-            
-            var cubeColor = UIColor(cvm.selectedCard?.color ?? Color.green)
-            
-            if currentTrackingMarker.hasDescription {
-                cubeColor = cubeColor.withAlphaComponent(0.8)
-            }
-            let colorMaterial = SCNMaterial()
-            colorMaterial.diffuse.contents = cubeColor
-            self.cvm.selectedCard?.marker?.box.materials = [colorMaterial]
-            
+             
             /// get distance from camera to cube
             if let cameraPosition = sceneView.pointOfView?.position {
                 let distance = anchorPosition.distance(to: cameraPosition)
@@ -84,9 +73,7 @@ extension MainViewController {
                     self.infoView.center = midPoint
                     self.infoView.transform = CGAffineTransform.identity
                 }
-                
-                
-                distanceLabel.text = "\(centimeters) cm"
+                distanceLabel?.text = "\(centimeters) cm"
                 
             }
         } else {
