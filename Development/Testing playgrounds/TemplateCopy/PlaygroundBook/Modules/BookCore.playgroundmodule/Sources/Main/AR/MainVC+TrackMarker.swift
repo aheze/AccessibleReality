@@ -97,8 +97,11 @@ extension MainViewController {
                     let angleInDegrees = angle.radiansToDegrees
                     
                     let compassText = getAngleText(between: crosshairCenter, and: edgePoint)
-                    degreesLabel.text = "\(Int(angleInDegrees))°\(compassText)"
-                    self.degreesAway = "\(Int(angleInDegrees))°\(compassText)"
+                    
+                    if !angleInDegrees.isNaN {
+                        degreesLabel.text = "\(Int(angleInDegrees))°\(compassText)"
+                        self.degreesAway = "\(Int(angleInDegrees))°\(compassText)"
+                    }
                     
                     UIView.animate(withDuration: 0.2) {
                         if angleInDegrees < 5 {

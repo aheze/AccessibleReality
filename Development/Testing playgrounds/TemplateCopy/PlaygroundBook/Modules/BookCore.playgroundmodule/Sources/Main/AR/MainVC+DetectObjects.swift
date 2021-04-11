@@ -27,7 +27,20 @@ extension MainViewController {
                     self?.processResults(for: request, error: error)
                 }
                 
-                let requestHandler = VNImageRequestHandler(ciImage: ciImage, orientation: .up, options: [:])
+                var orientation = CGImagePropertyOrientation.up
+                switch self.currentOrientation {
+                case .portrait:
+                    orientation = .right
+                case .portraitUpsideDown:
+                    orientation = .left
+                case .landscapeLeft:
+                    orientation = .down
+                case .landscapeRight:
+                    orientation = .up
+                default:
+                    orientation = .up
+                }
+                let requestHandler = VNImageRequestHandler(ciImage: ciImage, orientation: orientation, options: [:])
                 try requestHandler.perform([objectDetectionRequest])
             } catch {
                 print("Error making model: \(error)")

@@ -81,7 +81,41 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var drawingView: UIView!
     var cardsReferenceView: UIView!
     var cardsReferenceHeightC: NSLayoutConstraint!
- 
+    
+    // MARK: Accessibility
+    var currentOrientation = UIInterfaceOrientation.landscapeLeft
+    @IBOutlet weak var orientationBlurView: UIVisualEffectView!
+    @IBOutlet weak var orientationButton: UIButton!
+    @IBAction func orientationButtonPressed(_ sender: Any) {
+        let transform: CGAffineTransform
+        switch currentOrientation {
+        case .portrait:
+            currentOrientation = .landscapeRight
+            transform = CGAffineTransform(rotationAngle: 90.degreesToRadians)
+        case .portraitUpsideDown:
+            currentOrientation = .landscapeLeft
+            transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
+        case .landscapeLeft:
+            currentOrientation = .portrait
+            transform = CGAffineTransform(rotationAngle: 180.degreesToRadians)
+        case .landscapeRight:
+            currentOrientation = .portraitUpsideDown
+            transform = CGAffineTransform(rotationAngle: 0.degreesToRadians)
+        default:
+            currentOrientation = .landscapeRight
+            transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.orientationButton.transform = transform
+        }
+    }
+    
+    @IBOutlet weak var speakBlurView: UIVisualEffectView!
+    @IBOutlet weak var speakButton: UIButton!
+    @IBAction func speakButtonPressed(_ sender: Any) {
+        print("speak pressed")
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         

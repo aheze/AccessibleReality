@@ -15,14 +15,83 @@
                     <view key="view" contentMode="scaleToFill" id="CGj-eE-CW0">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njp-FE-CnI">
+                                <rect key="frame" x="16" y="60" width="48" height="52.333333333333343"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SBe-NB-Miy">
+                                    <rect key="frame" x="0.0" y="0.0" width="48" height="52.333333333333343"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1D8-J1-M8V">
+                                            <rect key="frame" x="0.0" y="0.0" width="48" height="52.333333333333336"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <inset key="contentEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
+                                            <state key="normal" image="ipad" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="orientationButtonPressed:" destination="MH8-lu-oSg" eventType="touchUpInside" id="wgP-l3-7yf"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="1D8-J1-M8V" firstAttribute="leading" secondItem="SBe-NB-Miy" secondAttribute="leading" id="5du-EH-Wrp"/>
+                                        <constraint firstItem="1D8-J1-M8V" firstAttribute="top" secondItem="SBe-NB-Miy" secondAttribute="top" id="M04-cZ-caE"/>
+                                        <constraint firstAttribute="trailing" secondItem="1D8-J1-M8V" secondAttribute="trailing" id="OIE-RE-JQw"/>
+                                        <constraint firstAttribute="bottom" secondItem="1D8-J1-M8V" secondAttribute="bottom" id="X3q-zh-xqe"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dx2-W5-bHC">
+                                <rect key="frame" x="148" y="60" width="226" height="51"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kfo-Rc-n40">
+                                    <rect key="frame" x="0.0" y="0.0" width="226" height="51"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kf-YT-ZBA">
+                                            <rect key="frame" x="0.0" y="0.0" width="226" height="51"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <inset key="contentEdgeInsets" minX="20" minY="14" maxX="20" maxY="14"/>
+                                            <state key="normal" title="Speak Current Status">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="speakButtonPressed:" destination="MH8-lu-oSg" eventType="touchUpInside" id="668-yg-JL7"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7kf-YT-ZBA" firstAttribute="top" secondItem="Kfo-Rc-n40" secondAttribute="top" id="37I-XV-T6y"/>
+                                        <constraint firstItem="7kf-YT-ZBA" firstAttribute="leading" secondItem="Kfo-Rc-n40" secondAttribute="leading" id="VOP-kC-MNQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="7kf-YT-ZBA" secondAttribute="bottom" id="WvB-Ze-cu9"/>
+                                        <constraint firstAttribute="trailing" secondItem="7kf-YT-ZBA" secondAttribute="trailing" id="lKT-c7-4GA"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="OuP-cF-Jwk"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OuP-cF-Jwk" firstAttribute="trailing" secondItem="dx2-W5-bHC" secondAttribute="trailing" constant="16" id="bPu-Gc-LI6"/>
+                            <constraint firstItem="dx2-W5-bHC" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="euB-BM-0X2"/>
+                            <constraint firstItem="njp-FE-CnI" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="nPm-k2-6nE"/>
+                            <constraint firstItem="njp-FE-CnI" firstAttribute="leading" secondItem="OuP-cF-Jwk" secondAttribute="leading" constant="16" id="weP-Vp-usG"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="degreesLabel" destination="ez5-wK-rGJ" id="naK-uE-ZnR"/>
                         <outlet property="distanceLabel" destination="jJg-gM-Q8y" id="P0D-to-hUV"/>
                         <outlet property="infoBorderView" destination="Qys-EE-1dv" id="0wp-7H-gs6"/>
                         <outlet property="infoView" destination="pzg-M6-VOZ" id="Wru-Cj-dGR"/>
+                        <outlet property="orientationBlurView" destination="njp-FE-CnI" id="Yuq-PG-LmG"/>
+                        <outlet property="orientationButton" destination="1D8-J1-M8V" id="Lw4-U8-AQW"/>
+                        <outlet property="speakBlurView" destination="dx2-W5-bHC" id="hhF-0q-Ms2"/>
+                        <outlet property="speakButton" destination="7kf-YT-ZBA" id="AbK-uN-Ay0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hae-vV-aQc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -71,10 +140,11 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="611" y="85"/>
+            <point key="canvasLocation" x="610.76923076923072" y="84.597156398104261"/>
         </scene>
     </scenes>
     <resources>
+        <image name="ipad" catalog="system" width="109" height="128"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

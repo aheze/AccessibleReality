@@ -15,6 +15,17 @@ extension MainViewController {
         
         sceneView.isAccessibilityElement = true
         sceneView.accessibilityLabel = "AR Viewfinder"
+        
+        infoView.isAccessibilityElement = false
+        
+        orientationBlurView.clipsToBounds = true
+        orientationBlurView.layer.cornerRadius = 6
+        view.bringSubviewToFront(orientationBlurView)
+        orientationButton.transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
+        
+        speakBlurView.clipsToBounds = true
+        speakBlurView.layer.cornerRadius = 6
+        view.bringSubviewToFront(speakBlurView)
     }
     
     func updateSceneViewAccessibility() {
