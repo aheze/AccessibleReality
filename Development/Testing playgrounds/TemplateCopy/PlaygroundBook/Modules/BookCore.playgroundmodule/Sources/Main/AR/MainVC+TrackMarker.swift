@@ -65,12 +65,38 @@ extension MainViewController {
                 let distance = anchorPosition.distance(to: cameraPosition)
                 let centimeters = Int(distance * 100)
                 
-                
                 drawingView.bringSubviewToFront(infoView)
-                let midPoint = getMidOf(firstPoint: crosshairCenter, secondPoint: edgePoint)
+                
+                var infoViewPoint = getMidOf(firstPoint: crosshairCenter, secondPoint: edgePoint)
+                
+                let distanceToCenter = DistanceFormula(from: crosshairCenter, to: infoViewPoint)
+                if distanceToCenter < 100 {
+                    
+                    let yCutoff: CGFloat
+                    
+                    switch infoViewPosition {
+                    case .aboveCenter:
+                        yCutoff = crosshairCenter.y - 10
+                    case .belowCenter:
+                        yCutoff = crosshairCenter.y + 10
+                    case .floating:
+                        yCutoff = crosshairCenter.y
+                    }
+                    
+                    if infoViewPoint.y < yCutoff {
+                        infoViewPoint = CGPoint(x: crosshairCenter.x, y: crosshairCenter.y + 70)
+                        self.infoViewPosition = .belowCenter
+                    } else if infoViewPoint.y > yCutoff {
+                        infoViewPoint = CGPoint(x: crosshairCenter.x, y: crosshairCenter.y - 70)
+                        self.infoViewPosition = .aboveCenter
+                    }
+                } else {
+                    self.infoViewPosition = .floating
+                }
+                
                 UIView.animate(withDuration: 0.2) {
                     self.infoView.alpha = 1
-                    self.infoView.center = midPoint
+                    self.infoView.center = infoViewPoint
                     self.infoView.transform = CGAffineTransform.identity
                 }
                 distanceLabel?.text = "\(centimeters) cm"

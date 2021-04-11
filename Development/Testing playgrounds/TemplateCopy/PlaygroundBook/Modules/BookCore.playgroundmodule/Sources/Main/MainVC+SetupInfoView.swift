@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum InfoViewPosition {
+    case aboveCenter
+    case belowCenter
+    case floating
+}
 extension MainViewController {
     
     func setupInfoView() {

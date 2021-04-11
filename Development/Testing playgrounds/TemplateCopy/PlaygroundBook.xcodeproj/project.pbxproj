@@ -12,7 +12,7 @@
 		3C728A3F261D4E1B007A1C7A /* Positioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A3E261D4E1B007A1C7A /* Positioning.swift */; };
 		3C728A51261D4F28007A1C7A /* MainVC+AddMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A50261D4F28007A1C7A /* MainVC+AddMarker.swift */; };
 		3C728A57261D4F3B007A1C7A /* MainVC+TrackMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */; };
-		3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */; };
+		3C728A5D261D4F91007A1C7A /* MainVC+DetectObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A5C261D4F91007A1C7A /* MainVC+DetectObjects.swift */; };
 		3C728A63261D4FAB007A1C7A /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A62261D4FAB007A1C7A /* Objects.swift */; };
 		3C728A69261D50B1007A1C7A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A68261D50B1007A1C7A /* Utilities.swift */; };
 		3C7A2F9926227C95008799A2 /* MainVC+SetupCrosshair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7A2F9826227C95008799A2 /* MainVC+SetupCrosshair.swift */; };
@@ -158,7 +158,7 @@
 		3C728A3E261D4E1B007A1C7A /* Positioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positioning.swift; sourceTree = "<group>"; };
 		3C728A50261D4F28007A1C7A /* MainVC+AddMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+AddMarker.swift"; sourceTree = "<group>"; };
 		3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+TrackMarker.swift"; sourceTree = "<group>"; };
-		3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+TrackObjects.swift"; sourceTree = "<group>"; };
+		3C728A5C261D4F91007A1C7A /* MainVC+DetectObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+DetectObjects.swift"; sourceTree = "<group>"; };
 		3C728A62261D4FAB007A1C7A /* Objects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
 		3C728A68261D50B1007A1C7A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		3C7A2F9826227C95008799A2 /* MainVC+SetupCrosshair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupCrosshair.swift"; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 				3C728A50261D4F28007A1C7A /* MainVC+AddMarker.swift */,
 				3C728A56261D4F3B007A1C7A /* MainVC+TrackMarker.swift */,
 				3CE81CCE26236092003FBC66 /* MainVC+UpdateColors.swift */,
-				3C728A5C261D4F91007A1C7A /* MainVC+TrackObjects.swift */,
+				3C728A5C261D4F91007A1C7A /* MainVC+DetectObjects.swift */,
 				3C728A62261D4FAB007A1C7A /* Objects.swift */,
 				3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */,
 			);
@@ -697,7 +697,7 @@
 			files = (
 				3CE81CCF26236092003FBC66 /* MainVC+UpdateColors.swift in Sources */,
 				3C7A2F9926227C95008799A2 /* MainVC+SetupCrosshair.swift in Sources */,
-				3C728A5D261D4F91007A1C7A /* MainVC+TrackObjects.swift in Sources */,
+				3C728A5D261D4F91007A1C7A /* MainVC+DetectObjects.swift in Sources */,
 				3CE8AAE82622C96200A3F5B9 /* MainVC+SetupInfoView.swift in Sources */,
 				3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */,
 				3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */,
