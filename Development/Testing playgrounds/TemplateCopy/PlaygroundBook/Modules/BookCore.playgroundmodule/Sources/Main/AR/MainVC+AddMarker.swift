@@ -75,7 +75,7 @@ extension MainViewController {
             let raycastQuery = sceneView.raycastQuery(
                 from: screenCoordinate,
                 allowing: .existingPlaneInfinite,
-                alignment: .horizontal
+                alignment: .any
             )
         {
             let results = sceneView.session.raycast(raycastQuery)
