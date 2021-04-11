@@ -38,6 +38,27 @@ extension MainViewController {
             self.lineLayer?.path = path.cgPath
             self.lineLayer?.strokeColor = UIColor(cvm.selectedCard?.color ?? Color.green).cgColor
             
+            let edgePointFrame: CGRect
+            if let intersection = drawingView.bounds.intersection(with: LineSegment(point1: crosshairCenter, point2: projectedPoint)) {
+                print("Int!!")
+                edgePointFrame = CGRect(origin: intersection, size: CGSize(width: 10, height: 10)).insetBy(dx: -5, dy: -5)
+            } else {
+                edgePointFrame = CGRect(origin: projectedPoint, size: CGSize(width: 10, height: 10)).insetBy(dx: -5, dy: -5)
+            }
+            
+            if let edgePointView = edgePointView {
+                UIView.animate(withDuration: 0.1) {
+                    edgePointView.frame = edgePointFrame
+                }
+            } else {
+                let edgePointView = UIView()
+                edgePointView.backgroundColor = .blue
+                edgePointView.layer.cornerRadius = 5
+                edgePointView.frame = edgePointFrame
+                drawingView.addSubview(edgePointView)
+                self.edgePointView = edgePointView
+            }
+            
             
             var cubeColor = UIColor(cvm.selectedCard?.color ?? Color.green)
             
@@ -56,9 +77,12 @@ extension MainViewController {
             /// remove line
             lineLayer?.removeFromSuperlayer()
             lineLayer = nil
+            edgePointView?.removeFromSuperview()
+            edgePointView = nil
         }
     }
 }
+
 
 
 extension SCNVector3 {

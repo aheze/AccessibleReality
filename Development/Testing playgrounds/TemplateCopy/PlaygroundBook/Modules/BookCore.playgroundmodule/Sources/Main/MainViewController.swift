@@ -67,6 +67,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var framesSinceLastTrack = 0 /// only track every 5 frames
     var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
+    var edgePointView: UIView?
     
     
     // MARK: Interface

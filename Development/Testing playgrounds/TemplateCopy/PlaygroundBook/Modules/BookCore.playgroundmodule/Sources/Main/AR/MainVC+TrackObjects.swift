@@ -62,23 +62,6 @@ extension MainViewController {
         }
         
         self.currentDetectedObjects = detectedObjects
-        
-        DispatchQueue.main.async {
-            for subView in self.drawingView.subviews {
-                subView.removeFromSuperview()
-            }
-            
-            for object in detectedObjects {
-                let newView = UIView()
-                newView.frame = object.convertedBoundingBox
-                newView.backgroundColor = UIColor.green.withAlphaComponent(0.2)
-                newView.layer.borderWidth = 4
-                newView.layer.borderColor = UIColor.green.cgColor
-                
-                self.drawingView.addSubview(newView)
-            }
-        }
-        
         busyProcessingImage = false
     }
     
