@@ -10,8 +10,8 @@ import SwiftUI
 extension MainViewController {
     
     func setupCardsView() {
-        self.vm = CardsViewModel()
-        let cardsView = CardsView(vm: self.vm) { [weak self] addedCard in
+        self.cvm = CardsViewModel()
+        let cardsView = CardsView(cvm: self.cvm) { [weak self] addedCard in
             guard let self = self else { return false }
             
             if let object = self.currentTargetedObject {
@@ -42,7 +42,7 @@ extension MainViewController {
                 self.sceneView.session.remove(anchor: anchor)
             }
             
-            if (self.vm.selectedCard?.marker == nil) ?? false {
+            if (self.cvm.selectedCard?.marker == nil) ?? false {
                 self.animateCubeOverlayPlaced(placed: false)
             } else {
                 self.animateCubeOverlayPlaced(placed: true)

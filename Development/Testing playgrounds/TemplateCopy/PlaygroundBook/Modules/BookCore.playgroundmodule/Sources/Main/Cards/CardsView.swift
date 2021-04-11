@@ -34,6 +34,7 @@ class Card: ObservableObject, Identifiable, Hashable {
 
 class CardsViewModel: ObservableObject {
     
+    @Published var safeAreaWidth = CGFloat(500)
     @Published var selectedCard: Card?
     @Published var cards = [
         Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
@@ -42,7 +43,7 @@ class CardsViewModel: ObservableObject {
 
 struct CardsView: View {
     
-    @ObservedObject var vm: CardsViewModel
+    @ObservedObject var cvm: CardsViewModel
     
     var cardAdded: ((Card) -> Bool)? /// Bool is false if didn't succeed
     var cardRemoved: ((Card) -> Void)?
@@ -52,12 +53,12 @@ struct CardsView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
-                    ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
+                    ForEach(Array(cvm.cards.enumerated()), id: \.1) { (index, card) in
+                        CardView(selectedCard: $cvm.selectedCard, card: card, addPressed: {
                             
                             if cardAdded?(card) ?? false {
                                 let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
-                                vm.cards.append(newCard)
+                                cvm.cards.append(newCard)
                                 return true
                             }
                             return false
@@ -66,20 +67,20 @@ struct CardsView: View {
                             
                             /// scroll to nearest index
                             var newIndex = index
-                            if index == vm.cards.indices.last {
+                            if index == cvm.cards.indices.last {
                                 newIndex = index - 1
                             }
                             
-                            _ = vm.cards.remove(at: index)
+                            _ = cvm.cards.remove(at: index)
                             
                             /// refocus if deleted selected card
-                            if vm.selectedCard == card {
+                            if cvm.selectedCard == card {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     withAnimation {
-                                        proxy.scrollTo(vm.cards[newIndex].id, anchor: .center)
+                                        proxy.scrollTo(cvm.cards[newIndex].id, anchor: .center)
                                     }
                                 }
-                                vm.selectedCard = vm.cards[newIndex]
+                                cvm.selectedCard = cvm.cards[newIndex]
                             }
                             
                             cardRemoved?(card)
@@ -89,21 +90,21 @@ struct CardsView: View {
                                 proxy.scrollTo(card.id, anchor: .center)
                             }
                             
-                            vm.selectedCard = card
+                            cvm.selectedCard = card
                             cardSelected?(card)
                         })
                         .id(card.id)
                         .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
-                        .offset(x: 0, y: vm.selectedCard == card ? -20 : 0)
-                        .brightness(vm.selectedCard == card ? 0 : -0.4)
+                        .offset(x: 0, y: cvm.selectedCard == card ? -20 : 0)
+                        .brightness(cvm.selectedCard == card ? 0 : -0.4)
                     }
                 }
-                .padding(.horizontal, (Positioning.safeAreaWidth - Constants.cardWidth) / 2)
+                .padding(.horizontal, (cvm.safeAreaWidth - Constants.cardWidth) / 2)
                 .padding(.vertical, 20)
             }
         }
         .onAppear {
-            vm.selectedCard = vm.cards.last
+            cvm.selectedCard = cvm.cards.last
         }
     }
 }

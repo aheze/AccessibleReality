@@ -70,7 +70,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     
     // MARK: Interface
-    var vm: CardsViewModel! /// keep reference to cards
+    var cvm: CardsViewModel! /// keep reference to cards
     var drawingView: UIView!
     var cardsReferenceView: UIView!
     var cardsReferenceHeightC: NSLayoutConstraint!
@@ -94,7 +94,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
         cardsReferenceHeightC.constant = Positioning.cardContainerHeight + 40
         
-        Positioning.safeAreaWidth = view.safeAreaLayoutGuide.layoutFrame.width
+        cvm.safeAreaWidth = view.safeAreaLayoutGuide.layoutFrame.width
     }
     
     

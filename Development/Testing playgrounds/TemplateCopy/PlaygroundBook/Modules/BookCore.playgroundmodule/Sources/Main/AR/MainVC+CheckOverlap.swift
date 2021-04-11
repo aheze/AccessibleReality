@@ -26,12 +26,12 @@ extension MainViewController {
             DispatchQueue.main.async {
                 completion(overlappedObject)
                 if let object = overlappedObject {
-                    if self.vm.selectedCard == self.vm.cards[self.vm.cards.count - 1] { /// only change if focused
-                        self.vm.cards[self.vm.cards.count - 1].name = object.name.capitalized
+                    if self.cvm.selectedCard == self.cvm.cards[self.cvm.cards.count - 1] { /// only change if focused
+                        self.cvm.cards[self.cvm.cards.count - 1].name = object.name.capitalized
                         self.scaleCubeOverlay(up: true)
                     }
                 } else {
-                    self.vm.cards[self.vm.cards.count - 1].name = "Marker"
+                    self.cvm.cards[self.cvm.cards.count - 1].name = "Marker"
                     
                     self.scaleCubeOverlay(up: false)
                 }

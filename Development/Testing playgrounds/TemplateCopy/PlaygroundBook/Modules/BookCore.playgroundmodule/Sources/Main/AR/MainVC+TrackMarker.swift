@@ -10,7 +10,7 @@ import ARKit
 
 extension MainViewController {
     func trackCurrentMarker() {
-        if let currentTrackingMarker = vm.selectedCard?.marker {
+        if let currentTrackingMarker = cvm.selectedCard?.marker {
             let anchorPosition = SCNVector3(
                 currentTrackingMarker.anchor.transform.columns.3.x,
                 currentTrackingMarker.anchor.transform.columns.3.y,
@@ -36,17 +36,17 @@ extension MainViewController {
             }
             
             self.lineLayer?.path = path.cgPath
-            self.lineLayer?.strokeColor = UIColor(vm.selectedCard?.color ?? Color.green).cgColor
+            self.lineLayer?.strokeColor = UIColor(cvm.selectedCard?.color ?? Color.green).cgColor
             
             
-            var cubeColor = UIColor(vm.selectedCard?.color ?? Color.green)
+            var cubeColor = UIColor(cvm.selectedCard?.color ?? Color.green)
             
             if currentTrackingMarker.hasDescription {
                 cubeColor = cubeColor.withAlphaComponent(0.8)
             }
             let colorMaterial = SCNMaterial()
             colorMaterial.diffuse.contents = cubeColor
-            self.vm.selectedCard?.marker?.box.materials = [colorMaterial]
+            self.cvm.selectedCard?.marker?.box.materials = [colorMaterial]
             
             /// get distance from camera to cube
             if let cameraPosition = sceneView.pointOfView?.position {

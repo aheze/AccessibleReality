@@ -13,5 +13,4 @@ struct Constants {
 }
 struct Positioning {
     static var cardContainerHeight = Constants.cardContainerHeight
-    static var safeAreaWidth = CGFloat(500)
 }
