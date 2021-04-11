@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         let sceneView = SCNView()
         sceneView.frame = sceneReferenceView.bounds
         sceneReferenceView.addSubview(sceneView)
+        sceneView.backgroundColor = .black
         
         let scene = SCNScene()
         
@@ -66,6 +67,7 @@ class ViewController: UIViewController {
         spriteKitView.backgroundColor = .clear
         particleReferenceView.addSubview(spriteKitView)
         
+        print("s., \(particleReferenceView.bounds.size)")
         let sprikeScene: SKScene = SKScene(size: particleReferenceView.bounds.size)
         sprikeScene.scaleMode = .aspectFit
         sprikeScene.backgroundColor = .clear

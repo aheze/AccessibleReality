@@ -53,16 +53,20 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
 
     var crosshairBusyCalculating = false
     var crosshairCenter = CGPoint.zero
-    
     var currentTargetedObject: DetectedObject? /// current object underneath crosshair
+    
+    var crosshairCubeSceneView: SCNView!
+    var crosshairCubeParticleView: SKView!
+    var crosshairCubeNode: SCNNode!
+    
+    // MARK: Tracking interface
+    var lineLayer: CAShapeLayer?
     
     // MARK: Tracking markers
     var framesSinceLastTrack = 0 /// only track every 5 frames
     var currentTrackingMarker: Marker?
     var placedMarkers = [Marker]() /// current placed markers
     
-    // MARK: Tracking interface
-    var lineLayer: CAShapeLayer?
     
     // MARK: Interface
     var vm: CardsViewModel! /// keep reference to cards
@@ -74,6 +78,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         super.viewDidLoad()
         
         setupAR()
+        setupCrosshair()
         setupViews()
         addCoaching()
         setupCardsView()
