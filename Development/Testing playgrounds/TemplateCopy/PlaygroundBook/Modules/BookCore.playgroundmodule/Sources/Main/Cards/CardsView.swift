@@ -44,7 +44,8 @@ struct CardsView: View {
     
     @ObservedObject var vm: CardsViewModel
     
-    var cardChanged: ((Card) -> Void)?
+    var cardShouldAdd: ((Card) -> Bool)?
+    var cardRemoved: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
     
     var body: some View {
@@ -52,13 +53,17 @@ struct CardsView: View {
             ScrollViewReader { proxy in
                 LazyHStack(spacing: 20) {
                     ForEach(Array(vm.cards.enumerated()), id: \.1) { (index, card) in
-                        CardView(selectedCard: $vm.selectedCard, card: card, addPressed: {
+                        CardView(selectedCard: $vm.selectedCard, card: card, canAdd: {
+                            let shouldAdd = cardShouldAdd?(card) ?? false
+                            return shouldAdd
+                        }, addPressed: {
                             
-                            /// keep the same color for now
-                            let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
-                            vm.cards.append(newCard)
+                            let shouldAdd = cardShouldAdd?(card) ?? false
+                            if shouldAdd {
+                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
+                                vm.cards.append(newCard)
+                            }
                             
-                            cardChanged?(card)
                         }, removePressed: {
                             
                             /// scroll to nearest index
@@ -79,7 +84,7 @@ struct CardsView: View {
                                 vm.selectedCard = vm.cards[newIndex]
                             }
                             
-                            cardChanged?(card)
+                            cardRemoved?(card)
                         }, selected: {
                             
                             withAnimation {
@@ -95,7 +100,7 @@ struct CardsView: View {
                         .brightness(vm.selectedCard == card ? 0 : -0.4)
                     }
                 }
-                .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
+                .padding(.horizontal, (Positioning.safeAreaWidth - Constants.cardWidth) / 2)
                 .padding(.vertical, 20)
             }
         }
@@ -123,6 +128,7 @@ struct CardView: View {
     @Binding var selectedCard: Card?
     @ObservedObject var card: Card
     
+    var canAdd: (() -> Bool)?
     var addPressed: (() -> Void)?
     var removePressed: (() -> Void)?
     var selected: (() -> Void)?
@@ -130,6 +136,8 @@ struct CardView: View {
     var body: some View {
         VStack(spacing: 0) {
             Button(action: {
+                guard canAdd?() ?? false else { return }
+                
                 card.added.toggle()
                 
                 if card.added {

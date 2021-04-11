@@ -11,33 +11,33 @@ extension MainViewController {
     
     func setupCardsView() {
         self.vm = CardsViewModel()
-        let cardsView = CardsView(vm: self.vm) { [weak self] card in
-            guard let self = self else { return }
+        let cardsView = CardsView(vm: self.vm) { [weak self] addedCard in
+            guard let self = self else { return false }
             
-            if card.added {
-                if let object = self.currentTargetedObject {
-                    if let marker = self.addMarker(
-                        at: object.convertedBoundingBox,
-                        name: object.name,
-                        color: UIColor(card.color)
-                    ) {
-                        card.marker = marker
-                    }
-                } else {
-                    let middleOfCrossHair = self.crosshairView.center
-                    if let marker = self.addMarker(
-                        at: middleOfCrossHair,
-                        color: UIColor(card.color)
-                    ) {
-                        card.marker = marker
-                    }
+            if let object = self.currentTargetedObject {
+                if let marker = self.addMarker(
+                    at: object.convertedBoundingBox,
+                    name: object.name,
+                    color: UIColor(addedCard.color)
+                ) {
+                    addedCard.marker = marker
+                    return true
                 }
             } else {
-                
-                if let anchor = card.marker?.anchor {
-                    self.sceneView.session.remove(anchor: anchor)
+                let middleOfCrossHair = self.crosshairView.center
+                if let marker = self.addMarker(
+                    at: middleOfCrossHair,
+                    color: UIColor(addedCard.color)
+                ) {
+                    addedCard.marker = marker
+                    return true
                 }
-                
+            }
+            
+            return false
+        } cardRemoved: { removedCard in
+            if let anchor = removedCard.marker?.anchor {
+                self.sceneView.session.remove(anchor: anchor)
             }
         } cardSelected: { [weak self] card in
             guard let self = self else { return }

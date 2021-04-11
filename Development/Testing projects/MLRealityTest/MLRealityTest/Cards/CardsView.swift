@@ -44,8 +44,6 @@ struct CardsView: View {
     
     @ObservedObject var vm: CardsViewModel
     
-//    var cardChanged: ((Card) -> Void)?
-    
     var cardShouldAdd: ((Card) -> Bool)?
     var cardRemoved: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
@@ -62,21 +60,8 @@ struct CardsView: View {
                             
                             let shouldAdd = cardShouldAdd?(card) ?? false
                             if shouldAdd {
-                                withAnimation(.easeOut) {
-                                    
-                                    let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
-                                    
-                                    /// keep the same color for now
-                                    vm.cards.append(newCard)
-                                    vm.selectedCard = newCard
-                                    
-                                }
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    withAnimation {
-                                        proxy.scrollTo(vm.cards.last?.id ?? card.id, anchor: .center)
-                                    }
-                                }
+                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
+                                vm.cards.append(newCard)
                             }
                             
                         }, removePressed: {
@@ -115,7 +100,7 @@ struct CardsView: View {
                         .brightness(vm.selectedCard == card ? 0 : -0.4)
                     }
                 }
-                .padding(.horizontal, (UIScreen.main.bounds.width - Constants.cardWidth) / 2)
+                .padding(.horizontal, (Positioning.safeAreaWidth - Constants.cardWidth) / 2)
                 .padding(.vertical, 20)
             }
         }

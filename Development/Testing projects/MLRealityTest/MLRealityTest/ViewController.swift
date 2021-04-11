@@ -64,5 +64,6 @@ class ViewController: UIViewController {
         Positioning.cardContainerHeight = Constants.cardContainerHeight + view.safeAreaInsets.bottom
         cardsReferenceHeightC.constant = Positioning.cardContainerHeight + 40
         
+        Positioning.safeAreaWidth = view.safeAreaLayoutGuide.layoutFrame.width
     }
 }

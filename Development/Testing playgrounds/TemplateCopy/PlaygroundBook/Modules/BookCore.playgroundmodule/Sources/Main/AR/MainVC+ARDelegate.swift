@@ -27,8 +27,6 @@ extension MainViewController: ARCoachingOverlayViewDelegate {
         ]
         NSLayoutConstraint.activate(constraints)
         
-        cardsReferenceView.isUserInteractionEnabled = false
-        cardsReferenceView.alpha = 0
     }
     
     public func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
