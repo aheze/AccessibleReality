@@ -63,7 +63,8 @@ extension MainViewController {
             /// get distance from camera to cube
             if let cameraPosition = sceneView.pointOfView?.position {
                 
-                let distanceToBoxCenter = CGFloat(anchorPosition.distance(to: cameraPosition))
+                
+                let distanceToBoxCenter = DistanceFormula3d(firstPoint: anchorPosition, secondPoint: cameraPosition)
                 let distanceToBoxEdge = distanceToBoxCenter - currentTrackingMarker.radius
                 
                 
@@ -76,27 +77,7 @@ extension MainViewController {
                 
                 let distanceToCenter = DistanceFormula(from: crosshairCenter, to: infoViewPoint)
                 if distanceToCenter < 100 {
-                    
-                    let yCutoff: CGFloat
-                    
-                    switch infoViewPosition {
-                    case .aboveCenter:
-                        yCutoff = crosshairCenter.y - 10
-                    case .belowCenter:
-                        yCutoff = crosshairCenter.y + 10
-                    case .floating:
-                        yCutoff = crosshairCenter.y
-                    }
-                    
-                    if infoViewPoint.y < yCutoff {
-                        infoViewPoint = CGPoint(x: crosshairCenter.x, y: crosshairCenter.y + 70)
-                        self.infoViewPosition = .belowCenter
-                    } else if infoViewPoint.y > yCutoff {
-                        infoViewPoint = CGPoint(x: crosshairCenter.x, y: crosshairCenter.y - 70)
-                        self.infoViewPosition = .aboveCenter
-                    }
-                } else {
-                    self.infoViewPosition = .floating
+                    infoViewPoint = CGPoint(x: crosshairCenter.x, y: crosshairCenter.y - 70)
                 }
                 
                 UIView.animate(withDuration: 0.2) {
@@ -104,7 +85,16 @@ extension MainViewController {
                     self.infoView.center = infoViewPoint
                     self.infoView.transform = CGAffineTransform.identity
                 }
-                distanceLabel?.text = "\(adjustedCentimeters) cm"
+                
+                distanceLabel?.text = "\(adjustedCentimeters)cm"
+                
+                if let cameraTransform = sceneView.pointOfView?.transform {
+                    let cameraProjectedPosition = projectedForwardsPosition(from: simd_float4x4(cameraTransform))
+                    
+                    let angle = Angle3d(vertex: cameraPosition, firstPoint: cameraProjectedPosition, secondPoint: anchorPosition)
+                    let angleInDegrees = angle.radiansToDegrees
+                    degreesLabel.text = "\(Int(angleInDegrees))°"
+                }
                 
             }
         } else {
@@ -129,9 +119,76 @@ extension MainViewController {
     
 }
 
+func DistanceFormula3d(firstPoint: SCNVector3, secondPoint: SCNVector3) -> Float {
+    let xDifference = firstPoint.x - secondPoint.x
+    let yDifference = firstPoint.y - secondPoint.y
+    let zDifference = firstPoint.z - secondPoint.z
+    let insideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
+    
+    return sqrt(insideSquareRoot)
+}
 
-extension SCNVector3 {
-     func distance(to vector: SCNVector3) -> Float {
-         return simd_distance(simd_float3(self), simd_float3(vector))
-     }
- }
+
+func Angle3d(vertex: SCNVector3, firstPoint: SCNVector3, secondPoint: SCNVector3) -> Float {
+    let firstVector = SCNVector3(
+        firstPoint.x - vertex.x,
+        firstPoint.y - vertex.y,
+        firstPoint.z - vertex.z
+    )
+    
+    let secondVector = SCNVector3(
+        secondPoint.x - vertex.x,
+        secondPoint.y - vertex.y,
+        secondPoint.z - vertex.z
+    )
+    
+    let xProduct = firstVector.x * secondVector.x
+    let yProduct = firstVector.y * secondVector.y
+    let zProduct = firstVector.z * secondVector.z
+
+    // a · b = ax · bx + ay · by + az · bz
+    let dotProduct = xProduct + yProduct + zProduct
+
+    let lengthToFirstPoint = DistanceFormula3d(firstPoint: vertex, secondPoint: firstPoint)
+    let lengthToSecondPoint = DistanceFormula3d(firstPoint: vertex, secondPoint: secondPoint)
+    // a · b = |a| · |b| · cos(θ)
+    // dotProduct = lengthToFirstPoint * lengthToSecondPoint * cos(θ)
+    let cosineOfAngle = dotProduct / (lengthToFirstPoint * lengthToSecondPoint)
+    
+    let angle = acos(cosineOfAngle)
+
+    return angle
+}
+
+func updatePositionAndOrientationOf(_ node: SCNNode, withPosition position: SCNVector3, relativeTo referenceNode: SCNNode) {
+    let referenceNodeTransform = matrix_float4x4(referenceNode.transform)
+    
+    /// Setup a translation matrix with the desired position
+    var translationMatrix = matrix_identity_float4x4
+    translationMatrix.columns.3.x = position.x
+    translationMatrix.columns.3.y = position.y
+    translationMatrix.columns.3.z = position.z
+    
+    /// Combine the configured translation matrix with the referenceNode's transform to get the desired position AND orientation
+    let updatedTransform = matrix_multiply(referenceNodeTransform, translationMatrix)
+    node.transform = SCNMatrix4(updatedTransform)
+}
+
+func projectedForwardsPosition(from transform: matrix_float4x4) -> SCNVector3 {
+    
+    var translationForwardsMatrix = matrix_identity_float4x4
+    translationForwardsMatrix.columns.3.x = 0
+    translationForwardsMatrix.columns.3.y = 0
+    translationForwardsMatrix.columns.3.z = -1  /// 1 meter in front
+    
+    let combinedTransform = matrix_multiply(transform, translationForwardsMatrix)
+    
+    let newPosition = SCNVector3(
+        x: combinedTransform.columns.3.x,
+        y: combinedTransform.columns.3.y,
+        z: combinedTransform.columns.3.z
+    )
+    
+    return newPosition
+    
+}

@@ -63,7 +63,6 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     // MARK: Tracking interface
     var lineLayer: CAShapeLayer?
-    var infoViewPosition = InfoViewPosition.aboveCenter
     @IBOutlet var infoView: UIView!
     @IBOutlet weak var degreesLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!

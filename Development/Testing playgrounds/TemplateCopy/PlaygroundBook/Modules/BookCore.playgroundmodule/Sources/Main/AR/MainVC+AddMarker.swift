@@ -41,7 +41,14 @@ extension MainViewController {
             sceneView.session.add(anchor: anchor)
             
             let maxRadius = max(distance, height) / 2
-            let marker = Marker(name: name, color: color, hasDescription: true, box: box, anchor: anchor, radius: maxRadius)
+            let marker = Marker(
+                name: name,
+                color: color,
+                hasDescription: true,
+                box: box,
+                anchor: anchor,
+                radius: Float(maxRadius)
+            )
             placedMarkers.append(marker)
             
             return marker
