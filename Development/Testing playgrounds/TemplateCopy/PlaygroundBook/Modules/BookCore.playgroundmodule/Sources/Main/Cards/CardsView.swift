@@ -112,16 +112,7 @@ struct CardsView: View {
 struct CardView: View {
     
     var sounds = [
-        Sound(name: "Chimes"),
-        Sound(name: "Waves"),
-        Sound(name: "Notes"),
-        Sound(name: "Danger"),
-        Sound(name: "Danger 2"),
-        Sound(name: "J. S. Bach"),
-        Sound(name: "Frédéric Chopin"),
-        Sound(name: "R. Nathaniel Dett"),
-        Sound(name: "Memento")
-        
+        Sound(name: "Calm", filename: "Calm.mp3")
     ]
     
     @Binding var selectedCard: Card?

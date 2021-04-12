@@ -56,7 +56,7 @@ struct Marker {
 struct Sound: Identifiable, Hashable {
     let id = UUID()
     var name: String
-    var filepath = URL(fileURLWithPath: "")
+    var filename = ""
 }
 
 

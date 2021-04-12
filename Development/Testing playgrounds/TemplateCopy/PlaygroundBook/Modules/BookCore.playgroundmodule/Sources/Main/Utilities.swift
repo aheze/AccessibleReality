@@ -161,22 +161,4 @@ extension UIColor {
 }
 
 
-//func getExtendedBezierOfLine(lineStart: CGPoint, lineEnd: CGPoint) {
-//    
-//    
-//    
-////    let slope = (lineEnd.y - lineStart.y) / (lineEnd.x - lineStart.x)
-////    let inverseSlope = -slope / 1
-////
-////    let offsetAmount = CGFloat(5)
-//    
-//    
-//    
-//    
-////    let lineStartOffset
-//    
-////    let path = UIBezierPath()
-////        path.move(to: start)
-////        path.addLine(to: end)
-//    
-//}
+

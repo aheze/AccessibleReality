@@ -27,6 +27,8 @@ extension MainViewController {
             
             print("nodes: \(nodes)")
             
+            self.getExtendedBezierOfLine(lineStart: self.crosshairCenter, lineEnd: self.edgePointView?.center ?? .zero)
+            
             if let firstNode = nodes.first {
                 print("has node!!")
                 

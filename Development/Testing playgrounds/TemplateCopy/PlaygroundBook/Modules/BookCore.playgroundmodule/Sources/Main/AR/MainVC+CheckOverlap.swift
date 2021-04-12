@@ -82,4 +82,34 @@ extension MainViewController {
             }
         }
     }
+    
+    func getExtendedBezierOfLine(lineStart: CGPoint, lineEnd: CGPoint) {
+        
+        let extendedLength = CGFloat(15)
+        
+        let slope = (lineEnd.x - lineStart.x) / (lineEnd.y - lineStart.y)
+        let theta = atan(slope)
+        
+        let x = extendedLength * cos(theta)
+        let y = extendedLength * sin(theta)
+        
+        let topLeft = CGPoint(x: lineStart.x - x, y: lineStart.y + y)
+        let topRight = CGPoint(x: lineStart.x + x, y: lineStart.y - y)
+        let bottomRight = CGPoint(x: lineEnd.x + x, y: lineEnd.y - y)
+        let bottomLeft = CGPoint(x: lineEnd.x - x, y: lineEnd.y + y)
+        
+        let path = UIBezierPath()
+        path.move(to: topLeft)
+        path.addLine(to: topRight)
+        path.addLine(to: bottomRight)
+        path.addLine(to: bottomLeft)
+        path.close()
+        
+        let shape = CAShapeLayer()
+        shape.frame = drawingView.bounds
+        shape.path = path.cgPath
+        shape.fillColor = UIColor.blue.cgColor
+        self.drawingView.layer.addSublayer(shape)
+        
+    }
 }

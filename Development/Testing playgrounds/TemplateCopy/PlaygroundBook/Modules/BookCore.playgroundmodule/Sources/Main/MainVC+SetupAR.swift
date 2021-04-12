@@ -30,7 +30,30 @@ extension MainViewController {
         sceneView.session.delegate = self /// for processing each frame
         sceneView.delegate = self /// for providing the node
         sceneView.autoenablesDefaultLighting = true
+        
+        /// Configure positional audio in the AR Scene view
+        sceneView.audioEnvironmentNode.distanceAttenuationParameters.maximumDistance = 4 /// how many meters to adjust the sound in fragments
+        sceneView.audioEnvironmentNode.distanceAttenuationParameters.referenceDistance = 0.02 /// adjust the sound every 0.02 meters
+        sceneView.audioEnvironmentNode.renderingAlgorithm = .auto
+        
         self.sceneView = sceneView
+        
     }
     
+    
+    func getAudioPlayer(filename: String) -> SCNAudioPlayer {
+        /// Make the audio source
+        let audioSource = SCNAudioSource(fileNamed: filename)!
+    
+        
+        /// As an environmental sound layer, audio should play indefinitely
+        audioSource.loops = true
+        audioSource.isPositional = true
+        
+        /// Decode the audio from disk ahead of time to prevent a delay in playback
+        audioSource.load()
+        
+        /// Add the audio player now
+        return SCNAudioPlayer(source: audioSource)
+    }
 }

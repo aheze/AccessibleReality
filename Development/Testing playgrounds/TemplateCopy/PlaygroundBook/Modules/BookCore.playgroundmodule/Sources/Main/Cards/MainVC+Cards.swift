@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ARKit
 
 extension MainViewController {
     
@@ -21,6 +22,11 @@ extension MainViewController {
                     color: UIColor(addedCard.color)
                 ) {
                     addedCard.marker = marker
+//                    marker.node.addAudioPlayer(self.getAudioPlayer(filename: addedCard.sound.filename))
+                    
+                    
+                    
+                    
                     self.animateCubeOverlayPlaced(placed: true)
                     return true
                 }
