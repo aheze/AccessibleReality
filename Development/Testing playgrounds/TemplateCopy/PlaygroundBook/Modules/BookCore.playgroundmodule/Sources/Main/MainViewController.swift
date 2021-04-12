@@ -92,32 +92,60 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     @IBOutlet weak var orientationButton: UIButton!
     @IBAction func orientationButtonPressed(_ sender: Any) {
         let transform: CGAffineTransform
+        let newOrientation: UIInterfaceOrientation
         switch currentOrientation {
         case .portrait:
-            currentOrientation = .landscapeRight
+            newOrientation = .landscapeRight
             transform = CGAffineTransform(rotationAngle: 90.degreesToRadians)
         case .portraitUpsideDown:
-            currentOrientation = .landscapeLeft
+            newOrientation = .landscapeLeft
             transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
         case .landscapeLeft:
-            currentOrientation = .portrait
+            newOrientation = .portrait
             transform = CGAffineTransform(rotationAngle: 180.degreesToRadians)
         case .landscapeRight:
-            currentOrientation = .portraitUpsideDown
+            newOrientation = .portraitUpsideDown
             transform = CGAffineTransform(rotationAngle: 0.degreesToRadians)
         default:
-            currentOrientation = .landscapeRight
+            newOrientation = .landscapeRight
             transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
         }
+        
+        currentOrientation = newOrientation
         UIView.animate(withDuration: 0.3) {
             self.orientationButton.transform = transform
         }
     }
     
+    var muted = false
+    @IBOutlet weak var speakMuteBlurView: UIVisualEffectView!
+    @IBOutlet weak var speakMuteButton: UIButton!
+    @IBAction func speakMuteButtonPressed(_ sender: Any) {
+        muted.toggle()
+        updateMuteButton()
+    }
+    
+    let synthesizer = AVSpeechSynthesizer()
     @IBOutlet weak var speakBlurView: UIVisualEffectView!
     @IBOutlet weak var speakButton: UIButton!
     @IBAction func speakButtonPressed(_ sender: Any) {
-        print("speak pressed")
+        speakStatus()
+    }
+    
+    @IBOutlet weak var speakExpandedBlurView: UIVisualEffectView!
+    @IBOutlet weak var speakExpandedLabel: UILabel!
+    @IBOutlet weak var speakCloseButton: UIButton!
+    @IBAction func speakClosePressed(_ sender: Any) {
+        stopSpeaking()
+    }
+    
+
+    let alertSynthesizer = AVSpeechSynthesizer()
+    @IBOutlet weak var alertExpandedBlurView: UIVisualEffectView!
+    @IBOutlet weak var alertExpandedLabel: UILabel!
+    @IBOutlet weak var alertCloseButton: UIButton!
+    @IBAction func alertClosePressed(_ sender: Any) {
+        stopSpeakingAlert()
     }
     
     override public func viewDidLoad() {

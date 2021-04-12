@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension MainViewController {
     func setupAccessibility() {
@@ -22,10 +23,56 @@ extension MainViewController {
         orientationBlurView.layer.cornerRadius = 6
         view.bringSubviewToFront(orientationBlurView)
         orientationButton.transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
+        orientationButton.accessibilityLabel = "ML orientation"
+        orientationButton.accessibilityHint = "Make sure the orientation matches your iPad's orientation in real life"
+        
+        let orientationValue: String
+        switch currentOrientation {
+        case .portrait:
+            orientationValue = "Upside down"
+        case .portraitUpsideDown:
+            orientationValue = "Portrait"
+        case .landscapeLeft:
+            orientationValue = "Home button right"
+        case .landscapeRight:
+            orientationValue = "Home button left"
+        default:
+            orientationValue = "Portrait"
+        }
+        orientationButton.accessibilityValue = orientationValue
+        
+        speakMuteBlurView.clipsToBounds = true
+        speakMuteBlurView.layer.cornerRadius = 6
+        view.bringSubviewToFront(speakMuteBlurView)
+        
+        updateMuteButton()
         
         speakBlurView.clipsToBounds = true
         speakBlurView.layer.cornerRadius = 6
         view.bringSubviewToFront(speakBlurView)
+        
+        speakExpandedBlurView.clipsToBounds = true
+        speakExpandedBlurView.layer.cornerRadius = 6
+        speakExpandedBlurView.alpha = 0
+        speakExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        view.bringSubviewToFront(speakExpandedBlurView)
+        
+        speakButton.accessibilityLabel = "Speak current status"
+        speakButton.accessibilityHint = "Describe the current status"
+        
+        speakExpandedLabel.isAccessibilityElement = false
+        
+        speakCloseButton.accessibilityLabel = "Stop speaking"
+        speakCloseButton.accessibilityHint = "Stop describing the current status"
+        
+        alertExpandedBlurView.clipsToBounds = true
+        alertExpandedBlurView.layer.cornerRadius = 6
+        alertExpandedBlurView.alpha = 0
+        alertExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        view.bringSubviewToFront(alertExpandedBlurView)
+        
+        synthesizer.delegate = self
+        alertSynthesizer.delegate = self
     }
     
     func updateSceneViewAccessibility() {
@@ -53,9 +100,128 @@ extension MainViewController {
                 }
             }
         }
+        
+        let orientationValue: String
+        switch currentOrientation {
+        case .portrait:
+            orientationValue = "Upside down"
+        case .portraitUpsideDown:
+            orientationValue = "Portrait"
+        case .landscapeLeft:
+            orientationValue = "Home button right"
+        case .landscapeRight:
+            orientationValue = "Home button left"
+        default:
+            orientationValue = "Portrait"
+        }
+        orientationButton.accessibilityValue = orientationValue
+    }
+    
+    func updateMuteButton() {
+        let imageName = muted ? "speaker.slash.fill" : "speaker.wave.2.fill"
+        if let image = UIImage(systemName: imageName) {
+            speakMuteButton.setImage(image, for: .normal)
+        }
+        
+        if muted {
+            speakMuteButton.accessibilityLabel = "Muted"
+            speakMuteButton.accessibilityHint = "Spoken feedback via Speech Synthesizer is muted. Double-tap to unmute. If using VoiceOver, make sure to mute."
+            synthesizer.stopSpeaking(at: .immediate)
+            alertSynthesizer.stopSpeaking(at: .immediate)
+        } else {
+            speakMuteButton.accessibilityLabel = "Sound on"
+            speakMuteButton.accessibilityHint = "Spoken feedback via Speech Synthesizer is on. Double-tap to mute. If using VoiceOver, make sure to mute."
+        }
+    }
+    func speakStatus() {
+        
+        let numberOfNodes = placedMarkers.count
+        let currentlyOnAddingMode = !(cvm.selectedCard?.added ?? true)
+        
+        let nodeText: String
+        
+        if numberOfNodes == 0 {
+            nodeText = "No nodes placed, currently in adding mode. Tap the Add button to add a node at the crosshair's location."
+        } else {
+            if currentlyOnAddingMode {
+                nodeText = "Adding mode. Tap the Add button to add a node at the crosshair's location. \(numberOfNodes) total nodes placed."
+            } else {
+                if let currentCard = cvm.selectedCard {
+                    let uiColor = UIColor(currentCard.color)
+                    
+                    let distanceText = "\(degreesAway) and \(cmAway) away"
+                    
+                    nodeText = "Selected node named \"\(currentCard.name)\", \(distanceText). Color \(uiColor.hexString), and sound \(currentCard.sound.name). \(numberOfNodes) total nodes placed."
+                } else {
+                    nodeText = "\(numberOfNodes) nodes placed. No selected node."
+                }
+            }
+        }
+        
+        alertSynthesizer.stopSpeaking(at: .immediate)
+        
+        if !muted {
+            let utterance = AVSpeechUtterance(string: nodeText)
+            synthesizer.stopSpeaking(at: .word)
+            synthesizer.speak(utterance)
+        }
+        
+        speakExpandedLabel.text = nodeText
+        
+        UIView.animate(withDuration: 0.3) {
+            self.speakExpandedBlurView.alpha = 1
+            self.speakExpandedBlurView.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+    }
+    func stopSpeaking() {
+        UIView.animate(withDuration: 0.3) {
+            self.speakExpandedBlurView.alpha = 0
+            self.speakExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        } completion: { _ in
+            self.speakExpandedLabel.text = ""
+        }
+        synthesizer.stopSpeaking(at: .word)
+    }
+    
+    func speakAlert(text: String) {
+        
+        if !alertSynthesizer.isSpeaking {
+            synthesizer.stopSpeaking(at: .immediate)
+            
+            if !muted {
+                let utterance = AVSpeechUtterance(string: text)
+                alertSynthesizer.speak(utterance)
+            }
+            
+            alertExpandedLabel.text = text
+            
+            UIView.animate(withDuration: 0.3) {
+                self.alertExpandedBlurView.alpha = 1
+                self.alertExpandedBlurView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }
+        }
+    }
+    func stopSpeakingAlert() {
+        UIView.animate(withDuration: 0.3) {
+            self.alertExpandedBlurView.alpha = 0
+            self.alertExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        } completion: { _ in
+            self.alertExpandedLabel.text = ""
+        }
+        alertSynthesizer.stopSpeaking(at: .word)
     }
     
    
+}
+
+extension MainViewController: AVSpeechSynthesizerDelegate {
+    public func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        if synthesizer == self.synthesizer {
+            stopSpeaking()
+        } else if synthesizer == self.alertSynthesizer {
+            stopSpeakingAlert()
+        }
+    }
 }
 
 

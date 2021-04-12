@@ -27,7 +27,7 @@
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <inset key="contentEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
-                                            <state key="normal" image="ipad.homebutton" catalog="system">
+                                            <state key="normal" image="ipad" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="medium"/>
                                             </state>
                                             <connections>
@@ -73,17 +73,136 @@
                                 </view>
                                 <blurEffect style="systemChromeMaterialDark"/>
                             </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RN6-c7-ONG">
+                                <rect key="frame" x="24" y="175" width="350" height="56"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="c6O-ad-Fv6">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="56"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUo-Zh-kgY">
+                                            <rect key="frame" x="284" y="15.999999999999998" width="50" height="31.333333333333329"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="g6v-mJ-xlY"/>
+                                            </constraints>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" image="xmark" catalog="system">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="medium" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="alertClosePressed:" destination="MH8-lu-oSg" eventType="touchUpInside" id="Te1-ST-I6N"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="as" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5z-bi-JaW">
+                                            <rect key="frame" x="16" y="16" width="256" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="iUo-Zh-kgY" firstAttribute="top" secondItem="c6O-ad-Fv6" secondAttribute="top" constant="16" id="06e-lV-iGd"/>
+                                        <constraint firstItem="l5z-bi-JaW" firstAttribute="leading" secondItem="c6O-ad-Fv6" secondAttribute="leading" constant="16" id="BWa-7i-biM"/>
+                                        <constraint firstItem="l5z-bi-JaW" firstAttribute="top" secondItem="c6O-ad-Fv6" secondAttribute="top" constant="16" id="W0v-K1-8qg"/>
+                                        <constraint firstAttribute="trailing" secondItem="iUo-Zh-kgY" secondAttribute="trailing" constant="16" id="b7y-Xb-Zip"/>
+                                        <constraint firstItem="iUo-Zh-kgY" firstAttribute="leading" secondItem="l5z-bi-JaW" secondAttribute="trailing" constant="12" id="l8A-FR-5tL"/>
+                                        <constraint firstAttribute="bottom" secondItem="l5z-bi-JaW" secondAttribute="bottom" constant="16" id="xfN-9o-009"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="KZb-Mf-MfH"/>
+                                </constraints>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HmV-Rv-9YS">
+                                <rect key="frame" x="24" y="127" width="350" height="32"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VK9-Ai-e4i">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="32"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4d-HQ-62l">
+                                            <rect key="frame" x="284" y="15.999999999999998" width="50" height="31.333333333333329"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="oeh-G3-cee"/>
+                                            </constraints>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" image="xmark" catalog="system">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="32" scale="medium" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="speakClosePressed:" destination="MH8-lu-oSg" eventType="touchUpInside" id="dv9-yc-yLR"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-nW-qAW">
+                                            <rect key="frame" x="16" y="16" width="256" height="0.0"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="e4d-HQ-62l" secondAttribute="trailing" constant="16" id="3ft-2l-bQz"/>
+                                        <constraint firstItem="e4d-HQ-62l" firstAttribute="leading" secondItem="qM3-nW-qAW" secondAttribute="trailing" constant="12" id="5fa-hc-pdQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="qM3-nW-qAW" secondAttribute="bottom" constant="16" id="Jrp-pe-ygW"/>
+                                        <constraint firstItem="qM3-nW-qAW" firstAttribute="top" secondItem="VK9-Ai-e4i" secondAttribute="top" constant="16" id="tfM-UY-Yc1"/>
+                                        <constraint firstItem="qM3-nW-qAW" firstAttribute="leading" secondItem="VK9-Ai-e4i" secondAttribute="leading" constant="16" id="yOQ-tY-bjC"/>
+                                        <constraint firstItem="e4d-HQ-62l" firstAttribute="top" secondItem="VK9-Ai-e4i" secondAttribute="top" constant="16" id="zVw-c5-k5f"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="350" id="zta-EY-CYr"/>
+                                </constraints>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wu5-eG-eDE">
+                                <rect key="frame" x="77" y="60" width="55" height="51"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="TDi-gm-bFZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="55" height="51"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uK-Sh-gli">
+                                            <rect key="frame" x="0.0" y="0.0" width="55" height="51"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <inset key="contentEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
+                                            <state key="normal" image="speaker.wave.2.fill" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="medium"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="speakMuteButtonPressed:" destination="MH8-lu-oSg" eventType="touchUpInside" id="pvz-eU-Akx"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="9uK-Sh-gli" firstAttribute="leading" secondItem="TDi-gm-bFZ" secondAttribute="leading" id="5iP-iB-DYJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="9uK-Sh-gli" secondAttribute="trailing" id="5jE-H0-TrZ"/>
+                                        <constraint firstItem="9uK-Sh-gli" firstAttribute="top" secondItem="TDi-gm-bFZ" secondAttribute="top" id="Gah-x5-b7h"/>
+                                        <constraint firstAttribute="bottom" secondItem="9uK-Sh-gli" secondAttribute="bottom" id="bw4-ZV-A5e"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OuP-cF-Jwk"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="RN6-c7-ONG" firstAttribute="top" secondItem="HmV-Rv-9YS" secondAttribute="bottom" constant="16" id="FNw-dQ-aDp"/>
+                            <constraint firstItem="HmV-Rv-9YS" firstAttribute="top" secondItem="dx2-W5-bHC" secondAttribute="bottom" constant="16" id="GxJ-QT-XsL"/>
+                            <constraint firstItem="OuP-cF-Jwk" firstAttribute="trailing" secondItem="RN6-c7-ONG" secondAttribute="trailing" constant="16" id="Lbq-6i-X4e"/>
+                            <constraint firstItem="dx2-W5-bHC" firstAttribute="leading" secondItem="Wu5-eG-eDE" secondAttribute="trailing" constant="16" id="agm-ue-dRd"/>
                             <constraint firstItem="OuP-cF-Jwk" firstAttribute="trailing" secondItem="dx2-W5-bHC" secondAttribute="trailing" constant="16" id="bPu-Gc-LI6"/>
                             <constraint firstItem="dx2-W5-bHC" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="euB-BM-0X2"/>
                             <constraint firstItem="njp-FE-CnI" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="nPm-k2-6nE"/>
+                            <constraint firstItem="Wu5-eG-eDE" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="rNB-PM-Lcu"/>
                             <constraint firstItem="njp-FE-CnI" firstAttribute="leading" secondItem="OuP-cF-Jwk" secondAttribute="leading" constant="16" id="weP-Vp-usG"/>
+                            <constraint firstItem="OuP-cF-Jwk" firstAttribute="trailing" secondItem="HmV-Rv-9YS" secondAttribute="trailing" constant="16" id="xPv-ci-sek"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertCloseButton" destination="iUo-Zh-kgY" id="VtZ-or-d2c"/>
+                        <outlet property="alertExpandedBlurView" destination="RN6-c7-ONG" id="Afp-lI-pDW"/>
+                        <outlet property="alertExpandedLabel" destination="l5z-bi-JaW" id="3nI-zI-WvX"/>
                         <outlet property="degreesLabel" destination="ez5-wK-rGJ" id="naK-uE-ZnR"/>
                         <outlet property="distanceLabel" destination="jJg-gM-Q8y" id="P0D-to-hUV"/>
                         <outlet property="infoBorderView" destination="Qys-EE-1dv" id="0wp-7H-gs6"/>
@@ -92,6 +211,11 @@
                         <outlet property="orientationButton" destination="1D8-J1-M8V" id="Lw4-U8-AQW"/>
                         <outlet property="speakBlurView" destination="dx2-W5-bHC" id="hhF-0q-Ms2"/>
                         <outlet property="speakButton" destination="7kf-YT-ZBA" id="AbK-uN-Ay0"/>
+                        <outlet property="speakCloseButton" destination="e4d-HQ-62l" id="FJn-Nl-uEF"/>
+                        <outlet property="speakExpandedBlurView" destination="HmV-Rv-9YS" id="D9r-pU-aDB"/>
+                        <outlet property="speakExpandedLabel" destination="qM3-nW-qAW" id="ERP-aS-cTg"/>
+                        <outlet property="speakMuteBlurView" destination="Wu5-eG-eDE" id="75x-sU-647"/>
+                        <outlet property="speakMuteButton" destination="9uK-Sh-gli" id="1fD-By-oPN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hae-vV-aQc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -144,7 +268,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ipad.homebutton" catalog="system" width="109" height="128"/>
+        <image name="ipad" catalog="system" width="109" height="128"/>
+        <image name="speaker.wave.2.fill" catalog="system" width="128" height="90"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

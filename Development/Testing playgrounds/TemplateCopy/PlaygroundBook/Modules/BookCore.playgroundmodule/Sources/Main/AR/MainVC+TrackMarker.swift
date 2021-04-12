@@ -103,17 +103,23 @@ extension MainViewController {
                         self.degreesAway = "\(Int(angleInDegrees))°\(compassText)"
                     }
                     
-                    UIView.animate(withDuration: 0.2) {
-                        if angleInDegrees < 5 {
+                    
+                    if angleInDegrees < 5 {
+                        UIView.animate(withDuration: 0.2) {
                             self.infoBorderView.alpha = 1
                             self.degreesLabel.textColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-                        } else {
+                        }
+                        
+                        let text = "\(currentTrackingMarker.name) is \(adjustedCentimeters)cm directly in front."
+                        speakAlert(text: text)
+                    } else {
+                        UIView.animate(withDuration: 0.2) {
                             self.infoBorderView.alpha = 0
                             self.degreesLabel.textColor = UIColor.label
                         }
+                        stopSpeakingAlert()
                     }
                 }
-                
             }
         } else {
             /// remove line
