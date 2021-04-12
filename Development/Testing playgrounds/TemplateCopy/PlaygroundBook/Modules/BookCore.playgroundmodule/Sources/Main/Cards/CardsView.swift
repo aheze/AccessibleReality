@@ -37,7 +37,7 @@ class CardsViewModel: ObservableObject {
     @Published var safeAreaWidth = CGFloat(500)
     @Published var selectedCard: Card?
     @Published var cards = [
-        Card(name: "Object", color: .green, sound: Sound(name: "Select a sound"))
+        Card(name: "Object", color: .green, sound: Sound(name: "None", filename: ""))
     ]
 }
 
@@ -48,6 +48,7 @@ struct CardsView: View {
     var cardAdded: ((Card) -> Bool)? /// Bool is false if didn't succeed
     var cardRemoved: ((Card) -> Void)?
     var cardSelected: ((Card) -> Void)?
+    var soundChanged: ((Card) -> Void)?
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -92,6 +93,8 @@ struct CardsView: View {
                             
                             cvm.selectedCard = card
                             cardSelected?(card)
+                        }, soundChanged: {
+                            soundChanged?(card)
                         })
                         .id(card.id)
                         .frame(width: Constants.cardWidth, height: Constants.cardContainerHeight)
@@ -112,7 +115,14 @@ struct CardsView: View {
 struct CardView: View {
     
     var sounds = [
-        Sound(name: "Calm", filename: "Calm.mp3")
+        Sound(name: "None"),
+        Sound(name: "Calm", filename: "Calm.mp3"),
+        Sound(name: "Electro", filename: "Electro.mp3"),
+        Sound(name: "Danger", filename: "Danger.mp3"),
+        Sound(name: "Chill", filename: "Chill.mp3"),
+        Sound(name: "Tea", filename: "Tea.mp3"),
+        Sound(name: "Dubs", filename: "Dubs.mp3"),
+        Sound(name: "Dance", filename: "Dance.mp3")
     ]
     
     @Binding var selectedCard: Card?
@@ -121,6 +131,7 @@ struct CardView: View {
     var addPressed: (() -> Bool)?
     var removePressed: (() -> Void)?
     var selected: (() -> Void)?
+    var soundChanged: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -225,6 +236,10 @@ struct CardView: View {
                 }
             }
         }
+        .onChange(of: card.sound, perform: { _ in
+            print("card sound changed")
+            soundChanged?()
+        })
         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .bottom)))
         .animation(.easeOut)
     }

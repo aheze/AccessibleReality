@@ -25,15 +25,53 @@ extension MainViewController {
             let results = self.sceneView.hitTest(point, options: [SCNHitTestOption.searchMode : 1])
             let nodes = results.map { $0.node }
             
-            print("nodes: \(nodes)")
+            let lineBounds = self.getExtendedBezierOfLine(lineStart: self.crosshairCenter, lineEnd: self.edgePointView?.center ?? .zero)
             
-            self.getExtendedBezierOfLine(lineStart: self.crosshairCenter, lineEnd: self.edgePointView?.center ?? .zero)
-            
-            if let firstNode = nodes.first {
-                print("has node!!")
+            if lineBounds.contains(point) {
                 
+                self.makeLineLayerActive(duration: 0.15)
                 
+                let path = Bundle.main.path(forResource: "Line.mp3", ofType: nil)!
+                let url = URL(fileURLWithPath: path)
+
+                if self.lineSoundPlayer == nil {
+                    do {
+                        self.lineSoundPlayer = try AVAudioPlayer(contentsOf: url)
+                        self.lineSoundPlayer?.numberOfLoops = -1
+                        self.lineSoundPlayer?.play()
+                    } catch {
+                        // couldn't load file :(
+                    }
+                } else {
+                    self.lineSoundPlayer?.setVolume(1, fadeDuration: 0.2)
+                }
+                
+                self.arrivedSoundPlayer?.setVolume(0, fadeDuration: 0.2)
+            } else if nodes.first != nil {
+                self.makeLineLayerInactive(duration: 0.4)
+                if self.arrivedSoundPlayer == nil {
+                    let path = Bundle.main.path(forResource: "Arrived.mp3", ofType: nil)!
+                    let url = URL(fileURLWithPath: path)
+                    
+                    do {
+                        self.arrivedSoundPlayer = try AVAudioPlayer(contentsOf: url)
+                        self.arrivedSoundPlayer?.numberOfLoops = -1
+                        self.arrivedSoundPlayer?.play()
+                    } catch {
+                        // couldn't load file :(
+                    }
+                } else {
+                    self.arrivedSoundPlayer?.setVolume(1, fadeDuration: 0.2)
+                }
+                
+                self.lineSoundPlayer?.setVolume(0, fadeDuration: 0.2)
+            } else {
+                self.makeLineLayerInactive(duration: 0.4)
+                self.arrivedSoundPlayer?.setVolume(0, fadeDuration: 0.2)
+                self.lineSoundPlayer?.setVolume(0, fadeDuration: 0.2)
             }
+            
+
         }
         
         drawingView.touchUp = { [weak self] point in
@@ -54,6 +92,10 @@ extension MainViewController {
                     }
                 }
             }
+            
+            self.arrivedSoundPlayer?.setVolume(0, fadeDuration: 0.2)
+            self.lineSoundPlayer?.setVolume(0, fadeDuration: 0.2)
+            self.makeLineLayerInactive(duration: 0.4)
         }
         
         
@@ -107,5 +149,40 @@ extension MainViewController {
         
     }
     
+    func makeLineLayerActive(duration: CGFloat) {
+        if let lineLayer = self.lineLayer {
+            if let currentValue = lineLayer.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.lineWidth)) {
+                let currentWidth = currentValue as! CGFloat
+                lineLayer.borderWidth = currentWidth
+                lineLayer.removeAllAnimations()
+            }
+            
+            let animation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
+            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            animation.fromValue = lineLayer.borderWidth
+            animation.toValue = 15
+            animation.duration = Double(duration)
+            lineLayer.lineWidth = 15
+            lineLayer.add(animation, forKey: "lineWidth")
+        }
+        
+    }
+    func makeLineLayerInactive(duration: CGFloat) {
+        if let lineLayer = self.lineLayer {
+            if let currentValue = lineLayer.presentation()?.value(forKeyPath: #keyPath(CAShapeLayer.lineWidth)) {
+                let currentWidth = currentValue as! CGFloat
+                lineLayer.borderWidth = currentWidth
+                lineLayer.removeAllAnimations()
+            }
+            
+            let animation = CABasicAnimation(keyPath: #keyPath(CAShapeLayer.lineWidth))
+            animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+            animation.fromValue = lineLayer.borderWidth
+            animation.toValue = 3
+            animation.duration = Double(duration)
+            lineLayer.lineWidth = 3
+            lineLayer.add(animation, forKey: "lineWidth")
+        }
+    }
     
 }

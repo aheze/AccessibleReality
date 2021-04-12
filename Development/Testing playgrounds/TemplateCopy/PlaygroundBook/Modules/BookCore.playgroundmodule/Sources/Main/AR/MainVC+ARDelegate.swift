@@ -50,6 +50,11 @@ extension MainViewController: ARCoachingOverlayViewDelegate {
 extension MainViewController: ARSessionDelegate, ARSCNViewDelegate {
     public func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if let marker = placedMarkers.first(where: {$0.anchor == anchor }) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                if !marker.soundFileName.isEmpty {
+                    marker.node.addAudioPlayer(self.getAudioPlayer(filename: marker.soundFileName))
+                }
+            }
             return marker.node
         }
         return nil

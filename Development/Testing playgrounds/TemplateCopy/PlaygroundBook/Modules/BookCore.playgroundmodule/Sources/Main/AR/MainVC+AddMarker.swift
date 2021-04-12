@@ -9,7 +9,7 @@ import UIKit
 import ARKit
 
 extension MainViewController {
-    func addMarker(at boundingBox: CGRect, name: String, color: UIColor) -> Marker? {
+    func addMarker(at boundingBox: CGRect, name: String, color: UIColor, soundFileName: String) -> Marker? {
         
         /// get horizontal distance
         let bottomLeftPoint = CGPoint(x: boundingBox.minX, y: boundingBox.maxY)
@@ -47,6 +47,7 @@ extension MainViewController {
             let marker = Marker(
                 name: name,
                 color: color,
+                soundFileName: soundFileName,
                 hasDescription: true,
                 box: box,
                 node: node,
@@ -61,7 +62,7 @@ extension MainViewController {
         return nil
     }
     
-    func addMarker(at screenCoordinate: CGPoint, color: UIColor) -> Marker? {
+    func addMarker(at screenCoordinate: CGPoint, color: UIColor, soundFileName: String) -> Marker? {
         if let result = makeRaycastQuery(at: screenCoordinate) {
             
             let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
@@ -75,7 +76,16 @@ extension MainViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: "Node", color: color, hasDescription: false, box: box, node: node, anchor: anchor, radius: 0.05)
+            let marker = Marker(
+                name: "Node",
+                color: color,
+                soundFileName: soundFileName,
+                hasDescription: false,
+                box: box,
+                node: node,
+                anchor: anchor,
+                radius: 0.05
+            )
             placedMarkers.append(marker)
             
             return marker

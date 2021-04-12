@@ -30,6 +30,14 @@
 		3CE81D1D2623A654003FBC66 /* MainVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE81D1C2623A654003FBC66 /* MainVC+Accessibility.swift */; };
 		3CE81D702623C008003FBC66 /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE81D6F2623C008003FBC66 /* DrawingView.swift */; };
 		3CE81D8C2623CE45003FBC66 /* Calm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81D8B2623CE45003FBC66 /* Calm.mp3 */; };
+		3CE81DB82623E9A0003FBC66 /* Arrived.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DB72623E9A0003FBC66 /* Arrived.mp3 */; };
+		3CE81DCF2623EBBF003FBC66 /* Danger.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DC92623EBBE003FBC66 /* Danger.mp3 */; };
+		3CE81DD02623EBBF003FBC66 /* Chill.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DCA2623EBBE003FBC66 /* Chill.mp3 */; };
+		3CE81DD12623EBBF003FBC66 /* Electro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DCB2623EBBE003FBC66 /* Electro.mp3 */; };
+		3CE81DD22623EBBF003FBC66 /* Dance.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DCC2623EBBE003FBC66 /* Dance.mp3 */; };
+		3CE81DD32623EBBF003FBC66 /* Dubs.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DCD2623EBBE003FBC66 /* Dubs.mp3 */; };
+		3CE81DD42623EBBF003FBC66 /* Tea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DCE2623EBBE003FBC66 /* Tea.mp3 */; };
+		3CE81DDE2623EF9B003FBC66 /* Line.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3CE81DDD2623EF9B003FBC66 /* Line.mp3 */; };
 		3CE8AAE82622C96200A3F5B9 /* MainVC+SetupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE8AAE72622C96200A3F5B9 /* MainVC+SetupInfoView.swift */; };
 		5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */; };
 		5E086DD32051E3A3004D8D25 /* Manifest.plist in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5E086DCF2051DF0F004D8D25 /* Manifest.plist */; };
@@ -179,6 +187,14 @@
 		3CE81D1C2623A654003FBC66 /* MainVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Accessibility.swift"; sourceTree = "<group>"; };
 		3CE81D6F2623C008003FBC66 /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		3CE81D8B2623CE45003FBC66 /* Calm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Calm.mp3; sourceTree = "<group>"; };
+		3CE81DB72623E9A0003FBC66 /* Arrived.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Arrived.mp3; sourceTree = "<group>"; };
+		3CE81DC92623EBBE003FBC66 /* Danger.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Danger.mp3; sourceTree = "<group>"; };
+		3CE81DCA2623EBBE003FBC66 /* Chill.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Chill.mp3; sourceTree = "<group>"; };
+		3CE81DCB2623EBBE003FBC66 /* Electro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Electro.mp3; sourceTree = "<group>"; };
+		3CE81DCC2623EBBE003FBC66 /* Dance.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dance.mp3; sourceTree = "<group>"; };
+		3CE81DCD2623EBBE003FBC66 /* Dubs.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Dubs.mp3; sourceTree = "<group>"; };
+		3CE81DCE2623EBBE003FBC66 /* Tea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tea.mp3; sourceTree = "<group>"; };
+		3CE81DDD2623EF9B003FBC66 /* Line.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Line.mp3; sourceTree = "<group>"; };
 		3CE8AAE72622C96200A3F5B9 /* MainVC+SetupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupInfoView.swift"; sourceTree = "<group>"; };
 		5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundBook.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
@@ -475,6 +491,14 @@
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
 				3CE81D8B2623CE45003FBC66 /* Calm.mp3 */,
 				3C99271926227B7F00F46FE5 /* Particles.sks */,
+				3CE81DCA2623EBBE003FBC66 /* Chill.mp3 */,
+				3CE81DCC2623EBBE003FBC66 /* Dance.mp3 */,
+				3CE81DC92623EBBE003FBC66 /* Danger.mp3 */,
+				3CE81DCD2623EBBE003FBC66 /* Dubs.mp3 */,
+				3CE81DDD2623EF9B003FBC66 /* Line.mp3 */,
+				3CE81DCB2623EBBE003FBC66 /* Electro.mp3 */,
+				3CE81DCE2623EBBE003FBC66 /* Tea.mp3 */,
+				3CE81DB72623E9A0003FBC66 /* Arrived.mp3 */,
 			);
 			path = PrivateResources;
 			sourceTree = "<group>";
@@ -639,11 +663,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
+				3CE81DD02623EBBF003FBC66 /* Chill.mp3 in Resources */,
+				3CE81DD22623EBBF003FBC66 /* Dance.mp3 in Resources */,
 				3C8D8A48261EC21E00E896FF /* YOLOv3TinyInt8LUT.mlmodelc in Resources */,
+				3CE81DD32623EBBF003FBC66 /* Dubs.mp3 in Resources */,
+				3CE81DCF2623EBBF003FBC66 /* Danger.mp3 in Resources */,
+				3CE81DD12623EBBF003FBC66 /* Electro.mp3 in Resources */,
+				3CE81DD42623EBBF003FBC66 /* Tea.mp3 in Resources */,
+				3CE81DDE2623EF9B003FBC66 /* Line.mp3 in Resources */,
 				3C99271A26227B7F00F46FE5 /* Particles.sks in Resources */,
 				3CE81D8C2623CE45003FBC66 /* Calm.mp3 in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
+				3CE81DB82623E9A0003FBC66 /* Arrived.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

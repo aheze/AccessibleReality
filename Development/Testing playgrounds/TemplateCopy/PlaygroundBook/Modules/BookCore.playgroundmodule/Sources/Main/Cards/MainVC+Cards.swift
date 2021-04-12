@@ -19,14 +19,10 @@ extension MainViewController {
                 if let marker = self.addMarker(
                     at: object.convertedBoundingBox,
                     name: object.name,
-                    color: UIColor(addedCard.color)
+                    color: UIColor(addedCard.color),
+                    soundFileName: addedCard.sound.filename
                 ) {
                     addedCard.marker = marker
-//                    marker.node.addAudioPlayer(self.getAudioPlayer(filename: addedCard.sound.filename))
-                    
-                    
-                    
-                    
                     self.animateCubeOverlayPlaced(placed: true)
                     return true
                 }
@@ -34,7 +30,8 @@ extension MainViewController {
                 let middleOfCrossHair = self.crosshairView.center
                 if let marker = self.addMarker(
                     at: middleOfCrossHair,
-                    color: UIColor(addedCard.color)
+                    color: UIColor(addedCard.color),
+                    soundFileName: addedCard.sound.filename
                 ) {
                     addedCard.marker = marker
                     self.animateCubeOverlayPlaced(placed: true)
@@ -64,6 +61,19 @@ extension MainViewController {
                 self.animateCubeOverlayPlaced(placed: true)
             } else {
                 self.animateCubeOverlayPlaced(placed: false)
+            }
+        } soundChanged: { [weak self] card in
+            guard let self = self else { return }
+            
+            
+            if let marker =  card.marker {
+                if !card.sound.filename.isEmpty {
+                    marker.node.removeAllAudioPlayers()
+                    marker.node.addAudioPlayer(self.getAudioPlayer(filename: card.sound.filename))
+                    
+                } else {
+                    marker.node.removeAllAudioPlayers()
+                }
             }
         }
         

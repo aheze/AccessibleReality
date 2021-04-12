@@ -83,7 +83,8 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var cardsReferenceHeightC: NSLayoutConstraint!
     
     // MARK: Audio
-    
+    var lineSoundPlayer: AVAudioPlayer?
+    var arrivedSoundPlayer: AVAudioPlayer?
     
     // MARK: Accessibility
     var currentOrientation = UIInterfaceOrientation.landscapeLeft
