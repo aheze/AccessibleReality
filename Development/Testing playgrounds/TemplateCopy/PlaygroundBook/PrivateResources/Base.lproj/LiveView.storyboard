@@ -27,7 +27,7 @@
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <inset key="contentEdgeInsets" minX="14" minY="14" maxX="14" maxY="14"/>
-                                            <state key="normal" image="ipad" catalog="system">
+                                            <state key="normal" image="ipad.homebutton" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="19" scale="medium" weight="medium"/>
                                             </state>
                                             <connections>
@@ -144,7 +144,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ipad" catalog="system" width="109" height="128"/>
+        <image name="ipad.homebutton" catalog="system" width="109" height="128"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

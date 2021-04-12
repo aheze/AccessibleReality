@@ -40,13 +40,12 @@ extension MainViewController {
         } cardRemoved: { removedCard in
             if let anchor = removedCard.marker?.anchor {
                 if let firstIndex = self.placedMarkers.firstIndex(where: { $0.box == removedCard.marker?.box }) {
-                    print("removing")
                     self.placedMarkers.remove(at: firstIndex)
                 }
                 self.sceneView.session.remove(anchor: anchor)
             }
             
-            if (self.cvm.selectedCard?.marker == nil) ?? false {
+            if self.cvm.selectedCard?.marker == nil {
                 self.animateCubeOverlayPlaced(placed: false)
             } else {
                 self.animateCubeOverlayPlaced(placed: true)
@@ -55,10 +54,10 @@ extension MainViewController {
             guard let self = self else { return }
             self.trackCurrentMarker()
             
-            if card.marker == nil {
-                self.animateCubeOverlayPlaced(placed: false)
-            } else {
+            if let marker = card.marker {
                 self.animateCubeOverlayPlaced(placed: true)
+            } else {
+                self.animateCubeOverlayPlaced(placed: false)
             }
         }
         

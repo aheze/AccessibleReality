@@ -6,16 +6,55 @@
 //
 
 import UIKit
+import ARKit
 
 extension MainViewController {
     
     func setupViews() {
         
         // MARK: Drawing View
-        let drawingView = UIView()
-        drawingView.isUserInteractionEnabled = false
+        let drawingView = DrawingView()
         drawingView.backgroundColor = .clear
         view.addSubview(drawingView)
+        
+        drawingView.checkOverlap = { [weak self] point in
+            guard let self = self else { return }
+            
+            
+            
+            let results = self.sceneView.hitTest(point, options: [SCNHitTestOption.searchMode : 1])
+            let nodes = results.map { $0.node }
+            
+            print("nodes: \(nodes)")
+            
+            if let firstNode = nodes.first {
+                print("has node!!")
+                
+                
+            }
+        }
+        
+        drawingView.touchUp = { [weak self] point in
+            guard let self = self else { return }
+            
+            let results = self.sceneView.hitTest(point, options: [SCNHitTestOption.searchMode : 1])
+            let nodes = results.map { $0.node }
+            
+            print("nodes: \(nodes.count)--------------------------")
+            
+            for node in nodes {
+                print("has node, up!!!! \(self.cvm.cards.map {$0.marker?.node})")
+                
+                
+                if let card = self.cvm.cards.first(where: {$0.marker?.node == node}) {
+                    print("Found card!")
+                    self.cvm.selectedCard = card
+                }
+            }
+            
+            
+        }
+        
         
         /// Positioning constraints
         drawingView.translatesAutoresizingMaskIntoConstraints = false

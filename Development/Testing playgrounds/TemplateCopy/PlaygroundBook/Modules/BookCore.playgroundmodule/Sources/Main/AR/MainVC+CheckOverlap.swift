@@ -81,7 +81,5 @@ extension MainViewController {
                 self.crosshairContentView?.alpha = 1
             }
         }
-        
     }
-    
 }

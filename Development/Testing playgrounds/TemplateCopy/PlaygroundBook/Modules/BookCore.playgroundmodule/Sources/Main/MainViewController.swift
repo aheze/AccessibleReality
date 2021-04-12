@@ -78,7 +78,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     
     // MARK: Interface
     var cvm: CardsViewModel! /// keep reference to cards
-    var drawingView: UIView!
+    var drawingView: DrawingView!
     var cardsReferenceView: UIView!
     var cardsReferenceHeightC: NSLayoutConstraint!
     

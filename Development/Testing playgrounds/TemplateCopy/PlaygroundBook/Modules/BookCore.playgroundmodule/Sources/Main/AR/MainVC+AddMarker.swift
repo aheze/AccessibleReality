@@ -31,6 +31,8 @@ extension MainViewController {
             let height = distance * CGFloat(heightOverWidthRatio)
     
             let box = SCNBox(width: distance, height: height, length: height, chamferRadius: 0)
+            let node = SCNNode(geometry: box)
+            node.name = "BoxNode"
             
             let cubeColor = color.withAlphaComponent(0.8) /// make partially transparent because it encompasses the detected object
             let colorMaterial = SCNMaterial()
@@ -46,6 +48,7 @@ extension MainViewController {
                 color: color,
                 hasDescription: true,
                 box: box,
+                node: node,
                 anchor: anchor,
                 radius: Float(maxRadius)
             )
@@ -61,6 +64,9 @@ extension MainViewController {
         if let result = makeRaycastQuery(at: screenCoordinate) {
             
             let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+            let node = SCNNode(geometry: box)
+            node.name = "BoxNode"
+            
             let colorMaterial = SCNMaterial()
             colorMaterial.diffuse.contents = color
             box.materials = [colorMaterial]
@@ -68,7 +74,7 @@ extension MainViewController {
             let anchor = ARAnchor(name: "Node Anchor", transform: result.worldTransform)
             sceneView.session.add(anchor: anchor)
             
-            let marker = Marker(name: "Node", color: color, hasDescription: false, box: box, anchor: anchor, radius: 0.05)
+            let marker = Marker(name: "Node", color: color, hasDescription: false, box: box, node: node, anchor: anchor, radius: 0.05)
             placedMarkers.append(marker)
             
             return marker

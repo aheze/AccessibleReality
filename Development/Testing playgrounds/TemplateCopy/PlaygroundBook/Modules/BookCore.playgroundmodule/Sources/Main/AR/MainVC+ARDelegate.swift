@@ -50,8 +50,7 @@ extension MainViewController: ARCoachingOverlayViewDelegate {
 extension MainViewController: ARSessionDelegate, ARSCNViewDelegate {
     public func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         if let marker = placedMarkers.first(where: {$0.anchor == anchor }) {
-            let node = SCNNode(geometry: marker.box)
-            return node
+            return marker.node
         }
         return nil
     }
