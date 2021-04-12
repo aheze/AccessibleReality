@@ -54,7 +54,7 @@ extension MainViewController {
             guard let self = self else { return }
             self.trackCurrentMarker()
             
-            if let marker = card.marker {
+            if card.marker != nil {
                 self.animateCubeOverlayPlaced(placed: true)
             } else {
                 self.animateCubeOverlayPlaced(placed: false)
