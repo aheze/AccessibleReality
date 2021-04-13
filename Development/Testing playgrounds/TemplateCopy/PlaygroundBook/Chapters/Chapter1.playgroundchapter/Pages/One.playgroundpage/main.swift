@@ -12,13 +12,18 @@ import PlaygroundSupport
 //#-end-hidden-code
 
 /*:
- **Goal:** Use the Right-Hand Rule algorithm to navigate around walls.
+ **Lesson 1**
+ # Positioning and Hit-Tests
  
- # h1 test
- ## h1 test
- ### h1 test
- #### h1 test
- ##### h1 test
+ Hey there! Before we do anything complicated, we need to understand how ARKit's coordinate system works.
+ 
+ Everything is determined by 3 axes: X, Y, and Z.
+ 
+ - X is right
+ - Y is up
+ - Z is left
+ 
+
  
 Run this puzzle, and notice how your character stops after the first gem. The algorithm used here follows the [right-hand rule](glossary://right-hand%20rule) to move around walls. To solve the puzzle, you’ll need to tweak the algorithm, but first try using [pseudocode](glossary://pseudocode) to plan the action.
 

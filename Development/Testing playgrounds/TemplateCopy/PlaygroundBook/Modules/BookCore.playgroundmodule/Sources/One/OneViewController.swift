@@ -138,15 +138,9 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         crosshairView.isHidden = true
         coordinateLabel.isHidden = true
         
-        let sliders = Sliders(svm: self.svm)
+        let sliders = OneSliderView(svm: self.svm)
         
-        
-        let newNode = Node()
-        newNode.color = UIColor.red
-        newNode.position = Value(x: 0, y: 0, z: 0)
-        self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
-        
-        self.cubeNode = newNode
+        self.addNodes(sceneView: sceneViewWrapper.sceneView)
         
         let hostingController = UIHostingController(rootView: sliders)
         addChildViewController(hostingController, in: slidersReferenceView)
@@ -163,5 +157,21 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         hitTestButton.layer.cornerRadius = 16
     }
     
+    func addNodes(sceneView: SCNView) {
+        let cubeNode = Node()
+        cubeNode.shape = .cube
+        cubeNode.color = UIColor.red
+        cubeNode.position = Value(x: 0, y: 0, z: 0)
+        sceneView.scene?.addNode(cubeNode)
+        
+        self.cubeNode = cubeNode
+    }
+    
+}
+
+extension SCNScene {
+    func addNode(_ node: Node) {
+        self.rootNode.addNode(node)
+    }
 }
 

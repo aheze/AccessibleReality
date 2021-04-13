@@ -38,8 +38,6 @@ class SlidersViewModel: ObservableObject {
 
 class ViewController: UIViewController {
     
-    var svm: SlidersViewModel! /// keep reference to cards
-    
     var isLive = true
     
     @IBOutlet weak var crosshairView: UIView!
@@ -117,8 +115,19 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var slidersReferenceView: UIView!
     
+    var svm: SlidersViewModel!
+    
+    var svm1: SlidersViewModel!
+    var svm2: SlidersViewModel!
+    var svm3: SlidersViewModel!
+    var svm4: SlidersViewModel!
     func setupLiveView() {
         self.svm = SlidersViewModel()
+        
+        self.svm1 = SlidersViewModel()
+        self.svm2 = SlidersViewModel()
+        self.svm3 = SlidersViewModel()
+        self.svm4 = SlidersViewModel()
         
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
@@ -129,7 +138,8 @@ class ViewController: UIViewController {
         crosshairView.isHidden = true
         coordinateLabel.isHidden = true
         
-        let sliderView = OneSliderView(svm: self.svm)
+//        let sliderView = OneSliderView(svm: self.svm)
+        let sliderView = FourSliderView(svm1: svm1, svm2: svm2, svm3: svm3, svm4: svm4)
         
         
         let newNode = Node()
@@ -177,6 +187,8 @@ class SceneViewWrapper: UIView {
         commonInit()
     }
     
+    var cameraNode: SCNNode!
+    
     private func commonInit() {
         let contentView = UIView()
         addSubview(contentView)
@@ -190,9 +202,12 @@ class SceneViewWrapper: UIView {
         let cameraNode = SCNNode()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 3)
         cameraNode.camera = camera
+        self.cameraNode = cameraNode
+        
         let cameraOrbitNode = SCNNode()
         cameraOrbitNode.addChildNode(cameraNode)
-        cameraOrbitNode.eulerAngles = SCNVector3(-35.degreesToRadians, 0, 0)
+        cameraOrbitNode.eulerAngles = SCNVector3(-45.degreesToRadians, 45.degreesToRadians, 0)
+        
         scene.rootNode.addChildNode(cameraOrbitNode)
         
         let crosshairCube = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0)
@@ -228,8 +243,53 @@ class SceneViewWrapper: UIView {
         let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
         sceneView.scene?.rootNode.addChildNode(origin)
         
+        let resetButton = UIButton(type: .system)
+        contentView.addSubview(resetButton)
+        
+        resetButton.setTitle("Reset point of view", for: .normal)
+        resetButton.titleLabel?.font = .systemFont(ofSize: 19, weight: .medium)
+        resetButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        resetButton.setTitleColor(.systemBlue, for: .normal)
+        resetButton.backgroundColor = UIColor.systemBackground
+        resetButton.layer.cornerRadius = 12
+        
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            resetButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12),
+            resetButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+        ])
+        
+        resetButton.addTarget(self, action: #selector(resetPressed), for: .touchUpInside)
+        
         self.sceneView = sceneView
         
+        resetButton.alpha = 0
+        resetButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        
+        self.resetButton = resetButton
+    }
+    
+    var resetButton: UIButton!
+    @objc func resetPressed() {
+
+        UIView.animate(withDuration: 0.3) {
+            self.resetButton.alpha = 0
+            self.resetButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        }
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1
+        sceneView.pointOfView = cameraNode
+        SCNTransaction.commit()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.resetButton.alpha = 1
+            self.resetButton.transform = CGAffineTransform.identity
+        }
     }
 }
 
