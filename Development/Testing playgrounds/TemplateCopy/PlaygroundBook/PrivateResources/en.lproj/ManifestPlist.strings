@@ -6,7 +6,13 @@ Contains English localizations of values in Manifest.plist files in the playgrou
 */
 
 /* The localized name of the playground book. */
-"PlaygroundBookName" = "Playground Book";
+"PlaygroundBookName" = "Accessible Reality";
+
+
+"PageOneName" = "Positioning";
+"PageMainName" = "The Completed App";
+
+
 
 /* The localized name of the first chapter in the playground book. */
 "ChapterOneName" = "Chapter One";
