@@ -33,6 +33,25 @@ struct Value {
         self.y = xyz
         self.z = xyz
     }
+    
+    internal init(position: SCNVector3) {
+        self.x = position.x * 100
+        self.y = position.y * 100
+        self.z = position.x * 100
+    }
+    
+    internal init(rotation: SCNVector3) {
+        self.x = rotation.x.radiansToDegrees
+        self.y = rotation.y.radiansToDegrees
+        self.z = rotation.x.radiansToDegrees
+    }
+    
+    internal init(scale: SCNVector3) {
+        self.x = scale.x
+        self.y = scale.y
+        self.z = scale.x
+    }
+    
 }
 
 /**
@@ -101,7 +120,11 @@ class Node {
         
         geometry.firstMaterial?.diffuse.contents = self.color
         
-        return (geometry, SCNVector3(self.position), SCNVector3(self.rotation), SCNVector3(self.scale))
+        let scnPosition = SCNVector3(position: position)
+        let scnRotation = SCNVector3(rotation: rotation)
+        let scnScale = SCNVector3(scale: scale)
+        
+        return (geometry, scnPosition, scnRotation, scnScale)
     }
     
     private func updateSCNNode() {
@@ -126,12 +149,93 @@ class Node {
 
 class ViewController: UIViewController {
     
-    
+    @IBOutlet weak var crosshairView: UIView!
+    @IBOutlet weak var crosshairImageView: UIImageView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet var panGestures: UIPanGestureRecognizer!
+    @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
+        if sender.state == .changed {
+            let translation = sender.translation(in: containerView)
+            crosshairView.frame.origin.x += translation.x
+            crosshairView.frame.origin.y += translation.y
+            
+            
+            if crosshairView.center.x > containerView.frame.width {
+                crosshairView.center.x = containerView.frame.width
+            } else if crosshairView.center.x < 0 {
+                crosshairView.center.x = 0
+            }
+            
+            if crosshairView.center.y > containerView.frame.height {
+                crosshairView.center.y = containerView.frame.height
+            } else if crosshairView.center.y < 0 {
+                crosshairView.center.y = 0
+            }
+            
+            coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
+        }
+        sender.setTranslation(.zero, in: containerView)
+    }
+    
+    @IBOutlet weak var coordinateLabel: UILabel!
+    @IBOutlet weak var hitTestButton: UIButton!
+    @IBAction func hitTestPressed(_ sender: Any) {
+        
+        UIView.animate(withDuration: 0.4) {
+            self.crosshairImageView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+        } completion: { _ in
+            
+            let center = CGPoint(
+                x: Int(self.crosshairView.center.x),
+                y: Int(self.crosshairView.center.y)
+            )
+            
+            let results = self.sceneView.hitTest(center, options: [SCNHitTestOption.searchMode : 1])
+            if let first = results.first(where: {$0.node.name == "PlaneNode"}) {
+                print("node yes")
+                
+                let coords = first.worldCoordinates
+                print("coro \(coords)")
+                
+                let value = Value(
+                    x: coords.x * 100,
+                    y: coords.y * 100,
+                    z: coords.z * 100
+                )
+                print("val: \(value)")
+                if let node = self.cubeNode {
+                    node.position = value
+                } else {
+                    let newNode = Node()
+                    newNode.color = UIColor.red
+                    newNode.position = value
+                    self.sceneView.scene?.rootNode.addNode(newNode)
+                    
+                    self.cubeNode = newNode
+                }
+            }
+            
+            UIView.animate(withDuration: 0.4) {
+                self.crosshairImageView.transform = CGAffineTransform.identity
+            }
+        }
+        
+    }
+    
+    var cubeNode: Node?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        crosshairImageView.layer.shadowRadius = 3
+        crosshairImageView.layer.shadowColor = UIColor.systemBlue.cgColor
+        crosshairImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        crosshairImageView.layer.shadowOpacity = 0.9
+        
+        coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
+        
+        hitTestButton.layer.cornerRadius = 16
         
         let cubeScene = SCNScene()
         
@@ -167,15 +271,11 @@ class ViewController: UIViewController {
         let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
         sceneView.scene?.rootNode.addChildNode(origin)
         
-        let newNode = Node()
-        newNode.color = UIColor.red
         
-        sceneView.scene?.rootNode.addNode(newNode)
+    }
+    
+    func hitTest() {
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            newNode.shape = .sphere
-        }
     }
     
     
@@ -190,8 +290,28 @@ extension SCNNode {
 }
 
 extension SCNVector3 {
-    init(_ value: Value) {
-        self.init(value.x, value.z, value.z)
+    internal init(position: Value) {
+        self.init(
+            position.x / 100,
+            position.y / 100,
+            position.z / 100
+        )
+    }
+    
+    internal init(rotation: Value) {
+        self.init(
+            rotation.x.degreesToRadians,
+            rotation.y.degreesToRadians,
+            rotation.z.degreesToRadians
+        )
+    }
+    
+    internal init(scale: Value) {
+        self.init(
+            scale.x,
+            scale.y,
+            scale.z
+        )
     }
 }
 
@@ -298,6 +418,7 @@ class Origin: SCNNode {
         planeGeo.firstMaterial = imageMaterial
         
         let plane = SCNNode(geometry: planeGeo)
+        plane.name = "PlaneNode"
         
         plane.geometry?.firstMaterial?.diffuse.wrapS = SCNWrapMode.repeat
         plane.geometry?.firstMaterial?.diffuse.wrapT = SCNWrapMode.repeat
