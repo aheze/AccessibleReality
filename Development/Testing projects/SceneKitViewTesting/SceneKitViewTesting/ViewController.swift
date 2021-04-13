@@ -7,6 +7,195 @@
 
 import UIKit
 import SceneKit
+import SwiftUI
+
+
+extension UIViewController {
+    func addChildViewController(_ childViewController: UIViewController, in inView: UIView) {
+        /// Add Child View Controller
+        addChild(childViewController)
+        
+        /// Add Child View as Subview
+        inView.insertSubview(childViewController.view, at: 0)
+        
+        /// Configure Child View
+        childViewController.view.frame = inView.bounds
+        childViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        /// Notify Child View Controller
+        childViewController.didMove(toParent: self)
+    }
+}
+
+class SlidersViewModel: ObservableObject {
+    @Published var x = Double(0)
+    @Published var y = Double(0)
+    @Published var z = Double(0)
+    
+    static var didChange: (() -> Void)?
+}
+
+
+class ViewController: UIViewController {
+    
+    var svm: SlidersViewModel! /// keep reference to cards
+    
+    var isLive = true
+    
+    @IBOutlet weak var crosshairView: UIView!
+    @IBOutlet weak var crosshairImageView: UIImageView!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var sceneView: SCNView!
+    @IBOutlet var panGestures: UIPanGestureRecognizer!
+    @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
+        if isLive == false {
+            if sender.state == .changed {
+                let translation = sender.translation(in: containerView)
+                crosshairView.frame.origin.x += translation.x
+                crosshairView.frame.origin.y += translation.y
+                
+                
+                if crosshairView.center.x > containerView.frame.width {
+                    crosshairView.center.x = containerView.frame.width
+                } else if crosshairView.center.x < 0 {
+                    crosshairView.center.x = 0
+                }
+                
+                if crosshairView.center.y > containerView.frame.height {
+                    crosshairView.center.y = containerView.frame.height
+                } else if crosshairView.center.y < 0 {
+                    crosshairView.center.y = 0
+                }
+                
+                coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
+            }
+            sender.setTranslation(.zero, in: containerView)
+        }
+    }
+    
+    @IBOutlet weak var coordinateLabel: UILabel!
+    @IBOutlet weak var hitTestButton: UIButton!
+    @IBAction func hitTestPressed(_ sender: Any) {
+        
+        UIView.animate(withDuration: 0.4) {
+            self.crosshairImageView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+        } completion: { _ in
+            
+            let center = CGPoint(
+                x: Int(self.crosshairView.center.x),
+                y: Int(self.crosshairView.center.y)
+            )
+            
+            let results = self.sceneView.hitTest(center, options: [SCNHitTestOption.searchMode : 1])
+            if let first = results.first(where: {$0.node.name == "PlaneNode"}) {
+                
+                let coords = first.worldCoordinates
+                
+                let value = Value(position: coords)
+
+                if let node = self.cubeNode {
+                    node.position = value
+                } else {
+                    let newNode = Node()
+                    newNode.color = UIColor.red
+                    newNode.position = value
+                    self.sceneView.scene?.rootNode.addNode(newNode)
+                    
+                    self.cubeNode = newNode
+                }
+            }
+            
+            UIView.animate(withDuration: 0.4) {
+                self.crosshairImageView.transform = CGAffineTransform.identity
+            }
+        }
+        
+    }
+    
+    var cubeNode: Node?
+    
+    @IBOutlet weak var slidersReferenceView: UIView!
+    
+    func setupLiveView() {
+        self.svm = SlidersViewModel()
+        
+        SlidersViewModel.didChange = { [weak self] in
+            guard let self = self else { return }
+            self.cubeNode?.position = Value(x: Float(self.svm.x), y: Float(self.svm.y), z:Float(self.svm.z))
+        }
+        
+        hitTestButton.isHidden = true
+        crosshairView.isHidden = true
+        coordinateLabel.isHidden = true
+        
+        let sliders = Sliders(svm: self.svm)
+        
+        
+        let newNode = Node()
+        newNode.color = UIColor.red
+        newNode.position = Value(x: 0, y: 0, z: 0)
+        self.sceneView.scene?.rootNode.addNode(newNode)
+        
+        self.cubeNode = newNode
+        
+        let hostingController = UIHostingController(rootView: sliders)
+        addChildViewController(hostingController, in: slidersReferenceView)
+    }
+    
+    func setupMainView() {
+        crosshairImageView.layer.shadowRadius = 3
+        crosshairImageView.layer.shadowColor = UIColor.systemBlue.cgColor
+        crosshairImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        crosshairImageView.layer.shadowOpacity = 0.9
+        
+        coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
+        
+        hitTestButton.layer.cornerRadius = 16
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        let cubeScene = SCNScene()
+        
+        let camera = SCNCamera()
+        camera.fieldOfView = 10
+        let cameraNode = SCNNode()
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 2)
+        cameraNode.camera = camera
+        let cameraOrbitNode = SCNNode()
+        cameraOrbitNode.addChildNode(cameraNode)
+        cameraOrbitNode.eulerAngles = SCNVector3(-35.degreesToRadians, 0, 0)
+        cubeScene.rootNode.addChildNode(cameraOrbitNode)
+        
+        let crosshairCube = SCNBox(width: 0.4, height: 0.4, length: 0.4, chamferRadius: 0)
+        crosshairCube.firstMaterial?.diffuse.contents = UIColor(red: 0.149, green: 0.604, blue: 0.859, alpha: 0.9)
+        
+        let crosshairCubeNode = SCNNode(geometry: crosshairCube)
+        cubeScene.rootNode.addChildNode(crosshairCubeNode)
+        
+        
+        let action = SCNAction.repeatForever(
+            SCNAction.rotate(
+                by: .pi,
+                around: SCNVector3(0, 0.5, 0),
+                duration: 3
+            )
+        )
+        crosshairCubeNode.runAction(action)
+        sceneView.scene = cubeScene
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.allowsCameraControl = true
+        
+        let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
+        sceneView.scene?.rootNode.addChildNode(origin)
+        
+        
+        isLive ? setupLiveView() : setupMainView()
+    }
+    
+}
+
 
 /**
  A value made of X, Y, and Z. The meaning of this depends on where it is used (for example, for Node.position, this is in centimeters).
@@ -37,19 +226,19 @@ struct Value {
     internal init(position: SCNVector3) {
         self.x = position.x * 100
         self.y = position.y * 100
-        self.z = position.x * 100
+        self.z = position.z * 100
     }
     
     internal init(rotation: SCNVector3) {
         self.x = rotation.x.radiansToDegrees
         self.y = rotation.y.radiansToDegrees
-        self.z = rotation.x.radiansToDegrees
+        self.z = rotation.z.radiansToDegrees
     }
     
     internal init(scale: SCNVector3) {
         self.x = scale.x
         self.y = scale.y
-        self.z = scale.x
+        self.z = scale.z
     }
     
 }
@@ -143,142 +332,6 @@ class Node {
         scnNode = SCNNode()
         updateSCNNode()
     }
-}
-
-
-
-class ViewController: UIViewController {
-    
-    @IBOutlet weak var crosshairView: UIView!
-    @IBOutlet weak var crosshairImageView: UIImageView!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var sceneView: SCNView!
-    @IBOutlet var panGestures: UIPanGestureRecognizer!
-    @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .changed {
-            let translation = sender.translation(in: containerView)
-            crosshairView.frame.origin.x += translation.x
-            crosshairView.frame.origin.y += translation.y
-            
-            
-            if crosshairView.center.x > containerView.frame.width {
-                crosshairView.center.x = containerView.frame.width
-            } else if crosshairView.center.x < 0 {
-                crosshairView.center.x = 0
-            }
-            
-            if crosshairView.center.y > containerView.frame.height {
-                crosshairView.center.y = containerView.frame.height
-            } else if crosshairView.center.y < 0 {
-                crosshairView.center.y = 0
-            }
-            
-            coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
-        }
-        sender.setTranslation(.zero, in: containerView)
-    }
-    
-    @IBOutlet weak var coordinateLabel: UILabel!
-    @IBOutlet weak var hitTestButton: UIButton!
-    @IBAction func hitTestPressed(_ sender: Any) {
-        
-        UIView.animate(withDuration: 0.4) {
-            self.crosshairImageView.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
-        } completion: { _ in
-            
-            let center = CGPoint(
-                x: Int(self.crosshairView.center.x),
-                y: Int(self.crosshairView.center.y)
-            )
-            
-            let results = self.sceneView.hitTest(center, options: [SCNHitTestOption.searchMode : 1])
-            if let first = results.first(where: {$0.node.name == "PlaneNode"}) {
-                print("node yes")
-                
-                let coords = first.worldCoordinates
-                print("coro \(coords)")
-                
-                let value = Value(
-                    x: coords.x * 100,
-                    y: coords.y * 100,
-                    z: coords.z * 100
-                )
-                print("val: \(value)")
-                if let node = self.cubeNode {
-                    node.position = value
-                } else {
-                    let newNode = Node()
-                    newNode.color = UIColor.red
-                    newNode.position = value
-                    self.sceneView.scene?.rootNode.addNode(newNode)
-                    
-                    self.cubeNode = newNode
-                }
-            }
-            
-            UIView.animate(withDuration: 0.4) {
-                self.crosshairImageView.transform = CGAffineTransform.identity
-            }
-        }
-        
-    }
-    
-    var cubeNode: Node?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        crosshairImageView.layer.shadowRadius = 3
-        crosshairImageView.layer.shadowColor = UIColor.systemBlue.cgColor
-        crosshairImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        crosshairImageView.layer.shadowOpacity = 0.9
-        
-        coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
-        
-        hitTestButton.layer.cornerRadius = 16
-        
-        let cubeScene = SCNScene()
-        
-        let camera = SCNCamera()
-        camera.fieldOfView = 10
-        let cameraNode = SCNNode()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 2)
-        cameraNode.camera = camera
-        let cameraOrbitNode = SCNNode()
-        cameraOrbitNode.addChildNode(cameraNode)
-        cameraOrbitNode.eulerAngles = SCNVector3(-35.degreesToRadians, 0, 0)
-        cubeScene.rootNode.addChildNode(cameraOrbitNode)
-        
-        let crosshairCube = SCNBox(width: 0.4, height: 0.4, length: 0.4, chamferRadius: 0)
-        crosshairCube.firstMaterial?.diffuse.contents = UIColor(red: 0.149, green: 0.604, blue: 0.859, alpha: 0.9)
-        
-        let crosshairCubeNode = SCNNode(geometry: crosshairCube)
-        cubeScene.rootNode.addChildNode(crosshairCubeNode)
-        
-        
-        let action = SCNAction.repeatForever(
-            SCNAction.rotate(
-                by: .pi,
-                around: SCNVector3(0, 0.5, 0),
-                duration: 3
-            )
-        )
-        crosshairCubeNode.runAction(action)
-        sceneView.scene = cubeScene
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.allowsCameraControl = true
-        
-        let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
-        sceneView.scene?.rootNode.addChildNode(origin)
-        
-        
-    }
-    
-    func hitTest() {
-        
-    }
-    
-    
 }
 
 extension SCNNode {
