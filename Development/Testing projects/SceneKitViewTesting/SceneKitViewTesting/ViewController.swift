@@ -420,7 +420,7 @@ extension FloatingPoint {
 
 
 /// show the world origin
-////from https://gist.github.com/cenkbilgen/ba5da0b80f10dc69c10ee59d4ccbbda6
+/// from https://gist.github.com/cenkbilgen/ba5da0b80f10dc69c10ee59d4ccbbda6
 class Origin: SCNNode {
     
     /// see: https://developer.apple.com/documentation/arkit/arsessionconfiguration/worldalignment/gravityandheading

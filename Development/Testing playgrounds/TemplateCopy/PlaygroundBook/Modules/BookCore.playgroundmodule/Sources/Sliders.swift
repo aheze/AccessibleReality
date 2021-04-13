@@ -1,6 +1,6 @@
 //
 //  Sliders.swift
-//  SceneKitViewTesting
+//  BookCore
 //
 //  Created by Zheng on 4/12/21.
 //

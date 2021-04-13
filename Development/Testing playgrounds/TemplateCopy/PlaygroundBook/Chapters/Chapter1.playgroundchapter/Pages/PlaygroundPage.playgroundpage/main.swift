@@ -13,7 +13,7 @@ import PlaygroundSupport
 let str = "Hello, playground"
 
 //#-hidden-code
-PlaygroundPage.current.liveView = instantiateLiveView()
+PlaygroundPage.current.liveView = instantiateMainLiveView()
 PlaygroundPage.current.needsIndefiniteExecution = true
 //#-end-hidden-code
 
