@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     
     var svm: SlidersViewModel! /// keep reference to cards
     
-    var isLive = false
+    var isLive = true
     
     @IBOutlet weak var crosshairView: UIView!
     @IBOutlet weak var crosshairImageView: UIImageView!

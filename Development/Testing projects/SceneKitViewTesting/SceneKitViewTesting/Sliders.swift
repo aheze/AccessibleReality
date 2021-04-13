@@ -14,9 +14,102 @@ struct OneSliderView: View {
             x: $svm.x,
             y: $svm.y,
             z: $svm.z,
+            name: "cubeNode",
             min: "-100 cm",
-            max: "100 cm"
+            max: "100 cm",
+            imageType: "Position"
         )
+        .padding()
+    }
+}
+
+struct TwoSliderView: View {
+    @ObservedObject var svm1: SlidersViewModel
+    @ObservedObject var svm2: SlidersViewModel
+    
+    var body: some View {
+        
+        HStack {
+            Sliders(
+                x: $svm1.x,
+                y: $svm1.y,
+                z: $svm1.z,
+                name: "cubeNode",
+                min: "-100 cm",
+                max: "100 cm",
+                imageType: "Position"
+            )
+            
+            Sliders(
+                x: $svm2.x,
+                y: $svm2.y,
+                z: $svm2.z,
+                name: "cameraNode",
+                min: "-100 cm",
+                max: "100 cm",
+                imageType: "Position"
+            )
+        }
+        .padding()
+    }
+}
+
+struct FourSliderView: View {
+    @ObservedObject var svm1: SlidersViewModel
+    @ObservedObject var svm2: SlidersViewModel
+    @ObservedObject var svm3: SlidersViewModel
+    @ObservedObject var svm4: SlidersViewModel
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Sliders(
+                    x: $svm1.x,
+                    y: $svm1.y,
+                    z: $svm1.z,
+                    name: "cubeNode",
+                    min: "-100 cm",
+                    max: "100 cm",
+                    imageType: "Position"
+                )
+                
+                Sliders(
+                    x: $svm2.x,
+                    y: $svm2.y,
+                    z: $svm2.z,
+                    name: "cameraNode",
+                    min: "-100 cm",
+                    max: "100 cm",
+                    imageType: "Position"
+                )
+            }
+            HStack {
+                Sliders(
+                    x: $svm3.x,
+                    y: $svm3.y,
+                    z: $svm3.z,
+                    name: "cameraNode",
+                    min: "-360°",
+                    max: "360°",
+                    imageType: "Rotation"
+                )
+                
+                Sliders(
+                    x: $svm4.x,
+                    y: $svm4.y,
+                    z: $svm4.z,
+                    name: "directionNode",
+                    min: "-100 cm",
+                    max: "100 cm",
+                    imageType: "Position"
+                )
+                .brightness(-0.25)
+                .allowsHitTesting(false)
+                
+                
+            }
+        }
+        .padding()
     }
 }
 
@@ -26,86 +119,157 @@ struct Sliders: View {
     @Binding var y: Double
     @Binding var z: Double
     
+    let name: String
     let min: String
     let max: String
+    let imageType: String
+    
     
     var body: some View {
-        VStack {
-            
-            let _ = SlidersViewModel.didChange?()
-            
-            Text("(\(Int(x)) x, \(Int(y)) y, \(Int(z)) z)")
-                .font(.system(size: 28, weight: .medium))
+        GeometryReader { proxy in
+            VStack {
                 
-            
-            HStack {
-                Text("X")
-                    .foregroundColor(.white)
-                    .font(.system(size: 21, weight: .medium))
-                    .padding()
-                    .background(Color.red)
+                let _ = SlidersViewModel.didChange?()
                 
-                Text(min)
-                Slider(value: $x, in: -100...100)
-                    .accentColor(Color.red)
-                Text(max)
-                    .padding(.trailing, 12)
+                if proxy.size.width < 450 {
+                    VStack {
+                        
+                        HStack {
+                            Image(imageType)
+                            
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(name)
+                                    .font(.system(size: 19, weight: .medium, design: .monospaced))
+                                Text(imageType)
+                            }
+                        }
+                        
+                        Text("(\(Int(x)) x, \(Int(y)) y, \(Int(z)) z)")
+                            .font(.system(size: 28, weight: .medium))
+                        
+                    }
+                } else {
+                    HStack {
+                        
+                        
+                        Image(imageType)
+                        
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(name)
+                                .font(.system(size: 19, weight: .medium, design: .monospaced))
+                            Text(imageType)
+                        }
+                        
+                        Spacer()
+                        
+                        Text("(\(Int(x)) x, \(Int(y)) y, \(Int(z)) z)")
+                            .font(.system(size: 28, weight: .medium))
+                        
+                    }
+                }
+                
+                
+                HStack {
+                    Text("X")
+                        .foregroundColor(.white)
+                        .font(.system(size: 21, weight: .medium))
+                        .padding()
+                        .background(Color.red)
+                    
+                    
+                    Slider(value: $x, in: -100...100)
+                        .accentColor(Color.red)
+                        .padding(.trailing, 12)
+                }
+                .background(
+                    Color(.systemBackground)
+                )
+                .cornerRadius(16)
+                
+                HStack {
+                    Text("Y")
+                        .foregroundColor(.white)
+                        .font(.system(size: 21, weight: .medium)).padding()
+                        .background(Color.green)
+                    
+                    Slider(value: $y, in: -100...100)
+                        .accentColor(Color.green)
+                        .padding(.trailing, 12)
+                }
+                .background(
+                    Color(.systemBackground)
+                )
+                .cornerRadius(16)
+                
+                HStack {
+                    Text("Z")
+                        .foregroundColor(.white)
+                        .font(.system(size: 21, weight: .medium)).padding()
+                        .background(Color.blue)
+                    
+                    
+                    
+                    Slider(value: $z, in: -100...100)
+                        .accentColor(Color.blue)
+                        .padding(.trailing, 12)
+                }
+                .background(
+                    Color(.systemBackground)
+                )
+                .cornerRadius(16)
+                
+                
+                HStack {
+                    Text(min)
+                        .offset(x: 50, y: 0)
+                    
+                    Spacer()
+                    
+                    Text(max)
+                        .offset(x: -15, y: 0)
+                }
+                
             }
-            .background(
-                Color(.systemBackground)
-            )
-            .cornerRadius(16)
-            
-            HStack {
-                Text("Y")
-                    .foregroundColor(.white)
-                    .font(.system(size: 21, weight: .medium)).padding()
-                    .background(Color.green)
-                
-                Text(min)
-                Slider(value: $y, in: -100...100)
-                    .accentColor(Color.green)
-                Text(max)
-                    .padding(.trailing, 12)
-            }
-            .background(
-                Color(.systemBackground)
-            )
-            .cornerRadius(16)
-            
-            HStack {
-                Text("Z")
-                    .foregroundColor(.white)
-                    .font(.system(size: 21, weight: .medium)).padding()
-                    .background(Color.blue)
-                
-                Text(min)
-                Slider(value: $z, in: -100...100)
-                    .accentColor(Color.blue)
-                Text(max)
-                    .padding(.trailing, 12)
-            }
-            .background(
-                Color(.systemBackground)
-            )
+            .padding(20)
+            .background(Color(.secondarySystemBackground))
             .cornerRadius(16)
         }
-        .padding(20)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(16)
     }
 }
 
+
 struct Sliders_Previews: PreviewProvider {
     static var previews: some View {
-//        Sliders(svm: SlidersViewModel())
         Sliders(
             x: .constant(0),
             y: .constant(0),
             z: .constant(0),
+            name: "cubeNode",
             min: "-100 cm",
-            max: "100 cm"
+            max: "100 cm",
+            imageType: "Rotation"
         )
     }
 }
+
+struct TwoSliderView_Previews: PreviewProvider {
+    static var previews: some View {
+        TwoSliderView(svm1: SlidersViewModel(), svm2: SlidersViewModel())
+            .previewLayout(.fixed(width: 800, height: 1000))
+    }
+}
+
+struct FourSliderView_Previews: PreviewProvider {
+    static var previews: some View {
+        FourSliderView(
+            svm1: SlidersViewModel(),
+            svm2: SlidersViewModel(),
+            svm3: SlidersViewModel(),
+            svm4: SlidersViewModel()
+        )
+        .previewLayout(.fixed(width: 600, height: 1000))
+    }
+}
+
+
 
