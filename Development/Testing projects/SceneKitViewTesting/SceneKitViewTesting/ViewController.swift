@@ -40,12 +40,13 @@ class ViewController: UIViewController {
     
     var svm: SlidersViewModel! /// keep reference to cards
     
-    var isLive = true
+    var isLive = false
     
     @IBOutlet weak var crosshairView: UIView!
     @IBOutlet weak var crosshairImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var sceneView: SCNView!
+    
+    @IBOutlet weak var sceneViewWrapper: SceneViewWrapper!
     @IBOutlet var panGestures: UIPanGestureRecognizer!
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
         if isLive == false {
@@ -86,7 +87,7 @@ class ViewController: UIViewController {
                 y: Int(self.crosshairView.center.y)
             )
             
-            let results = self.sceneView.hitTest(center, options: [SCNHitTestOption.searchMode : 1])
+            let results = self.sceneViewWrapper.sceneView.hitTest(center, options: [SCNHitTestOption.searchMode : 1])
             if let first = results.first(where: {$0.node.name == "PlaneNode"}) {
                 
                 let coords = first.worldCoordinates
@@ -99,7 +100,7 @@ class ViewController: UIViewController {
                     let newNode = Node()
                     newNode.color = UIColor.red
                     newNode.position = value
-                    self.sceneView.scene?.rootNode.addNode(newNode)
+                    self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
                     
                     self.cubeNode = newNode
                 }
@@ -134,7 +135,7 @@ class ViewController: UIViewController {
         let newNode = Node()
         newNode.color = UIColor.red
         newNode.position = Value(x: 0, y: 0, z: 0)
-        self.sceneView.scene?.rootNode.addNode(newNode)
+        self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
         
         self.cubeNode = newNode
         
@@ -156,23 +157,49 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        let cubeScene = SCNScene()
+        isLive ? setupLiveView() : setupMainView()
+    }
+    
+}
+
+
+class SceneViewWrapper: UIView {
+    
+    var sceneView: SCNView!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        let contentView = UIView()
+        addSubview(contentView)
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        let scene = SCNScene()
         
         let camera = SCNCamera()
         camera.fieldOfView = 10
         let cameraNode = SCNNode()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 2)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: 3)
         cameraNode.camera = camera
         let cameraOrbitNode = SCNNode()
         cameraOrbitNode.addChildNode(cameraNode)
         cameraOrbitNode.eulerAngles = SCNVector3(-35.degreesToRadians, 0, 0)
-        cubeScene.rootNode.addChildNode(cameraOrbitNode)
+        scene.rootNode.addChildNode(cameraOrbitNode)
         
-        let crosshairCube = SCNBox(width: 0.4, height: 0.4, length: 0.4, chamferRadius: 0)
+        let crosshairCube = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0)
         crosshairCube.firstMaterial?.diffuse.contents = UIColor(red: 0.149, green: 0.604, blue: 0.859, alpha: 0.9)
         
         let crosshairCubeNode = SCNNode(geometry: crosshairCube)
-        cubeScene.rootNode.addChildNode(crosshairCubeNode)
+        scene.rootNode.addChildNode(crosshairCubeNode)
         
         
         let action = SCNAction.repeatForever(
@@ -183,17 +210,27 @@ class ViewController: UIViewController {
             )
         )
         crosshairCubeNode.runAction(action)
-        sceneView.scene = cubeScene
+        
+        let sceneView = SCNView()
+        contentView.addSubview(sceneView)
+        sceneView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            sceneView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            sceneView.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            sceneView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            sceneView.leftAnchor.constraint(equalTo: contentView.leftAnchor)
+        ])
+        
+        sceneView.scene = scene
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
         let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
         sceneView.scene?.rootNode.addChildNode(origin)
         
+        self.sceneView = sceneView
         
-        isLive ? setupLiveView() : setupMainView()
     }
-    
 }
 
 
@@ -283,6 +320,7 @@ class Node {
      Shape of the node
      */
     var shape = Shape.cube { didSet { updateSCNNode() } }
+    
     
     internal var scnNode: SCNNode?
     
