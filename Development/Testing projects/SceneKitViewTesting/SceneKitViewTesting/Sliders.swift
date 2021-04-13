@@ -7,61 +7,105 @@
 
 import SwiftUI
 
+struct OneSliderView: View {
+    @ObservedObject var svm: SlidersViewModel
+    var body: some View {
+        Sliders(
+            x: $svm.x,
+            y: $svm.y,
+            z: $svm.z,
+            min: "-100 cm",
+            max: "100 cm"
+        )
+    }
+}
+
 struct Sliders: View {
     
-    @ObservedObject var svm: SlidersViewModel
+    @Binding var x: Double
+    @Binding var y: Double
+    @Binding var z: Double
+    
+    let min: String
+    let max: String
     
     var body: some View {
         VStack {
             
             let _ = SlidersViewModel.didChange?()
             
-            Text("(\(Int(svm.x)) x, \(Int(svm.y)) y, \(Int(svm.z)) z)")
+            Text("(\(Int(x)) x, \(Int(y)) y, \(Int(z)) z)")
                 .font(.system(size: 28, weight: .medium))
-                .padding()
+                
             
             HStack {
                 Text("X")
+                    .foregroundColor(.white)
                     .font(.system(size: 21, weight: .medium))
+                    .padding()
+                    .background(Color.red)
                 
-                Slider(value: $svm.x, in: -100...100)
+                Text(min)
+                Slider(value: $x, in: -100...100)
+                    .accentColor(Color.red)
+                Text(max)
+                    .padding(.trailing, 12)
             }
-            .padding()
             .background(
-                Color(.secondarySystemBackground)
-                    .cornerRadius(16)
+                Color(.systemBackground)
             )
+            .cornerRadius(16)
             
             HStack {
                 Text("Y")
-                    .font(.system(size: 21, weight: .medium))
-                Slider(value: $svm.y, in: -100...100)
+                    .foregroundColor(.white)
+                    .font(.system(size: 21, weight: .medium)).padding()
+                    .background(Color.green)
                 
+                Text(min)
+                Slider(value: $y, in: -100...100)
+                    .accentColor(Color.green)
+                Text(max)
+                    .padding(.trailing, 12)
             }
-            .padding()
             .background(
-                Color(.secondarySystemBackground)
-                    .cornerRadius(16)
+                Color(.systemBackground)
             )
+            .cornerRadius(16)
             
             HStack {
                 Text("Z")
-                    .font(.system(size: 21, weight: .medium))
-                Slider(value: $svm.z, in: -100...100)
+                    .foregroundColor(.white)
+                    .font(.system(size: 21, weight: .medium)).padding()
+                    .background(Color.blue)
+                
+                Text(min)
+                Slider(value: $z, in: -100...100)
+                    .accentColor(Color.blue)
+                Text(max)
+                    .padding(.trailing, 12)
             }
-            .padding()
             .background(
-                Color(.secondarySystemBackground)
-                    .cornerRadius(16)
+                Color(.systemBackground)
             )
+            .cornerRadius(16)
         }
-        .padding()
+        .padding(20)
+        .background(Color(.secondarySystemBackground))
+        .cornerRadius(16)
     }
 }
 
 struct Sliders_Previews: PreviewProvider {
     static var previews: some View {
-        Sliders(svm: SlidersViewModel())
+//        Sliders(svm: SlidersViewModel())
+        Sliders(
+            x: .constant(0),
+            y: .constant(0),
+            z: .constant(0),
+            min: "-100 cm",
+            max: "100 cm"
+        )
     }
 }
 

@@ -129,7 +129,7 @@ class ViewController: UIViewController {
         crosshairView.isHidden = true
         coordinateLabel.isHidden = true
         
-        let sliders = Sliders(svm: self.svm)
+        let sliderView = OneSliderView(svm: self.svm)
         
         
         let newNode = Node()
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         
         self.cubeNode = newNode
         
-        let hostingController = UIHostingController(rootView: sliders)
+        let hostingController = UIHostingController(rootView: sliderView)
         addChildViewController(hostingController, in: slidersReferenceView)
     }
     
