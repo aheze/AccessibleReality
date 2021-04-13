@@ -185,6 +185,7 @@ class SceneViewWrapper: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()
+        
     }
     
     var cameraNode: SCNNode!

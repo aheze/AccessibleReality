@@ -60,7 +60,6 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
                 crosshairView.frame.origin.x += translation.x
                 crosshairView.frame.origin.y += translation.y
                 
-                
                 if crosshairView.center.x > containerView.frame.width {
                     crosshairView.center.x = containerView.frame.width
                 } else if crosshairView.center.x < 0 {
@@ -81,6 +80,9 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
     
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var hitTestButton: UIButton!
+    
+    
+    var hitTest: ((SCNView, CGPoint) -> Bool)?
     @IBAction func hitTestPressed(_ sender: Any) {
         
         UIView.animate(withDuration: 0.4) {
@@ -92,30 +94,50 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
                 y: Int(self.crosshairView.center.y)
             )
             
-            let results = self.sceneViewWrapper.sceneView.hitTest(center, options: [SCNHitTestOption.searchMode : 1])
-            if let first = results.first(where: {$0.node.name == "PlaneNode"}) {
+            if self.hitTest?(self.sceneViewWrapper.sceneView, center) == false {
+                print("was error.")
                 
-                let coords = first.worldCoordinates
+                let viewController = UIHostingController(rootView: HintView(hint: "Don't forget to fill in the placeholder! Once you've done that, tap Run My Code again."))
+                viewController.view.backgroundColor = .clear
+                viewController.view.alpha = 0
+                self.addChildViewController(viewController, in: self.sceneViewWrapper)
                 
-                let value = Value(position: coords)
-                
-                if let node = self.cubeNode {
-                    node.position = value
-                } else {
-                    let newNode = Node()
-                    newNode.color = UIColor.red
-                    newNode.position = value
-                    self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
-                    
-                    self.cubeNode = newNode
+                UIView.animate(withDuration: 0.3) {
+                    viewController.view.alpha = 1
                 }
             }
+            
+//            if let value = self.sceneViewWrapper.sceneView.hitTest(at: center) {
+//                if let node = self.cubeNode {
+//                    node.position = value
+//                } else {
+//                    let newNode = Node()
+//                    newNode.color = UIColor.red
+//                    newNode.position = value
+//                    self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
+//
+//                    self.cubeNode = newNode
+//                }
+//            }
             
             UIView.animate(withDuration: 0.4) {
                 self.crosshairImageView.transform = CGAffineTransform.identity
             }
         }
+        
+        let sceneView = sceneViewWrapper.sceneView!
+        let center = CGPoint(x: 50, y: 50)
+        
+        
+        if let position = sceneView.hitTest(at: center) {
+            let newNode = Node()
+            newNode.color = UIColor.red
+            newNode.position = position
+            sceneView.scene?.addNode(newNode)
+        }
     }
+    
+    
     
     var cubeNode: Node?
     
@@ -125,6 +147,7 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
     }
     
     @IBOutlet weak var slidersReferenceView: UIView!
+    
     
     func setupLiveView() {
         self.svm = SlidersViewModel()
@@ -165,6 +188,7 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         sceneView.scene?.addNode(cubeNode)
         
         self.cubeNode = cubeNode
+        
     }
     
 }
@@ -175,3 +199,18 @@ extension SCNScene {
     }
 }
 
+extension SCNView {
+    func hitTest(at location: CGPoint) -> Value? {
+        
+        let results = self.hitTest(location, options: [SCNHitTestOption.searchMode : 1])
+
+        if let first = results.first(where: {$0.node.name == "PlaneNode"}) {
+            let coords = first.worldCoordinates
+            let value = Value(position: coords)
+
+            return value
+        }
+        
+        return nil
+    }
+}

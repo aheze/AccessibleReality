@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C5209062626610C0058F77A /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5209052626610C0058F77A /* Hint.swift */; };
 		3C728A2F261D4DB4007A1C7A /* MainVC+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */; };
 		3C728A39261D4DBA007A1C7A /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A38261D4DBA007A1C7A /* CardsView.swift */; };
 		3C728A3F261D4E1B007A1C7A /* Positioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A3E261D4E1B007A1C7A /* Positioning.swift */; };
@@ -168,6 +169,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C5209052626610C0058F77A /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Cards.swift"; sourceTree = "<group>"; };
 		3C728A38261D4DBA007A1C7A /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
 		3C728A3E261D4E1B007A1C7A /* Positioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positioning.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
 				3C9A2D1026255B1600D920A0 /* SceneViewWrapper.swift */,
 				3C9A2D2026255C0200D920A0 /* Sliders.swift */,
+				3C5209052626610C0058F77A /* Hint.swift */,
 				3C9A2D1626255B4600D920A0 /* Node.swift */,
 				3C9A2CE12625248900D920A0 /* One */,
 				3CA7D8AC261A9B1A00A7C3C3 /* Main */,
@@ -761,6 +764,7 @@
 				3C9A2D2126255C0200D920A0 /* Sliders.swift in Sources */,
 				3C7A2F9926227C95008799A2 /* MainVC+SetupCrosshair.swift in Sources */,
 				3CE81D1D2623A654003FBC66 /* MainVC+Accessibility.swift in Sources */,
+				3C5209062626610C0058F77A /* Hint.swift in Sources */,
 				3C9A2D1126255B1600D920A0 /* SceneViewWrapper.swift in Sources */,
 				3C9A2CE3262524A000D920A0 /* OneViewController.swift in Sources */,
 				3C9A2D1726255B4600D920A0 /* Node.swift in Sources */,

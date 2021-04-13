@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C52090C2626615B0058F77A /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C52090B2626615B0058F77A /* Hint.swift */; };
 		3C9A2D0E262540EE00D920A0 /* Sliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A2D0D262540EE00D920A0 /* Sliders.swift */; };
 		3CF6721726249B6100AA5470 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6721626249B6100AA5470 /* AppDelegate.swift */; };
 		3CF6721926249B6100AA5470 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF6721826249B6100AA5470 /* SceneDelegate.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C52090B2626615B0058F77A /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		3C9A2D0D262540EE00D920A0 /* Sliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sliders.swift; sourceTree = "<group>"; };
 		3CF6721326249B6100AA5470 /* SceneKitViewTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneKitViewTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF6721626249B6100AA5470 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				3CF6721826249B6100AA5470 /* SceneDelegate.swift */,
 				3CF6721A26249B6100AA5470 /* ViewController.swift */,
 				3C9A2D0D262540EE00D920A0 /* Sliders.swift */,
+				3C52090B2626615B0058F77A /* Hint.swift */,
 				3CF6721C26249B6100AA5470 /* Main.storyboard */,
 				3CF6721F26249B6300AA5470 /* Assets.xcassets */,
 				3CF6722126249B6300AA5470 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C52090C2626615B0058F77A /* Hint.swift in Sources */,
 				3CF6721B26249B6100AA5470 /* ViewController.swift in Sources */,
 				3CF6721726249B6100AA5470 /* AppDelegate.swift in Sources */,
 				3C9A2D0E262540EE00D920A0 /* Sliders.swift in Sources */,

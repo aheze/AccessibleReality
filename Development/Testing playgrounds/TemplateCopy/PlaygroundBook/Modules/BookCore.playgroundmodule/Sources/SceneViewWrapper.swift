@@ -23,6 +23,8 @@ class SceneViewWrapper: UIView {
         commonInit()
     }
     
+    var cameraNode: SCNNode!
+    
     private func commonInit() {
         let contentView = UIView()
         addSubview(contentView)
@@ -36,9 +38,12 @@ class SceneViewWrapper: UIView {
         let cameraNode = SCNNode()
         cameraNode.position = SCNVector3(x: 0, y: 0, z: 3)
         cameraNode.camera = camera
+        self.cameraNode = cameraNode
+        
         let cameraOrbitNode = SCNNode()
         cameraOrbitNode.addChildNode(cameraNode)
-        cameraOrbitNode.eulerAngles = SCNVector3(-35.degreesToRadians, 0, 0)
+        cameraOrbitNode.eulerAngles = SCNVector3(-45.degreesToRadians, 45.degreesToRadians, 0)
+        
         scene.rootNode.addChildNode(cameraOrbitNode)
         
         let crosshairCube = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0)
@@ -74,8 +79,53 @@ class SceneViewWrapper: UIView {
         let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
         sceneView.scene?.rootNode.addChildNode(origin)
         
+        let resetButton = UIButton(type: .system)
+        contentView.addSubview(resetButton)
+        
+        resetButton.setTitle("Reset point of view", for: .normal)
+        resetButton.titleLabel?.font = .systemFont(ofSize: 19, weight: .medium)
+        resetButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        resetButton.setTitleColor(.systemBlue, for: .normal)
+        resetButton.backgroundColor = UIColor.systemBackground
+        resetButton.layer.cornerRadius = 12
+        
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            resetButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12),
+            resetButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+        ])
+        
+        resetButton.addTarget(self, action: #selector(resetPressed), for: .touchUpInside)
+        
         self.sceneView = sceneView
         
+        resetButton.alpha = 0
+        resetButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        
+        self.resetButton = resetButton
+    }
+    
+    var resetButton: UIButton!
+    @objc func resetPressed() {
+
+        UIView.animate(withDuration: 0.3) {
+            self.resetButton.alpha = 0
+            self.resetButton.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        }
+        
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1
+        sceneView.pointOfView = cameraNode
+        SCNTransaction.commit()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.resetButton.alpha = 1
+            self.resetButton.transform = CGAffineTransform.identity
+        }
     }
 }
 

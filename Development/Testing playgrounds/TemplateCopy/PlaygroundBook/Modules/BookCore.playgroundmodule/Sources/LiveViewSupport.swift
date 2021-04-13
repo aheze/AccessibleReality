@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SceneKit
 import PlaygroundSupport
 
 /// Instantiates a new instance of a live view.
@@ -20,17 +21,6 @@ public func instantiateMainLiveView() -> PlaygroundLiveViewable {
     
     fatalError("instantiateMainLiveView failed")
     
-//    let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
-//
-//    guard let viewController = storyboard.instantiateInitialViewController() else {
-//        fatalError("LiveView.storyboard does not have an initial scene; please set one or update this function")
-//    }
-//
-//    guard let liveViewController = viewController as? MainViewController else {
-//        fatalError("LiveView.storyboard's initial scene is not a LiveViewController; please either update the storyboard or this function")
-//    }
-//
-//    return liveViewController
 }
 
 public func instantiateOneLiveView() -> PlaygroundLiveViewable {
@@ -42,5 +32,20 @@ public func instantiateOneLiveView() -> PlaygroundLiveViewable {
     
     fatalError("instantiateOneLiveView failed")
 }
+
+public func instantiateOneMainView(block: @escaping ((SCNView, CGPoint) -> Bool)) -> PlaygroundLiveViewable {
+    
+    let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
+    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_OneViewController") as? OneViewController {
+        viewController.isLive = false
+        viewController.hitTest = { (sceneView, point) in
+            return block(sceneView, point)
+        }
+        return viewController
+    }
+    
+    fatalError("instantiateOneLiveView failed")
+}
+
 
 
