@@ -99,6 +99,9 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
             
             if let value = self.hitTest?(self.sceneViewWrapper.sceneView, center) {
                 self.hitResultLabel.text = "hitPosition: (\(Int(value.x)) x, \(Int(value.y)) y, \(Int(value.z)) z)"
+                PlaygroundPage.current.assessmentStatus = .pass(
+                    message: "Awesome! \n\nNow you know how to position `Node`s and Hit-Test in ARKit. \n\n[**Next Page**](@next)"
+                )
             } else {
                 self.hitResultLabel.text = "hitPosition: Out of bounds"
             }
@@ -142,6 +145,8 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         
         let hostingController = UIHostingController(rootView: sliders)
         addChildViewController(hostingController, in: slidersReferenceView)
+        
+        UIScrollView.appearance().bounces = false
     }
     
     func setupMainView() {
@@ -150,7 +155,7 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         crosshairImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
         crosshairImageView.layer.shadowOpacity = 0.9
         
-        crosshairView.center = CGPoint(x: 50, y: 50)
+        crosshairView.center = CGPoint(x: 200, y: 200)
         coordinateLabel.text = "crosshairPoint: (\(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y)"
         
         hitTestButton.layer.cornerRadius = 16

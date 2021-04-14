@@ -60,8 +60,8 @@ if let hitPosition = sceneView.hitTest(at: crosshairPoint) {
     newNode.shape = .cube
     newNode.color = UIColor.red
     newNode.position = <#Value#>
-    sceneView.scene?.addNode(newNode)
 //#-end-editable-code
+    sceneView.scene?.addNode(newNode)
 //#-hidden-code
 return hitPosition
 //#-end-hidden-code
