@@ -415,7 +415,64 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-963.07692307692309" y="84.597156398104261"/>
+            <point key="canvasLocation" x="-2348" y="85"/>
+        </scene>
+        <!--Book Core Two View Controller-->
+        <scene sceneID="1tm-sB-Nzc">
+            <objects>
+                <viewController storyboardIdentifier="BookCore_TwoViewController" id="I3n-zW-VBW" customClass="BookCore_TwoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K1a-rc-yog">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9Y-HD-i5g">
+                                <rect key="frame" x="0.0" y="68" width="390" height="400"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBy-8l-R6S" customClass="BookCore_SceneViewWrapper">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="400"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="tBy-8l-R6S" firstAttribute="top" secondItem="n9Y-HD-i5g" secondAttribute="top" id="1Gb-I7-n1P"/>
+                                    <constraint firstAttribute="bottom" secondItem="tBy-8l-R6S" secondAttribute="bottom" id="3Je-0v-uHM"/>
+                                    <constraint firstItem="tBy-8l-R6S" firstAttribute="leading" secondItem="n9Y-HD-i5g" secondAttribute="leading" id="iFB-tp-DYp"/>
+                                    <constraint firstAttribute="height" constant="400" id="not-iv-SCy"/>
+                                    <constraint firstAttribute="trailing" secondItem="tBy-8l-R6S" secondAttribute="trailing" id="vbF-5N-Zop"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fbs-kt-Mbs" appends="YES" id="gKU-6x-Bm5"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buc-yK-deB">
+                                <rect key="frame" x="0.0" y="468" width="390" height="342"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hK4-fE-d3c"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="n9Y-HD-i5g" firstAttribute="top" secondItem="hK4-fE-d3c" secondAttribute="top" constant="24" id="5Wy-nH-Wa4"/>
+                            <constraint firstItem="buc-yK-deB" firstAttribute="top" secondItem="n9Y-HD-i5g" secondAttribute="bottom" id="5cH-F8-b8p"/>
+                            <constraint firstItem="n9Y-HD-i5g" firstAttribute="leading" secondItem="hK4-fE-d3c" secondAttribute="leading" id="FIT-TR-NF1"/>
+                            <constraint firstItem="n9Y-HD-i5g" firstAttribute="centerX" secondItem="K1a-rc-yog" secondAttribute="centerX" id="HLT-FX-1y3"/>
+                            <constraint firstItem="buc-yK-deB" firstAttribute="trailing" secondItem="hK4-fE-d3c" secondAttribute="trailing" id="LXK-ac-hn5"/>
+                            <constraint firstItem="hK4-fE-d3c" firstAttribute="trailing" secondItem="n9Y-HD-i5g" secondAttribute="trailing" id="NxJ-rQ-nKS"/>
+                            <constraint firstItem="buc-yK-deB" firstAttribute="leading" secondItem="K1a-rc-yog" secondAttribute="leading" id="TWc-W7-qOk"/>
+                            <constraint firstItem="hK4-fE-d3c" firstAttribute="bottom" secondItem="buc-yK-deB" secondAttribute="bottom" id="nVC-86-RI9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sceneViewWrapper" destination="tBy-8l-R6S" id="TN6-gd-hs7"/>
+                        <outlet property="slidersReferenceView" destination="buc-yK-deB" id="CVP-Qe-fCZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m4j-TD-ZY0" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="fbs-kt-Mbs"/>
+            </objects>
+            <point key="canvasLocation" x="-1678" y="85"/>
         </scene>
     </scenes>
     <resources>

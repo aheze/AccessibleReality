@@ -9,7 +9,9 @@ Contains English localizations of values in Manifest.plist files in the playgrou
 "PlaygroundBookName" = "Accessible Reality";
 
 
-"PageOneName" = "Positioning";
+"PageOneName" = "Positioning and Hit-Tests";
+"PageTwoName" = "The Distance Formula";
+"PageThreeName" = "Amazing Angles";
 "PageMainName" = "The Completed App";
 
 

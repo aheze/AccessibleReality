@@ -33,6 +33,16 @@ public func instantiateOneLiveView() -> PlaygroundLiveViewable {
     fatalError("instantiateOneLiveView failed")
 }
 
+public func instantiateTwoLiveView() -> PlaygroundLiveViewable {
+    
+    let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
+    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_TwoViewController") as? TwoViewController {
+        return viewController
+    }
+    
+    fatalError("instantiateOneLiveView failed")
+}
+
 public func instantiateOneMainView(block: @escaping ((SCNView, CGPoint) -> Value?)) -> PlaygroundLiveViewable {
     
     let storyboard = UIStoryboard(name: "LiveView", bundle: nil)

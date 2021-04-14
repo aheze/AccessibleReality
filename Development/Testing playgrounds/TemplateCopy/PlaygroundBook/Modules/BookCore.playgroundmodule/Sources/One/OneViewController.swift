@@ -171,7 +171,6 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         sceneView.scene?.addNode(cubeNode)
         
         self.cubeNode = cubeNode
-        
     }
     
 }

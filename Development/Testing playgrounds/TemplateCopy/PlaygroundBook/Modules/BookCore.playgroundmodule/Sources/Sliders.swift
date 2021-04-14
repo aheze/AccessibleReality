@@ -164,7 +164,7 @@ struct Sliders: View {
                     }
                     
                     Text("(\(Int(x)) x, \(Int(y)) y, \(Int(z)) z)")
-                        .font(.system(size: 28, weight: .medium))
+                        .font(.system(size: compactLayout ? 21 : 28, weight: .medium))
                     
                 }
             } else {
@@ -240,16 +240,18 @@ struct Sliders: View {
             
             HStack {
                 Text(min)
+                    .font(.system(size: compactLayout ? 14 : 21, weight: .regular))
                     .offset(x: 50, y: 0)
                 
                 Spacer()
                 
                 Text(max)
+                    .font(.system(size: compactLayout ? 14 : 21, weight: .regular))
                     .offset(x: -15, y: 0)
             }
             
         }
-        .padding(20)
+        .padding(compactLayout ? 14 : 20)
         .background(Color(.secondarySystemBackground))
         .cornerRadius(16)
         
