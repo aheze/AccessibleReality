@@ -72,17 +72,20 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
                     crosshairView.center.y = 0
                 }
                 
-                coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
+                coordinateLabel.text = "crosshairPoint: (\(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y)"
             }
             sender.setTranslation(.zero, in: containerView)
         }
     }
     
+    @IBOutlet weak var hitScrollView: UIScrollView!
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var hitTestButton: UIButton!
+    @IBOutlet weak var hitResultDownImageView: UIImageView!
+    @IBOutlet weak var hitResultLabel: UILabel!
     
     
-    var hitTest: ((SCNView, CGPoint) -> Bool)?
+    var hitTest: ((SCNView, CGPoint) -> Value?)?
     @IBAction func hitTestPressed(_ sender: Any) {
         
         UIView.animate(withDuration: 0.4) {
@@ -94,47 +97,20 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
                 y: Int(self.crosshairView.center.y)
             )
             
-            if self.hitTest?(self.sceneViewWrapper.sceneView, center) == false {
-                print("was error.")
-                
-                let viewController = UIHostingController(rootView: HintView(hint: "Don't forget to fill in the placeholder! Once you've done that, tap Run My Code again."))
-                viewController.view.backgroundColor = .clear
-                viewController.view.alpha = 0
-                self.addChildViewController(viewController, in: self.sceneViewWrapper)
-                
-                UIView.animate(withDuration: 0.3) {
-                    viewController.view.alpha = 1
-                }
+            if let value = self.hitTest?(self.sceneViewWrapper.sceneView, center) {
+                self.hitResultLabel.text = "hitPosition: (\(Int(value.x)) x, \(Int(value.y)) y, \(Int(value.z)) z)"
+            } else {
+                self.hitResultLabel.text = "hitPosition: Out of bounds"
             }
             
-//            if let value = self.sceneViewWrapper.sceneView.hitTest(at: center) {
-//                if let node = self.cubeNode {
-//                    node.position = value
-//                } else {
-//                    let newNode = Node()
-//                    newNode.color = UIColor.red
-//                    newNode.position = value
-//                    self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
-//
-//                    self.cubeNode = newNode
-//                }
-//            }
             
             UIView.animate(withDuration: 0.4) {
                 self.crosshairImageView.transform = CGAffineTransform.identity
+                self.hitResultDownImageView.tintColor = .systemGreen
+                self.hitResultLabel.textColor = .systemGreen
             }
         }
         
-        let sceneView = sceneViewWrapper.sceneView!
-        let center = CGPoint(x: 50, y: 50)
-        
-        
-        if let position = sceneView.hitTest(at: center) {
-            let newNode = Node()
-            newNode.color = UIColor.red
-            newNode.position = position
-            sceneView.scene?.addNode(newNode)
-        }
     }
     
     
@@ -157,9 +133,8 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
             self.cubeNode?.position = Value(x: Float(self.svm.x), y: Float(self.svm.y), z:Float(self.svm.z))
         }
         
-        hitTestButton.isHidden = true
         crosshairView.isHidden = true
-        coordinateLabel.isHidden = true
+        hitScrollView.isHidden = true
         
         let sliders = OneSliderView(svm: self.svm)
         
@@ -175,9 +150,12 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         crosshairImageView.layer.shadowOffset = CGSize(width: 0, height: 0)
         crosshairImageView.layer.shadowOpacity = 0.9
         
-        coordinateLabel.text = "Crosshair: \(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y"
+        crosshairView.center = CGPoint(x: 50, y: 50)
+        coordinateLabel.text = "crosshairPoint: (\(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y)"
         
         hitTestButton.layer.cornerRadius = 16
+        hitResultDownImageView.tintColor = .placeholderText
+        hitResultLabel.textColor = .placeholderText
     }
     
     func addNodes(sceneView: SCNView) {
@@ -193,13 +171,13 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
     
 }
 
-extension SCNScene {
+public extension SCNScene {
     func addNode(_ node: Node) {
         self.rootNode.addNode(node)
     }
 }
 
-extension SCNView {
+public extension SCNView {
     func hitTest(at location: CGPoint) -> Value? {
         
         let results = self.hitTest(location, options: [SCNHitTestOption.searchMode : 1])
@@ -214,3 +192,4 @@ extension SCNView {
         return nil
     }
 }
+

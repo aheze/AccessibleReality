@@ -11,15 +11,15 @@ import SceneKit
 /**
  A value made of X, Y, and Z. The meaning of this depends on where it is used (for example, for Node.position, this is in centimeters).
  */
-struct Value {
-    var x: Float
-    var y: Float
-    var z: Float
+public struct Value {
+    public var x: Float
+    public var y: Float
+    public var z: Float
     
     /**
      Make a new Value
      */
-    init(x: Float, y: Float, z: Float) {
+    public init(x: Float, y: Float, z: Float) {
         self.x = x
         self.y = y
         self.z = z
@@ -28,7 +28,7 @@ struct Value {
     /**
      Make a new Value with the same number for X, Y, and Z
      */
-    init(xyz: Float) {
+    public init(xyz: Float) {
         self.x = xyz
         self.y = xyz
         self.z = xyz
@@ -57,7 +57,7 @@ struct Value {
 /**
  The shape of a node.
  */
-enum NodeShape {
+public enum NodeShape {
     case cube
     case cylinder
     case sphere
@@ -68,32 +68,32 @@ enum NodeShape {
 /**
  An element inside SceneKit. Determines the position, rotation, scale, and how it looks (color and shape).
  */
-class Node {
+public class Node {
     
     /**
      Position of the node, in centimeters
      */
-    var position = Value(x: 0, y: 0, z: 0) { didSet { updateSCNNode() } }
+    public var position = Value(x: 0, y: 0, z: 0) { didSet { updateSCNNode() } }
     
     /**
      Rotation of the node, in degrees
      */
-    var rotation = Value(x: 0, y: 0, z: 0) { didSet { updateSCNNode() } }
+    public var rotation = Value(x: 0, y: 0, z: 0) { didSet { updateSCNNode() } }
     
     /**
      Scale of the node, with 1 as the normal scale
      */
-    var scale = Value(x: 1, y: 1, z: 1) { didSet { updateSCNNode() } }
+    public var scale = Value(x: 1, y: 1, z: 1) { didSet { updateSCNNode() } }
     
     /**
      Color of the node
      */
-    var color = UIColor.green { didSet { updateSCNNode() } }
+    public var color = UIColor.green { didSet { updateSCNNode() } }
     
     /**
      Shape of the node
      */
-    var shape = NodeShape.cube { didSet { updateSCNNode() } }
+    public var shape = NodeShape.cube { didSet { updateSCNNode() } }
     
     
     internal var scnNode: SCNNode?
@@ -140,13 +140,13 @@ class Node {
     /**
      Make a node.
      */
-    init() {
+    public init() {
         scnNode = SCNNode()
         updateSCNNode()
     }
 }
 
-extension SCNNode {
+public extension SCNNode {
     func addNode(_ node: Node) {
         if let scnNode = node.scnNode {
             addChildNode(scnNode)

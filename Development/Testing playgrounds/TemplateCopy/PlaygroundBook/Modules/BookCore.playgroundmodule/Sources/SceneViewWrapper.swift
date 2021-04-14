@@ -46,22 +46,6 @@ class SceneViewWrapper: UIView {
         
         scene.rootNode.addChildNode(cameraOrbitNode)
         
-        let crosshairCube = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0)
-        crosshairCube.firstMaterial?.diffuse.contents = UIColor(red: 0.149, green: 0.604, blue: 0.859, alpha: 0.9)
-        
-        let crosshairCubeNode = SCNNode(geometry: crosshairCube)
-        scene.rootNode.addChildNode(crosshairCubeNode)
-        
-        
-        let action = SCNAction.repeatForever(
-            SCNAction.rotate(
-                by: .pi,
-                around: SCNVector3(0, 0.5, 0),
-                duration: 3
-            )
-        )
-        crosshairCubeNode.runAction(action)
-        
         let sceneView = SCNView()
         contentView.addSubview(sceneView)
         sceneView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,16 +122,15 @@ class Origin: SCNNode {
     
     private enum Axis {
         case x, y, z
-        
-        var normal: float3 {
+
+        var normal: SIMD3<Float> {
             switch self {
-            case .x: return simd_float3(1, 0, 0)
-            case .y: return simd_float3(0, 1, 0)
-            case .z: return simd_float3(0, 0, 1)
+            case .x: return SIMD3(1, 0, 0)
+            case .y: return SIMD3(0, 1, 0)
+            case .z: return SIMD3(0, 0, 1)
             }
         }
     }
-    
     
     init(length: CGFloat = 0.1, radiusRatio ratio: CGFloat = 0.04, color: (x: UIColor, y: UIColor, z: UIColor, origin: UIColor) = (.blue, .green, .red, .cyan)) {
         

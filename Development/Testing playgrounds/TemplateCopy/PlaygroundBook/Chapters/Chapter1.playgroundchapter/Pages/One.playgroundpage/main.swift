@@ -32,7 +32,7 @@ Let's start by making sense of ARKit's coordinate system. At its core are the 3 
  - Y is up
  - Z is left
  
- Each object is called a `Node` and contains several properties, including `position`. You'll pass in a `Value` of (x, y, z) for this. For example, here is the code for the cube in the live view:
+ Each object is called a `Node` and contains several properties, including `position`. You'll pass in a `Value` of (x, y, z) for this. For example, here's the code for the red cube in the live view:
  
      let cubeNode = Node()
      cubeNode.shape = .cube
@@ -47,48 +47,33 @@ Let's start by making sense of ARKit's coordinate system. At its core are the 3 
  
  Sometimes we want to convert on-screen coordinates (x, y) into ARKit coordinates (x, y, z). This is especially useful when you want to position a node at where you tapped the screen. To do this, we can use "Hit-Testing."
  
- How does this work? Imagine an invisible beam of light that fires from your finger tap. This beam pierces through screen, travels into the ARKit scene, and *hits* the coordinate plane. ARKit will tell you the exact point (x, y, z) where the collision happened!
+ How does this work? Imagine an invisible beam of light that fires from your finger tap. This beam pierces through screen, travels into the ARKit scene, and *hits* the 3D coordinate plane. ARKit will tell you the exact point (x, y, z) where the collision happened!
  
- The hit-testing function is simple:
- 
- 
-
+ Below, use the `hitTest(at:)` function's return value to place a node at the crosshair's point.
 */
-
-
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateOneMainView { (sceneView, crosshairPoint) in
 //#-end-hidden-code
-if let position = sceneView.hitTest(at: crosshairPoint) {
+if let hitPosition = sceneView.hitTest(at: crosshairPoint) {
     let newNode = Node()
+//#-editable-code
     newNode.shape = .cube
     newNode.color = UIColor.red
-    newNode.position = /*#-editable-code The Hit-Test's result*/Value(x: -98765, y: -98765, z: -98765)/*#-end-editable-code*/
+    newNode.position = <#Value#>
     sceneView.scene?.addNode(newNode)
-    
-    //#-hidden-code
-    if newNode.position == Value(x: -98765, y: -98765, z: -98765) {
-        return false
-    }
-    return true
-    //#-end-hidden-code
+//#-end-editable-code
+//#-hidden-code
+return hitPosition
+//#-end-hidden-code
 } else {
     print("Out of bounds!")
-    //#-hidden-code
-    return true
-    //#-end-hidden-code
 }
 //#-hidden-code
-return false
+return nil
 }
+
 PlaygroundPage.current.needsIndefiniteExecution = true
-
-
 //#-end-hidden-code
-
-while /*#-editable-code Enter your condition*/<#condition#>/*#-end-editable-code*/ {
-    //#-editable-code
-
-    //#-end-editable-code
-}
-
+/*:
+Once you've filled in the placeholder, tap **Run My Code**!
+*/
