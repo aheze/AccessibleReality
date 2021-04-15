@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SceneKit
 
 struct LineSpace: View {
     var body: some View {
@@ -28,9 +29,9 @@ struct AngleWalkThrough: View {
     
     
     /// parameters
-    var vertex = Value(x: 0, y: 0, z: 0)
-    var position1 = Value(x: 0, y: 0, z: 0)
-    var position2 = Value(x: 4, y: 25, z: 30)
+    var vertex = Value(x: 0, y: 0, z: 5)
+    var position1 = Value(x: 3, y: 0, z: 2)
+    var position2 = Value(x: 0, y: 7, z: 1)
     
     /// results
     @State var vertexString = ""
@@ -115,7 +116,7 @@ struct AngleWalkThrough: View {
     var showResult: ((String) -> Void)?
     
     @State var timerCounter = 0
-    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.04, on: .main, in: .common).autoconnect()
     @State var animationBlocks: [(() -> Void)] = []
     
     @State var currentCodeLine = 0
@@ -128,9 +129,9 @@ struct AngleWalkThrough: View {
                         active: currentCodeLine == 0, blocks: [
                             CodeBlock(code: "func ", codeColor: .cMagenta),
                             CodeBlock(code: "angle3D(vertex: ", codeColor: .black),
-                            CodeBlock(animated: position1ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position1String),
+                            CodeBlock(animated: vertexParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: vertexString),
                             CodeBlock(code: ", position1: ", codeColor: .black),
-                            CodeBlock(animated: position2ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position2String),
+                            CodeBlock(animated: position1ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position1String),
                             CodeBlock(code: ", position2: ", codeColor: .black),
                             CodeBlock(animated: position2ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position2String),
                             CodeBlock(code: ") -> Number {", codeColor: .black)
@@ -148,31 +149,31 @@ struct AngleWalkThrough: View {
                         )
                         
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 2, blocks: [
                                 CodeBlock(code: "        x: ", codeColor: .black),
-                                CodeBlock(code: "position1.x", codeColor: .black, replacedCode: v1x1String),
+                                CodeBlock(animated: v1x1Animated, code: "position1.x", codeColor: .black, replacedCode: v1x1String),
                                 CodeBlock(code: " - ", codeColor: .black),
-                                CodeBlock(code: "vertex.x", codeColor: .black, replacedCode: v1x2String),
+                                CodeBlock(animated: v1x2Animated, code: "vertex.x", codeColor: .black, replacedCode: v1x2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 3, blocks: [
                                 CodeBlock(code: "        y: ", codeColor: .black),
-                                CodeBlock(code: "position1.y", codeColor: .black, replacedCode: v1y1String),
+                                CodeBlock(animated: v1y1Animated, code: "position1.y", codeColor: .black, replacedCode: v1y1String),
                                 CodeBlock(code: " - ", codeColor: .black),
-                                CodeBlock(code: "vertex.y", codeColor: .black, replacedCode: v1y2String),
+                                CodeBlock(animated: v1y2Animated, code: "vertex.y", codeColor: .black, replacedCode: v1y2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 4, blocks: [
                                 CodeBlock(code: "        z: ", codeColor: .black),
-                                CodeBlock(code: "position1.z", codeColor: .black, replacedCode: v1z1String),
+                                CodeBlock(animated: v1z1Animated, code: "position1.z", codeColor: .black, replacedCode: v1z1String),
                                 CodeBlock(code: " - ", codeColor: .black),
-                                CodeBlock(code: "vertex.z", codeColor: .black, replacedCode: v1z2String),
+                                CodeBlock(animated: v1z2Animated, code: "vertex.z", codeColor: .black, replacedCode: v1z2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 5, blocks: [
                                 CodeBlock(code: "    )", codeColor: .black)
                             ]
                         )
@@ -180,7 +181,7 @@ struct AngleWalkThrough: View {
                     
                     Group {
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 6, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "vector2 = ", codeColor: .black),
                                 CodeBlock(code: "Value", codeColor: .cTeal),
@@ -189,31 +190,31 @@ struct AngleWalkThrough: View {
                         )
                         
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 7, blocks: [
                                 CodeBlock(code: "        x: ", codeColor: .black),
-                                CodeBlock(code: "\(v2xLiteral).x", codeColor: .black, replacedCode: v2x1String),
+                                CodeBlock(animated: v2x1Animated, code: "\(v2xLiteral).x", codeColor: .black, replacedCode: v2x1String),
                                 CodeBlock(code: " - ", codeColor: .black),
-                                CodeBlock(code: "vertex.x", codeColor: .black, replacedCode: v2x2String),
+                                CodeBlock(animated: v2x2Animated, code: "vertex.x", codeColor: .black, replacedCode: v2x2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 8, blocks: [
                                 CodeBlock(code: "        y: ", codeColor: .black),
-                                CodeBlock(code: "\(v2yLiteral).y", codeColor: .black, replacedCode: v2y1String),
+                                CodeBlock(animated: v2y1Animated, code: "\(v2yLiteral).y", codeColor: .black, replacedCode: v2y1String),
                                 CodeBlock(code: " - ", codeColor: .black),
-                                CodeBlock(code: "vertex.y", codeColor: .black, replacedCode: v2y2String),
+                                CodeBlock(animated: v2y2Animated, code: "vertex.y", codeColor: .black, replacedCode: v2y2String)
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 9, blocks: [
                                 CodeBlock(code: "        z: ", codeColor: .black),
-                                CodeBlock(code: "\(v2zLiteral).z", codeColor: .black, replacedCode: v2z1String),
+                                CodeBlock(animated: v2z1Animated, code: "\(v2zLiteral).z", codeColor: .black, replacedCode: v2z1String),
                                 CodeBlock(code: " - ", codeColor: .black),
-                                CodeBlock(code: "vertex.z", codeColor: .black, replacedCode: v2z2String),
+                                CodeBlock(animated: v2z2Animated, code: "vertex.z", codeColor: .black, replacedCode: v2z2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 10, blocks: [
                                 CodeBlock(code: "    )", codeColor: .black)
                             ]
                         )
@@ -222,30 +223,30 @@ struct AngleWalkThrough: View {
                     
                     Group {
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 11, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "xProduct = ", codeColor: .black),
-                                CodeBlock(code: "vector1.x", codeColor: .black, replacedCode: xProduct1String),
+                                CodeBlock(animated: product_v1xAnimated, code: "vector1.x", codeColor: .black, replacedCode: xProduct1String),
                                 CodeBlock(code: " * ", codeColor: .black),
-                                CodeBlock(code: "vector2.x", codeColor: .black, replacedCode: xProduct2String),
+                                CodeBlock(animated: product_v2xAnimated, code: "vector2.x", codeColor: .black, replacedCode: xProduct2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 12, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "yProduct = ", codeColor: .black),
-                                CodeBlock(code: "vector1.y", codeColor: .black, replacedCode: yProduct1String),
+                                CodeBlock(animated: product_v1yAnimated, code: "vector1.y", codeColor: .black, replacedCode: yProduct1String),
                                 CodeBlock(code: " * ", codeColor: .black),
-                                CodeBlock(code: "vector2.y", codeColor: .black, replacedCode: yProduct2String),
+                                CodeBlock(animated: product_v2yAnimated, code: "vector2.y", codeColor: .black, replacedCode: yProduct2String),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 13, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "zProduct = ", codeColor: .black),
-                                CodeBlock(code: "vector1.z", codeColor: .black, replacedCode: zProduct1String),
+                                CodeBlock(animated: product_v1zAnimated, code: "vector1.z", codeColor: .black, replacedCode: zProduct1String),
                                 CodeBlock(code: " * ", codeColor: .black),
-                                CodeBlock(code: "vector2.z", codeColor: .black, replacedCode: zProduct2String),
+                                CodeBlock(animated: product_v2zAnimated, code: "vector2.z", codeColor: .black, replacedCode: zProduct2String),
                             ]
                         )
                         LineSpace()
@@ -253,37 +254,37 @@ struct AngleWalkThrough: View {
                     
                     Group {
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 14, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "dotProduct = ", codeColor: .black),
-                                CodeBlock(code: xProductLiteral, codeColor: .black, replacedCode: dotProductXString),
+                                CodeBlock(animated: dotProduct_xAnimated, code: xProductLiteral, codeColor: .black, replacedCode: dotProductXString),
                                 CodeBlock(code: " + ", codeColor: .black),
-                                CodeBlock(code: yProductLiteral, codeColor: .black, replacedCode: dotProductYString),
+                                CodeBlock(animated: dotProduct_yAnimated, code: yProductLiteral, codeColor: .black, replacedCode: dotProductYString),
                                 CodeBlock(code: " + ", codeColor: .black),
-                                CodeBlock(code: zProductLiteral, codeColor: .black, replacedCode: dotProductZString),
+                                CodeBlock(animated: dotProduct_zAnimated, code: zProductLiteral, codeColor: .black, replacedCode: dotProductZString),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 15, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "vertexToPosition1 = ", codeColor: .black),
                                 CodeBlock(code: "distanceFormula3D", codeColor: .cTeal),
                                 CodeBlock(code: "(position1: ", codeColor: .black),
-                                CodeBlock(code: "vertex", codeColor: .black, replacedCode: vertexString),
+                                CodeBlock(animated: vertexPos1_position1Animated, code: "vertex", codeColor: .black, replacedCode: vertexString),
                                 CodeBlock(code: ", position2: ", codeColor: .black),
-                                CodeBlock(code: "position1", codeColor: .black, replacedCode: position1String),
+                                CodeBlock(animated: vertexPos1_position2Animated, code: "position1", codeColor: .black, replacedCode: position1String),
                                 CodeBlock(code: ")", codeColor: .black)
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 16, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "vertexToPosition2 = ", codeColor: .black),
                                 CodeBlock(code: "distanceFormula3D", codeColor: .cTeal),
                                 CodeBlock(code: "(position1: ", codeColor: .black),
-                                CodeBlock(code: "vertex", codeColor: .black, replacedCode: vertexString),
+                                CodeBlock(animated: vertexPos2_position1Animated, code: "vertex", codeColor: .black, replacedCode: vertexString),
                                 CodeBlock(code: ", position2: ", codeColor: .black),
-                                CodeBlock(code: "position2", codeColor: .black, replacedCode: position2String),
+                                CodeBlock(animated: vertexPos2_position2Animated, code: "position2", codeColor: .black, replacedCode: position2String),
                                 CodeBlock(code: ")", codeColor: .black)
                             ]
                         )
@@ -292,35 +293,35 @@ struct AngleWalkThrough: View {
                     
                     Group {
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 17, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "cosineOfAngle = ", codeColor: .black),
-                                CodeBlock(code: "dotProduct", codeColor: .black, replacedCode: dotProductResult),
+                                CodeBlock(animated: cosOfAngle_dotProductAnimated, code: "dotProduct", codeColor: .black, replacedCode: dotProductResult),
                                 CodeBlock(code: " / (", codeColor: .black),
-                                CodeBlock(code: "vertexToPosition1", codeColor: .black, replacedCode: vertexToPosition1String),
+                                CodeBlock(animated: cosOfAngle_vertexPos1Animated, code: "vertexToPosition1", codeColor: .black, replacedCode: vertexToPosition1String),
                                 CodeBlock(code: " * ", codeColor: .black),
-                                CodeBlock(code: "vertexToPosition2", codeColor: .black, replacedCode: vertexToPosition2String),
+                                CodeBlock(animated: cosOfAngle_vertexPos2Animated, code: "vertexToPosition2", codeColor: .black, replacedCode: vertexToPosition2String),
                                 CodeBlock(code: ")", codeColor: .black),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 18, blocks: [
                                 CodeBlock(code: "    let ", codeColor: .cMagenta),
                                 CodeBlock(code: "angle = ", codeColor: .black),
                                 CodeBlock(code: "acos", codeColor: .cPurple),
                                 CodeBlock(code: "(", codeColor: .black),
-                                CodeBlock(code: acosLiteral, codeColor: .black, replacedCode: cosineOfAngleString),
+                                CodeBlock(animated: angle_cosOfAngleAnimated, code: acosLiteral, codeColor: .black, replacedCode: cosineOfAngleString),
                                 CodeBlock(code: ")", codeColor: .black),
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 19, blocks: [
                                 CodeBlock(code: "    return ", codeColor: .cMagenta),
-                                CodeBlock(code: "angle", codeColor: .black, replacedCode: angleResultString)
+                                CodeBlock(animated: angleResultAnimated, code: "angle", codeColor: .black, replacedCode: angleResultString)
                             ]
                         )
                         CodeLineView(
-                            active: currentCodeLine == 1, blocks: [
+                            active: currentCodeLine == 20, blocks: [
                                 CodeBlock(code: "}", codeColor: .black),
                             ]
                         )
@@ -367,29 +368,182 @@ struct AngleWalkThrough: View {
                 self.timer.upstream.connect().cancel()
             }
             
-//            animationBlocks[self.timerCounter]()
+            animationBlocks[self.timerCounter]()
             
             self.timerCounter += 1
         }
         .onAppear {
+            self.vertexString = "(\(Int(vertex.x)) x, \(Int(vertex.y)) y, \(Int(vertex.z)) z)"
             self.position1String = "(\(Int(position1.x)) x, \(Int(position1.y)) y, \(Int(position1.z)) z)"
             self.position2String = "(\(Int(position2.x)) x, \(Int(position2.y)) y, \(Int(position2.z)) z)"
             
-            var hasError = false
+            var hasError: Bool {
+                get {
+                    hasErrorLiteral != nil
+                }
+            }
             var hasErrorLiteral: String?
+
+            self.v1x1String = "\(Int(position1.x))"
+            self.v1x2String = "\(Int(vertex.x))"
+            self.v1y1String = "\(Int(position1.y))"
+            self.v1y2String = "\(Int(vertex.y))"
+            self.v1z1String = "\(Int(position1.z))"
+            self.v1z2String = "\(Int(vertex.z))"
             
-            let x1ValueFloat = position1.x
-            let y1ValueFloat = position1.y
-            let z1ValueFloat = position1.z
-            var x2ValueFloat = Float(0)
-            var y2ValueFloat = Float(0)
-            var z2ValueFloat = Float(0)
+            if v2xLiteral != "position2" { hasErrorLiteral = v2xLiteral }
+            if v2yLiteral != "position2" { hasErrorLiteral = v2yLiteral }
+            if v2zLiteral != "position2" { hasErrorLiteral = v2zLiteral }
             
+            self.v2x1String = hasError ? "Error" : "\(Int(position2.x))"
+            self.v2x2String = hasError ? "Error" : "\(Int(vertex.x))"
+            self.v2y1String = hasError ? "Error" : "\(Int(position2.y))"
+            self.v2y2String = hasError ? "Error" : "\(Int(vertex.y))"
+            self.v2z1String = hasError ? "Error" : "\(Int(position2.z))"
+            self.v2z2String = hasError ? "Error" : "\(Int(vertex.z))"
+            
+            let vector1 = Value(
+                x: position1.x - vertex.x,
+                y: position1.y - vertex.y,
+                z: position1.z - vertex.z
+            )
+            let vector2 = Value(
+                x: position2.x - vertex.x,
+                y: position2.y - vertex.y,
+                z: position2.z - vertex.z
+            )
+            
+            let xProduct = vector1.x * vector2.x
+            let yProduct = vector1.y * vector2.y
+            let zProduct = vector1.z * vector2.z
+            
+            self.xProduct1String = hasError ? "Error" : "\(Int(vector1.x))"
+            self.xProduct2String = hasError ? "Error" : "\(Int(vector2.x))"
+            self.yProduct1String = hasError ? "Error" : "\(Int(vector1.y))"
+            self.yProduct2String = hasError ? "Error" : "\(Int(vector2.y))"
+            self.zProduct1String = hasError ? "Error" : "\(Int(vector1.z))"
+            self.zProduct2String = hasError ? "Error" : "\(Int(vector2.z))"
+            
+            let dotProduct = xProduct + yProduct + zProduct
+            self.dotProductXString = hasError ? "Error" : "\(Int(xProduct))"
+            self.dotProductYString = hasError ? "Error" : "\(Int(yProduct))"
+            self.dotProductZString = hasError ? "Error" : "\(Int(zProduct))"
+            
+            
+            let vertexToPosition1 = distanceFormula3D(position1: vertex, position2: position1)
+            let vertexToPosition2 = distanceFormula3D(position1: vertex, position2: position2)
+            let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
+            print("COS OF AN \(cosineOfAngle)")
+            
+            self.dotProductResult = hasError ? "Error" : "\(Int(dotProduct))"
+            self.vertexToPosition1String = hasError ? "Error" : "\(Int(vertexToPosition1))"
+            self.vertexToPosition2String = hasError ? "Error" : "\(Int(vertexToPosition2))"
+            
+            if cosineOfAngle.isNaN {
+                self.cosineOfAngleString = hasError ? "Error" : "Nan"
+            } else {
+                self.cosineOfAngleString = hasError ? "Error" : "\(Int(cosineOfAngle))"
+            }
+            
+            
+            let angle = acos(cosineOfAngle)
+            if angle.isNaN {
+                self.angleResultString = hasError ? "Error" : "Nan"
+            } else {
+                self.angleResultString = hasError ? "Error" : "\(Int(angle))"
+            }
+            
+            animationBlocks = [
+                { withAnimation { vertexParameterAnimated = true; currentCodeLine = 0 } },
+                { withAnimation { position1ParameterAnimated = true } },
+                { withAnimation { position2ParameterAnimated = true } },
+                
+                { withAnimation { currentCodeLine = 1 } },
+
+                { withAnimation { v1x1Animated = true; currentCodeLine = 2 } },
+                { withAnimation { v1x2Animated = true } },
+                { withAnimation { v1y1Animated = true; currentCodeLine = 3 } },
+                { withAnimation { v1y2Animated = true } },
+                { withAnimation { v1z1Animated = true; currentCodeLine = 4 } },
+                { withAnimation { v1z2Animated = true } },
+                
+                { withAnimation { currentCodeLine = 5 } },
+                { withAnimation { currentCodeLine = 6 } },
+                
+                { withAnimation { v2x1Animated = true; currentCodeLine = 7 } },
+                { withAnimation { v2x2Animated = true } },
+                { withAnimation { v2y1Animated = true; currentCodeLine = 8 } },
+                { withAnimation { v2y2Animated = true } },
+                { withAnimation { v2z1Animated = true; currentCodeLine = 9 } },
+                { withAnimation { v2z2Animated = true } },
+                
+                { withAnimation { v2z1Animated = true; currentCodeLine = 10 } },
+                
+                { }, /// spacer
+                
+                { withAnimation { product_v1xAnimated = true; currentCodeLine = 11 } },
+                { withAnimation { product_v2xAnimated = true } },
+                { withAnimation { product_v1yAnimated = true; currentCodeLine = 12 } },
+                { withAnimation { product_v2yAnimated = true } },
+                { withAnimation { product_v1zAnimated = true; currentCodeLine = 13 } },
+                { withAnimation { product_v2zAnimated = true } },
+                
+                { }, /// spacer
+                
+                { withAnimation { dotProduct_xAnimated = true; currentCodeLine = 14 } },
+                { withAnimation { dotProduct_yAnimated = true } },
+                { withAnimation { dotProduct_zAnimated = true } },
+                
+                { withAnimation { vertexPos1_position1Animated = true; currentCodeLine = 15 } },
+                { withAnimation { vertexPos1_position2Animated = true } },
+                { withAnimation { vertexPos2_position1Animated = true; currentCodeLine = 16 } },
+                { withAnimation { vertexPos2_position2Animated = true } },
+                
+                
+                { }, /// spacer
+                
+                { withAnimation { cosOfAngle_dotProductAnimated = true; currentCodeLine = 17 } },
+                { withAnimation { cosOfAngle_vertexPos1Animated = true } },
+                { withAnimation { cosOfAngle_vertexPos2Animated = true } },
+                
+                { withAnimation { angle_cosOfAngleAnimated = true; currentCodeLine = 18 } },
+                { withAnimation { angleResultAnimated = true; currentCodeLine = 19 } },
+                {
+//                    if let hasErrorLiteral = hasErrorLiteral {
+//                        showResult?(false, "Hmm... not quite. \n\n\"\(hasErrorLiteral)\" might not be correct.")
+//                    } else {
+//                        showResult?(true, "Congratulations! \n\nYou got **\(distanceResult)**, which is the correct result! \n\n[**Next Page**](@next)")
+//                    }
+                }
+            ]
         }
     }
 }
 
 
+func distanceFormula3D(position1: Value, position2: Value) -> Number {
+    let xDifference = position1.x - position2.x
+    let yDifference = position1.y - position2.y
+    let zDifference = position1.z - position2.z
+
+    let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
+    let distance = sqrt(everythingInsideSquareRoot)
+    
+    return distance
+}
+
+public func acos(_ number: Number) -> Number {
+    let result = acos(Double(number))
+    let degrees = result.radiansToDegrees
+    print("acos deg: \(degrees)")
+    return Number(degrees)
+}
+public func sqrt(_ number: Number) -> Number {
+    let result = sqrt(Double(number))
+    let degrees = result.radiansToDegrees
+    print("sqrt deg: \(degrees)")
+    return Number(degrees)
+}
 
 
 

@@ -22,3 +22,14 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Float {
     let angle = acos(<#cosineOfAngle#>)
     return angle
 }
+
+func distanceFormula3D(position1: Value, position2: Value) -> Number {
+    let xDifference = position1.x - position2.x
+    let yDifference = position1.y - position2.y
+    let zDifference = position1.z - position2.z
+
+    let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
+    let distance = sqrt(everythingInsideSquareRoot)
+    
+    return Number(distance)
+}
