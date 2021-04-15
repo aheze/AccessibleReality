@@ -54,7 +54,6 @@ struct WalkThrough: View {
     @State var yValue2Animated = false
     @State var zValue2Animated = false
     
-    
     @State var pow1Animated = false
     @State var pow2Animated = false
     @State var pow3Animated = false
@@ -64,107 +63,108 @@ struct WalkThrough: View {
     @State var showingEnding: String?
     
     @State var timerCounter = 0
-    let timer = Timer.publish(every: 0.6, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     @State var animationBlocks: [(() -> Void)] = []
+    
+    @State var currentCodeLine = 0
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "func ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(code: "distanceFormula3D", codeColor: .black, replacedCode: nil),
-                        CodeBlock(code: "(position1: ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: position1ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position1String),
-                        CodeBlock(code: ", position2: ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: position2ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position2String),
-                        CodeBlock(code: ") -> Number {", codeColor: .black, replacedCode: nil),
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(code: "xDifference", codeColor: .black, replacedCode: xDifference),
-                        CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: xValue1Animated, code: "position1.x", codeColor: .black, replacedCode: "\(x1Value)"),
-                        CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(animated: xValue2Animated, code: "\(xValueLiteral).x", codeColor: .black, replacedCode: "\(x2Value)")
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(code: "yDifference", codeColor: .black, replacedCode: yDifference),
-                        CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: yValue1Animated, code: "position1.y", codeColor: .black, replacedCode: "\(y1Value)"),
-                        CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(animated: yValue2Animated, code: "\(yValueLiteral).y", codeColor: .black, replacedCode: "\(y2Value)")
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(code: "zDifference", codeColor: .black, replacedCode: zDifference),
-                        CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: zValue1Animated, code: "position1.z", codeColor: .black, replacedCode: "\(z1Value)"),
-                        CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(animated: zValue2Animated, code: "\(zValueLiteral).z", codeColor: .black, replacedCode: "\(z2Value)")
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(code: "everythingInsideSquareRoot", codeColor: .black, replacedCode: "1000"),
-                        CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: pow1Animated, code: pow1Literal, codeColor: .black, replacedCode: xDifference),
-                        CodeBlock(code: ", 2) + ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: pow2Animated, code: pow2Literal, codeColor: .black, replacedCode: yDifference),
-                        CodeBlock(code: ", 2) + ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: pow3Animated, code: pow3Literal, codeColor: .black, replacedCode: zDifference),
-                        CodeBlock(code: ", 2)", codeColor: .black, replacedCode: nil),
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(code: "distance", codeColor: .black, replacedCode: distanceResult),
-                        CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                        CodeBlock(code: "sqrt", codeColor: .cPurple, replacedCode: nil),
-                        CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                        CodeBlock(animated: insideSquareRootAnimated, code: "everythingInsideSquareRoot", codeColor: .black, replacedCode: insideSquareRootResult),
-                        CodeBlock(code: ")", codeColor: .cPurple, replacedCode: nil),
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "    return ", codeColor: .cMagenta, replacedCode: nil),
-                        CodeBlock(animated: distanceAnimated, code: "distance", codeColor: .black, replacedCode: distanceResult)
-                    ]
-                )
-                CodeLineView(
-                    blocks: [
-                        CodeBlock(code: "}", codeColor: .black, replacedCode: nil)
-                    ]
-                )
-                
-                Group {
-                    if let endingString = showingEnding {
-                        Text(endingString)
-                            .foregroundColor(Color(#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)))
-                            .font(.system(.title))
-                            .fixedSize(horizontal: false, vertical: true)
+            ScrollView(.horizontal, showsIndicators: false) {
+                VStack {
+                    VStack(alignment: .leading) {
+                        CodeLineView(
+                            active: currentCodeLine == 0, blocks: [
+                                CodeBlock(code: "func ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(code: "distanceFormula3D", codeColor: .black, replacedCode: nil),
+                                CodeBlock(code: "(position1: ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: position1ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position1String),
+                                CodeBlock(code: ", position2: ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: position2ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position2String),
+                                CodeBlock(code: ") -> Number {", codeColor: .black, replacedCode: nil),
+                            ]
+                        )
+                        CodeLineView(
+                            active: currentCodeLine == 1, blocks: [
+                                CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(code: "xDifference", codeColor: .black, replacedCode: xDifference),
+                                CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: xValue1Animated, code: "position1.x", codeColor: .black, replacedCode: "\(x1Value)"),
+                                CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(animated: xValue2Animated, code: "\(xValueLiteral).x", codeColor: .black, replacedCode: "\(x2Value)")
+                            ]
+                        )
+                        CodeLineView(
+                            active: currentCodeLine == 2, blocks: [
+                                CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(code: "yDifference", codeColor: .black, replacedCode: yDifference),
+                                CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: yValue1Animated, code: "position1.y", codeColor: .black, replacedCode: "\(y1Value)"),
+                                CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(animated: yValue2Animated, code: "\(yValueLiteral).y", codeColor: .black, replacedCode: "\(y2Value)")
+                            ]
+                        )
+                        CodeLineView(
+                            active: currentCodeLine == 3, blocks: [
+                                CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(code: "zDifference", codeColor: .black, replacedCode: zDifference),
+                                CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: zValue1Animated, code: "position1.z", codeColor: .black, replacedCode: "\(z1Value)"),
+                                CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(animated: zValue2Animated, code: "\(zValueLiteral).z", codeColor: .black, replacedCode: "\(z2Value)")
+                            ]
+                        )
+                        CodeLineView(
+                            active: currentCodeLine == 4, blocks: [
+                                CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(code: "everythingInsideSquareRoot", codeColor: .black, replacedCode: "1000"),
+                                CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: pow1Animated, code: pow1Literal, codeColor: .black, replacedCode: xDifference),
+                                CodeBlock(code: ", 2) + ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: pow2Animated, code: pow2Literal, codeColor: .black, replacedCode: yDifference),
+                                CodeBlock(code: ", 2) + ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: pow3Animated, code: pow3Literal, codeColor: .black, replacedCode: zDifference),
+                                CodeBlock(code: ", 2)", codeColor: .black, replacedCode: nil),
+                            ]
+                        )
+                        CodeLineView(
+                            active: currentCodeLine == 5, blocks: [
+                                CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(code: "distance", codeColor: .black, replacedCode: distanceResult),
+                                CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
+                                CodeBlock(code: "sqrt", codeColor: .cPurple, replacedCode: nil),
+                                CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
+                                CodeBlock(animated: insideSquareRootAnimated, code: "everythingInsideSquareRoot", codeColor: .black, replacedCode: insideSquareRootResult),
+                                CodeBlock(code: ")", codeColor: .cPurple, replacedCode: nil),
+                            ]
+                        )
+                        CodeLineView(
+                            active: currentCodeLine == 6, blocks: [
+                                CodeBlock(code: "    return ", codeColor: .cMagenta, replacedCode: nil),
+                                CodeBlock(animated: distanceAnimated, code: "distance", codeColor: .black, replacedCode: distanceResult)
+                            ]
+                        )
+                        CodeLineView(
+                            active: false, blocks: [
+                                CodeBlock(code: "}", codeColor: .black, replacedCode: nil)
+                            ]
+                        )
                     }
+                    .padding(20)
+                    .background(
+                        Color.white
+                            .cornerRadius(12)
+                            .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
+                    )
+                    .padding()
                 }
-                .transition(.opacity)
-                
             }
-            .padding(20)
         }
         .onReceive(timer) { time in
             if self.timerCounter == animationBlocks.indices.last ?? 0 {
@@ -172,7 +172,7 @@ struct WalkThrough: View {
             }
             
             animationBlocks[self.timerCounter]()
-
+            
             self.timerCounter += 1
         }
         .onAppear {
@@ -218,41 +218,41 @@ struct WalkThrough: View {
             
             
             animationBlocks = [
-                { withAnimation { position1ParameterAnimated = true } },
+                { withAnimation { position1ParameterAnimated = true; currentCodeLine = 0 } },
                 { withAnimation { position2ParameterAnimated = true } },
                 
                 { }, /// spacer
                 
-                { withAnimation { xValue1Animated = true } },
+                { withAnimation { xValue1Animated = true; currentCodeLine = 1 } },
                 { withAnimation { xValue2Animated = true } },
                 
                 { }, /// spacer
                 
-                { withAnimation { yValue1Animated = true } },
+                { withAnimation { yValue1Animated = true; currentCodeLine = 2 } },
                 { withAnimation { yValue2Animated = true } },
                 
                 { }, /// spacer
                 
-                { withAnimation { zValue1Animated = true } },
+                { withAnimation { zValue1Animated = true; currentCodeLine = 3 } },
                 { withAnimation { zValue2Animated = true } },
                 
                 { }, /// spacer
                 
-                { withAnimation { pow1Animated = true } },
+                { withAnimation { pow1Animated = true; currentCodeLine = 4 } },
                 { withAnimation { pow2Animated = true } },
                 { withAnimation { pow3Animated = true } },
                 
                 { }, /// spacer
                 
-                { withAnimation { insideSquareRootAnimated = true } },
-                { withAnimation { distanceAnimated = true } },
+                { withAnimation { insideSquareRootAnimated = true; currentCodeLine = 5 } },
+                { withAnimation { distanceAnimated = true; currentCodeLine = 6 } },
                 
                 { }, /// spacer
                 
                 {
                     if let hasErrorLiteral = hasErrorLiteral {
                         withAnimation {
-                            showingEnding = "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct."
+                            showingEnding = "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correct."
                         }
                     } else {
                         withAnimation {
@@ -275,38 +275,57 @@ struct CodeBlock: Identifiable {
 }
 
 struct CodeLineView: View {
+    var active: Bool
+    var activeBlock: CodeBlock?
     var blocks = [CodeBlock]()
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
-                ForEach(blocks) { block in
-                    Group {
+        
+        HStack(spacing: 0) {
+            ForEach(blocks) { block in
+                Group {
+                    
+                    if
+                        let replacedCode = block.replacedCode,
+                        let animated = block.animated,
+                        animated
+                    {
+                        Text(replacedCode)
+                            .foregroundColor(.white)
+                            .font(.system(size: 18, weight: .medium, design: .monospaced))
+                            .padding(4)
+                            .background(Color.green.brightness(-0.2))
+                            .cornerRadius(6)
                         
-                        if
-                            let replacedCode = block.replacedCode,
-                            let animated = block.animated,
-                            animated
-                        {
-                            Text(replacedCode)
-                                .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .medium, design: .monospaced))
-                                .padding(4)
-                                .background(Color.green.brightness(-0.2))
-                                .cornerRadius(6)
-                        } else {
-                            Text(block.code)
-                                .foregroundColor(block.codeColor)
-                                .font(.system(size: 18, weight: .regular, design: .monospaced))
-                        }
+                    } else {
+                        Text(block.code)
+                            .foregroundColor(block.codeColor)
+                            .font(.system(size: 18, weight: .regular, design: .monospaced))
                     }
-                    .frame(height: 30)
-                    .transition(.opacity)
                 }
+                .frame(height: 30)
+                .transition(.opacity)
             }
         }
+        .padding(.horizontal, 16)
+        .background(
+            Group {
+                if active {
+                    Rectangle()
+                        .fill(Color.green.opacity(0.3))
+                        .cornerRadius(4)
+                        .transition(
+                            AnyTransition.opacity.combined(
+                                with: .asymmetric(
+                                    insertion: .move(edge: .top),
+                                    removal: .move(edge: .bottom)
+                                )
+                            )
+                        )
+                }
+            }
+        )
     }
 }
-
 struct WalkThrough_Previews: PreviewProvider {
     static var previews: some View {
         WalkThrough(
