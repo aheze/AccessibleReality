@@ -66,10 +66,13 @@ cameraNode.position = Value(x: 50, y: 25, z: 25)
 sceneView.scene?.addNode(cameraNode)
     
 func distanceFormula3D(position1: Value, position2: Value) -> Number {
+    //#-code-completion(everything, hide)
+    //#-code-completion(identifier, show, position1, position2)
     let xDifference = position1.x - /*#-editable-code X coordinate*/<#T##Value#>/*#-end-editable-code*/.x
     let yDifference = position1.y - /*#-editable-code Y coordinate*/<#T##Value#>/*#-end-editable-code*/.y
     let zDifference = position1.z - /*#-editable-code Z coordinate*/<#T##Value#>/*#-end-editable-code*/.z
 
+    //#-code-completion(identifier, show, xDifference, yDifference, zDifference)
     let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
     let distance = sqrt(everythingInsideSquareRoot)
     
