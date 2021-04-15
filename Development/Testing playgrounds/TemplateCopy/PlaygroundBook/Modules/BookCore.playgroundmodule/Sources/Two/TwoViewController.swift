@@ -105,7 +105,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         let hostingController = UIHostingController(rootView: sliders)
         addChildViewController(hostingController, in: slidersReferenceView)
         
-        UIScrollView.appearance().bounces = false
+        UIScrollView.appearance().alwaysBounceVertical = false
     }
     
     func setupMainView() {
@@ -156,7 +156,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         let hostingController = UIHostingController(rootView: mainView)
         addChildViewController(hostingController, in: slidersReferenceView)
         
-        UIScrollView.appearance().bounces = false
+        UIScrollView.appearance().alwaysBounceVertical = false
         
         
     }

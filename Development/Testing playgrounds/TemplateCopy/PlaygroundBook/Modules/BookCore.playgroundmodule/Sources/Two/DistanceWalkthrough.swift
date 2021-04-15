@@ -203,63 +203,95 @@ struct WalkThrough: View {
             insideSquareRootResult = hasError ? "Error" : "\(Int(insideSquareRoot))"
             distanceResult = hasError ? "Error" : "\(Int(sqrt(insideSquareRoot)))"
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                withAnimation { position1ParameterAnimated = true }
-            }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                withAnimation { position2ParameterAnimated = true }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                withAnimation { xValue1Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
-                withAnimation { xValue2Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
-                withAnimation { yValue1Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.6) {
-                withAnimation { yValue2Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                withAnimation { zValue1Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.4) {
-                withAnimation { zValue2Animated = true }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                withAnimation { pow1Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.6) {
-                withAnimation { pow2Animated = true }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 7.2) {
-                withAnimation { pow3Animated = true }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 8.3) {
-                withAnimation { insideSquareRootAnimated = true }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 8.6) {
-                withAnimation { distanceAnimated = true }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 9.2) {
+            let animationBlocks: [(() -> Void)] = [
+                { withAnimation { position1ParameterAnimated = true } },
+                { withAnimation { position2ParameterAnimated = true } },
                 
-                if let hasErrorLiteral = hasErrorLiteral {
-                    withAnimation {
-                        showingEnding = "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct."
-                    }
-                } else {
-                    withAnimation {
-                        showingEnding = "Congratulations! You got \(distanceResult), which is the correct result!"
+                { withAnimation { xValue1Animated = true } },
+                { withAnimation { xValue2Animated = true } },
+                { withAnimation { yValue1Animated = true } },
+                { withAnimation { yValue2Animated = true } },
+                { withAnimation { zValue1Animated = true } },
+                { withAnimation { zValue2Animated = true } },
+                
+                { withAnimation { pow1Animated = true } },
+                { withAnimation { pow2Animated = true } },
+                { withAnimation { pow3Animated = true } },
+                
+                { withAnimation { insideSquareRootAnimated = true } },
+                { withAnimation { distanceAnimated = true } },
+                {
+                    if let hasErrorLiteral = hasErrorLiteral {
+                        withAnimation {
+                            showingEnding = "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct."
+                        }
+                    } else {
+                        withAnimation {
+                            showingEnding = "Congratulations! You got \(distanceResult), which is the correct result!"
+                        }
                     }
                 }
-            }
+                
+            ]
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                withAnimation { position1ParameterAnimated = true }
+//            }
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                withAnimation { position2ParameterAnimated = true }
+//            }
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+//                withAnimation { xValue1Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2.8) {
+//                withAnimation { xValue2Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+//                withAnimation { yValue1Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.6) {
+//                withAnimation { yValue2Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                withAnimation { zValue1Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 5.4) {
+//                withAnimation { zValue2Animated = true }
+//            }
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+//                withAnimation { pow1Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 6.6) {
+//                withAnimation { pow2Animated = true }
+//            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 7.2) {
+//                withAnimation { pow3Animated = true }
+//            }
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 8.3) {
+//                withAnimation { insideSquareRootAnimated = true }
+//            }
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 8.6) {
+//                withAnimation { distanceAnimated = true }
+//            }
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 9.2) {
+//
+//                if let hasErrorLiteral = hasErrorLiteral {
+//                    withAnimation {
+//                        showingEnding = "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct."
+//                    }
+//                } else {
+//                    withAnimation {
+//                        showingEnding = "Congratulations! You got \(distanceResult), which is the correct result!"
+//                    }
+//                }
+//            }
         }
     }
 }

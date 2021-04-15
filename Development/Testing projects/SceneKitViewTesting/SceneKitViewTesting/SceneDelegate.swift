@@ -18,7 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 //        guard let _ = (scene as? UIWindowScene) else { return }
         
-        let contentView = WalkThrough()
+        let contentView =  WalkThrough(
+            svm1: SlidersViewModel(),
+            svm2: SlidersViewModel(),
+            xValueLiteral: "xValue",
+            yValueLiteral: "yValue",
+            zValueLiteral: "zValue",
+            pow1Literal: "pow1",
+            pow2Literal: "pow2",
+            pow3Literal: "pow3"
+        )
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
