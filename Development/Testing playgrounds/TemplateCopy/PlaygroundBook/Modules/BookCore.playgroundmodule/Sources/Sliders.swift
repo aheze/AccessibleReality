@@ -30,35 +30,63 @@ struct OneSliderView: View {
 struct TwoSliderView: View {
     @ObservedObject var svm1: SlidersViewModel
     @ObservedObject var svm2: SlidersViewModel
+    var canScroll = true
     
     var body: some View {
-        GeometryReader { proxy in
-            ScrollView {
-                HStack {
-                    Sliders(
-                        x: $svm1.x,
-                        y: $svm1.y,
-                        z: $svm1.z,
-                        compactLayout: proxy.size.width < 900,
-                        name: "cubeNode",
-                        min: "-100 cm",
-                        max: "100 cm",
-                        imageType: "Position"
-                    )
-                    
-                    Sliders(
-                        x: $svm2.x,
-                        y: $svm2.y,
-                        z: $svm2.z,
-                        compactLayout: proxy.size.width < 900,
-                        name: "cameraNode",
-                        min: "-100 cm",
-                        max: "100 cm",
-                        imageType: "Position"
-                    )
+        if canScroll {
+            GeometryReader { proxy in
+                ScrollView {
+                    HStack {
+                        Sliders(
+                            x: $svm1.x,
+                            y: $svm1.y,
+                            z: $svm1.z,
+                            compactLayout: proxy.size.width < 900,
+                            name: "cubeNode",
+                            min: "-100 cm",
+                            max: "100 cm",
+                            imageType: "Position"
+                        )
+                        
+                        Sliders(
+                            x: $svm2.x,
+                            y: $svm2.y,
+                            z: $svm2.z,
+                            compactLayout: proxy.size.width < 900,
+                            name: "cameraNode",
+                            min: "-100 cm",
+                            max: "100 cm",
+                            imageType: "Position"
+                        )
+                    }
+                    .padding()
                 }
-                .padding()
             }
+        } else {
+            HStack {
+                Sliders(
+                    x: $svm1.x,
+                    y: $svm1.y,
+                    z: $svm1.z,
+                    compactLayout: true,
+                    name: "cubeNode",
+                    min: "-100 cm",
+                    max: "100 cm",
+                    imageType: "Position"
+                )
+                
+                Sliders(
+                    x: $svm2.x,
+                    y: $svm2.y,
+                    z: $svm2.z,
+                    compactLayout: true,
+                    name: "cameraNode",
+                    min: "-100 cm",
+                    max: "100 cm",
+                    imageType: "Position"
+                )
+            }
+            .padding()
         }
     }
 }

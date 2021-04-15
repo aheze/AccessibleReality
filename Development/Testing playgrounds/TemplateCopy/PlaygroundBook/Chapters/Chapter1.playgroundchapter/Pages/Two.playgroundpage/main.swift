@@ -73,26 +73,16 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
     let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
     let distance = sqrt(everythingInsideSquareRoot)
     
-    return distance
+    return Number(distance)
 }
     
 let distance = distanceFormula3D(position1: cubeNode.position, position2: cameraNode.position)
     
-
-//#-hidden-code
-return Number(0)
-}
-func DistanceFormula3d(firstPoint: SCNVector3, secondPoint: SCNVector3) -> Float {
-    let xDifference = firstPoint.x - secondPoint.x
-    let yDifference = firstPoint.y - secondPoint.y
-    let zDifference = firstPoint.z - secondPoint.z
-    let insideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
     
-    return sqrt(insideSquareRoot)
 }
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-//#-end-hidden-code
+
 /*:
 Once you've filled in the placeholder, tap **Run My Code**!
 */

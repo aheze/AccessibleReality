@@ -111,12 +111,57 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     func setupMainView() {
         mainCode?(sceneViewWrapper.sceneView)
         
+        self.svm1 = SlidersViewModel()
+        self.svm2 = SlidersViewModel()
         
+        let text = PlaygroundPage.current.text
+        
+        let xValue = text.slice(from: "/*#-editable-code X coordinate*/", to: "/*#-end-editable-code*/.x") ?? ""
+        let yValue = text.slice(from: "/*#-editable-code Y coordinate*/", to: "/*#-end-editable-code*/.y") ?? ""
+        let zValue = text.slice(from: "/*#-editable-code Z coordinate*/", to: "/*#-end-editable-code*/.z") ?? ""
+        
+        let squareRoot = text.slice(from: "let everythingInsideSquareRoot = pow(/*#-editable-code Number*/", to: "let distance = sqrt(everythingInsideSquareRoot)")
+        let splits = squareRoot?.components(separatedBy: "/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/") ?? []
+        
+        let pow1: String
+        let pow2: String
+        let pow3: String
+        if
+            splits.indices.contains(0),
+            splits.indices.contains(1),
+            splits.indices.contains(2)
+        {
+            pow1 = splits[0]
+            pow2 = splits[1]
+            pow3 = splits[2].replacingOccurrences(of: "/*#-end-editable-code*/, 2)", with: "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        } else {
+            pow1 = "xDifference"
+            pow2 = "yDifference"
+            pow3 = "zDifference"
+        }
+        
+        let mainView = WalkThrough(
+            svm1: svm1,
+            svm2: svm2,
+            xValueLiteral: xValue,
+            yValueLiteral: yValue,
+            zValueLiteral: zValue,
+            pow1Literal: pow1,
+            pow2Literal: pow2,
+            pow3Literal: pow3
+        )
+        
+        self.addNodes(sceneView: sceneViewWrapper.sceneView)
+        
+        let hostingController = UIHostingController(rootView: mainView)
+        addChildViewController(hostingController, in: slidersReferenceView)
+        
+        UIScrollView.appearance().bounces = false
         
         
     }
     
-    var mainCode: ((SCNView) -> Value)?
+    var mainCode: ((SCNView) -> Void)?
     
     func addNodes(sceneView: SCNView) {
         let cubeNode = Node()

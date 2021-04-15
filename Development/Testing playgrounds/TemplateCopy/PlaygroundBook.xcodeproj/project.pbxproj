@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C4052A02627F4E80088DCBE /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40529F2627F4E80088DCBE /* Walkthrough.swift */; };
+		3C4052AA2627F5220088DCBE /* DistanceWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */; };
 		3C5209062626610C0058F77A /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5209052626610C0058F77A /* Hint.swift */; };
 		3C728A2F261D4DB4007A1C7A /* MainVC+Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */; };
 		3C728A39261D4DBA007A1C7A /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C728A38261D4DBA007A1C7A /* CardsView.swift */; };
@@ -170,6 +172,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C40529F2627F4E80088DCBE /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
+		3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceWalkthrough.swift; sourceTree = "<group>"; };
 		3C5209052626610C0058F77A /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		3C728A2E261D4DB4007A1C7A /* MainVC+Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Cards.swift"; sourceTree = "<group>"; };
 		3C728A38261D4DBA007A1C7A /* CardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				3C8F285A2626A394007E9CCE /* TwoViewController.swift */,
+				3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */,
 			);
 			path = Two;
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				3C9A2D2026255C0200D920A0 /* Sliders.swift */,
 				3C5209052626610C0058F77A /* Hint.swift */,
 				3C9A2D1626255B4600D920A0 /* Node.swift */,
+				3C40529F2627F4E80088DCBE /* Walkthrough.swift */,
 				3C9A2CE12625248900D920A0 /* One */,
 				3C8F28592626A388007E9CCE /* Two */,
 				3CA7D8AC261A9B1A00A7C3C3 /* Main */,
@@ -779,8 +785,10 @@
 				3C9A2D1126255B1600D920A0 /* SceneViewWrapper.swift in Sources */,
 				3C9A2CE3262524A000D920A0 /* OneViewController.swift in Sources */,
 				3C9A2D1726255B4600D920A0 /* Node.swift in Sources */,
+				3C4052AA2627F5220088DCBE /* DistanceWalkthrough.swift in Sources */,
 				3C728A5D261D4F91007A1C7A /* MainVC+DetectObjects.swift in Sources */,
 				3CE8AAE82622C96200A3F5B9 /* MainVC+SetupInfoView.swift in Sources */,
+				3C4052A02627F4E80088DCBE /* Walkthrough.swift in Sources */,
 				3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */,
 				3C86BDC1261AB1D600610690 /* MainVC+CheckOverlap.swift in Sources */,
 				3C8F285B2626A394007E9CCE /* TwoViewController.swift in Sources */,

@@ -304,36 +304,6 @@ struct WalkThrough_Previews: PreviewProvider {
     }
 }
 
-func asdasd() {
-    let cubeNode = Node()
-    let cameraNode = Node()
-
-    let xDifference = cubeNode.position.x - cameraNode.position.x
-    let yDifference = cubeNode.position.y - cameraNode.position.y
-    let zDifference = cubeNode.position.z - cameraNode.position.z
-
-    let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
-    let distance = sqrt(everythingInsideSquareRoot)
-    
-}
-func dsistanceFormula3D(position1: Value, position2: Value) {
-    let xDifference = position1.x - position2.x
-    let yDifference = position1.y - position2.y
-    let zDifference = position1.z - position2.z
-
-    let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
-    let distance = sqrt(everythingInsideSquareRoot)
-}
-
-//func distanceFormula3D(position1: Value, position2: Value) {
-//    let xDifference = position1.x - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.x
-//    let yDifference = position1.y - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.y
-//    let zDifference = position1.z - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.z
-//
-//    let everythingInsideSquareRoot = pow(<#T##Number#>, 2) + pow(<#T##Number#>, 2) + pow(<#T##Number#>, 2)
-//    let distance = sqrt(everythingInsideSquareRoot)
-//}
-
 public typealias Number = Float
 
 extension Color {
