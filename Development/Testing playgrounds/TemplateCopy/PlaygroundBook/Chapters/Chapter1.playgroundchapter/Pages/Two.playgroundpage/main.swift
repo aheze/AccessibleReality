@@ -14,13 +14,21 @@ import PlaygroundSupport
 
 /*:
  **Lesson 2**
- # The Distance Formula
+ # The Distance Formula (but 3D)
  
-
+Ah, the old algebra days! Remember the Distance Formula? Hopefully... but anyway, it lets you find the distance between two points. Here's what it looks like:
  
- - X is right
- - Y is up
- - Z is left
+ P:
+ 
+ ![](Position)
+ 
+ 
+That was for 2D points. But guess what? It works great for 3D points too!
+ 
+ ![](Position)
+ 
+ 
+ 
  
  Each object is called a `Node` and contains several properties, including `position`. You'll pass in a `Value` of (x, y, z) for this. For example, here's the code for the red cube in the live view:
  
@@ -42,24 +50,41 @@ import PlaygroundSupport
  Below, use the `hitTest(at:)` function's return value to place a node at the crosshair's point.
 */
 //#-hidden-code
-PlaygroundPage.current.liveView = instantiateOneMainView { (sceneView, crosshairPoint) in
+PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView) in
 //#-end-hidden-code
-if let hitPosition = sceneView.hitTest(at: crosshairPoint) {
-    let newNode = Node()
-//#-editable-code
-    newNode.shape = .cube
-    newNode.color = UIColor.red
-    newNode.position = <#Value#>
-//#-end-editable-code
-    sceneView.scene?.addNode(newNode)
-//#-hidden-code
-return hitPosition
-//#-end-hidden-code
-} else {
-    print("Out of bounds!")
+func distanceFormula3D(position1: Value, position2: Value) {
+let cubeNode = Node()
+cubeNode.shape = .cube
+cubeNode.color = UIColor.red
+cubeNode.position = Value(x: 0, y: 0, z: 0)
+sceneView.scene?.addNode(cubeNode)
+
+let cameraNode = Node()
+cameraNode.shape = .pyramid
+cameraNode.color = UIColor.black
+cameraNode.position = Value(x: 50, y: 25, z: 25)
+sceneView.scene?.addNode(cameraNode)
+    
+func distanceFormula3D(position1: Value, position2: Value) {
+    let xDifference = position1.x - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.x
+    let yDifference = position1.y - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.y
+    let zDifference = position1.z - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.z
+
+    let everythingInsideSquareRoot = pow(/*#-editable-code */<#T##Number#>/*#-end-editable-code*/, 2) + pow(<#T##Number#>, 2) + pow(<#T##Number#>, 2)
+    let distance = sqrt(everythingInsideSquareRoot)
 }
+    
+
 //#-hidden-code
-return nil
+return distance
+}
+func DistanceFormula3d(firstPoint: SCNVector3, secondPoint: SCNVector3) -> Float {
+    let xDifference = firstPoint.x - secondPoint.x
+    let yDifference = firstPoint.y - secondPoint.y
+    let zDifference = firstPoint.z - secondPoint.z
+    let insideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
+    
+    return sqrt(insideSquareRoot)
 }
 
 PlaygroundPage.current.needsIndefiniteExecution = true

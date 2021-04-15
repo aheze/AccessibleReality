@@ -24,6 +24,11 @@ class SceneViewWrapper: UIView {
     }
     
     var cameraNode: SCNNode!
+    var positionZ: Float = 3 {
+        didSet {
+            cameraNode.position = SCNVector3(x: 0, y: 0, z: positionZ)
+        }
+    }
     
     private func commonInit() {
         let contentView = UIView()
@@ -36,7 +41,7 @@ class SceneViewWrapper: UIView {
         let camera = SCNCamera()
         camera.fieldOfView = 10
         let cameraNode = SCNNode()
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 3)
+        cameraNode.position = SCNVector3(x: 0, y: 0, z: positionZ)
         cameraNode.camera = camera
         self.cameraNode = cameraNode
         

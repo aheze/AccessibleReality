@@ -45,6 +45,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     override public func viewDidLoad() {
         super.viewDidLoad()
         isLive ? setupLiveView() : setupMainView()
+        sceneViewWrapper.positionZ = 5
     }
     
     func setupLiveView() {
@@ -53,7 +54,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         
         svm2.x = 50
         svm2.y = 25
-        svm2.z = 50
+        svm2.z = 25
         
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
@@ -76,7 +77,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         mainCode?(sceneViewWrapper.sceneView)
     }
     
-    var mainCode: ((SCNView) -> Void)?
+    var mainCode: ((SCNView) -> Value)?
     
     func addNodes(sceneView: SCNView) {
         let cubeNode = Node()
@@ -90,7 +91,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         let cameraNode = Node()
         cameraNode.shape = .pyramid
         cameraNode.color = UIColor.black
-        cameraNode.position = Value(x: 50, y: 25, z: 50)
+        cameraNode.position = Value(x: 50, y: 25, z: 25)
         sceneView.scene?.addNode(cameraNode)
         
         self.cameraNode = cameraNode
