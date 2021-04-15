@@ -52,7 +52,7 @@ That was for 2D points. But guess what? It works great for 3D points too!
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView) in
 //#-end-hidden-code
-func distanceFormula3D(position1: Value, position2: Value) {
+
 let cubeNode = Node()
 cubeNode.shape = .cube
 cubeNode.color = UIColor.red
@@ -65,18 +65,22 @@ cameraNode.color = UIColor.black
 cameraNode.position = Value(x: 50, y: 25, z: 25)
 sceneView.scene?.addNode(cameraNode)
     
-func distanceFormula3D(position1: Value, position2: Value) {
-    let xDifference = position1.x - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.x
-    let yDifference = position1.y - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.y
-    let zDifference = position1.z - /*#-editable-code cameraNode x coordinate*/<#T##Value#>/*#-end-editable-code*/.z
+func distanceFormula3D(position1: Value, position2: Value) -> Number {
+    let xDifference = position1.x - /*#-editable-code X coordinate*/<#T##Value#>/*#-end-editable-code*/.x
+    let yDifference = position1.y - /*#-editable-code Y coordinate*/<#T##Value#>/*#-end-editable-code*/.y
+    let zDifference = position1.z - /*#-editable-code Z coordinate*/<#T##Value#>/*#-end-editable-code*/.z
 
-    let everythingInsideSquareRoot = pow(/*#-editable-code */<#T##Number#>/*#-end-editable-code*/, 2) + pow(<#T##Number#>, 2) + pow(<#T##Number#>, 2)
+    let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
     let distance = sqrt(everythingInsideSquareRoot)
+    
+    return distance
 }
+    
+let distance = distanceFormula3D(position1: cubeNode.position, position2: cameraNode.position)
     
 
 //#-hidden-code
-return distance
+return Number(0)
 }
 func DistanceFormula3d(firstPoint: SCNVector3, secondPoint: SCNVector3) -> Float {
     let xDifference = firstPoint.x - secondPoint.x

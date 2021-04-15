@@ -46,6 +46,41 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         super.viewDidLoad()
         isLive ? setupLiveView() : setupMainView()
         sceneViewWrapper.positionZ = 5
+
+        let text = PlaygroundPage.current.text
+        
+        let xValue = text.slice(from: "/*#-editable-code X coordinate*/", to: "/*#-end-editable-code*/.x") ?? ""
+        let yValue = text.slice(from: "/*#-editable-code Y coordinate*/", to: "/*#-end-editable-code*/.y") ?? ""
+        let zValue = text.slice(from: "/*#-editable-code Z coordinate*/", to: "/*#-end-editable-code*/.z") ?? ""
+        
+        let squareRoot = text.slice(from: "let everythingInsideSquareRoot = pow(/*#-editable-code Number*/", to: "let distance = sqrt(everythingInsideSquareRoot)")
+        let splits = squareRoot?.components(separatedBy: "/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/") ?? []
+        
+        if
+            splits.indices.contains(0),
+            splits.indices.contains(1),
+            splits.indices.contains(2)
+        {
+            let pow1 = splits[0]
+            let pow2 = splits[1]
+            let pow3 = splits[2].replacingOccurrences(of: "/*#-end-editable-code*/, 2)", with: "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        }
+        
+        
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//            let textField = UILabel()
+//            self.view.addSubview(textField)
+//            textField.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                textField.topAnchor.constraint(equalTo: self.view.topAnchor),
+//                textField.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+//                textField.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+//                textField.leftAnchor.constraint(equalTo: self.view.leftAnchor)
+//            ])
+//            textField.numberOfLines = 0
+//            textField.text = "xValue: \(xValue)\n\(yValue)\n\(zValue)\nSQ:\(squareRoot)\n\n\n SPLITTTT\(splits.prefix(3))"
+//        }
     }
     
     func setupLiveView() {
@@ -75,6 +110,10 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     
     func setupMainView() {
         mainCode?(sceneViewWrapper.sceneView)
+        
+        
+        
+        
     }
     
     var mainCode: ((SCNView) -> Value)?
@@ -95,5 +134,19 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         sceneView.scene?.addNode(cameraNode)
         
         self.cameraNode = cameraNode
+    }
+}
+
+public typealias Number = Float
+
+
+/// from https://stackoverflow.com/a/31727051/14351818
+extension String {
+    func slice(from: String, to: String) -> String? {
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
     }
 }
