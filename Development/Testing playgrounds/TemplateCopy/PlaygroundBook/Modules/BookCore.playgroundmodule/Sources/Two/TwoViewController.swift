@@ -31,6 +31,8 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         // Implement this method to receive messages sent from the process running Contents.swift.
         // This method is *required* by the PlaygroundLiveViewMessageHandler protocol.
         // Use this method to decode any messages sent as PlaygroundValue values and respond accordingly.
+        
+        print("message? \(message)")
     }
     
     @IBOutlet weak var sceneViewWrapper: SceneViewWrapper!
@@ -45,42 +47,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     override public func viewDidLoad() {
         super.viewDidLoad()
         isLive ? setupLiveView() : setupMainView()
-        sceneViewWrapper.positionZ = 5
-
-        let text = PlaygroundPage.current.text
-        
-        let xValue = text.slice(from: "/*#-editable-code X coordinate*/", to: "/*#-end-editable-code*/.x") ?? ""
-        let yValue = text.slice(from: "/*#-editable-code Y coordinate*/", to: "/*#-end-editable-code*/.y") ?? ""
-        let zValue = text.slice(from: "/*#-editable-code Z coordinate*/", to: "/*#-end-editable-code*/.z") ?? ""
-        
-        let squareRoot = text.slice(from: "let everythingInsideSquareRoot = pow(/*#-editable-code Number*/", to: "let distance = sqrt(everythingInsideSquareRoot)")
-        let splits = squareRoot?.components(separatedBy: "/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/") ?? []
-        
-        if
-            splits.indices.contains(0),
-            splits.indices.contains(1),
-            splits.indices.contains(2)
-        {
-            let pow1 = splits[0]
-            let pow2 = splits[1]
-            let pow3 = splits[2].replacingOccurrences(of: "/*#-end-editable-code*/, 2)", with: "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        }
-        
-        
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//            let textField = UILabel()
-//            self.view.addSubview(textField)
-//            textField.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                textField.topAnchor.constraint(equalTo: self.view.topAnchor),
-//                textField.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-//                textField.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-//                textField.leftAnchor.constraint(equalTo: self.view.leftAnchor)
-//            ])
-//            textField.numberOfLines = 0
-//            textField.text = "xValue: \(xValue)\n\(yValue)\n\(zValue)\nSQ:\(squareRoot)\n\n\n SPLITTTT\(splits.prefix(3))"
-//        }
+        sceneViewWrapper.positionZ = 5        
     }
     
     func setupLiveView() {
@@ -95,6 +62,33 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             guard let self = self else { return }
             self.cubeNode?.position = Value(x: Float(self.svm1.x), y: Float(self.svm1.y), z:Float(self.svm1.z))
             self.cameraNode?.position = Value(x: Float(self.svm2.x), y: Float(self.svm2.y), z:Float(self.svm2.z))
+            
+//            self.send(
+//                .array(
+//                    [
+//                        .string("\(Int(self.svm1.x))"),
+//                        .string("\(Int(self.svm1.y))"),
+//                        .string("\(Int(self.svm1.z))"),
+//                        .string("\(Int(self.svm2.x))"),
+//                        .string("\(Int(self.svm2.y))"),
+//                        .string("\(Int(self.svm2.z))"),
+//                    ]
+//                )
+//            )
+//            PlaygroundKeyValueStore.current.key["svm1"] = .string("Llama")
+            PlaygroundKeyValueStore.current["Two_svm1x"] = .floatingPoint(self.svm1.x)
+            PlaygroundKeyValueStore.current["Two_svm1y"] = .floatingPoint(self.svm1.y)
+            PlaygroundKeyValueStore.current["Two_svm1z"] = .floatingPoint(self.svm1.z)
+            PlaygroundKeyValueStore.current["Two_svm2x"] = .floatingPoint(self.svm2.x)
+            PlaygroundKeyValueStore.current["Two_svm2y"] = .floatingPoint(self.svm2.y)
+            PlaygroundKeyValueStore.current["Two_svm2z"] = .floatingPoint(self.svm2.z)
+
+            // Retreive that same value.
+//            var theAnimal: String? = nil
+//            if let keyValue = PlaygroundKeyValueStore.current.keyValueStore["animal"],
+//                case .string(let animalType) = keyValue {
+//                theAnimal = animalType
+//            }
         }
         
         
@@ -109,6 +103,9 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     }
     
     func setupMainView() {
+        
+
+        
         mainCode?(sceneViewWrapper.sceneView)
         
         self.svm1 = SlidersViewModel()
@@ -148,7 +145,15 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             zValueLiteral: zValue,
             pow1Literal: pow1,
             pow2Literal: pow2,
-            pow3Literal: pow3
+            pow3Literal: pow3,
+            showResult: { (passed, message) in
+                if passed {
+                    PlaygroundPage.current.assessmentStatus = .pass(message: message)
+                } else {
+                    PlaygroundPage.current.assessmentStatus = .fail(hints: [message], solution: nil)
+                }
+                
+            }
         )
         
         self.addNodes(sceneView: sceneViewWrapper.sceneView)
@@ -181,8 +186,6 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         self.cameraNode = cameraNode
     }
 }
-
-public typealias Number = Float
 
 
 /// from https://stackoverflow.com/a/31727051/14351818

@@ -60,7 +60,7 @@ struct WalkThrough: View {
     @State var insideSquareRootAnimated = false
     @State var distanceAnimated = false
     
-    @State var showingEnding: String?
+    var showResult: ((String) -> Void)?
     
     @State var timerCounter = 0
     let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
@@ -249,13 +249,9 @@ struct WalkThrough: View {
                 
                 {
                     if let hasErrorLiteral = hasErrorLiteral {
-                        withAnimation {
-                            showingEnding = "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correctmight not be correct."
-                        }
+                        showResult?("Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct.")
                     } else {
-                        withAnimation {
-                            showingEnding = "Congratulations! You got \(distanceResult), which is the correct result!"
-                        }
+                        showResult?("Congratulations! You got \(distanceResult), which is the correct result!")
                     }
                 }
             ]
@@ -269,7 +265,7 @@ struct CodeBlock: Identifiable {
     var animated: Bool?
     var code: String
     var codeColor: Color
-    var replacedCode: String?
+    var replacedCode: String? = nil
 }
 
 struct CodeLineView: View {
