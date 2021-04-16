@@ -12,7 +12,8 @@ struct HintView: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.3)
+            Color.black.opacity(0.5)
+                .edgesIgnoringSafeArea(.all)
             
             Text(hint)
                 .foregroundColor(.green)

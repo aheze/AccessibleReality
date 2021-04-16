@@ -134,9 +134,6 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             pow3 = "zDifference"
         }
         
-//        cubeNode?.position = value1
-//        cameraNode?.position = value1
-        
         let mainView = WalkThrough(
             svm1: svm1,
             svm2: svm2,

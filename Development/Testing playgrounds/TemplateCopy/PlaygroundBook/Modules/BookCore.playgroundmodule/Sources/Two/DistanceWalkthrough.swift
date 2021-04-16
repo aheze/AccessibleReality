@@ -215,11 +215,10 @@ struct WalkThrough: View {
                         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
                         
                 )
-                .padding(EdgeInsets(top: 0, leading: 20, bottom: 50, trailing: 20))
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 160, trailing: 20))
             }
         }
-        
-        .padding()
+        .edgesIgnoringSafeArea(.all)
         .onReceive(timer) { time in
             if self.timerCounter == animationBlocks.indices.last ?? 0 {
                 self.timer.connect().cancel()

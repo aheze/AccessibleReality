@@ -18,7 +18,9 @@ class AppDelegate: LiveViewHost.AppDelegate {
         // The view or view controller returned from this method will be automatically be shown on screen,
         // as if it were a live view in Swift Playgrounds. You can control how the live view is shown by
         // changing the implementation of the `liveViewConfiguration` property below.
-        return BookCore.instantiateOneLiveView()
+        return BookCore.instantiateOneMainView(block: { _,_  in
+          return Value(x: 0, y: 0, z: 0)
+        })
     }
 
     override var liveViewConfiguration: LiveViewConfiguration {

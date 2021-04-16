@@ -8,12 +8,16 @@
 import UIKit
 
 extension UIViewController {
-    func addChildViewController(_ childViewController: UIViewController, in inView: UIView) {
+    func addChildViewController(_ childViewController: UIViewController, in inView: UIView, atTop: Bool = false) {
         /// Add Child View Controller
         addChild(childViewController)
         
-        /// Add Child View as Subview
-        inView.insertSubview(childViewController.view, at: 0)
+        if atTop {
+            /// Add Child View as Subview
+            inView.addSubview(childViewController.view)
+        } else {
+            inView.insertSubview(childViewController.view, at: 0)
+        }
         
         /// Configure Child View
         childViewController.view.frame = inView.bounds

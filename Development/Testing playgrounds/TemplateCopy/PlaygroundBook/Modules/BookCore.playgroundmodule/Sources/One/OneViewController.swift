@@ -161,6 +161,22 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         hitTestButton.layer.cornerRadius = 16
         hitResultDownImageView.tintColor = .placeholderText
         hitResultLabel.textColor = .placeholderText
+        
+        let text = PlaygroundPage.current.text
+        let xValue = text.slice(from: "if let hitPosition = sceneView.hitTest(at: crosshairPoint) {", to: "//#-end-editable-code") ?? ""
+        if xValue.contains("<#Value#>") {
+            let hintView = HintView(hint: "Make sure you have filled in the \"Value\" placeholder")
+            let vc = UIHostingController(rootView: hintView)
+            addChildViewController(vc, in: view, atTop: true)
+            vc.view.backgroundColor = .clear
+            vc.view.alpha = 0
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                UIView.animate(withDuration: 0.5) {
+                    vc.view.alpha = 1
+                }
+            }
+        }
+        
     }
     
     func addNodes(sceneView: SCNView) {
