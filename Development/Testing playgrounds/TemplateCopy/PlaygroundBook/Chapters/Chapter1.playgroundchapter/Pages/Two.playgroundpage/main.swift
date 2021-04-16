@@ -54,7 +54,7 @@ sceneView.scene?.addNode(cubeNode)
 
 let cameraNode = Node()
 cameraNode.shape = .pyramid
-cameraNode.color = UIColor.black
+cameraNode.color = UIColor.darkGray
 cameraNode.position = slider2Value
 sceneView.scene?.addNode(cameraNode)
 //#-end-hidden-code

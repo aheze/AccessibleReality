@@ -174,7 +174,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
 
         let cameraNode = Node()
         cameraNode.shape = .pyramid
-        cameraNode.color = UIColor.black
+        cameraNode.color = UIColor.darkGray
         cameraNode.position = Value(x: 50, y: 25, z: 25)
         sceneView.scene?.addNode(cameraNode)
 

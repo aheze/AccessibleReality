@@ -112,17 +112,19 @@ class ViewController: UIViewController {
     }
     
     var cubeNode: Node?
+    var cameraNode: Node?
+    var directionNode: Node?
     
     @IBOutlet weak var slidersReferenceView: UIView!
     
-    var svm: SlidersViewModel!
+//    var svm: SlidersViewModel!
     
     var svm1: SlidersViewModel!
     var svm2: SlidersViewModel!
     var svm3: SlidersViewModel!
     var svm4: SlidersViewModel!
     func setupLiveView() {
-        self.svm = SlidersViewModel()
+//        self.svm = SlidersViewModel()
         
         self.svm1 = SlidersViewModel()
         self.svm2 = SlidersViewModel()
@@ -131,7 +133,11 @@ class ViewController: UIViewController {
         
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
-            self.cubeNode?.position = Value(x: Float(self.svm.x), y: Float(self.svm.y), z:Float(self.svm.z))
+//            self.cubeNode?.position = Value(x: Float(self.svm.x), y: Float(self.svm.y), z:Float(self.svm.z))
+            
+            self.cubeNode?.position = Value(x: Float(self.svm1.x), y: Float(self.svm1.y), z:Float(self.svm1.z))
+            self.cameraNode?.position = Value(x: Float(self.svm2.x), y: Float(self.svm2.y), z:Float(self.svm2.z))
+            self.cameraNode?.rotation = Value(x: Float(self.svm3.x), y: Float(self.svm3.y), z:Float(self.svm3.z))
         }
         
         hitTestButton.isHidden = true
@@ -142,12 +148,26 @@ class ViewController: UIViewController {
         let sliderView = FourSliderView(svm1: svm1, svm2: svm2, svm3: svm3, svm4: svm4)
         
         
-        let newNode = Node()
-        newNode.color = UIColor.red
-        newNode.position = Value(x: 0, y: 0, z: 0)
-        self.sceneViewWrapper.sceneView.scene?.rootNode.addNode(newNode)
+        let cubeNode = Node()
+        cubeNode.color = UIColor.red
+        cubeNode.position = Value(x: 0, y: 0, z: 0)
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(cubeNode)
+        self.cubeNode = cubeNode
         
-        self.cubeNode = newNode
+        let cameraNode = Node()
+        cameraNode.shape = .pyramid
+        cameraNode.color = UIColor.darkGray
+        cameraNode.position = Value(x: 50, y: 25, z: 25)
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(cameraNode)
+        self.cameraNode = cameraNode
+        
+        let directionNode = Node()
+        directionNode.shape = .sphere
+        directionNode.color = UIColor.systemTeal
+        directionNode.position = Value(x: 20, y: 25, z: 25)
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(directionNode)
+        self.directionNode = directionNode
+        
         
         let hostingController = UIHostingController(rootView: sliderView)
         addChildViewController(hostingController, in: slidersReferenceView)
