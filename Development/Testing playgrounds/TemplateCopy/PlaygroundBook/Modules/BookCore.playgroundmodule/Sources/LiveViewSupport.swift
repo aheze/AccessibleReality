@@ -56,13 +56,13 @@ public func instantiateOneMainView(block: @escaping ((SCNView, CGPoint) -> Value
     
     fatalError("instantiateOneLiveView failed")
 }
-public func instantiateTwoMainView(block: @escaping ((SCNView) -> Void)) -> PlaygroundLiveViewable {
+public func instantiateTwoMainView(block: @escaping ((SCNView, Value, Value) -> Void)) -> PlaygroundLiveViewable {
     
     let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
     if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_TwoViewController") as? TwoViewController {
         viewController.isLive = false
-        viewController.mainCode = { (sceneView) in
-            block(sceneView)
+        viewController.mainCode = { (sceneView, slider1Value, slider2Value) in
+            block(sceneView, slider1Value, slider2Value)
         }
         return viewController
     }

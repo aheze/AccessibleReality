@@ -10,6 +10,7 @@ import SwiftUI
 import SceneKit
 import PlaygroundSupport
 
+
 @objc(BookCore_TwoViewController)
 public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
     /*
@@ -114,8 +115,18 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         if let keyValue = PlaygroundKeyValueStore.current["Two_svm2y"], case .floatingPoint(let number) = keyValue { svm2.y = number }
         if let keyValue = PlaygroundKeyValueStore.current["Two_svm2z"], case .floatingPoint(let number) = keyValue { svm2.z = number }
         
-        
-        mainCode?(sceneViewWrapper.sceneView)
+        let value1 = Value(
+            x: Float(svm1.x),
+            y: Float(svm1.y),
+            z: Float(svm1.z)
+        )
+        let value2 = Value(
+            x: Float(svm2.x),
+            y: Float(svm2.y),
+            z: Float(svm2.z)
+        )
+
+        mainCode?(sceneViewWrapper.sceneView, value1, value2)
         
         
         
@@ -174,7 +185,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         
     }
     
-    var mainCode: ((SCNView) -> Void)?
+    var mainCode: ((SCNView, Value, Value) -> Void)?
     
     func addNodes(sceneView: SCNView) {
         let cubeNode = Node()

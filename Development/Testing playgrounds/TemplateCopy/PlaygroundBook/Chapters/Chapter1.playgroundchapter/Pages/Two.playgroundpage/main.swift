@@ -50,19 +50,20 @@ That was for 2D points. But guess what? It works great for 3D points too!
  Below, use the `hitTest(at:)` function's return value to place a node at the crosshair's point.
 */
 //#-hidden-code
-PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView) in
+PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView, slider1Value, slider2Value) in
 //#-end-hidden-code
+
 
 let cubeNode = Node()
 cubeNode.shape = .cube
 cubeNode.color = UIColor.red
-cubeNode.position = Value(x: 0, y: 0, z: 0)
+cubeNode.position = slider1Value
 sceneView.scene?.addNode(cubeNode)
 
 let cameraNode = Node()
 cameraNode.shape = .pyramid
 cameraNode.color = UIColor.black
-cameraNode.position = Value(x: 50, y: 25, z: 25)
+cameraNode.position = slider2Value
 sceneView.scene?.addNode(cameraNode)
     
 func distanceFormula3D(position1: Value, position2: Value) -> Number {
