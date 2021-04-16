@@ -161,6 +161,13 @@ extension UIColor {
 }
 
 
+public func pow(_ x: Number, _ y: Int) -> Number {
+    let xDecimal = Decimal(Double(x))
+    let result = pow(xDecimal, y)
+    let doubleResult = Double(truncating: result as NSNumber)
+    
+    return Number(doubleResult)
+}
 public func acos(_ number: Number) -> Number {
     let result = acos(Double(number))
     let degrees = result.radiansToDegrees
@@ -168,6 +175,5 @@ public func acos(_ number: Number) -> Number {
 }
 public func sqrt(_ number: Number) -> Number {
     let result = sqrt(Double(number))
-    let degrees = result.radiansToDegrees
-    return Number(degrees)
+    return Number(result)
 }

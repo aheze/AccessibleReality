@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-public typealias Number = Float
 
 struct CodeBlock: Identifiable {
     let id = UUID()

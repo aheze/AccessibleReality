@@ -194,7 +194,7 @@ struct WalkThrough: View {
                         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
                         
                 )
-                .padding(.horizontal, 20)
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 20))
             }
         }
         
@@ -246,8 +246,10 @@ struct WalkThrough: View {
             if pow3Literal != "zDifference" { hasError = true ; hasErrorLiteral = pow3Literal  }
             
             let insideSquareRoot = pow(xDiff, 2) + pow(yDiff, 2) + pow(zDiff, 2)
+            let distResult = sqrt(insideSquareRoot)
+            
             insideSquareRootResult = hasError ? "Error" : "\(Int(insideSquareRoot))"
-            distanceResult = hasError ? "Error" : "\(Int(sqrt(insideSquareRoot)))"
+            distanceResult = hasError ? "Error" : "\(Int(distResult))"
             
             
             animationBlocks = [

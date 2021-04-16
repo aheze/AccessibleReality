@@ -1,8 +1,8 @@
 //
-//  TwoViewController.swift
+//  ThreeViewController.swift
 //  BookCore
 //
-//  Created by Zheng on 4/13/21.
+//  Created by Zheng on 4/15/21.
 //
 
 import UIKit
@@ -11,8 +11,8 @@ import SceneKit
 import PlaygroundSupport
 
 
-@objc(BookCore_TwoViewController)
-public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
+@objc(BookCore_ThreeViewController)
+public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
     /*
      public func liveViewMessageConnectionOpened() {
      // Implement this method to be notified when the live view message connection is opened.
@@ -43,10 +43,11 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     @IBOutlet weak var slidersReferenceView: UIView!
     
     var isLive = true
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         isLive ? setupLiveView() : setupMainView()
-        sceneViewWrapper.positionZ = 5        
+        sceneViewWrapper.positionZ = 5
     }
     
     func setupLiveView() {
@@ -180,17 +181,5 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         sceneView.scene?.addNode(cameraNode)
         
         self.cameraNode = cameraNode
-    }
-}
-
-
-/// from https://stackoverflow.com/a/31727051/14351818
-extension String {
-    func slice(from: String, to: String) -> String? {
-        return (range(of: from)?.upperBound).flatMap { substringFrom in
-            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
-                String(self[substringFrom..<substringTo])
-            }
-        }
     }
 }

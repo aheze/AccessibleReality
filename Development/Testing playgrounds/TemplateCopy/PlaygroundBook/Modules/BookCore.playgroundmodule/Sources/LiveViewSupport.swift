@@ -70,6 +70,16 @@ public func instantiateTwoMainView(block: @escaping ((SCNView, Value, Value) -> 
     fatalError("instantiateOneLiveView failed")
 }
 
+public func instantiateThreeLiveView() -> PlaygroundLiveViewable {
+    
+    let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
+    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_ThreeViewController") as? TwoViewController {
+        return viewController
+    }
+    
+    fatalError("instantiateOneLiveView failed")
+}
+
 
 
 

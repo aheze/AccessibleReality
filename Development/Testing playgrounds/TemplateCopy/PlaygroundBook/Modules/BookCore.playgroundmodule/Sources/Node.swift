@@ -9,26 +9,32 @@ import UIKit
 import SceneKit
 
 /**
+ Any real number.
+ */
+public typealias Number = Float
+
+
+/**
  A value made of X, Y, and Z. The meaning of this depends on where it is used (for example, for Node.position, this is in centimeters).
  */
 public struct Value {
-    public var x: Float
-    public var y: Float
-    public var z: Float
+    public var x: Number
+    public var y: Number
+    public var z: Number
     
     /**
-     Make a new Value
+     Make a new Value.
      */
-    public init(x: Float, y: Float, z: Float) {
+    public init(x: Number, y: Number, z: Number) {
         self.x = x
         self.y = y
         self.z = z
     }
     
     /**
-     Make a new Value with the same number for X, Y, and Z
+     Make a new Value with the same number for X, Y, and Z.
      */
-    public init(xyz: Float) {
+    public init(xyz: Number) {
         self.x = xyz
         self.y = xyz
         self.z = xyz

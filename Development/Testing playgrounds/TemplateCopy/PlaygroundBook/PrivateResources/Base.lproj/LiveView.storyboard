@@ -474,6 +474,63 @@
             </objects>
             <point key="canvasLocation" x="-1678" y="85"/>
         </scene>
+        <!--Book Core Three View Controller-->
+        <scene sceneID="JBI-qR-A6p">
+            <objects>
+                <viewController storyboardIdentifier="BookCore_ThreeViewController" id="AbC-gZ-O2m" customClass="BookCore_ThreeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eVl-2b-LFj">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUq-hV-A6F">
+                                <rect key="frame" x="0.0" y="68" width="390" height="400"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cAb-dY-HGN" customClass="BookCore_SceneViewWrapper">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="400"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="cAb-dY-HGN" secondAttribute="trailing" id="JBw-uT-hlK"/>
+                                    <constraint firstAttribute="bottom" secondItem="cAb-dY-HGN" secondAttribute="bottom" id="P7s-Lp-Qgy"/>
+                                    <constraint firstItem="cAb-dY-HGN" firstAttribute="top" secondItem="AUq-hV-A6F" secondAttribute="top" id="ZGS-e1-7lS"/>
+                                    <constraint firstAttribute="height" constant="400" id="jdN-bV-7ag"/>
+                                    <constraint firstItem="cAb-dY-HGN" firstAttribute="leading" secondItem="AUq-hV-A6F" secondAttribute="leading" id="r7a-3m-kyx"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="6PX-pu-6kR" appends="YES" id="5i4-Qg-pMR"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOX-Zw-ovt">
+                                <rect key="frame" x="0.0" y="468" width="390" height="376"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bgS-Ff-vbV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="aOX-Zw-ovt" firstAttribute="top" secondItem="AUq-hV-A6F" secondAttribute="bottom" id="0ht-J5-6Xe"/>
+                            <constraint firstItem="AUq-hV-A6F" firstAttribute="centerX" secondItem="eVl-2b-LFj" secondAttribute="centerX" id="214-ge-2qO"/>
+                            <constraint firstAttribute="bottom" secondItem="aOX-Zw-ovt" secondAttribute="bottom" id="JWr-PY-8m4"/>
+                            <constraint firstItem="AUq-hV-A6F" firstAttribute="top" secondItem="bgS-Ff-vbV" secondAttribute="top" constant="24" id="cb6-rS-b67"/>
+                            <constraint firstItem="AUq-hV-A6F" firstAttribute="leading" secondItem="bgS-Ff-vbV" secondAttribute="leading" id="dbU-GO-CpA"/>
+                            <constraint firstItem="bgS-Ff-vbV" firstAttribute="trailing" secondItem="AUq-hV-A6F" secondAttribute="trailing" id="e6n-cp-9JZ"/>
+                            <constraint firstItem="aOX-Zw-ovt" firstAttribute="leading" secondItem="eVl-2b-LFj" secondAttribute="leading" id="ehH-1b-pRx"/>
+                            <constraint firstItem="aOX-Zw-ovt" firstAttribute="trailing" secondItem="eVl-2b-LFj" secondAttribute="trailing" id="meQ-qz-aGi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sceneViewWrapper" destination="cAb-dY-HGN" id="pan-Hv-NoS"/>
+                        <outlet property="slidersReferenceView" destination="aOX-Zw-ovt" id="4po-fz-Dua"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8nz-vm-ihQ" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="6PX-pu-6kR"/>
+            </objects>
+            <point key="canvasLocation" x="-1002" y="85"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>

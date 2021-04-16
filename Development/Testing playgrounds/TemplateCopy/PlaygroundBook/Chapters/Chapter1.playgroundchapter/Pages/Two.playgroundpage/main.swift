@@ -32,10 +32,14 @@ That was for 2D points. Now, to make it work for 3D, all we need to do is add on
 
  Let's make the 3D Distance Formula in Swift! We'll put it in a function so that we can reuse it easily. It will take in 2 parameters, one for the starting position and one for the ending, and `return` the resulting distance when done.
  
- * callout(Built-in function):
+ * callout(Built-in functions):
      We'll use Foundation's `pow(_:_:)` function, which raises numbers to a power. For example:
-     - `pow(3, 2)` will raise `3` to the power of `2`
-     - `pow(4, 5)` will raise `4` to the power of `5`
+     - `pow(3, 2)` raises `3` to the power of `2` — equals `9`
+     - `pow(4, 3)` raises `4` to the power of `3` — equals `64`
+ 
+     We also need Darwin's `sqrt(_:)` function, which takes the square root. For example:
+     - `sqrt(9)` equals `3`
+     - `sqrt(16)` equals `4`
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView, slider1Value, slider2Value) in
@@ -64,6 +68,7 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
     //#-code-completion(identifier, show, xDifference, yDifference, zDifference)
     let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
     let distance = sqrt(everythingInsideSquareRoot)
+    print(distance)
     return distance
 }
     
