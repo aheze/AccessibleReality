@@ -176,7 +176,7 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
                 }
             }
         }
-        
+        hitScrollView.delaysContentTouches = false
     }
     
     func addNodes(sceneView: SCNView) {

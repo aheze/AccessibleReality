@@ -21,6 +21,8 @@ struct WalkThrough: View {
     var pow2Literal: String
     var pow3Literal: String
     
+    var showResult: ((Bool, String) -> Void)?
+    
     /// results
     @State var position1String = ""
     @State var position2String = ""
@@ -56,8 +58,6 @@ struct WalkThrough: View {
     @State var insideSquareRootAnimated = false
     @State var distanceAnimated = false
     
-    var showResult: ((String) -> Void)?
-    
     @State var timerCounter = 0
     @State var timerStarted = false
     @State var timer = Timer.publish(every: 0.5, on: .main, in: .common)
@@ -90,7 +90,7 @@ struct WalkThrough: View {
                         z: svm2.z,
                         parameterName: "position2",
                         compactLayout: true,
-                        name: "cubeNode",
+                        name: "cameraNode",
                         imageType: "Position"
                     )
                 }
@@ -215,11 +215,10 @@ struct WalkThrough: View {
                         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
                         
                 )
-                .padding(.horizontal, 20)
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 160, trailing: 20))
             }
         }
-        
-        .padding()
+        .edgesIgnoringSafeArea(.all)
         .onReceive(timer) { time in
             if self.timerCounter == animationBlocks.indices.last ?? 0 {
                 self.timer.connect().cancel()
@@ -267,8 +266,10 @@ struct WalkThrough: View {
             if pow3Literal != "zDifference" { hasError = true ; hasErrorLiteral = pow3Literal  }
             
             let insideSquareRoot = pow(xDiff, 2) + pow(yDiff, 2) + pow(zDiff, 2)
+            let distResult = sqrt(insideSquareRoot)
+            
             insideSquareRootResult = hasError ? "Error" : "\(Int(insideSquareRoot))"
-            distanceResult = hasError ? "Error" : "\(Int(sqrt(insideSquareRoot)))"
+            distanceResult = hasError ? "Error" : "\(Int(distResult))"
             
             
             animationBlocks = [
@@ -305,15 +306,16 @@ struct WalkThrough: View {
                 
                 {
                     if let hasErrorLiteral = hasErrorLiteral {
-                        showResult?("Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct.")
+                        showResult?(false, "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct.")
                     } else {
-                        showResult?("Congratulations! You got \(distanceResult), which is the correct result!")
+                        showResult?(true, "Congratulations! \n\nYou got \(distanceResult), which is the correct distance! \n\n[**Next Page**](@next)")
                     }
                 }
             ]
         }
     }
 }
+
 
 
 struct CodeBlock: Identifiable {
