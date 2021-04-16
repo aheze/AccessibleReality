@@ -119,6 +119,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         let pow1: String
         let pow2: String
         let pow3: String
+        
         if
             splits.indices.contains(0),
             splits.indices.contains(1),
@@ -132,6 +133,9 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             pow2 = "yDifference"
             pow3 = "zDifference"
         }
+        
+//        cubeNode?.position = value1
+//        cameraNode?.position = value1
         
         let mainView = WalkThrough(
             svm1: svm1,
@@ -152,8 +156,6 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             }
         )
         
-        self.addNodes(sceneView: sceneViewWrapper.sceneView)
-        
         let hostingController = UIHostingController(rootView: mainView)
         addChildViewController(hostingController, in: slidersReferenceView)
         
@@ -170,15 +172,15 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         cubeNode.color = UIColor.red
         cubeNode.position = Value(x: 0, y: 0, z: 0)
         sceneView.scene?.addNode(cubeNode)
-        
+
         self.cubeNode = cubeNode
-        
+
         let cameraNode = Node()
         cameraNode.shape = .pyramid
         cameraNode.color = UIColor.black
         cameraNode.position = Value(x: 50, y: 25, z: 25)
         sceneView.scene?.addNode(cameraNode)
-        
+
         self.cameraNode = cameraNode
     }
 }

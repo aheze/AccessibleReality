@@ -59,7 +59,8 @@ struct WalkThrough: View {
     var showResult: ((String) -> Void)?
     
     @State var timerCounter = 0
-    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    @State var timerStarted = false
+    @State var timer = Timer.publish(every: 0.5, on: .main, in: .common)
     @State var animationBlocks: [(() -> Void)] = []
     
     @State var currentCodeLine = 0
@@ -95,10 +96,30 @@ struct WalkThrough: View {
                 }
                 .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
                 
-                Text("Code walkthrough")
-                    .font(.system(size: 34, weight: .bold, design: .rounded))
-                    .foregroundColor(Color.green)
-                    .padding(EdgeInsets(top: 20, leading: 20, bottom: 12, trailing: 20))
+                HStack(spacing: 16) {
+                    Text("Code walkthrough")
+                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .foregroundColor(Color.green)
+                    
+                    if !timerStarted {
+                        Button(action: {
+                            withAnimation(.spring()) {
+                                timerStarted = true
+                            }
+                            self.timer = Timer.publish(every: 0.5, on: .main, in: .common)
+                            self.timer.connect()
+                        }) {
+                            Text("Start")
+                                .font(.system(size: 34, weight: .bold, design: .rounded))
+                                .foregroundColor(Color.white)
+                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                                .background(Color.green)
+                                .cornerRadius(16)
+                        }
+                        .transition(.scale)
+                    }
+                }
+                .padding(EdgeInsets(top: 20, leading: 20, bottom: 12, trailing: 20))
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     VStack(alignment: .leading) {
@@ -201,7 +222,7 @@ struct WalkThrough: View {
         .padding()
         .onReceive(timer) { time in
             if self.timerCounter == animationBlocks.indices.last ?? 0 {
-                self.timer.upstream.connect().cancel()
+                self.timer.connect().cancel()
             }
             
             animationBlocks[self.timerCounter]()

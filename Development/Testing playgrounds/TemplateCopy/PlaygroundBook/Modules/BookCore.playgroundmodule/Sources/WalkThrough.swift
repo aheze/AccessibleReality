@@ -112,7 +112,7 @@ struct InfoCard: View {
                         .font(.system(size: 28, weight: .medium))
                     
                 }
-                .padding(20)
+                .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
             } else {
                 HStack {
                     
