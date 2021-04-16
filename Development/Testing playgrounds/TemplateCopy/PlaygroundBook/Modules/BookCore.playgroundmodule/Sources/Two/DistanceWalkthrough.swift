@@ -24,8 +24,8 @@ struct WalkThrough: View {
     var showResult: ((Bool, String) -> Void)?
     
     /// parameters
-    var position1 = Value(x: 0, y: 0, z: 0)
-    var position2 = Value(x: 4, y: 25, z: 30)
+//    var position1 = Value(x: 0, y: 0, z: 0)
+//    var position2 = Value(x: 4, y: 25, z: 30)
     
     /// results
     @State var position1String = ""
@@ -174,22 +174,22 @@ struct WalkThrough: View {
             self.timerCounter += 1
         }
         .onAppear {
-            self.position1String = "(\(Int(position1.x)) x, \(Int(position1.y)) y, \(Int(position1.z)) z)"
-            self.position2String = "(\(Int(position2.x)) x, \(Int(position2.y)) y, \(Int(position2.z)) z)"
+            self.position1String = "(\(Int(svm1.x)) x, \(Int(svm1.y)) y, \(Int(svm1.z)) z)"
+            self.position2String = "(\(Int(svm2.x)) x, \(Int(svm2.y)) y, \(Int(svm2.z)) z)"
             
             var hasError = false
             var hasErrorLiteral: String?
             
-            let x1ValueFloat = position1.x
-            let y1ValueFloat = position1.y
-            let z1ValueFloat = position1.z
+            let x1ValueFloat = Float(svm1.x)
+            let y1ValueFloat = Float(svm1.y)
+            let z1ValueFloat = Float(svm1.z)
             var x2ValueFloat = Float(0)
             var y2ValueFloat = Float(0)
             var z2ValueFloat = Float(0)
             
-            if xValueLiteral == "position2" { x2ValueFloat = position2.x } else { hasError = true; hasErrorLiteral = xValueLiteral }
-            if yValueLiteral == "position2" { y2ValueFloat = position2.y } else { hasError = true; hasErrorLiteral = yValueLiteral }
-            if zValueLiteral == "position2" { z2ValueFloat = position2.z } else { hasError = true; hasErrorLiteral = zValueLiteral }
+            if xValueLiteral == "position2" { x2ValueFloat = Float(svm2.x) } else { hasError = true; hasErrorLiteral = xValueLiteral }
+            if yValueLiteral == "position2" { y2ValueFloat = Float(svm2.y) } else { hasError = true; hasErrorLiteral = yValueLiteral }
+            if zValueLiteral == "position2" { z2ValueFloat = Float(svm2.z) } else { hasError = true; hasErrorLiteral = zValueLiteral }
             
             let xDiff = x1ValueFloat - x2ValueFloat
             let yDiff = y1ValueFloat - y2ValueFloat

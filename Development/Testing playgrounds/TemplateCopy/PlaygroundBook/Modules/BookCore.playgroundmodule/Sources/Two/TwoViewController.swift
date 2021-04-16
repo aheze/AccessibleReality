@@ -104,12 +104,20 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     
     func setupMainView() {
         
-
+        self.svm1 = SlidersViewModel()
+        self.svm2 = SlidersViewModel()
+        
+        if let keyValue = PlaygroundKeyValueStore.current["Two_svm1x"], case .floatingPoint(let number) = keyValue { svm1.x = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Two_svm1y"], case .floatingPoint(let number) = keyValue { svm1.y = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Two_svm1z"], case .floatingPoint(let number) = keyValue { svm1.z = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Two_svm2x"], case .floatingPoint(let number) = keyValue { svm2.x = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Two_svm2y"], case .floatingPoint(let number) = keyValue { svm2.y = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Two_svm2z"], case .floatingPoint(let number) = keyValue { svm2.z = number }
+        
         
         mainCode?(sceneViewWrapper.sceneView)
         
-        self.svm1 = SlidersViewModel()
-        self.svm2 = SlidersViewModel()
+        
         
         let text = PlaygroundPage.current.text
         
