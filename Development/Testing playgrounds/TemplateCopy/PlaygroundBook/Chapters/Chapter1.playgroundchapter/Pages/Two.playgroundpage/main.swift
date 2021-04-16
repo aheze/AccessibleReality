@@ -51,7 +51,7 @@ That was for 2D points. But guess what? It works great for 3D points too!
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView, slider1Value, slider2Value) in
-//#-end-hidden-code
+
 
 
 let cubeNode = Node()
@@ -65,7 +65,7 @@ cameraNode.shape = .pyramid
 cameraNode.color = UIColor.black
 cameraNode.position = slider2Value
 sceneView.scene?.addNode(cameraNode)
-    
+//#-end-hidden-code
 func distanceFormula3D(position1: Value, position2: Value) -> Number {
     //#-code-completion(everything, hide)
     //#-code-completion(identifier, show, position1, position2)
@@ -77,16 +77,17 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
     let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
     let distance = sqrt(everythingInsideSquareRoot)
     
-    return Number(distance)
+    return distance
 }
     
+// Call the function here!
 let distance = distanceFormula3D(position1: cubeNode.position, position2: cameraNode.position)
-    
+//#-hidden-code
     
 }
 
 PlaygroundPage.current.needsIndefiniteExecution = true
-
+//#-end-hidden-code
 /*:
 Once you've filled in the placeholder, tap **Run My Code**!
 */

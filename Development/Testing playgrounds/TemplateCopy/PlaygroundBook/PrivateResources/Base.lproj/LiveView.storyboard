@@ -17,9 +17,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njp-FE-CnI">
-                                <rect key="frame" x="16" y="60" width="48" height="52.666666666666657"/>
+                                <rect key="frame" x="16" y="60" width="48" height="52"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SBe-NB-Miy">
-                                    <rect key="frame" x="0.0" y="0.0" width="48" height="52.666666666666657"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="48" height="52"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1D8-J1-M8V">
@@ -446,7 +446,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buc-yK-deB">
-                                <rect key="frame" x="0.0" y="468" width="390" height="342"/>
+                                <rect key="frame" x="0.0" y="468" width="390" height="376"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -458,10 +458,10 @@
                             <constraint firstItem="buc-yK-deB" firstAttribute="top" secondItem="n9Y-HD-i5g" secondAttribute="bottom" id="5cH-F8-b8p"/>
                             <constraint firstItem="n9Y-HD-i5g" firstAttribute="leading" secondItem="hK4-fE-d3c" secondAttribute="leading" id="FIT-TR-NF1"/>
                             <constraint firstItem="n9Y-HD-i5g" firstAttribute="centerX" secondItem="K1a-rc-yog" secondAttribute="centerX" id="HLT-FX-1y3"/>
-                            <constraint firstItem="buc-yK-deB" firstAttribute="trailing" secondItem="hK4-fE-d3c" secondAttribute="trailing" id="LXK-ac-hn5"/>
+                            <constraint firstItem="buc-yK-deB" firstAttribute="trailing" secondItem="K1a-rc-yog" secondAttribute="trailing" id="LXK-ac-hn5"/>
                             <constraint firstItem="hK4-fE-d3c" firstAttribute="trailing" secondItem="n9Y-HD-i5g" secondAttribute="trailing" id="NxJ-rQ-nKS"/>
                             <constraint firstItem="buc-yK-deB" firstAttribute="leading" secondItem="K1a-rc-yog" secondAttribute="leading" id="TWc-W7-qOk"/>
-                            <constraint firstItem="hK4-fE-d3c" firstAttribute="bottom" secondItem="buc-yK-deB" secondAttribute="bottom" id="nVC-86-RI9"/>
+                            <constraint firstAttribute="bottom" secondItem="buc-yK-deB" secondAttribute="bottom" id="nVC-86-RI9"/>
                         </constraints>
                     </view>
                     <connections>

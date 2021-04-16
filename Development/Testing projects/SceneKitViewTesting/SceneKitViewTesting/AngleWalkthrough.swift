@@ -535,13 +535,11 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
 public func acos(_ number: Number) -> Number {
     let result = acos(Double(number))
     let degrees = result.radiansToDegrees
-    print("acos deg: \(degrees)")
     return Number(degrees)
 }
 public func sqrt(_ number: Number) -> Number {
     let result = sqrt(Double(number))
     let degrees = result.radiansToDegrees
-    print("sqrt deg: \(degrees)")
     return Number(degrees)
 }
 
