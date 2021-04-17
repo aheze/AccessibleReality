@@ -207,6 +207,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
                     self.textNode?.geometry = text
                     
                     
+                    
                     PlaygroundPage.current.assessmentStatus = .pass(message: message)
                 } else {
                     PlaygroundPage.current.assessmentStatus = .fail(hints: [message], solution: nil)
