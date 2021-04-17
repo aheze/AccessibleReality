@@ -20,6 +20,7 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Float {
 
     let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
     let angle = acos(<#cosineOfAngle#>)
+    let degrees = angle * 180 / .pi
     return angle
 }
 

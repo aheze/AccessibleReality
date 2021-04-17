@@ -21,10 +21,6 @@ struct AngleWalkThrough: View {
 
     
     /// user entered code literals
-    var v2xLiteral: String
-    var v2yLiteral: String
-    var v2zLiteral: String
-    
     var xProductLiteral: String
     var yProductLiteral: String
     var zProductLiteral: String
@@ -72,6 +68,7 @@ struct AngleWalkThrough: View {
     
     @State var cosineOfAngleString = ""
     @State var angleResultString = ""
+    @State var degreesResultString = ""
     
     
     /// animating
@@ -114,14 +111,18 @@ struct AngleWalkThrough: View {
     @State var cosOfAngle_vertexPos2Animated = false
     
     @State var angle_cosOfAngleAnimated = false
-    @State var angleResultAnimated = false
+    
+    @State var degrees_angleAnimated = false
+    @State var degrees_piAnimated = false
+    
+    @State var degreesResultAnimated = false
     
     
     var showResult: ((String) -> Void)?
     
     @State var timerCounter = 0
     @State var timerStarted = false
-    @State var timer = Timer.publish(every: 0.5, on: .main, in: .common)
+    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common)
     @State var animationBlocks: [(() -> Void)] = []
     
     @State var currentCodeLine = 0
@@ -259,7 +260,7 @@ struct AngleWalkThrough: View {
                             CodeLineView(
                                 active: currentCodeLine == 7, blocks: [
                                     CodeBlock(code: "        x: ", codeColor: .black),
-                                    CodeBlock(animated: v2x1Animated, code: "\(v2xLiteral).x", codeColor: .black, replacedCode: v2x1String),
+                                    CodeBlock(animated: v2x1Animated, code: "position2.x", codeColor: .black, replacedCode: v2x1String),
                                     CodeBlock(code: " - ", codeColor: .black),
                                     CodeBlock(animated: v2x2Animated, code: "vertex.x", codeColor: .black, replacedCode: v2x2String),
                                 ]
@@ -267,7 +268,7 @@ struct AngleWalkThrough: View {
                             CodeLineView(
                                 active: currentCodeLine == 8, blocks: [
                                     CodeBlock(code: "        y: ", codeColor: .black),
-                                    CodeBlock(animated: v2y1Animated, code: "\(v2yLiteral).y", codeColor: .black, replacedCode: v2y1String),
+                                    CodeBlock(animated: v2y1Animated, code: "position2.y", codeColor: .black, replacedCode: v2y1String),
                                     CodeBlock(code: " - ", codeColor: .black),
                                     CodeBlock(animated: v2y2Animated, code: "vertex.y", codeColor: .black, replacedCode: v2y2String)
                                 ]
@@ -275,7 +276,7 @@ struct AngleWalkThrough: View {
                             CodeLineView(
                                 active: currentCodeLine == 9, blocks: [
                                     CodeBlock(code: "        z: ", codeColor: .black),
-                                    CodeBlock(animated: v2z1Animated, code: "\(v2zLiteral).z", codeColor: .black, replacedCode: v2z1String),
+                                    CodeBlock(animated: v2z1Animated, code: "position2.z", codeColor: .black, replacedCode: v2z1String),
                                     CodeBlock(code: " - ", codeColor: .black),
                                     CodeBlock(animated: v2z2Animated, code: "vertex.z", codeColor: .black, replacedCode: v2z2String),
                                 ]
@@ -383,12 +384,23 @@ struct AngleWalkThrough: View {
                             )
                             CodeLineView(
                                 active: currentCodeLine == 19, blocks: [
-                                    CodeBlock(code: "    return ", codeColor: .cMagenta),
-                                    CodeBlock(animated: angleResultAnimated, code: "angle", codeColor: .black, replacedCode: angleResultString)
+                                    CodeBlock(code: "    let ", codeColor: .cMagenta),
+                                    CodeBlock(code: "degrees = ", codeColor: .black),
+                                    CodeBlock(animated: degrees_angleAnimated, code: "angle", codeColor: .black, replacedCode: angleResultString),
+                                    CodeBlock(code: " * ", codeColor: .black),
+                                    CodeBlock(code: "180", codeColor: .cBlue),
+                                    CodeBlock(code: " / ", codeColor: .black),
+                                    CodeBlock(animated: degrees_piAnimated, code: ".pi", codeColor: .black, replacedCode: "3.1415"),
                                 ]
                             )
                             CodeLineView(
                                 active: currentCodeLine == 20, blocks: [
+                                    CodeBlock(code: "    return ", codeColor: .cMagenta),
+                                    CodeBlock(animated: degreesResultAnimated, code: "angle", codeColor: .black, replacedCode: degreesResultString)
+                                ]
+                            )
+                            CodeLineView(
+                                active: false, blocks: [
                                     CodeBlock(code: "}", codeColor: .black),
                                 ]
                             )
@@ -432,16 +444,12 @@ struct AngleWalkThrough: View {
             self.v1z1String = "\(Int(svm1.z))"
             self.v1z2String = "\(Int(svmV.z))"
             
-            if v2xLiteral != "position2" { hasErrorLiteral = v2xLiteral }
-            if v2yLiteral != "position2" { hasErrorLiteral = v2yLiteral }
-            if v2zLiteral != "position2" { hasErrorLiteral = v2zLiteral }
-            
-            self.v2x1String = hasError ? "Error" : "\(Int(svm2.x))"
-            self.v2x2String = hasError ? "Error" : "\(Int(svmV.x))"
-            self.v2y1String = hasError ? "Error" : "\(Int(svm2.y))"
-            self.v2y2String = hasError ? "Error" : "\(Int(svmV.y))"
-            self.v2z1String = hasError ? "Error" : "\(Int(svm2.z))"
-            self.v2z2String = hasError ? "Error" : "\(Int(svmV.z))"
+            self.v2x1String = "\(Int(svm2.x))"
+            self.v2x2String = "\(Int(svmV.x))"
+            self.v2y1String = "\(Int(svm2.y))"
+            self.v2y2String = "\(Int(svmV.y))"
+            self.v2z1String = "\(Int(svm2.z))"
+            self.v2z2String = "\(Int(svmV.z))"
             
             let vector1 = Value(
                 x: Float(svm1.x - svmV.x),
@@ -474,12 +482,16 @@ struct AngleWalkThrough: View {
             let yProduct = vector1.y * vector2.y
             let zProduct = vector1.z * vector2.z
             
-            self.xProduct1String = hasError ? "Error" : "\(Int(vector1.x))"
-            self.xProduct2String = hasError ? "Error" : "\(Int(vector2.x))"
-            self.yProduct1String = hasError ? "Error" : "\(Int(vector1.y))"
-            self.yProduct2String = hasError ? "Error" : "\(Int(vector2.y))"
-            self.zProduct1String = hasError ? "Error" : "\(Int(vector1.z))"
-            self.zProduct2String = hasError ? "Error" : "\(Int(vector2.z))"
+            self.xProduct1String = "\(Int(vector1.x))"
+            self.xProduct2String = "\(Int(vector2.x))"
+            self.yProduct1String = "\(Int(vector1.y))"
+            self.yProduct2String = "\(Int(vector2.y))"
+            self.zProduct1String = "\(Int(vector1.z))"
+            self.zProduct2String = "\(Int(vector2.z))"
+            
+            if xProductLiteral != "xProduct" { hasErrorLiteral = xProductLiteral }
+            if yProductLiteral != "yProduct" { hasErrorLiteral = yProductLiteral }
+            if zProductLiteral != "zProduct" { hasErrorLiteral = zProductLiteral }
             
             let dotProduct = xProduct + yProduct + zProduct
             self.dotProductXString = hasError ? "Error" : "\(Int(xProduct))"
@@ -508,6 +520,13 @@ struct AngleWalkThrough: View {
                 self.angleResultString = hasError ? "Error" : "Nan"
             } else {
                 self.angleResultString = hasError ? "Error" : "\(Int(angle))"
+            }
+            
+            let degrees = angle * 180 / .pi
+            if degrees.isNaN {
+                self.degreesResultString = hasError ? "Error" : "Nan"
+            } else {
+                self.degreesResultString = hasError ? "Error" : "\(Int(degrees))"
             }
             
             animationBlocks = [
@@ -564,7 +583,9 @@ struct AngleWalkThrough: View {
                 { withAnimation { cosOfAngle_vertexPos2Animated = true } },
                 
                 { withAnimation { angle_cosOfAngleAnimated = true; currentCodeLine = 18 } },
-                { withAnimation { angleResultAnimated = true; currentCodeLine = 19 } },
+                { withAnimation { degrees_angleAnimated = true; currentCodeLine = 19 } },
+                { withAnimation { degrees_piAnimated = true } },
+                { withAnimation { degreesResultAnimated = true; currentCodeLine = 20 } },
                 {
                     //                    if let hasErrorLiteral = hasErrorLiteral {
                     //                        showResult?(false, "Hmm... not quite. \n\n\"\(hasErrorLiteral)\" might not be correct.")
