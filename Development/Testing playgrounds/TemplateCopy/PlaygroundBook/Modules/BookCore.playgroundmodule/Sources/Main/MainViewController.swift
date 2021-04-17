@@ -74,7 +74,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var edgePointView: UIView?
     var degreesAway = ""
     var cmAway = ""
-    
+    var isDirectlyInFront = false
     
     // MARK: Interface
     var cvm: CardsViewModel! /// keep reference to cards
@@ -93,29 +93,63 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     @IBAction func orientationButtonPressed(_ sender: Any) {
         let transform: CGAffineTransform
         let newOrientation: UIInterfaceOrientation
+        
+        let orientationText: String
+        
         switch currentOrientation {
         case .portrait:
             newOrientation = .landscapeRight
             transform = CGAffineTransform(rotationAngle: 90.degreesToRadians)
+            orientationText = "Home button left"
         case .portraitUpsideDown:
             newOrientation = .landscapeLeft
             transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
+            
+            orientationText = "Home button right"
         case .landscapeLeft:
             newOrientation = .portrait
             transform = CGAffineTransform(rotationAngle: 180.degreesToRadians)
+            
+            orientationText = "Upside down"
         case .landscapeRight:
             newOrientation = .portraitUpsideDown
             transform = CGAffineTransform(rotationAngle: 0.degreesToRadians)
+            
+            orientationText = "Portrait"
         default:
             newOrientation = .landscapeRight
             transform = CGAffineTransform(rotationAngle: -90.degreesToRadians)
+            
+            orientationText = "Home button right"
         }
         
         currentOrientation = newOrientation
+        print("adsad \(orientationText)")
+        
+        orientationDescriptionLabel.text = "ML Orientation: \(orientationText)"
+        animatingDescriptionCount += 1
         UIView.animate(withDuration: 0.3) {
             self.orientationButton.transform = transform
+            self.orientationDescriptionBlurView.transform = CGAffineTransform.identity
+            self.orientationDescriptionBlurView.alpha = 1
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+            self.animatingDescriptionCount -= 1
+            
+            if self.animatingDescriptionCount == 0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.orientationDescriptionBlurView.alpha = 0
+                    self.orientationDescriptionBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                }
+            }
         }
     }
+    
+    var animatingDescriptionCount = 0
+    @IBOutlet weak var orientationDescriptionBlurView: UIVisualEffectView!
+    @IBOutlet weak var orientationDescriptionLabel: UILabel!
+    
     
     var muted = false
     @IBOutlet weak var speakMuteBlurView: UIVisualEffectView!
@@ -160,7 +194,6 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         setupCardsView()
         
         setupAccessibility()
-        
     }
     
     override public func viewDidLayoutSubviews() {

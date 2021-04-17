@@ -33,7 +33,7 @@ extension MainViewController {
         
         /// Configure positional audio in the AR Scene view
         sceneView.audioEnvironmentNode.distanceAttenuationParameters.maximumDistance = 4 /// how many meters to adjust the sound in fragments
-        sceneView.audioEnvironmentNode.distanceAttenuationParameters.referenceDistance = 0.02 /// adjust the sound every 0.02 meters
+        sceneView.audioEnvironmentNode.distanceAttenuationParameters.referenceDistance = 0.05
         sceneView.audioEnvironmentNode.renderingAlgorithm = .auto
         
         self.sceneView = sceneView

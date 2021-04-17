@@ -24,8 +24,8 @@ extension MainViewController {
             let bottomLeftRealWorldPosition = bottomLeftResult.worldTransform.columns.3
             let bottomRightRealWorldPosition = bottomRightResult.worldTransform.columns.3
             let line = bottomRightRealWorldPosition - bottomLeftRealWorldPosition
-            let distance = CGFloat(length(line))
-            
+           
+            let distance = max(0.1, CGFloat(length(line))) /// prevent too small
             
             let heightOverWidthRatio = boundingBox.height / boundingBox.width
             let height = distance * CGFloat(heightOverWidthRatio)
@@ -100,7 +100,7 @@ extension MainViewController {
             let raycastQuery = sceneView.raycastQuery(
                 from: screenCoordinate,
                 allowing: .existingPlaneInfinite,
-                alignment: .any
+                alignment: .horizontal
             )
         {
             let results = sceneView.session.raycast(raycastQuery)

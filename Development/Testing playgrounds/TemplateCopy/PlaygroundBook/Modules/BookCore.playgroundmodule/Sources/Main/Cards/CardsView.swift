@@ -58,7 +58,7 @@ struct CardsView: View {
                         CardView(selectedCard: $cvm.selectedCard, card: card, addPressed: {
                             
                             if cardAdded?(card) ?? false {
-                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "Select a sound"))
+                                let newCard = Card(name: "Object", color: card.color, sound: Sound(name: "None"))
                                 cvm.cards.append(newCard)
                                 return true
                             }
@@ -149,7 +149,7 @@ struct CardView: View {
                     card.added = false
                 }
             }) {
-                Text(card.added ? "Remove" : "Add")
+                Text(card.added ? "Remove" : "Hit-Test")
                     .foregroundColor(Color.white)
                     .font(.system(size: 18, weight: .semibold))
                     .frame(maxWidth: .infinity)
@@ -158,7 +158,7 @@ struct CardView: View {
                     .cornerRadius(12, corners: [.topLeft, .topRight])
                     .padding(.horizontal, 16)
             }
-            .accessibility(hint: Text("\(card.added ? "Remove" : "Add") this node and its configuration card"))
+            .accessibility(hint: Text("\(card.added ? "Remove" : "Hit-Test and add") this node and its configuration card"))
             
             
             ZStack {

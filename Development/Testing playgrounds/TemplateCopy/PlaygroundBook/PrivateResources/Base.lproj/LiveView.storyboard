@@ -17,9 +17,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njp-FE-CnI">
-                                <rect key="frame" x="16" y="60" width="48" height="52"/>
+                                <rect key="frame" x="16" y="60" width="48" height="52.333333333333343"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SBe-NB-Miy">
-                                    <rect key="frame" x="0.0" y="0.0" width="48" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="48" height="52.333333333333343"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1D8-J1-M8V">
@@ -183,6 +183,28 @@
                                 </view>
                                 <blurEffect style="systemChromeMaterialDark"/>
                             </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cA4-d9-az5">
+                                <rect key="frame" x="76" y="60" width="162" height="51"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QWE-mm-avb">
+                                    <rect key="frame" x="0.0" y="0.0" width="162" height="51"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ML Orientation:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aW7-3w-UZZ">
+                                            <rect key="frame" x="14" y="14" width="134" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aW7-3w-UZZ" firstAttribute="leading" secondItem="QWE-mm-avb" secondAttribute="leading" constant="14" id="Di6-Pp-i0R"/>
+                                        <constraint firstAttribute="trailing" secondItem="aW7-3w-UZZ" secondAttribute="trailing" constant="14" id="dqm-hh-QfV"/>
+                                        <constraint firstAttribute="bottom" secondItem="aW7-3w-UZZ" secondAttribute="bottom" constant="14" id="iP1-4c-QUz"/>
+                                        <constraint firstItem="aW7-3w-UZZ" firstAttribute="top" secondItem="QWE-mm-avb" secondAttribute="top" constant="14" id="pXJ-Ai-ozS"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="systemChromeMaterialDark"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OuP-cF-Jwk"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
@@ -193,10 +215,12 @@
                             <constraint firstItem="dx2-W5-bHC" firstAttribute="leading" secondItem="Wu5-eG-eDE" secondAttribute="trailing" constant="16" id="agm-ue-dRd"/>
                             <constraint firstItem="OuP-cF-Jwk" firstAttribute="trailing" secondItem="dx2-W5-bHC" secondAttribute="trailing" constant="16" id="bPu-Gc-LI6"/>
                             <constraint firstItem="dx2-W5-bHC" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="euB-BM-0X2"/>
+                            <constraint firstItem="cA4-d9-az5" firstAttribute="leading" secondItem="njp-FE-CnI" secondAttribute="trailing" constant="12" id="lWb-Gf-FD3"/>
                             <constraint firstItem="njp-FE-CnI" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="nPm-k2-6nE"/>
                             <constraint firstItem="Wu5-eG-eDE" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="rNB-PM-Lcu"/>
                             <constraint firstItem="njp-FE-CnI" firstAttribute="leading" secondItem="OuP-cF-Jwk" secondAttribute="leading" constant="16" id="weP-Vp-usG"/>
                             <constraint firstItem="OuP-cF-Jwk" firstAttribute="trailing" secondItem="HmV-Rv-9YS" secondAttribute="trailing" constant="16" id="xPv-ci-sek"/>
+                            <constraint firstItem="cA4-d9-az5" firstAttribute="top" secondItem="OuP-cF-Jwk" secondAttribute="top" constant="16" id="yZg-8P-Xsk"/>
                         </constraints>
                     </view>
                     <connections>
@@ -209,6 +233,8 @@
                         <outlet property="infoView" destination="pzg-M6-VOZ" id="Wru-Cj-dGR"/>
                         <outlet property="orientationBlurView" destination="njp-FE-CnI" id="Yuq-PG-LmG"/>
                         <outlet property="orientationButton" destination="1D8-J1-M8V" id="Lw4-U8-AQW"/>
+                        <outlet property="orientationDescriptionBlurView" destination="cA4-d9-az5" id="o0A-Oj-Kre"/>
+                        <outlet property="orientationDescriptionLabel" destination="aW7-3w-UZZ" id="Tvq-mm-rvp"/>
                         <outlet property="speakBlurView" destination="dx2-W5-bHC" id="hhF-0q-Ms2"/>
                         <outlet property="speakButton" destination="7kf-YT-ZBA" id="AbK-uN-Ay0"/>
                         <outlet property="speakCloseButton" destination="e4d-HQ-62l" id="FJn-Nl-uEF"/>
@@ -264,7 +290,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-78" y="85"/>
+            <point key="canvasLocation" x="-78.461538461538453" y="84.597156398104261"/>
         </scene>
         <!--Book Core One View Controller-->
         <scene sceneID="77F-1h-L9Z">

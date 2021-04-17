@@ -111,13 +111,21 @@ extension MainViewController {
                         }
                         
                         let text = "\(currentTrackingMarker.name) is \(adjustedCentimeters)cm directly in front."
-                        speakAlert(text: text)
+                        
+                        if isDirectlyInFront == false {
+                            self.speakAlert(text: text)
+                        }
+                        
+                        
+                        self.isDirectlyInFront = true
                     } else {
                         UIView.animate(withDuration: 0.2) {
                             self.infoBorderView.alpha = 0
                             self.degreesLabel.textColor = UIColor.label
                         }
                         stopSpeakingAlert()
+                        
+                        self.isDirectlyInFront = false
                     }
                 }
             }

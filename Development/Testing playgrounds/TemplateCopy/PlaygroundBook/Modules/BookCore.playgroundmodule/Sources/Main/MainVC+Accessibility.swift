@@ -10,12 +10,14 @@ import AVFoundation
 
 extension MainViewController {
     func setupAccessibility() {
+        drawingView.isAccessibilityElement = true
+        drawingView.accessibilityLabel = "AR Viewfinder"
+        
         crosshairImageView.isAccessibilityElement = true
         crosshairImageView.accessibilityLabel = "Crosshair"
         crosshairImageView.accessibilityHint = "Double-tap the Add button to add a node here"
         
-        sceneView.isAccessibilityElement = true
-        sceneView.accessibilityLabel = "AR Viewfinder"
+        
         
         infoView.isAccessibilityElement = false
         
@@ -71,6 +73,14 @@ extension MainViewController {
         alertExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         view.bringSubviewToFront(alertExpandedBlurView)
         
+        
+        orientationDescriptionBlurView.clipsToBounds = true
+        orientationDescriptionBlurView.layer.cornerRadius = 6
+        orientationDescriptionBlurView.alpha = 0
+        orientationDescriptionBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        view.bringSubviewToFront(orientationDescriptionBlurView)
+        orientationDescriptionBlurView.isAccessibilityElement = false
+        
         synthesizer.delegate = self
         alertSynthesizer.delegate = self
     }
@@ -125,12 +135,12 @@ extension MainViewController {
         
         if muted {
             speakMuteButton.accessibilityLabel = "Muted"
-            speakMuteButton.accessibilityHint = "Spoken feedback via Speech Synthesizer is muted. Double-tap to unmute. If using VoiceOver, make sure to mute."
+            speakMuteButton.accessibilityHint = "Spoken feedback is muted. Double-tap to unmute."
             synthesizer.stopSpeaking(at: .immediate)
             alertSynthesizer.stopSpeaking(at: .immediate)
         } else {
             speakMuteButton.accessibilityLabel = "Sound on"
-            speakMuteButton.accessibilityHint = "Spoken feedback via Speech Synthesizer is on. Double-tap to mute. If using VoiceOver, make sure to mute."
+            speakMuteButton.accessibilityHint = "Spoken feedback is on. Double-tap to mute."
         }
     }
     func speakStatus() {
@@ -161,9 +171,15 @@ extension MainViewController {
         alertSynthesizer.stopSpeaking(at: .immediate)
         
         if !muted {
-            let utterance = AVSpeechUtterance(string: nodeText)
-            synthesizer.stopSpeaking(at: .word)
-            synthesizer.speak(utterance)
+            if UIAccessibility.isVoiceOverRunning {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                    UIAccessibility.post(notification: .announcement, argument: nodeText)
+                }
+            } else {
+                let utterance = AVSpeechUtterance(string: nodeText)
+                synthesizer.stopSpeaking(at: .word)
+                synthesizer.speak(utterance)
+            }
         }
         
         speakExpandedLabel.text = nodeText
@@ -189,8 +205,12 @@ extension MainViewController {
             synthesizer.stopSpeaking(at: .immediate)
             
             if !muted {
-                let utterance = AVSpeechUtterance(string: text)
-                alertSynthesizer.speak(utterance)
+                if UIAccessibility.isVoiceOverRunning {
+                    UIAccessibility.post(notification: .announcement, argument: text)
+                } else {
+                    let utterance = AVSpeechUtterance(string: text)
+                    alertSynthesizer.speak(utterance)
+                }
             }
             
             alertExpandedLabel.text = text
