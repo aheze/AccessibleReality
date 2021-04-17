@@ -80,7 +80,7 @@ struct WalkThrough: View {
                         y: svm1.y,
                         z: svm1.z,
                         parameterName: "position1",
-                        compactLayout: true,
+                        layout: .compact,
                         name: "cubeNode",
                         imageType: "Position"
                     )
@@ -89,7 +89,7 @@ struct WalkThrough: View {
                         y: svm2.y,
                         z: svm2.z,
                         parameterName: "position2",
-                        compactLayout: true,
+                        layout: .compact,
                         name: "cameraNode",
                         imageType: "Position"
                     )

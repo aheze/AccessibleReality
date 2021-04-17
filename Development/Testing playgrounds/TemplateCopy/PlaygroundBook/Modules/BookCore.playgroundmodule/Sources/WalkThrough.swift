@@ -75,6 +75,11 @@ extension Color {
     static var cBlue = Color("cBlue")
 }
 
+enum InfoCardLayout {
+    case normal
+    case compact
+    case ultraCompact
+}
 struct InfoCard: View {
     
     var x: Double
@@ -82,7 +87,7 @@ struct InfoCard: View {
     var z: Double
     
     var parameterName = "position1"
-    var compactLayout = false
+    var layout = InfoCardLayout.normal
     let name: String
     let imageType: String
     
@@ -96,7 +101,25 @@ struct InfoCard: View {
                 .padding()
                 .background(Color(.systemBackground))
             
-            if compactLayout {
+            if layout == .ultraCompact {
+                VStack {
+                    
+                    Image(imageType)
+                    
+                    
+                    Text(name)
+                        .font(.system(size: 15, weight: .medium, design: .monospaced))
+                    Text(imageType)
+                        .font(.system(size: 15, weight: .medium))
+                        .padding(.bottom, 6)
+                    
+                    
+                    Text("(\(Int(x)) x, \(Int(y)) y, \(Int(z)) z)")
+                        .font(.system(size: 18, weight: .medium))
+                    
+                }
+                .padding(EdgeInsets(top: 14, leading: 8, bottom: 14, trailing: 8))
+            } else if layout == .compact {
                 VStack {
                     HStack {
                         Image(imageType)
@@ -115,8 +138,6 @@ struct InfoCard: View {
                 .padding(EdgeInsets(top: 14, leading: 20, bottom: 14, trailing: 20))
             } else {
                 HStack {
-                    
-                    
                     Image(imageType)
                     
                     VStack(alignment: .leading, spacing: 2) {
@@ -150,7 +171,7 @@ struct Card_Previews: PreviewProvider {
             x: 40,
             y: 20,
             z: 1,
-            compactLayout: true,
+            layout: .normal,
             name: "cubeNode",
             imageType: "Position"
         )

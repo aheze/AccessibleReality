@@ -130,13 +130,13 @@ struct AngleWalkThrough: View {
                     .foregroundColor(Color.green)
                     .padding(EdgeInsets(top: 20, leading: 20, bottom: 6, trailing: 20))
                 
-                HStack(spacing: 16) {
+                HStack(alignment: .top, spacing: 16) {
                     InfoCard(
                         x: svmV.x,
                         y: svmV.y,
                         z: svmV.z,
                         parameterName: "vertex",
-                        compactLayout: true,
+                        layout: .ultraCompact,
                         name: "cameraNode",
                         imageType: "Position"
                     )
@@ -145,7 +145,7 @@ struct AngleWalkThrough: View {
                         y: svm1.y,
                         z: svm1.z,
                         parameterName: "position1",
-                        compactLayout: true,
+                        layout: .ultraCompact,
                         name: "cubeNode",
                         imageType: "Position"
                     )
@@ -154,7 +154,7 @@ struct AngleWalkThrough: View {
                         y: svm2.y,
                         z: svm2.z,
                         parameterName: "position2",
-                        compactLayout: true,
+                        layout: .ultraCompact,
                         name: "directionNode",
                         imageType: "Position"
                     )

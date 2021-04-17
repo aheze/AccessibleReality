@@ -18,8 +18,8 @@ class AppDelegate: LiveViewHost.AppDelegate {
         // The view or view controller returned from this method will be automatically be shown on screen,
         // as if it were a live view in Swift Playgrounds. You can control how the live view is shown by
         // changing the implementation of the `liveViewConfiguration` property below.
-        return BookCore.instantiateOneMainView(block: { _,_  in
-          return Value(x: 0, y: 0, z: 0)
+        return BookCore.instantiateThreeMainView(block: { _, _, _  in
+//          return Value(x: 0, y: 0, z: 0)
         })
     }
 
@@ -29,6 +29,6 @@ class AppDelegate: LiveViewHost.AppDelegate {
         // Valid values are `.fullScreen`, which simulates when the user has expanded the live
         // view to fill the full screen in Swift Playgrounds, and `.sideBySide`, which simulates when
         // the live view is shown next to or above the source code editor in Swift Playgrounds.
-        return .fullScreen
+        return .sideBySide
     }
 }
