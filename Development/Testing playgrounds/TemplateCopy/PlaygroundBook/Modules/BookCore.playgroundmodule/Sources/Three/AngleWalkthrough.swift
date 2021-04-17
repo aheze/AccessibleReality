@@ -1,9 +1,10 @@
 //
 //  AngleWalkthrough.swift
-//  SceneKitViewTesting
+//  BookCore
 //
-//  Created by Zheng on 4/15/21.
+//  Created by Zheng on 4/17/21.
 //
+
 
 import SwiftUI
 
@@ -16,7 +17,7 @@ struct AngleWalkThrough: View {
 
     @ObservedObject var svmV: SlidersViewModel /// vertex
     @ObservedObject var svm1: SlidersViewModel
-    @ObservedObject var svm2: SlidersViewModel
+    @ObservedObject var svm2: ReadOnlySlidersViewModel
 
     
     /// user entered code literals
@@ -591,7 +592,6 @@ struct AngleWalkThrough: View {
     }
 }
 
-
 func distanceFormula3D(position1: Value, position2: Value) -> Number {
     let xDifference = position1.x - position2.x
     let yDifference = position1.y - position2.y
@@ -601,22 +601,4 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
     let distance = sqrt(everythingInsideSquareRoot)
     
     return distance
-}
-
-public func acos(_ number: Number) -> Number {
-    let result = acos(Double(number))
-    let degrees = result.radiansToDegrees
-    return Number(degrees)
-}
-public func sqrt(_ number: Number) -> Number {
-    let result = sqrt(Double(number))
-    let degrees = result.radiansToDegrees
-    return Number(degrees)
-}
-
-
-
-public struct Testing {
-    public var config = Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
-    public var otherColor = Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1))
 }

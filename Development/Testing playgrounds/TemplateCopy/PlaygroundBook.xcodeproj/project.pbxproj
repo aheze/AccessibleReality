@@ -34,6 +34,7 @@
 		3C9A2D2126255C0200D920A0 /* Sliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9A2D2026255C0200D920A0 /* Sliders.swift */; };
 		3CA21F1E26292DBC00664CFD /* ThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA21F1D26292DBC00664CFD /* ThreeViewController.swift */; };
 		3CA7D8A7261A9B1700A7C3C3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */; };
+		3CB18FC2262B4A2D00670BEF /* AngleWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB18FC1262B4A2D00670BEF /* AngleWalkthrough.swift */; };
 		3CE81CC926235FC6003FBC66 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE81CC826235FC6003FBC66 /* Global.swift */; };
 		3CE81CCF26236092003FBC66 /* MainVC+UpdateColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE81CCE26236092003FBC66 /* MainVC+UpdateColors.swift */; };
 		3CE81D1D2623A654003FBC66 /* MainVC+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE81D1C2623A654003FBC66 /* MainVC+Accessibility.swift */; };
@@ -200,6 +201,7 @@
 		3C9A2D2026255C0200D920A0 /* Sliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sliders.swift; sourceTree = "<group>"; };
 		3CA21F1D26292DBC00664CFD /* ThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewController.swift; sourceTree = "<group>"; };
 		3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3CB18FC1262B4A2D00670BEF /* AngleWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleWalkthrough.swift; sourceTree = "<group>"; };
 		3CE81CC826235FC6003FBC66 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		3CE81CCE26236092003FBC66 /* MainVC+UpdateColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+UpdateColors.swift"; sourceTree = "<group>"; };
 		3CE81D1C2623A654003FBC66 /* MainVC+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+Accessibility.swift"; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				3CA21F1D26292DBC00664CFD /* ThreeViewController.swift */,
+				3CB18FC1262B4A2D00670BEF /* AngleWalkthrough.swift */,
 			);
 			path = Three;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				3C86BDB7261AB1C400610690 /* MainVC+ARDelegate.swift in Sources */,
 				3C8D8A6C261EC4B400E896FF /* MainVC+SetupAR.swift in Sources */,
 				3CE81CC926235FC6003FBC66 /* Global.swift in Sources */,
+				3CB18FC2262B4A2D00670BEF /* AngleWalkthrough.swift in Sources */,
 				3C728A57261D4F3B007A1C7A /* MainVC+TrackMarker.swift in Sources */,
 				3C8D8A4E261EC29000E896FF /* YOLOv3TinyInt8LUT.swift in Sources */,
 				3CE81D702623C008003FBC66 /* DrawingView.swift in Sources */,
