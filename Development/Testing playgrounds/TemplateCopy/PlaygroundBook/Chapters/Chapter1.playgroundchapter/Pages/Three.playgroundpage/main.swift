@@ -41,9 +41,9 @@ Once we got that down, let's use the Dot Product to find that angle! We can calc
  ... which we will now make in Swift!
  
  * callout(Built-in functions):
-     We'll use Darwin's `acos(_:)` function, which takes the arccos of a number. For example:
-     - `acos(0)` equals `0`
-     - `acos(0.707)` equals `45`
+     We'll use vForce's `acos(_:)` function, which gets the arccos of a number. For example:
+     - `acos(0)` equals `1.57` radians (90°)
+     - `acos(-1)` equals `3.14` radians (180°)
  
 */
 //#-hidden-code
@@ -58,7 +58,6 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
     
     return Number(distance)
 }
-
 //#-end-hidden-code
 func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
     let vector1 = Value(
@@ -67,22 +66,24 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
         z: position1.z - vertex.z
     )
     let vector2 = Value(
-        x: /*#-editable-code X coordinate*/<#T##Value#>/*#-end-editable-code*/.x - vertex.x,
-        y: /*#-editable-code Y coordinate*/<#T##Value#>/*#-end-editable-code*/.y - vertex.y,
-        z: /*#-editable-code Z coordinate*/<#T##Value#>/*#-end-editable-code*/.z - vertex.z
+        x: position2.x - vertex.x,
+        y: position2.y - vertex.y,
+        z: position2.z - vertex.z
     )
     
     let xProduct = vector1.x * vector2.x
     let yProduct = vector1.y * vector2.y
     let zProduct = vector1.z * vector2.z
-
-    let dotProduct = /*#-editable-code Number*/<#Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#Number#>/*#-end-editable-code*/
+    //#-code-completion(everything, hide)
+    //#-code-completion(identifier, show, xProduct, yProduct, zProduct)
+    let dotProduct = /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/
     let vertexToPosition1 = distanceFormula3D(position1: vertex, position2: position1) // using our own 3D Distance Formula!
     let vertexToPosition2 = distanceFormula3D(position1: vertex, position2: position2)
 
     let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
-    let angle = acos(/*#-editable-code Number*/<#Number#>/*#-end-editable-code*/)
-    return angle
+    let angle = acos(cosineOfAngle)
+    let degrees = angle * 180 / .pi
+    return degrees
 }
     
 // Call the function here!

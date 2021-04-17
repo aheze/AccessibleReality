@@ -57,6 +57,13 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         svm2.y = 25
         svm2.z = 25
         
+        PlaygroundKeyValueStore.current["Two_svm1x"] = .floatingPoint(self.svm1.x)
+        PlaygroundKeyValueStore.current["Two_svm1y"] = .floatingPoint(self.svm1.y)
+        PlaygroundKeyValueStore.current["Two_svm1z"] = .floatingPoint(self.svm1.z)
+        PlaygroundKeyValueStore.current["Two_svm2x"] = .floatingPoint(self.svm2.x)
+        PlaygroundKeyValueStore.current["Two_svm2y"] = .floatingPoint(self.svm2.y)
+        PlaygroundKeyValueStore.current["Two_svm2z"] = .floatingPoint(self.svm2.z)
+        
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
             self.cubeNode?.position = Value(x: Float(self.svm1.x), y: Float(self.svm1.y), z:Float(self.svm1.z))

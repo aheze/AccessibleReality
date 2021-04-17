@@ -77,10 +77,10 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         svm2R.y = Double(defaultCameraRotation.y)
         svm2R.z = Double(defaultCameraRotation.z)
         
+        updatePositionStore()
 
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
-//            self.cubeNode?.position = Value(x: Float(self.svm.x), y: Float(self.svm.y), z:Float(self.svm.z))
             
             self.cubeNode?.position = Value(x: Float(self.svm1.x), y: Float(self.svm1.y), z:Float(self.svm1.z))
             self.cameraNode?.position = Value(x: Float(self.svmV.x), y: Float(self.svmV.y), z:Float(self.svmV.z))
@@ -92,51 +92,8 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             self.svm2.y = Double(position.y)
             self.svm2.z = Double(position.z)
             
-            PlaygroundKeyValueStore.current["Two_svm1x"] = .floatingPoint(self.svm1.x)
-            PlaygroundKeyValueStore.current["Two_svm1y"] = .floatingPoint(self.svm1.y)
-            PlaygroundKeyValueStore.current["Two_svm1z"] = .floatingPoint(self.svm1.z)
-            PlaygroundKeyValueStore.current["Two_svm2x"] = .floatingPoint(self.svm2.x)
-            PlaygroundKeyValueStore.current["Two_svm2y"] = .floatingPoint(self.svm2.y)
-            PlaygroundKeyValueStore.current["Two_svm2z"] = .floatingPoint(self.svm2.z)
+            self.updatePositionStore()
         }
-//        
-//        func distanceFormula3D(position1: Value, position2: Value) -> Number {
-//            let xDifference = position1.x - position2.x
-//            let yDifference = position1.y - position2.y
-//            let zDifference = position1.z - position2.z
-//
-//            let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
-//            let distance = sqrt(everythingInsideSquareRoot)
-//            
-//            return Number(distance)
-//        }
-//
-//        func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
-//            let vector1 = Value(
-//                x: position1.x - vertex.x,
-//                y: position1.y - vertex.y,
-//                z: position1.z - vertex.z
-//            )
-//            let vector2 = Value(
-//                x: position2.x - vertex.x,
-//                y: position2.y - vertex.y,
-//                z: position2.z - vertex.z
-//            )
-//            
-//            let xProduct = vector1.x * vector2.x
-//            let yProduct = vector1.y * vector2.y
-//            let zProduct = vector1.z * vector2.z
-//
-//            let dotProduct = xProduct + yProduct + zProduct
-//            let vertexToPosition1 = distanceFormula3D(position1: vertex, position2: position1)
-//            let vertexToPosition2 = distanceFormula3D(position1: vertex, position2: position2)
-//
-//            let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
-//            let angle = acos(cosineOfAngle)
-//            return angle
-//        }
-//        
-//        
 
         let sliderView = FourSliderView(svm1: svm1, svmV: svmV, svm2R: svm2R, svm2: svm2)
         
@@ -181,12 +138,18 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         self.svm2R = SlidersViewModel()
         self.svm2 = ReadOnlySlidersViewModel()
         
-        if let keyValue = PlaygroundKeyValueStore.current["Two_svm1x"], case .floatingPoint(let number) = keyValue { svm1.x = number }
-        if let keyValue = PlaygroundKeyValueStore.current["Two_svm1y"], case .floatingPoint(let number) = keyValue { svm1.y = number }
-        if let keyValue = PlaygroundKeyValueStore.current["Two_svm1z"], case .floatingPoint(let number) = keyValue { svm1.z = number }
-        if let keyValue = PlaygroundKeyValueStore.current["Two_svm2x"], case .floatingPoint(let number) = keyValue { svm2.x = number }
-        if let keyValue = PlaygroundKeyValueStore.current["Two_svm2y"], case .floatingPoint(let number) = keyValue { svm2.y = number }
-        if let keyValue = PlaygroundKeyValueStore.current["Two_svm2z"], case .floatingPoint(let number) = keyValue { svm2.z = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svmVx"], case .floatingPoint(let number) = keyValue { svmV.x = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svmVy"], case .floatingPoint(let number) = keyValue { svmV.y = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svmVz"], case .floatingPoint(let number) = keyValue { svmV.z = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm1x"], case .floatingPoint(let number) = keyValue { svm1.x = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm1y"], case .floatingPoint(let number) = keyValue { svm1.y = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm1z"], case .floatingPoint(let number) = keyValue { svm1.z = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm2Rx"], case .floatingPoint(let number) = keyValue { svm2R.x = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm2Ry"], case .floatingPoint(let number) = keyValue { svm2R.y = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm2Rz"], case .floatingPoint(let number) = keyValue { svm2R.z = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm2x"], case .floatingPoint(let number) = keyValue { svm2.x = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm2y"], case .floatingPoint(let number) = keyValue { svm2.y = number }
+        if let keyValue = PlaygroundKeyValueStore.current["Three_svm2z"], case .floatingPoint(let number) = keyValue { svm2.z = number }
         
         let value1 = Value(
             x: Float(svm1.x),
@@ -280,5 +243,19 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     
     var mainCode: ((Node, Node, Node) -> Void)?
     
+    func updatePositionStore() {
+        PlaygroundKeyValueStore.current["Three_svmVx"] = .floatingPoint(self.svmV.x)
+        PlaygroundKeyValueStore.current["Three_svmVy"] = .floatingPoint(self.svmV.y)
+        PlaygroundKeyValueStore.current["Three_svmVz"] = .floatingPoint(self.svmV.z)
+        PlaygroundKeyValueStore.current["Three_svm1x"] = .floatingPoint(self.svm1.x)
+        PlaygroundKeyValueStore.current["Three_svm1y"] = .floatingPoint(self.svm1.y)
+        PlaygroundKeyValueStore.current["Three_svm1z"] = .floatingPoint(self.svm1.z)
+        PlaygroundKeyValueStore.current["Three_svm2Rx"] = .floatingPoint(self.svm2R.x)
+        PlaygroundKeyValueStore.current["Three_svm2Ry"] = .floatingPoint(self.svm2R.y)
+        PlaygroundKeyValueStore.current["Three_svm2Rz"] = .floatingPoint(self.svm2R.z)
+        PlaygroundKeyValueStore.current["Three_svm2x"] = .floatingPoint(self.svm2.x)
+        PlaygroundKeyValueStore.current["Three_svm2y"] = .floatingPoint(self.svm2.y)
+        PlaygroundKeyValueStore.current["Three_svm2z"] = .floatingPoint(self.svm2.z)
+    }
 
 }

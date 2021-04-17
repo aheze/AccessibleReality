@@ -192,7 +192,7 @@
 		3C8D8A47261EC21E00E896FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Base; path = Base.lproj/YOLOv3TinyInt8LUT.mlmodelc; sourceTree = "<group>"; };
 		3C8D8A4D261EC29000E896FF /* YOLOv3TinyInt8LUT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YOLOv3TinyInt8LUT.swift; sourceTree = "<group>"; };
 		3C8D8A6B261EC4B400E896FF /* MainVC+SetupAR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupAR.swift"; sourceTree = "<group>"; };
-		3C8F285A2626A394007E9CCE /* TwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewController.swift; sourceTree = "<group>"; };
+		3C8F285A2626A394007E9CCE /* TwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		3C99271926227B7F00F46FE5 /* Particles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Particles.sks; sourceTree = "<group>"; };
 		3C9A2CE2262524A000D920A0 /* OneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewController.swift; sourceTree = "<group>"; };
 		3C9A2D1026255B1600D920A0 /* SceneViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneViewWrapper.swift; sourceTree = "<group>"; };

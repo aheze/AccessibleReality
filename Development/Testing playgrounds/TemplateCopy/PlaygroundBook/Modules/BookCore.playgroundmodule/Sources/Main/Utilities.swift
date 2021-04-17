@@ -172,13 +172,28 @@ public func pow(_ x: Number, _ y: Int) -> Number {
     
     return Number(doubleResult)
 }
-public func acos(_ number: Number) -> Number {
-    let result = acos(Double(number))
-    let degrees = result.radiansToDegrees
-    return Number(degrees)
-}
+//public s
 public func sqrt(_ number: Number) -> Number {
     let result = sqrt(Double(number))
     return Number(result)
+}
+
+extension Number {
+    static func + (left: Number, right: Number) -> Number {
+        let result = Double(left) + Double(right)
+        return Number(result)
+    }
+}
+extension Number {
+    static func * (left: Number, right: Number) -> Number {
+        let result = Double(left) * Double(right)
+        return Number(result)
+    }
+}
+extension Number {
+    static func / (left: Number, right: Number) -> Number {
+        let result = Double(left) / Double(right)
+        return Number(result)
+    }
 }
 
