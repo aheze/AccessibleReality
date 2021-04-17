@@ -43,6 +43,7 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     var line1Node: SCNNode?
     var line2Node: SCNNode?
     var textNode: SCNNode? = SCNNode()
+    var anglePlaneNode: SCNNode?
     
     var svmV: SlidersViewModel!
     var svm1: SlidersViewModel!
@@ -121,7 +122,46 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
                 updateLineNode(scene: scene, node: line1Node, color: .yellow, distance: line1.0, position: line1.1, positionB: line1.2, lineWorldUp: line1.3)
                 updateLineNode(scene: scene, node: line2Node, color: .yellow, distance: line2.0, position: line2.1, positionB: line2.2, lineWorldUp: line2.3)
                 
-//                textNode.position = line.1.offsetZ(by: 0.03)
+                /// draw angled plane
+                /// from https://stackoverflow.com/a/57792501/14351818
+                let vertices: [SCNVector3] = [SCNVector3(valueV.x, valueV.y, valueV.z),
+                                              SCNVector3(value1.x, value1.y, value1.z),
+                                              SCNVector3(value2.x, value2.y, value2.z)]
+
+                let source = SCNGeometrySource(vertices: vertices)
+
+                let indices: [UInt16] = [0, 1, 2,
+                                         2, 1, 0]
+
+                let element = SCNGeometryElement(indices: indices, primitiveType: .triangles)
+                let geometry = SCNGeometry(sources: [source], elements: [element])
+                geometry.firstMaterial?.diffuse.contents = UIColor.green
+                self.anglePlaneNode?.geometry = geometry
+
+                if
+                    let cameraNode = self.cameraNode,
+                    let cubeNode = self.cubeNode,
+                    let directionNode = self.directionNode
+                {
+                    
+                    let midNodeX = (directionNode.position.x + cubeNode.position.x) / 2
+                    let midNodeY = (directionNode.position.y + cubeNode.position.y) / 2
+                    let midNodeZ = (directionNode.position.z + cubeNode.position.z) / 2
+                    
+                    let midCameraX = (midNodeX + cameraNode.position.x) / 2
+                    let midCameraY = (midNodeY + cameraNode.position.y) / 2
+                    let midCameraZ = (midNodeZ + cameraNode.position.z) / 2
+                    
+                    
+                    let value = Value(
+                        x: Float(midCameraX),
+                        y: Float(midCameraY),
+                        z: Float(midCameraZ)
+                    )
+                    
+                    let vector = SCNVector3(position: value)
+                    textNode.position = vector
+                }
             }
         }
 
@@ -313,32 +353,79 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             self.line1Node = line1Node
             self.line2Node = line2Node
             
-//            let text = SCNText(string: "?", extrusionDepth: 1)
-//            text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-//
-//            let material = SCNMaterial()
-//            material.diffuse.contents = UIColor(named: "BaseGreen")
-//            text.materials = [material]
-//
-//            let textNode = SCNNode()
-//            textNode.geometry = text
-//            textNode.scale = SCNVector3(0.006, 0.006, 0.006)
-//
-//            let lookAtConstraint = SCNBillboardConstraint()
-//            textNode.constraints = [lookAtConstraint]
-//            textNode.position = line.1.offsetZ(by: 0.03)
-//
-//            /// center text node correctly
-//            /// from https://stackoverflow.com/a/49860463/14351818
-//            let (min, max) = textNode.boundingBox
-//            let dx = min.x + 0.5 * (max.x - min.x)
-//            let dy = min.y + 0.5 * (max.y - min.y)
-//            let dz = min.z + 0.5 * (max.z - min.z)
-//            textNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
-//
-//            sceneView.scene?.rootNode.addChildNode(textNode)
-//            self.textNode = textNode
+            
+            /// draw angled plane
+            /// from https://stackoverflow.com/a/57792501/14351818
+            let vertices: [SCNVector3] = [SCNVector3(valueV.x, valueV.y, valueV.z),
+                                          SCNVector3(value1.x, value1.y, value1.z),
+                                          SCNVector3(value2.x, value2.y, value2.z)]
+
+            let source = SCNGeometrySource(vertices: vertices)
+
+            let indices: [UInt16] = [0, 1, 2,
+                                     2, 1, 0]
+
+            let element = SCNGeometryElement(indices: indices, primitiveType: .triangles)
+            let geometry = SCNGeometry(sources: [source], elements: [element])
+            geometry.firstMaterial?.diffuse.contents = UIColor.green
+            
+            let anglePlaneNode = SCNNode(geometry: geometry)
+            anglePlaneNode.opacity = 0.5
+            sceneView.scene?.rootNode.addChildNode(anglePlaneNode)
+            self.anglePlaneNode = anglePlaneNode
+            
+            
+            let text = SCNText(string: "?", extrusionDepth: 1)
+            text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+
+            let material = SCNMaterial()
+            material.diffuse.contents = UIColor(named: "BaseGreen")
+            text.materials = [material]
+
+            let textNode = SCNNode()
+            textNode.geometry = text
+            textNode.scale = SCNVector3(0.006, 0.006, 0.006)
+
+            let lookAtConstraint = SCNBillboardConstraint()
+            textNode.constraints = [lookAtConstraint]
+            
+            if
+                let cameraNode = cameraNode,
+                let cubeNode = cubeNode,
+                let directionNode = directionNode
+            {
+                
+                let midNodeX = (directionNode.position.x + cubeNode.position.x) / 2
+                let midNodeY = (directionNode.position.y + cubeNode.position.y) / 2
+                let midNodeZ = (directionNode.position.z + cubeNode.position.z) / 2
+                
+                let midCameraX = (midNodeX + cameraNode.position.x) / 2
+                let midCameraY = (midNodeY + cameraNode.position.y) / 2
+                let midCameraZ = (midNodeZ + cameraNode.position.z) / 2
+                
+                
+                let value = Value(
+                    x: Float(midCameraX),
+                    y: Float(midCameraY),
+                    z: Float(midCameraZ)
+                )
+                
+                let vector = SCNVector3(position: value)
+                textNode.position = vector
+            }
+
+            /// center text node correctly
+            /// from https://stackoverflow.com/a/49860463/14351818
+            let (min, max) = textNode.boundingBox
+            let dx = min.x + 0.5 * (max.x - min.x)
+            let dy = min.y + 0.5 * (max.y - min.y)
+            let dz = min.z + 0.5 * (max.z - min.z)
+            textNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
+
+            sceneView.scene?.rootNode.addChildNode(textNode)
+            self.textNode = textNode
         }
     }
 }
+
 
