@@ -30,58 +30,53 @@ For the last lesson in this playground, we'll visit the spectacular world of ang
  
  ![Diagram showing the camera (V), cube node (1), and sphere node (2)](AnglePositionsDiagram)
  
-Once we 
+Once we got that down, let's use the Dot Product to find that angle! We can calculate this in 2 ways: by using the cosine and each ray's lengths, or with the `x` and `y` coordinates of the nodes (relative to the vertex).
  
+ ![](DotProductsDiagram)
  
- `d` will equal the distance between 2 points `(x₁, y₁, z₁)` and `(x₂, y₂, z₂)`.
+ We can then rearrange the terms to get the 3D angle equation:
  
- In the completed project, we'll use this to show the user how far they are from a node. Coordinates in ARKit are *so accurate* that we can rely on them for real-life distances. For now, we'll use `cameraNode` to represent the user's device, and `cubeNode` as the node of interest.
-
- Let's make the 3D Distance Formula in Swift! We'll put it in a function so that we can reuse it easily. It will take in 2 parameters, one for the starting position and one for the ending, and `return` the resulting distance when done.
+ ![](AngleEquationDiagram)
+ 
+ ... which we will now make in Swift!
  
  * callout(Built-in functions):
-     We'll use Foundation's `pow(_:_:)` function, which raises numbers to a power. For example:
-     - `pow(3, 2)` raises `3` to the power of `2` — equals `9`
-     - `pow(4, 3)` raises `4` to the power of `3` — equals `64`
+     We'll use Darwin's `acos(_:)` function, which takes the arccos of a number. For example:
+     - `acos(0)` equals `0`
+     - `acos(0.707)` equals `45`
  
-     We also need Darwin's `sqrt(_:)` function, which takes the square root. For example:
-     - `sqrt(9)` equals `3`
-     - `sqrt(16)` equals `4`
 */
 //#-hidden-code
-PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView, slider1Value, slider2Value) in
+PlaygroundPage.current.liveView = instantiateThreeMainView { (cameraNode, cubeNode, directionNode) in
 
-
-
-let cubeNode = Node()
-cubeNode.shape = .cube
-cubeNode.color = UIColor.red
-cubeNode.position = slider1Value
-sceneView.scene?.addNode(cubeNode)
-
-let cameraNode = Node()
-cameraNode.shape = .pyramid
-cameraNode.color = UIColor.darkGray
-cameraNode.position = slider2Value
-sceneView.scene?.addNode(cameraNode)
 //#-end-hidden-code
-func distanceFormula3D(position1: Value, position2: Value) -> Number {
-    //#-code-completion(everything, hide)
-    //#-code-completion(identifier, show, position1, position2)
-    let xDifference = position1.x - /*#-editable-code X coordinate*/<#T##Value#>/*#-end-editable-code*/.x
-    let yDifference = position1.y - /*#-editable-code Y coordinate*/<#T##Value#>/*#-end-editable-code*/.y
-    let zDifference = position1.z - /*#-editable-code Z coordinate*/<#T##Value#>/*#-end-editable-code*/.z
+func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
+    let vector1 = Value(
+        x: position1.x - vertex.x,
+        y: position1.y - vertex.y,
+        z: position1.z - vertex.z
+    )
+    let vector2 = Value(
+        x: /*#-editable-code X coordinate*/<#T##Value#>/*#-end-editable-code*/.x - vertex.x,
+        y: /*#-editable-code Y coordinate*/<#T##Value#>/*#-end-editable-code*/.y - vertex.y,
+        z: /*#-editable-code Z coordinate*/<#T##Value#>/*#-end-editable-code*/.z - vertex.z
+    )
+    
+    let xProduct = vector1.x * vector2.x
+    let yProduct = vector1.y * vector2.y
+    let zProduct = vector1.z * vector2.z
 
-    //#-code-completion(everything, hide)
-    //#-code-completion(identifier, show, xDifference, yDifference, zDifference)
-    let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
-    let distance = sqrt(everythingInsideSquareRoot)
-    print(distance)
-    return distance
+    let dotProduct = /*#-editable-code Number*/<#Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#Number#>/*#-end-editable-code*/
+    let vertexToPosition1 = distanceFormula3D(position1: vertex, position2: position1) // using our own 3D Distance Formula!
+    let vertexToPosition2 = distanceFormula3D(position1: vertex, position2: position2)
+
+    let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
+    let angle = acos(/*#-editable-code Number*/<#Number#>/*#-end-editable-code*/)
+    return angle
 }
     
 // Call the function here!
-let distance = distanceFormula3D(position1: cubeNode.position, position2: cameraNode.position)
+let angle = angle3D(vertex: cameraNode.position, position1: cubeNode.position, position2: directionNode.position)
 //#-hidden-code
     
 }
