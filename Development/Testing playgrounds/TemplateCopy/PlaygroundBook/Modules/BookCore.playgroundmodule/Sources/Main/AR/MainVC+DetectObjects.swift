@@ -68,12 +68,10 @@ extension MainViewController {
                     
                     let detectedObject = DetectedObject(name: name, convertedBoundingBox: convertedRect)
                     detectedObjects.append(detectedObject)
-                }
-                
+                    
+                }   
             }
-            
         }
-        
         self.currentDetectedObjects = detectedObjects
         busyProcessingImage = false
     }

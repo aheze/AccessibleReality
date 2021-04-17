@@ -75,6 +75,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var degreesAway = ""
     var cmAway = ""
     var isDirectlyInFront = false
+    var objectDetected = false
     
     // MARK: Interface
     var cvm: CardsViewModel! /// keep reference to cards

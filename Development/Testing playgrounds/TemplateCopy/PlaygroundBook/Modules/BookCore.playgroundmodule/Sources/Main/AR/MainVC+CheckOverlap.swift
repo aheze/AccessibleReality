@@ -29,11 +29,20 @@ extension MainViewController {
                     if self.cvm.selectedCard == self.cvm.cards[self.cvm.cards.count - 1] { /// only change if focused
                         self.cvm.cards[self.cvm.cards.count - 1].name = object.name.capitalized
                         self.scaleCubeOverlay(up: true)
+                        
+                        let capName = object.name.capitalized
+                        DispatchQueue.main.async {
+                            if self.objectDetected == false && self.isDirectlyInFront == false {
+                                self.speakAlert(text: "\(capName) detected at crosshair")
+                            } else {
+                                self.objectDetected = true
+                            }
+                        }
                     }
                 } else {
                     self.cvm.cards[self.cvm.cards.count - 1].name = "Node"
-                    
                     self.scaleCubeOverlay(up: false)
+                    self.objectDetected = false
                 }
             }
             

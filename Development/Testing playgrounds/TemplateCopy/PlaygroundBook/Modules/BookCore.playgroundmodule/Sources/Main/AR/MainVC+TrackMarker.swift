@@ -140,6 +140,8 @@ extension MainViewController {
                 self.infoView.alpha = 0
                 self.infoView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
             }
+            
+            self.isDirectlyInFront = false
         }
     }
     

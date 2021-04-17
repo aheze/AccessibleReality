@@ -15,7 +15,7 @@ extension MainViewController {
         
         crosshairImageView.isAccessibilityElement = true
         crosshairImageView.accessibilityLabel = "Crosshair"
-        crosshairImageView.accessibilityHint = "Double-tap the Add button to add a node here"
+        crosshairImageView.accessibilityHint = "Double-tap the Hit-Test button to add a node here"
         
         
         
@@ -90,13 +90,13 @@ extension MainViewController {
         
         let currentlyOnAddingMode = !(cvm.selectedCard?.added ?? true)
         
-        crosshairImageView.accessibilityHint = currentlyOnAddingMode ? "Double-tap the Add button to add a node here" : "A line is connected from here to the selected node"
+        crosshairImageView.accessibilityHint = currentlyOnAddingMode ? "Double-tap the Hit-Test button to add a node here" : "A line is connected from here to the selected node"
         
         if numberOfNodes == 0 {
-            sceneView.accessibilityHint = "No nodes currently. Double-tap the Add button to add a node at the crosshair's location."
+            sceneView.accessibilityHint = "No nodes currently. Double-tap the Hit-Test button to add a node at the crosshair's location."
         } else {
             if currentlyOnAddingMode {
-                sceneView.accessibilityHint = "\(numberOfNodes) nodes placed. Double-tap the Add button to add another node at the crosshair's location."
+                sceneView.accessibilityHint = "\(numberOfNodes) nodes placed. Double-tap the Hit-Test button to add another node at the crosshair's location."
             } else {
                 if let currentCard = cvm.selectedCard {
                     let uiColor = UIColor(currentCard.color)
@@ -104,7 +104,7 @@ extension MainViewController {
                     
                     let distanceText = "\(degreesAway) and \(cmAway) away"
                     
-                    sceneView.accessibilityHint = "\(numberOfNodes) nodes placed. Selected node named \"\(currentCard.name)\", \(distanceText). Color \(uiColor.hexString), and sound \(currentCard.sound.name)"
+                    sceneView.accessibilityHint = "\(numberOfNodes) nodes placed. Selected node named \"\(currentCard.name.capitalized)\", \(distanceText). Color \(uiColor.hexString), and sound \(currentCard.sound.name)"
                 } else {
                     sceneView.accessibilityHint = "\(numberOfNodes) nodes placed."
                 }
@@ -151,17 +151,17 @@ extension MainViewController {
         let nodeText: String
         
         if numberOfNodes == 0 {
-            nodeText = "No nodes placed, currently in adding mode. Tap the Add button to add a node at the crosshair's location."
+            nodeText = "No nodes placed, currently in adding mode. Tap the Hit-Test button to add a node at the crosshair's location."
         } else {
             if currentlyOnAddingMode {
-                nodeText = "Adding mode. Tap the Add button to add a node at the crosshair's location. \(numberOfNodes) total nodes placed."
+                nodeText = "Adding mode. Tap the Hit-Test button to add a node at the crosshair's location. \(numberOfNodes) total nodes placed."
             } else {
                 if let currentCard = cvm.selectedCard {
                     let uiColor = UIColor(currentCard.color)
                     
                     let distanceText = "\(degreesAway) and \(cmAway) away"
                     
-                    nodeText = "Selected node named \"\(currentCard.name)\", \(distanceText). Color \(uiColor.hexString), and sound \(currentCard.sound.name). \(numberOfNodes) total nodes placed."
+                    nodeText = "Selected node named \"\(currentCard.name.capitalized)\", \(distanceText). Color \(uiColor.hexString), and sound \(currentCard.sound.name). \(numberOfNodes) total nodes placed."
                 } else {
                     nodeText = "\(numberOfNodes) nodes placed. No selected node."
                 }
@@ -193,8 +193,6 @@ extension MainViewController {
         UIView.animate(withDuration: 0.3) {
             self.speakExpandedBlurView.alpha = 0
             self.speakExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        } completion: { _ in
-            self.speakExpandedLabel.text = ""
         }
         synthesizer.stopSpeaking(at: .word)
     }
@@ -225,8 +223,6 @@ extension MainViewController {
         UIView.animate(withDuration: 0.3) {
             self.alertExpandedBlurView.alpha = 0
             self.alertExpandedBlurView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        } completion: { _ in
-            self.alertExpandedLabel.text = ""
         }
         alertSynthesizer.stopSpeaking(at: .word)
     }
