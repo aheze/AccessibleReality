@@ -95,7 +95,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
                 )
                 let line = lineMidBetweenNodes(positionA: value1, positionB: value2, inScene: scene)
                 updateLineNode(scene: scene, node: lineNode, color: .yellow, distance: line.0, position: line.1, positionB: line.2, lineWorldUp: line.3)
-                textNode.position = line.1
+                textNode.position = line.1.offsetZ(by: 0.03)
             }
         }
         
@@ -244,8 +244,15 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             
             let lookAtConstraint = SCNBillboardConstraint()
             textNode.constraints = [lookAtConstraint]
+            textNode.position = line.1.offsetZ(by: 0.03)
             
-            textNode.position = line.1
+            /// center text node correctly
+            /// from https://stackoverflow.com/a/49860463/14351818
+            let (min, max) = textNode.boundingBox
+            let dx = min.x + 0.5 * (max.x - min.x)
+            let dy = min.y + 0.5 * (max.y - min.y)
+            let dz = min.z + 0.5 * (max.z - min.z)
+            textNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
             
             sceneView.scene?.rootNode.addChildNode(textNode)
             self.textNode = textNode
@@ -253,6 +260,12 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     }
 }
 
+extension SCNVector3 {
+    func offsetZ(by float: Float) -> SCNVector3 {
+        let vector = SCNVector3(self.x, self.y, self.z + float)
+        return vector
+    }
+}
 
 /// from https://stackoverflow.com/a/31727051/14351818
 extension String {

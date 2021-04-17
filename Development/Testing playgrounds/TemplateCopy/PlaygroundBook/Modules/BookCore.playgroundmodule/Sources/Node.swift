@@ -238,6 +238,5 @@ func updateLineNode(scene: SCNScene, node: SCNNode, color: UIColor, distance: Nu
     
     node.geometry = lineGeometry
     node.position = position
-    node.opacity = 0.8
     node.look(at: positionB, up: scene.rootNode.worldUp, localFront: lineWorldUp)
 }
