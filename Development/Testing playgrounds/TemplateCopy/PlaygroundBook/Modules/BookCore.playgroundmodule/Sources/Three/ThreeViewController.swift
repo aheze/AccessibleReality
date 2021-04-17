@@ -40,6 +40,10 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     var cameraNode: Node?
     var directionNode: Node?
     
+    var line1Node: SCNNode?
+    var line2Node: SCNNode?
+    var textNode: SCNNode? = SCNNode()
+    
     var svmV: SlidersViewModel!
     var svm1: SlidersViewModel!
     var svm2R: SlidersViewModel!
@@ -90,6 +94,35 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             self.svm2.z = Double(position.z)
             
             self.updatePositionStore()
+            
+            if
+                let line1Node = self.line1Node,
+                let line2Node = self.line2Node,
+                let textNode = self.textNode,
+                let scene = self.sceneViewWrapper.sceneView.scene
+            {
+                let valueV = Value(
+                    x: Float(self.svmV.x) / 100,
+                    y: Float(self.svmV.y) / 100,
+                    z: Float(self.svmV.z) / 100
+                )
+                let value1 = Value(
+                    x: Float(self.svm1.x) / 100,
+                    y: Float(self.svm1.y) / 100,
+                    z: Float(self.svm1.z) / 100
+                )
+                let value2 = Value(
+                    x: Float(self.svm2.x) / 100,
+                    y: Float(self.svm2.y) / 100,
+                    z: Float(self.svm2.z) / 100
+                )
+                let line1 = lineMidBetweenNodes(positionA: valueV, positionB: value1, inScene: scene)
+                let line2 = lineMidBetweenNodes(positionA: valueV, positionB: value2, inScene: scene)
+                updateLineNode(scene: scene, node: line1Node, color: .yellow, distance: line1.0, position: line1.1, positionB: line1.2, lineWorldUp: line1.3)
+                updateLineNode(scene: scene, node: line2Node, color: .yellow, distance: line2.0, position: line2.1, positionB: line2.2, lineWorldUp: line2.3)
+                
+//                textNode.position = line.1.offsetZ(by: 0.03)
+            }
         }
 
         let sliderView = FourSliderView(svm1: svm1, svmV: svmV, svm2R: svm2R, svm2: svm2)
@@ -110,6 +143,8 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         
         let hostingController = UIHostingController(rootView: sliderView)
         addChildViewController(hostingController, in: slidersReferenceView)
+        
+        self.addLineNodes(sceneView: sceneViewWrapper.sceneView)
         
         UIScrollView.appearance().alwaysBounceVertical = false
     }
@@ -243,6 +278,67 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         sceneViewWrapper.sceneView.scene?.rootNode.addNode(directionNode)
         
         return position
+    }
+    func addLineNodes(sceneView: SCNView) {
+        
+        let valueV = Value(
+            x: Float(svmV.x) / 100,
+            y: Float(svmV.y) / 100,
+            z: Float(svmV.z) / 100
+        )
+        let value1 = Value(
+            x: Float(svm1.x) / 100,
+            y: Float(svm1.y) / 100,
+            z: Float(svm1.z) / 100
+        )
+        let value2 = Value(
+            x: Float(svm2.x) / 100,
+            y: Float(svm2.y) / 100,
+            z: Float(svm2.z) / 100
+        )
+        
+        if let scene = sceneView.scene {
+            
+            let line1 = lineMidBetweenNodes(positionA: valueV, positionB: value1, inScene: scene)
+            let line2 = lineMidBetweenNodes(positionA: valueV, positionB: value2, inScene: scene)
+            
+            let line1Node = SCNNode()
+            let line2Node = SCNNode()
+            
+            updateLineNode(scene: scene, node: line1Node, color: .yellow, distance: line1.0, position: line1.1, positionB: line1.2, lineWorldUp: line1.3)
+            updateLineNode(scene: scene, node: line2Node, color: .yellow, distance: line2.0, position: line2.1, positionB: line2.2, lineWorldUp: line2.3)
+            
+            sceneView.scene?.rootNode.addChildNode(line1Node)
+            sceneView.scene?.rootNode.addChildNode(line2Node)
+            self.line1Node = line1Node
+            self.line2Node = line2Node
+            
+//            let text = SCNText(string: "?", extrusionDepth: 1)
+//            text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+//
+//            let material = SCNMaterial()
+//            material.diffuse.contents = UIColor(named: "BaseGreen")
+//            text.materials = [material]
+//
+//            let textNode = SCNNode()
+//            textNode.geometry = text
+//            textNode.scale = SCNVector3(0.006, 0.006, 0.006)
+//
+//            let lookAtConstraint = SCNBillboardConstraint()
+//            textNode.constraints = [lookAtConstraint]
+//            textNode.position = line.1.offsetZ(by: 0.03)
+//
+//            /// center text node correctly
+//            /// from https://stackoverflow.com/a/49860463/14351818
+//            let (min, max) = textNode.boundingBox
+//            let dx = min.x + 0.5 * (max.x - min.x)
+//            let dy = min.y + 0.5 * (max.y - min.y)
+//            let dz = min.z + 0.5 * (max.z - min.z)
+//            textNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
+//
+//            sceneView.scene?.rootNode.addChildNode(textNode)
+//            self.textNode = textNode
+        }
     }
 }
 
