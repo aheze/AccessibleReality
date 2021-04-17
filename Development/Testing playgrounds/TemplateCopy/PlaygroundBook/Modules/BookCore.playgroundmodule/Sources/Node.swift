@@ -101,6 +101,15 @@ public class Node {
      */
     public var shape = NodeShape.cube { didSet { updateSCNNode() } }
     
+    /**
+     Position, rotation, and scale combined in 1 matrix
+     */
+    public var transform: SCNMatrix4 {
+        get {
+            scnNode?.transform ?? SCNMatrix4Identity
+        }
+    }
+    
     
     internal var scnNode: SCNNode?
     

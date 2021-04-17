@@ -91,7 +91,7 @@ extension MainViewController {
                 self.cmAway = "\(adjustedCentimeters)cm"
                 
                 if let cameraTransform = sceneView.pointOfView?.transform {
-                    let cameraProjectedPosition = projectedForwardsPosition(from: simd_float4x4(cameraTransform))
+                    let cameraProjectedPosition = projectedForwardsPosition(from: cameraTransform)
                     
                     let angle = Angle3d(vertex: cameraPosition, firstPoint: cameraProjectedPosition, secondPoint: anchorPosition)
                     let angleInDegrees = angle.radiansToDegrees
@@ -184,29 +184,17 @@ func Angle3d(vertex: SCNVector3, firstPoint: SCNVector3, secondPoint: SCNVector3
     return angle
 }
 
-func updatePositionAndOrientationOf(_ node: SCNNode, withPosition position: SCNVector3, relativeTo referenceNode: SCNNode) {
-    let referenceNodeTransform = matrix_float4x4(referenceNode.transform)
-    
-    /// Setup a translation matrix with the desired position
-    var translationMatrix = matrix_identity_float4x4
-    translationMatrix.columns.3.x = position.x
-    translationMatrix.columns.3.y = position.y
-    translationMatrix.columns.3.z = position.z
-    
-    /// Combine the configured translation matrix with the referenceNode's transform to get the desired position AND orientation
-    let updatedTransform = matrix_multiply(referenceNodeTransform, translationMatrix)
-    node.transform = SCNMatrix4(updatedTransform)
-}
 
-func projectedForwardsPosition(from transform: matrix_float4x4) -> SCNVector3 {
+func projectedForwardsPosition(from transform: SCNMatrix4) -> SCNVector3 {
+    let floatMatrix = simd_float4x4(transform)
     
     var translationForwardsMatrix = matrix_identity_float4x4
     translationForwardsMatrix.columns.3.x = 0
     translationForwardsMatrix.columns.3.y = 0
     translationForwardsMatrix.columns.3.z = -1  /// 1 meter in front
     
-    let combinedTransform = matrix_multiply(transform, translationForwardsMatrix)
-    
+    let combinedTransform = matrix_multiply(floatMatrix, translationForwardsMatrix)
+
     let newPosition = SCNVector3(
         x: combinedTransform.columns.3.x,
         y: combinedTransform.columns.3.y,
