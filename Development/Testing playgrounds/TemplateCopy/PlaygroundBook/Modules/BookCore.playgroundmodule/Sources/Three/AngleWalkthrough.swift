@@ -400,14 +400,16 @@ struct AngleWalkThrough: View {
                             )
                         }
                     }
-                    .padding(20)
-                    .background(
-                        Color.white
-                            .cornerRadius(12)
-                            .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
-                    )
-                    .padding()
+                    .padding(EdgeInsets(top: 2, leading: 20, bottom: 12, trailing: 20))
                 }
+                .padding(20)
+                .background(
+                    Color.white
+                        .cornerRadius(12)
+                        .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
+                )
+                .padding()
+                
             }
         }
         .onReceive(timer) { time in
