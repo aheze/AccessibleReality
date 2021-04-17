@@ -21,7 +21,7 @@ struct WalkThrough: View {
     var pow2Literal: String
     var pow3Literal: String
     
-    var showResult: ((Bool, String) -> Void)?
+    var showResult: ((Bool, String, String) -> Void)?
     
     /// results
     @State var position1String = ""
@@ -306,9 +306,9 @@ struct WalkThrough: View {
                 
                 {
                     if let hasErrorLiteral = hasErrorLiteral {
-                        showResult?(false, "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct.")
+                        showResult?(false, "Hmm... not quite. \"\(hasErrorLiteral)\" might not be correct.", "")
                     } else {
-                        showResult?(true, "Congratulations! \n\nYou got \(distanceResult), which is the correct distance! \n\n[**Next Page**](@next)")
+                        showResult?(true, "Congratulations! \n\nYou got \(distanceResult), which is the correct distance! \n\n[**Next Page**](@next)", distanceResult)
                     }
                 }
             ]

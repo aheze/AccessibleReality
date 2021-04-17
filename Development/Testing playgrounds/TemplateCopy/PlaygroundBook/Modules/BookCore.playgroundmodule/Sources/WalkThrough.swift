@@ -93,7 +93,6 @@ struct InfoCard: View {
     
     var body: some View {
         
-        
         VStack {
             Text(parameterName)
                 .font(.system(size: 19, weight: .medium, design: .monospaced))

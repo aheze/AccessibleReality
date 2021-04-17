@@ -134,7 +134,14 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             z: Float(svm2.z)
         )
 
-        mainCode?(sceneViewWrapper.sceneView, value1, value2)
+        if let (cubeNode, cameraNode) = mainCode?(sceneViewWrapper.sceneView, value1, value2) {
+            self.addLineNodes(
+                sceneView: sceneViewWrapper.sceneView,
+                cubePosition: cubeNode.position,
+                cameraPosition: cameraNode.position
+            )
+        }
+        
         
         let text = PlaygroundPage.current.text
         
@@ -173,13 +180,37 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             pow1Literal: pow1,
             pow2Literal: pow2,
             pow3Literal: pow3,
-            showResult: { (passed, message) in
+            showResult: { (passed, message, result) in
                 if passed {
+                    let oldColor = UIColor.yellow
+                    let newColor = UIColor(named: "BaseGreen")!
+                    let duration: TimeInterval = 1
+                    let act0 = SCNAction.customAction(duration: duration, action: { (node, elapsedTime) in
+                        let percentage = elapsedTime / CGFloat(duration)
+                        node.geometry?.firstMaterial?.diffuse.contents = animateColor(from: newColor, to: oldColor, percentage: percentage)
+                    })
+                    let act1 = SCNAction.customAction(duration: duration, action: { (node, elapsedTime) in
+                        let percentage = elapsedTime / CGFloat(duration)
+                        node.geometry?.firstMaterial?.diffuse.contents = animateColor(from: oldColor, to: newColor, percentage: percentage)
+                    })
+
+                    let act = SCNAction.repeatForever(SCNAction.sequence([act0, act1]))
+                    self.lineNode?.runAction(act)
+                    
+                    let text = SCNText(string: result, extrusionDepth: 1)
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+                    
+                    let material = SCNMaterial()
+                    material.diffuse.contents = UIColor(named: "BaseGreen")
+                    text.materials = [material]
+                    
+                    self.textNode?.geometry = text
+                    
+                    
                     PlaygroundPage.current.assessmentStatus = .pass(message: message)
                 } else {
                     PlaygroundPage.current.assessmentStatus = .fail(hints: [message], solution: nil)
                 }
-                
             }
         )
         
@@ -191,7 +222,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         
     }
     
-    var mainCode: ((SCNView, Value, Value) -> Void)?
+    var mainCode: ((SCNView, Value, Value) -> (Node, Node))?
     
     func addNodes(sceneView: SCNView) {
         let cubeNode = Node()
@@ -211,18 +242,38 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         self.cameraNode = cameraNode
         
     }
-    func addLineNodes(sceneView: SCNView) {
+    func addLineNodes(sceneView: SCNView, cubePosition: Value? = nil, cameraPosition: Value? = nil) {
+        let value1: Value
+        let value2: Value
         
-        let value1 = Value(
-            x: Float(svm1.x) / 100,
-            y: Float(svm1.y) / 100,
-            z: Float(svm1.z) / 100
-        )
-        let value2 = Value(
-            x: Float(svm2.x) / 100,
-            y: Float(svm2.y) / 100,
-            z: Float(svm2.z) / 100
-        )
+        if
+            let cubePosition = cubePosition,
+            let cameraPosition = cameraPosition
+        {
+            value1 = Value(
+                x: Float(cubePosition.x) / 100,
+                y: Float(cubePosition.y) / 100,
+                z: Float(cubePosition.z) / 100
+            )
+            value2 = Value(
+                x: Float(cameraPosition.x) / 100,
+                y: Float(cameraPosition.y) / 100,
+                z: Float(cameraPosition.z) / 100
+            )
+        } else {
+            
+            value1 = Value(
+                x: Float(svm1.x) / 100,
+                y: Float(svm1.y) / 100,
+                z: Float(svm1.z) / 100
+            )
+            value2 = Value(
+                x: Float(svm2.x) / 100,
+                y: Float(svm2.y) / 100,
+                z: Float(svm2.z) / 100
+            )
+        }
+        
         if let scene = sceneView.scene {
             let line = lineMidBetweenNodes(positionA: value1, positionB: value2, inScene: scene)
             let lineNode = SCNNode()

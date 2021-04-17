@@ -240,3 +240,16 @@ func updateLineNode(scene: SCNScene, node: SCNNode, color: UIColor, distance: Nu
     node.position = position
     node.look(at: positionB, up: scene.rootNode.worldUp, localFront: lineWorldUp)
 }
+
+/// animate node color
+/// from https://stackoverflow.com/a/45049489/14351818
+func animateColor(from: UIColor, to: UIColor, percentage: CGFloat) -> UIColor {
+    let fromComponents = from.cgColor.components!
+    let toComponents = to.cgColor.components!
+
+    let color = UIColor(red: fromComponents[0] + (toComponents[0] - fromComponents[0]) * percentage,
+        green: fromComponents[1] + (toComponents[1] - fromComponents[1]) * percentage,
+        blue: fromComponents[2] + (toComponents[2] - fromComponents[2]) * percentage,
+        alpha: fromComponents[3] + (toComponents[3] - fromComponents[3]) * percentage)
+    return color
+}

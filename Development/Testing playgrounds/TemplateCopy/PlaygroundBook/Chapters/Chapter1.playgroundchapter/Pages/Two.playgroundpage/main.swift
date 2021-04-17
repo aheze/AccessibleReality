@@ -44,8 +44,6 @@ That was for 2D points. Now, to make it work for 3D, all we need to do is add on
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView, slider1Value, slider2Value) in
 
-
-
 let cubeNode = Node()
 cubeNode.shape = .cube
 cubeNode.color = UIColor.red
@@ -76,7 +74,7 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
 // Call the function here!
 let distance = distanceFormula3D(position1: cubeNode.position, position2: cameraNode.position)
 //#-hidden-code
-    
+return (cubeNode, cameraNode)
 }
 
 PlaygroundPage.current.needsIndefiniteExecution = true
