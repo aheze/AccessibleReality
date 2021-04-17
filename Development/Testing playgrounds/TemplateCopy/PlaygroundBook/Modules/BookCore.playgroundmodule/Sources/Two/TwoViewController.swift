@@ -37,6 +37,8 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     @IBOutlet weak var sceneViewWrapper: SceneViewWrapper!
     var cubeNode: Node?
     var cameraNode: Node?
+    var lineNode: SCNNode?
+    var textNode: SCNNode?
     
     var svm1: SlidersViewModel! /// keep reference to cards
     var svm2: SlidersViewModel! /// keep reference to cards
@@ -76,12 +78,32 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             PlaygroundKeyValueStore.current["Two_svm2y"] = .floatingPoint(self.svm2.y)
             PlaygroundKeyValueStore.current["Two_svm2z"] = .floatingPoint(self.svm2.z)
 
+            
+            if
+                let lineNode = self.lineNode,
+                let textNode = self.textNode,
+                let scene = self.sceneViewWrapper.sceneView.scene {
+                let value1 = Value(
+                    x: Float(self.svm1.x) / 100,
+                    y: Float(self.svm1.y) / 100,
+                    z: Float(self.svm1.z) / 100
+                )
+                let value2 = Value(
+                    x: Float(self.svm2.x) / 100,
+                    y: Float(self.svm2.y) / 100,
+                    z: Float(self.svm2.z) / 100
+                )
+                let line = lineMidBetweenNodes(positionA: value1, positionB: value2, inScene: scene)
+                updateLineNode(scene: scene, node: lineNode, color: .yellow, distance: line.0, position: line.1, positionB: line.2, lineWorldUp: line.3)
+                textNode.position = line.1
+            }
         }
         
         
         let sliders = TwoSliderView(svm1: svm1, svm2: svm2)
         
         self.addNodes(sceneView: sceneViewWrapper.sceneView)
+        self.addLineNodes(sceneView: sceneViewWrapper.sceneView)
         
         let hostingController = UIHostingController(rootView: sliders)
         addChildViewController(hostingController, in: slidersReferenceView)
@@ -187,6 +209,47 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         sceneView.scene?.addNode(cameraNode)
 
         self.cameraNode = cameraNode
+        
+    }
+    func addLineNodes(sceneView: SCNView) {
+        
+        let value1 = Value(
+            x: Float(svm1.x) / 100,
+            y: Float(svm1.y) / 100,
+            z: Float(svm1.z) / 100
+        )
+        let value2 = Value(
+            x: Float(svm2.x) / 100,
+            y: Float(svm2.y) / 100,
+            z: Float(svm2.z) / 100
+        )
+        if let scene = sceneView.scene {
+            let line = lineMidBetweenNodes(positionA: value1, positionB: value2, inScene: scene)
+            let lineNode = SCNNode()
+            updateLineNode(scene: scene, node: lineNode, color: .yellow, distance: line.0, position: line.1, positionB: line.2, lineWorldUp: line.3)
+            
+            sceneView.scene?.rootNode.addChildNode(lineNode)
+            self.lineNode = lineNode
+            
+            let text = SCNText(string: "?", extrusionDepth: 1)
+            text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            
+            let material = SCNMaterial()
+            material.diffuse.contents = UIColor(named: "BaseGreen")
+            text.materials = [material]
+            
+            let textNode = SCNNode()
+            textNode.geometry = text
+            textNode.scale = SCNVector3(0.006, 0.006, 0.006)
+            
+            let lookAtConstraint = SCNBillboardConstraint()
+            textNode.constraints = [lookAtConstraint]
+            
+            textNode.position = line.1
+            
+            sceneView.scene?.rootNode.addChildNode(textNode)
+            self.textNode = textNode
+        }
     }
 }
 

@@ -213,3 +213,31 @@ func combine(_ transform: SCNMatrix4, with position: Value) -> Value {
     
     return combinedPosition
 }
+
+/// distance, position, lookPositionB, lookWorldUp
+/// make a line between nodes
+/// from https://stackoverflow.com/a/57724512/14351818
+func lineMidBetweenNodes(positionA: Value, positionB: Value, inScene: SCNScene) -> (Number, SCNVector3, SCNVector3, SCNVector3) {
+    let vector = SCNVector3(positionA.x - positionB.x, positionA.y - positionB.y, positionA.z - positionB.z)
+    let distance = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+    let midPosition = SCNVector3 (x:(positionA.x + positionB.x) / 2, y:(positionA.y + positionB.y) / 2, z:(positionA.z + positionB.z) / 2)
+
+    let lineNode = SCNNode()
+    lineNode.position = midPosition
+
+    let positionBVector = SCNVector3(x: positionB.x, y: positionB.y, z: positionB.z)
+    return (distance, midPosition, positionBVector, lineNode.worldUp)
+}
+
+func updateLineNode(scene: SCNScene, node: SCNNode, color: UIColor, distance: Number, position: SCNVector3, positionB: SCNVector3, lineWorldUp: SCNVector3) {
+    let lineGeometry = SCNCylinder()
+    lineGeometry.radius = 0.005
+    lineGeometry.height = CGFloat(distance)
+    lineGeometry.radialSegmentCount = 5
+    lineGeometry.firstMaterial!.diffuse.contents = color
+    
+    node.geometry = lineGeometry
+    node.position = position
+    node.opacity = 0.8
+    node.look(at: positionB, up: scene.rootNode.worldUp, localFront: lineWorldUp)
+}
