@@ -48,6 +48,16 @@ Once we got that down, let's use the Dot Product to find that angle! We can calc
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateThreeMainView { (cameraNode, cubeNode, directionNode) in
+func distanceFormula3D(position1: Value, position2: Value) -> Number {
+    let xDifference = position1.x - position2.x
+    let yDifference = position1.y - position2.y
+    let zDifference = position1.z - position2.z
+
+    let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
+    let distance = sqrt(everythingInsideSquareRoot)
+    
+    return Number(distance)
+}
 
 //#-end-hidden-code
 func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {

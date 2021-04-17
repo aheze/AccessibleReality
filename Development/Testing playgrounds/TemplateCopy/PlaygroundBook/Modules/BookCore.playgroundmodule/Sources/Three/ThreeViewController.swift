@@ -199,7 +199,29 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             z: Float(svm2.z)
         )
 
-        mainCode?(sceneViewWrapper.sceneView, value1, value2)
+        let cubeNode = Node()
+        cubeNode.color = UIColor.red
+        cubeNode.position = defaultCubePosition
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(cubeNode)
+        self.cubeNode = cubeNode
+        
+        let cameraNode = Node()
+        cameraNode.shape = .pyramid
+        cameraNode.color = UIColor.darkGray
+        cameraNode.position = defaultCameraPosition
+        cameraNode.rotation = defaultCameraRotation
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(cameraNode)
+        self.cameraNode = cameraNode
+        
+        let position = combine(self.cameraNode!.transform, with: Value(x: 0, y: -50, z: 0))
+        let directionNode = Node()
+        directionNode.shape = .sphere
+        directionNode.color = UIColor.systemTeal
+        directionNode.position = position
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(directionNode)
+        self.directionNode = directionNode
+        
+        mainCode?(cameraNode, cubeNode, directionNode)
         
         let text = PlaygroundPage.current.text
         
@@ -256,7 +278,7 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         
     }
     
-    var mainCode: ((SCNView, Value, Value) -> Void)?
+    var mainCode: ((Node, Node, Node) -> Void)?
     
 
 }

@@ -80,6 +80,19 @@ public func instantiateThreeLiveView() -> PlaygroundLiveViewable {
     fatalError("instantiateOneLiveView failed")
 }
 
+public func instantiateThreeMainView(block: @escaping ((Node, Node, Node) -> Void)) -> PlaygroundLiveViewable {
+    
+    let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
+    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_ThreeViewController") as? ThreeViewController {
+        viewController.isLive = false
+        viewController.mainCode = { (cameraNode, cubeNode, directionNode) in
+            block(cameraNode, cubeNode, directionNode)
+        }
+        return viewController
+    }
+    
+    fatalError("instantiateOneLiveView failed")
+}
 
 
 
