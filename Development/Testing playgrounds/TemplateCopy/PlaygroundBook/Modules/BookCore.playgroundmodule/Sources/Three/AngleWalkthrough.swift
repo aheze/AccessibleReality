@@ -25,8 +25,6 @@ struct AngleWalkThrough: View {
     var yProductLiteral: String
     var zProductLiteral: String
     
-    var acosLiteral: String
-    
     var showResult: ((Bool, String, String) -> Void)?
     
     /// results
@@ -115,7 +113,7 @@ struct AngleWalkThrough: View {
     
     @State var timerCounter = 0
     @State var timerStarted = false
-    @State var timer = Timer.publish(every: 0.1, on: .main, in: .common)
+    @State var timer = Timer.publish(every: 0.4, on: .main, in: .common)
     @State var animationBlocks: [(() -> Void)] = []
     
     @State var currentCodeLine = 0
@@ -371,7 +369,7 @@ struct AngleWalkThrough: View {
                                     CodeBlock(code: "angle = ", codeColor: .black),
                                     CodeBlock(code: "acos", codeColor: .cPurple),
                                     CodeBlock(code: "(", codeColor: .black),
-                                    CodeBlock(animated: angle_cosOfAngleAnimated, code: acosLiteral, codeColor: .black, replacedCode: cosineOfAngleString),
+                                    CodeBlock(animated: angle_cosOfAngleAnimated, code: "cosineOfAngle", codeColor: .black, replacedCode: cosineOfAngleString),
                                     CodeBlock(code: ")", codeColor: .black),
                                 ]
                             )
@@ -497,7 +495,6 @@ struct AngleWalkThrough: View {
             let vertexToPosition1 = distanceFormula3D(position1: vertexValue, position2: position1Value)
             let vertexToPosition2 = distanceFormula3D(position1: vertexValue, position2: position2Value)
             let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
-            print("COS OF AN \(cosineOfAngle)")
             
             self.dotProductResult = hasError ? "Error" : "\(Int(dotProduct))"
             self.vertexToPosition1String = hasError ? "Error" : "\(Int(vertexToPosition1.rounded()))"

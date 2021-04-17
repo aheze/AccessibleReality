@@ -245,9 +245,6 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             zProduct = "zProduct"
         }
         
-        
-        let cosineOfAngle = text.slice(from: "let angle = acos(/*#-editable-code Number*/", to: "/*#-end-editable-code*/)") ?? ""
-        
         let mainView = AngleWalkThrough(
             svmV: svmV,
             svm1: svm1,
@@ -255,7 +252,6 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             xProductLiteral: xProduct,
             yProductLiteral: yProduct,
             zProductLiteral: zProduct,
-            acosLiteral: cosineOfAngle,
             showResult: { (passed, message, result) in
                 if passed {
                     let oldColor = UIColor.yellow

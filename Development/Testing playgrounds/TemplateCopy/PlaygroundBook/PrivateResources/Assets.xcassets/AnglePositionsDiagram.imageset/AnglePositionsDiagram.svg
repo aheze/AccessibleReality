@@ -2,8 +2,8 @@
 <svg width="500px" height="200px" viewBox="0 0 500 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>AnglePositionsDiagram</title>
     <g id="AnglePositionsDiagram" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <polygon id="Rectangle" fill-opacity="0.5" fill="#F2F2F2" transform="translate(94.743966, -8.275781) rotate(-27.000000) translate(-94.743966, 8.275781) " points="-202.093223 162.961074 325.906777 162.961074 391.581156 34.0678496 -27.594151 -179.512637"></polygon>
-        <polygon id="Rectangle" fill-opacity="0.5" fill="#BDBDBD" transform="translate(256.243449, 241.279028) rotate(-27.000000) translate(-256.243449, -241.279028) " points="-70.9204874 116.11077 457.079513 116.11077 583.407386 366.447285 55.407386 366.447285"></polygon>
+        <polygon id="Rectangle" fill-opacity="0.5" fill="#F2F2F2" transform="translate(83.274621, -2.431858) rotate(-27.000000) translate(-83.274621, 2.431858) " points="-226.434917 90.0356697 327.309779 168.804998 392.984158 39.9117733 -26.191149 -173.668713"></polygon>
+        <polygon id="Rectangle" fill-opacity="0.5" fill="#BDBDBD" transform="translate(226.937316, 212.418971) rotate(-27.000000) translate(-226.937316, -212.418971) " points="-113.236385 48.2315093 440.783144 126.269919 567.111017 376.606434 39.1110172 376.606434"></polygon>
         <polygon id="Rectangle" fill-opacity="0.5" fill="#DDDDDD" transform="translate(525.035100, 43.961484) rotate(-27.000000) translate(-525.035100, -43.961484) " points="452.072735 -135.720055 396.520926 -26.6934911 522.848799 223.643024 653.549274 -33.0626306"></polygon>
         <path d="M173.859375,83 C192.543403,91.2894471 199.755208,106.024256 195.494792,127.204427" id="Path-3" stroke="#FF8F00" stroke-width="6" stroke-linecap="round"></path>
         <path d="M173.859375,83 C192.236328,95.1531624 199.294596,111.819829 195.03418,133 C181.011393,133 154.553385,131.880534 115.660156,129.641602 L173.859375,83 Z" id="Path-3" fill-opacity="0.3" fill="#FF8F00"></path>
@@ -15,8 +15,10 @@
             <polygon id="Rectangle-Copy-2" fill="#821414" transform="translate(51.000000, 48.565829) scale(-1, 1) translate(-51.000000, -48.565829) " points="32 19.5405129 70 33.5405129 70 77.5911458 32 63.5911458"></polygon>
         </g>
         <polygon id="Rectangle" fill="#D6AD18" transform="translate(230.054688, 31.240625) rotate(-169.000000) translate(-230.054688, -31.240625) " points="216.054688 17.240625 230.054688 30.9718942 244.054688 45.240625 216.054688 45.240625"></polygon>
-        <circle id="Oval" fill="#00C5D3" cx="230" cy="29" r="26"></circle>
-        <path d="M230,55 C244.359403,55 256,43.3594035 256,28.9999452 C238.292969,47.0888672 214.885433,41.9999726 204,28.9999452 C204,43.3594035 215.640597,55 230,55 Z" id="Oval" fill="#00B7C4"></path>
+        <g id="Group-3" transform="translate(204.000000, 3.000000)">
+            <circle id="Oval" fill="#00C5D3" cx="26" cy="26" r="26"></circle>
+            <path d="M26,52 C40.3594035,52 52,40.3594035 52,25.9999452 C34.2929687,44.0888672 10.885433,38.9999726 0,25.9999452 C0,40.3594035 11.6405965,52 26,52 Z" id="Oval" fill="#00B7C4"></path>
+        </g>
         <g id="Group-2" transform="translate(116.000000, 132.000000) rotate(2.000000) translate(-116.000000, -132.000000) translate(71.000000, 83.000000)">
             <polygon id="Path-5" fill="#979797" points="6.39488462e-14 61.875 32.9699707 0 89.0927183 54"></polygon>
             <polygon id="Path-5" fill="#6F6F6F" points="6.39488462e-14 61.875 66.3068848 97.875 89.0927183 54"></polygon>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>xArrow</title>
+    <g id="xArrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M0.928932188,7 L8,-0.0710678119 L15.0710678,7 L11,7 L11,16 L5,16 L5,7 L0.928932188,7 Z" id="Combined-Shape" fill="#FF0000" transform="translate(8.000000, 7.964466) rotate(-270.000000) translate(-8.000000, -7.964466) "></path>
+    </g>
+</svg>

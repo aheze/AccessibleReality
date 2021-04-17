@@ -82,7 +82,7 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
 
     let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
     //#-code-completion(identifier, show, cosineOfAngle)
-    let angle = acos(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/)
+    let angle = acos(cosineOfAngle)
     let degrees = angle * 180 / .pi
     return degrees
 }

@@ -149,37 +149,12 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
         let yValue = text.slice(from: "/*#-editable-code Y coordinate*/", to: "/*#-end-editable-code*/.y") ?? ""
         let zValue = text.slice(from: "/*#-editable-code Z coordinate*/", to: "/*#-end-editable-code*/.z") ?? ""
         
-        let squareRoot = text.slice(from: "let everythingInsideSquareRoot = pow(/*#-editable-code Number*/", to: "let distance = sqrt(everythingInsideSquareRoot)")
-        let splits = squareRoot?.components(separatedBy: "/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/") ?? []
-        
-        let pow1: String
-        let pow2: String
-        let pow3: String
-        
-        if
-            splits.indices.contains(0),
-            splits.indices.contains(1),
-            splits.indices.contains(2)
-        {
-            pow1 = splits[0]
-            pow2 = splits[1]
-            pow3 = splits[2].replacingOccurrences(of: "/*#-end-editable-code*/, 2)", with: "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        } else {
-            pow1 = "xDifference"
-            pow2 = "yDifference"
-            pow3 = "zDifference"
-        }
-        
-        
         let mainView = WalkThrough(
             svm1: svm1,
             svm2: svm2,
             xValueLiteral: xValue,
             yValueLiteral: yValue,
             zValueLiteral: zValue,
-            pow1Literal: pow1,
-            pow2Literal: pow2,
-            pow3Literal: pow3,
             showResult: { (passed, message, result) in
                 if passed {
                     let oldColor = UIColor.yellow

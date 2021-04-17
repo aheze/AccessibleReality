@@ -28,9 +28,9 @@ With the introduction of Apple's ARKit and similar frameworks, it's now very eas
  
 Let's start by making sense of ARKit's coordinate system. At its core are the 3 axes: X, Y, and Z.
  
- - X is right
- - Y is up
- - Z is left
+ - ![Red arrow pointing right](xArrow) X is right
+ - ![Green arrow pointing up](yArrow) Y is up
+ - ![Blue arrow pointing left](zArrow) Z is left
  
  Each object is called a `Node` and contains several properties, including `position`. You'll pass in a `Value` of (x, y, z) for this. For example, here's the code for the red cube in the live view:
  
@@ -59,7 +59,7 @@ if let hitPosition = sceneView.hitTest(at: crosshairPoint) {
 //#-editable-code
     newNode.shape = .cube
     newNode.color = UIColor.red
-    newNode.position = <#Value#>
+    newNode.position = hitPosition
 //#-end-editable-code
     sceneView.scene?.addNode(newNode)
 //#-hidden-code

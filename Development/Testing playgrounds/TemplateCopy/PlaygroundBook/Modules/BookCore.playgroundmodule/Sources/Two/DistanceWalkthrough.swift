@@ -17,9 +17,6 @@ struct WalkThrough: View {
     var xValueLiteral: String
     var yValueLiteral: String
     var zValueLiteral: String
-    var pow1Literal: String
-    var pow2Literal: String
-    var pow3Literal: String
     
     var showResult: ((Bool, String, String) -> Void)?
     
@@ -171,15 +168,15 @@ struct WalkThrough: View {
                                 CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
                                 CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
                                 CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                                CodeBlock(animated: pow1Animated, code: pow1Literal, codeColor: .black, replacedCode: xDifference),
+                                CodeBlock(animated: pow1Animated, code: "xDifference", codeColor: .black, replacedCode: xDifference),
                                 CodeBlock(code: ", 2) + ", codeColor: .black, replacedCode: nil),
                                 CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
                                 CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                                CodeBlock(animated: pow2Animated, code: pow2Literal, codeColor: .black, replacedCode: yDifference),
+                                CodeBlock(animated: pow2Animated, code: "yDifference", codeColor: .black, replacedCode: yDifference),
                                 CodeBlock(code: ", 2) + ", codeColor: .black, replacedCode: nil),
                                 CodeBlock(code: "pow", codeColor: .cPurple, replacedCode: nil),
                                 CodeBlock(code: "(", codeColor: .black, replacedCode: nil),
-                                CodeBlock(animated: pow3Animated, code: pow3Literal, codeColor: .black, replacedCode: zDifference),
+                                CodeBlock(animated: pow3Animated, code: "zDifference", codeColor: .black, replacedCode: zDifference),
                                 CodeBlock(code: ", 2)", codeColor: .black, replacedCode: nil),
                             ]
                         )
@@ -260,10 +257,6 @@ struct WalkThrough: View {
             xDifference = hasError ? "Error" : "\(Int(xDiff))"
             yDifference = hasError ? "Error" : "\(Int(yDiff))"
             zDifference = hasError ? "Error" : "\(Int(zDiff))"
-            
-            if pow1Literal != "xDifference" { hasError = true ; hasErrorLiteral = pow1Literal  }
-            if pow2Literal != "yDifference" { hasError = true ; hasErrorLiteral = pow2Literal  }
-            if pow3Literal != "zDifference" { hasError = true ; hasErrorLiteral = pow3Literal  }
             
             let insideSquareRoot = pow(xDiff, 2) + pow(yDiff, 2) + pow(zDiff, 2)
             let distResult = sqrt(insideSquareRoot)

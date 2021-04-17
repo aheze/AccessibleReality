@@ -65,7 +65,7 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
 
     //#-code-completion(everything, hide)
     //#-code-completion(identifier, show, xDifference, yDifference, zDifference)
-    let everythingInsideSquareRoot = pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2) + pow(/*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/, 2)
+    let everythingInsideSquareRoot = pow(xDifference, 2) + pow(yDifference, 2) + pow(zDifference, 2)
     let distance = sqrt(everythingInsideSquareRoot)
     print(distance)
     return distance
