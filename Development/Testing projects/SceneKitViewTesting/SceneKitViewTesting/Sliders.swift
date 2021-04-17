@@ -140,137 +140,142 @@ struct FourSliderView: View {
                                             .font(.system(size: 24, weight: .medium))
                                             .foregroundColor(Color.green)
                                     }
-                                    .popover(isPresented: $popoverPresented) {
-                                        VStack(alignment: .leading) {
-                                            Group {
-                                                Text("Connected to...")
-                                                    .font(.headline)
-                                                    .foregroundColor(Color.green)
-                                                
-                                                HStack {
-                                                    Text("cameraNode.position")
-                                                        .font(.system(size: 21, weight: .medium, design: .monospaced))
-                                                    Text("and")
-                                                        .font(.system(size: 21, weight: .medium))
-                                                    Text("cameraNode.rotation")
-                                                        .font(.system(size: 21, weight: .medium, design: .monospaced))
-                                                    Text(" (together ")
-                                                        .font(.system(size: 21, weight: .medium))
-                                                    Text("cameraNode.transform")
-                                                        .font(.system(size: 21, weight: .medium, design: .monospaced))
-                                                    Text(")")
-                                                        .font(.system(size: 21, weight: .medium))
+                                    .popover(isPresented: $popoverPresented, arrowEdge: .bottom) {
+                                        ScrollView {
+                                            VStack(alignment: .leading) {
+                                                Group {
+                                                    Text("Connected to...")
+                                                        .font(.headline)
+                                                        .foregroundColor(Color.green)
+                                                    
+                                                    VStack(alignment: .leading) {
+                                                        Text("cameraNode.position")
+                                                            .font(.system(size: 21, weight: .medium, design: .monospaced))
+                                                        Text("and")
+                                                            .font(.system(size: 21, weight: .medium))
+                                                        Text("cameraNode.rotation")
+                                                            .font(.system(size: 21, weight: .medium, design: .monospaced))
+                                                        
+                                                        HStack {
+                                                            Text("(together ")
+                                                                .font(.system(size: 21, weight: .medium))
+                                                            Text("cameraNode.transform")
+                                                                .font(.system(size: 21, weight: .medium, design: .monospaced))
+                                                            Text(")")
+                                                                .font(.system(size: 21, weight: .medium))
+                                                        }
+                                                    }
+                                                    .padding(.bottom, 14)
+                                                    
+                                                    Text("...with this code:")
+                                                        .font(.headline)
+                                                        .foregroundColor(Color.green)
                                                 }
-                                                .padding(.bottom, 14)
                                                 
-                                                Text("...with this code:")
-                                                    .font(.headline)
-                                                    .foregroundColor(Color.green)
-                                            }
-                                            
-                                            Group {
-                                                Text(
-                                                    """
-                                                func combine(_ transform: SCNMatrix4, with position: Value) -> Value {
-                                                """
-                                                )
-                                                
-                                                Button(action: {
-                                                    explanation1Presented = true
-                                                }) {
+                                                Group {
                                                     Text(
                                                         """
+                                                func combine(_ transform: SCNMatrix4, with position: Value) -> Value {
+                                                """
+                                                    )
+                                                    
+                                                    Button(action: {
+                                                        explanation1Presented = true
+                                                    }) {
+                                                        Text(
+                                                            """
                                                         var positionForwardsMatrix = matrix_identity_float4x4
                                                         positionForwardsMatrix.columns.3.x = position.x
                                                         positionForwardsMatrix.columns.3.y = position.y
                                                         positionForwardsMatrix.columns.3.z = position.z
                                                     """
-                                                    )
-                                                    .foregroundColor(Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)))
-                                                    .popover(isPresented: $explanation1Presented) {
-                                                        VStack(alignment: .leading) {
-                                                            Text("Converting a `Value` to a `simd_float4x4` matrix")
-                                                                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
-                                                                .fontWeight(.bold)
-                                                            Text("We first start off with an identity matrix, which is like a clean slate. The third column of matrices correspond to positions, which we can access with `columns.3`. We'll set this to our `position`.")
-                                                                .foregroundColor(Color(.label))
+                                                        )
+                                                        .foregroundColor(Color(#colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)))
+                                                        .popover(isPresented: $explanation1Presented) {
+                                                            VStack(alignment: .leading) {
+                                                                Text("Converting a `Value` to a `simd_float4x4` matrix")
+                                                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                                                                    .fontWeight(.bold)
+                                                                Text("We first start off with an identity matrix, which is like a clean slate. The third column of matrices correspond to positions, which we can access with `columns.3`. We'll set this to our `position`.")
+                                                                    .foregroundColor(Color(.label))
+                                                            }
+                                                            .font(.system(size: 19, weight: .regular))
+                                                            .padding()
+                                                            .frame(width: 500)
                                                         }
-                                                        .font(.system(size: 19, weight: .regular))
-                                                        .padding()
-                                                        .frame(width: 500)
                                                     }
-                                                }
-                                                
-                                                Text(
-                                                    """
+                                                    
+                                                    Text(
+                                                        """
 
                                                     let transformMatrix = simd_float4x4(transform)
                                                 """
-                                                )
-                                                
-                                                Button(action: {
-                                                    explanation2Presented = true
-                                                }) {
-                                                    Text(
-                                                        """
+                                                    )
+                                                    
+                                                    Button(action: {
+                                                        explanation2Presented = true
+                                                    }) {
+                                                        Text(
+                                                            """
                                                     let combinedTransform = matrix_multiply(transformMatrix, positionForwardsMatrix)
                                                 """
-                                                    )
-                                                    .foregroundColor(Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)))
-                                                    .popover(isPresented: $explanation2Presented) {
-                                                        VStack(alignment: .leading) {
-                                                            Text("matrix_multiply")
-                                                                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
-                                                                .fontWeight(.bold)
-                                                            Text(" lets you combine 2 matrices. In our case, we combined \"transformMatrix\" (cameraNode's transform) with \"positionForwardsMatrix\" (the offset we want to add).")
-                                                                .foregroundColor(Color(.label))
+                                                        )
+                                                        .foregroundColor(Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)))
+                                                        .popover(isPresented: $explanation2Presented) {
+                                                            VStack(alignment: .leading) {
+                                                                Text("matrix_multiply")
+                                                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                                                                    .fontWeight(.bold)
+                                                                Text(" lets you combine 2 matrices. In our case, we combined \"transformMatrix\" (cameraNode's transform) with \"positionForwardsMatrix\" (the offset we want to add).")
+                                                                    .foregroundColor(Color(.label))
+                                                            }
+                                                            .font(.system(size: 19, weight: .regular))
+                                                            .padding()
+                                                            .frame(width: 500)
                                                         }
-                                                        .font(.system(size: 19, weight: .regular))
-                                                        .padding()
-                                                        .frame(width: 500)
                                                     }
-                                                }
-                                                
-                                                Button(action: {
-                                                    explanation3Presented = true
-                                                }) {
-                                                    Text(
-                                                        """
+                                                    
+                                                    Button(action: {
+                                                        explanation3Presented = true
+                                                    }) {
+                                                        Text(
+                                                            """
                                                         let combinedPosition = Value(
                                                             x: combinedTransform.columns.3.x,
                                                             y: combinedTransform.columns.3.y,
                                                             z: combinedTransform.columns.3.z
                                                         )
                                                     """
-                                                    )
-                                                    .foregroundColor(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
-                                                    .popover(isPresented: $explanation3Presented) {
-                                                        VStack(alignment: .leading) {
-                                                            Text("Getting the `Value` back")
-                                                                .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
-                                                                .fontWeight(.bold)
-                                                            Text("We are only interested in the position of the combined transform, so we can fetch it back with `columns.3` once again.")
-                                                                .foregroundColor(Color(.label))
+                                                        )
+                                                        .foregroundColor(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
+                                                        .popover(isPresented: $explanation3Presented) {
+                                                            VStack(alignment: .leading) {
+                                                                Text("Getting the `Value` back")
+                                                                    .foregroundColor(Color(#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)))
+                                                                    .fontWeight(.bold)
+                                                                Text("We are only interested in the position of the combined transform, so we can fetch it back with `columns.3` once again.")
+                                                                    .foregroundColor(Color(.label))
+                                                            }
+                                                            .font(.system(size: 19, weight: .regular))
+                                                            .padding()
+                                                            .frame(width: 500)
                                                         }
-                                                        .font(.system(size: 19, weight: .regular))
-                                                        .padding()
-                                                        .frame(width: 500)
                                                     }
-                                                }
-                                                
-                                                Text(
-                                                    """
+                                                    
+                                                    Text(
+                                                        """
                                                 
                                                     return combinedPosition
                                                 }
                                                 let position = combine(cameraNode.transform, with: Value(x: 0, y: -50, z: 0))
                                                 directionNode.position = position
                                                 """
-                                                )
+                                                    )
+                                                }
+                                                .font(.system(size: 19, weight: .regular, design: .monospaced))
                                             }
-                                            .font(.system(size: 19, weight: .regular, design: .monospaced))
+                                            .padding(24)
                                         }
-                                        .padding(24)
                                     }
 
                                 }

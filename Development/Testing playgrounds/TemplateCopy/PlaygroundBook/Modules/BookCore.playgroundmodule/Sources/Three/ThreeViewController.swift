@@ -35,11 +35,20 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     }
     
     @IBOutlet weak var sceneViewWrapper: SceneViewWrapper!
+
     var cubeNode: Node?
     var cameraNode: Node?
+    var directionNode: Node?
     
-    var svm1: SlidersViewModel! /// keep reference to cards
-    var svm2: SlidersViewModel! /// keep reference to cards
+    var svmV: SlidersViewModel!
+    var svm1: SlidersViewModel!
+    var svm2R: SlidersViewModel!
+    var svm2: ReadOnlySlidersViewModel!
+    
+    let defaultCubePosition = Value(x: 0, y: 0, z: 0)
+    let defaultCameraPosition = Value(x: 50, y: 45, z: 30)
+    let defaultCameraRotation = Value(x: 50, y: 0, z: 0)
+    
     @IBOutlet weak var slidersReferenceView: UIView!
     
     var isLive = true
@@ -51,17 +60,37 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     }
     
     func setupLiveView() {
+        self.svmV = SlidersViewModel()
         self.svm1 = SlidersViewModel()
-        self.svm2 = SlidersViewModel()
+        self.svm2R = SlidersViewModel()
+        self.svm2 = ReadOnlySlidersViewModel()
+
+        svmV.x = Double(defaultCameraPosition.x)
+        svmV.y = Double(defaultCameraPosition.y)
+        svmV.z = Double(defaultCameraPosition.z)
         
-        svm2.x = 50
-        svm2.y = 25
-        svm2.z = 25
+        svm1.x = Double(defaultCubePosition.x)
+        svm1.y = Double(defaultCubePosition.y)
+        svm1.z = Double(defaultCubePosition.z)
         
+        svm2R.x = Double(defaultCameraRotation.x)
+        svm2R.y = Double(defaultCameraRotation.y)
+        svm2R.z = Double(defaultCameraRotation.z)
+        
+
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
+//            self.cubeNode?.position = Value(x: Float(self.svm.x), y: Float(self.svm.y), z:Float(self.svm.z))
+            
             self.cubeNode?.position = Value(x: Float(self.svm1.x), y: Float(self.svm1.y), z:Float(self.svm1.z))
-            self.cameraNode?.position = Value(x: Float(self.svm2.x), y: Float(self.svm2.y), z:Float(self.svm2.z))
+            self.cameraNode?.position = Value(x: Float(self.svmV.x), y: Float(self.svmV.y), z:Float(self.svmV.z))
+            self.cameraNode?.rotation = Value(x: Float(self.svm2R.x), y: Float(self.svm2R.y), z:Float(self.svm2R.z))
+            
+            let position = combine(self.cameraNode!.transform, with: Value(x: 0, y: -50, z: 0))
+            self.directionNode?.position = position
+            self.svm2.x = Double(position.x)
+            self.svm2.y = Double(position.y)
+            self.svm2.z = Double(position.z)
             
             PlaygroundKeyValueStore.current["Two_svm1x"] = .floatingPoint(self.svm1.x)
             PlaygroundKeyValueStore.current["Two_svm1y"] = .floatingPoint(self.svm1.y)
@@ -69,15 +98,40 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             PlaygroundKeyValueStore.current["Two_svm2x"] = .floatingPoint(self.svm2.x)
             PlaygroundKeyValueStore.current["Two_svm2y"] = .floatingPoint(self.svm2.y)
             PlaygroundKeyValueStore.current["Two_svm2z"] = .floatingPoint(self.svm2.z)
-
         }
         
+
+        let sliderView = FourSliderView(svm1: svm1, svmV: svmV, svm2R: svm2R, svm2: svm2)
         
-        let sliders = TwoSliderView(svm1: svm1, svm2: svm2)
         
-        self.addNodes(sceneView: sceneViewWrapper.sceneView)
+        let cubeNode = Node()
+        cubeNode.color = UIColor.red
+        cubeNode.position = defaultCubePosition
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(cubeNode)
+        self.cubeNode = cubeNode
         
-        let hostingController = UIHostingController(rootView: sliders)
+        let cameraNode = Node()
+        cameraNode.shape = .pyramid
+        cameraNode.color = UIColor.darkGray
+        cameraNode.position = defaultCameraPosition
+        cameraNode.rotation = defaultCameraRotation
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(cameraNode)
+        self.cameraNode = cameraNode
+        
+        let position = combine(self.cameraNode!.transform, with: Value(x: 0, y: -50, z: 0))
+        let directionNode = Node()
+        directionNode.shape = .sphere
+        directionNode.color = UIColor.systemTeal
+        directionNode.position = position
+        sceneViewWrapper.sceneView.scene?.rootNode.addNode(directionNode)
+        self.directionNode = directionNode
+        
+        svm2.x = Double(position.x)
+        svm2.y = Double(position.y)
+        svm2.z = Double(position.z)
+        
+        
+        let hostingController = UIHostingController(rootView: sliderView)
         addChildViewController(hostingController, in: slidersReferenceView)
         
         UIScrollView.appearance().alwaysBounceVertical = false
@@ -85,8 +139,10 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     
     func setupMainView() {
         
+        self.svmV = SlidersViewModel()
         self.svm1 = SlidersViewModel()
-        self.svm2 = SlidersViewModel()
+        self.svm2R = SlidersViewModel()
+        self.svm2 = ReadOnlySlidersViewModel()
         
         if let keyValue = PlaygroundKeyValueStore.current["Two_svm1x"], case .floatingPoint(let number) = keyValue { svm1.x = number }
         if let keyValue = PlaygroundKeyValueStore.current["Two_svm1y"], case .floatingPoint(let number) = keyValue { svm1.y = number }
@@ -134,29 +190,29 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             pow3 = "zDifference"
         }
         
-        let mainView = WalkThrough(
-            svm1: svm1,
-            svm2: svm2,
-            xValueLiteral: xValue,
-            yValueLiteral: yValue,
-            zValueLiteral: zValue,
-            pow1Literal: pow1,
-            pow2Literal: pow2,
-            pow3Literal: pow3,
-            showResult: { (passed, message) in
-                if passed {
-                    PlaygroundPage.current.assessmentStatus = .pass(message: message)
-                } else {
-                    PlaygroundPage.current.assessmentStatus = .fail(hints: [message], solution: nil)
-                }
-                
-            }
-        )
-        
-        self.addNodes(sceneView: sceneViewWrapper.sceneView)
-        
-        let hostingController = UIHostingController(rootView: mainView)
-        addChildViewController(hostingController, in: slidersReferenceView)
+//        let mainView = WalkThrough(
+//            svm1: svm1,
+//            svm2: svm2,
+//            xValueLiteral: xValue,
+//            yValueLiteral: yValue,
+//            zValueLiteral: zValue,
+//            pow1Literal: pow1,
+//            pow2Literal: pow2,
+//            pow3Literal: pow3,
+//            showResult: { (passed, message) in
+//                if passed {
+//                    PlaygroundPage.current.assessmentStatus = .pass(message: message)
+//                } else {
+//                    PlaygroundPage.current.assessmentStatus = .fail(hints: [message], solution: nil)
+//                }
+//                
+//            }
+//        )
+//        
+//        self.addNodes(sceneView: sceneViewWrapper.sceneView)
+//        
+//        let hostingController = UIHostingController(rootView: mainView)
+//        addChildViewController(hostingController, in: slidersReferenceView)
         
         UIScrollView.appearance().alwaysBounceVertical = false
         
@@ -165,21 +221,5 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
     
     var mainCode: ((SCNView, Value, Value) -> Void)?
     
-    func addNodes(sceneView: SCNView) {
-        let cubeNode = Node()
-        cubeNode.shape = .cube
-        cubeNode.color = UIColor.red
-        cubeNode.position = Value(x: 0, y: 0, z: 0)
-        sceneView.scene?.addNode(cubeNode)
-        
-        self.cubeNode = cubeNode
-        
-        let cameraNode = Node()
-        cameraNode.shape = .pyramid
-        cameraNode.color = UIColor.black
-        cameraNode.position = Value(x: 50, y: 25, z: 25)
-        sceneView.scene?.addNode(cameraNode)
-        
-        self.cameraNode = cameraNode
-    }
+
 }

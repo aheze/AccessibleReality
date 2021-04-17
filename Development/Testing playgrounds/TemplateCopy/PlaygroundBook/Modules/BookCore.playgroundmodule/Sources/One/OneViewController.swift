@@ -17,6 +17,11 @@ class SlidersViewModel: ObservableObject {
     
     static var didChange: (() -> Void)?
 }
+class ReadOnlySlidersViewModel: ObservableObject {
+    @Published var x = Double(0)
+    @Published var y = Double(0)
+    @Published var z = Double(0)
+}
 
 @objc(BookCore_OneViewController)
 public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {

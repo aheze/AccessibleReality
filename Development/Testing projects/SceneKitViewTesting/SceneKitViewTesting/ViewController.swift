@@ -130,6 +130,10 @@ class ViewController: UIViewController {
     var svm2R: SlidersViewModel!
     var svm2: ReadOnlySlidersViewModel!
     
+    let defaultCubePosition = Value(x: 0, y: 0, z: 0)
+    let defaultCameraPosition = Value(x: 50, y: 45, z: 30)
+    let defaultCameraRotation = Value(x: 50, y: 0, z: 0)
+    
     func setupLiveView() {
 //        self.svm = SlidersViewModel()
         
@@ -138,6 +142,17 @@ class ViewController: UIViewController {
         self.svm2R = SlidersViewModel()
         self.svm2 = ReadOnlySlidersViewModel()
         
+        svmV.x = Double(defaultCameraPosition.x)
+        svmV.y = Double(defaultCameraPosition.y)
+        svmV.z = Double(defaultCameraPosition.z)
+        
+        svm1.x = Double(defaultCubePosition.x)
+        svm1.y = Double(defaultCubePosition.y)
+        svm1.z = Double(defaultCubePosition.z)
+        
+        svm2R.x = Double(defaultCameraRotation.x)
+        svm2R.y = Double(defaultCameraRotation.y)
+        svm2R.z = Double(defaultCameraRotation.z)
         
         SlidersViewModel.didChange = { [weak self] in
             guard let self = self else { return }
@@ -164,23 +179,29 @@ class ViewController: UIViewController {
         
         let cubeNode = Node()
         cubeNode.color = UIColor.red
-        cubeNode.position = Value(x: 0, y: 0, z: 0)
+        cubeNode.position = defaultCubePosition
         sceneViewWrapper.sceneView.scene?.rootNode.addNode(cubeNode)
         self.cubeNode = cubeNode
         
         let cameraNode = Node()
         cameraNode.shape = .pyramid
         cameraNode.color = UIColor.darkGray
-        cameraNode.position = Value(x: 50, y: 25, z: 25)
+        cameraNode.position = defaultCameraPosition
+        cameraNode.rotation = defaultCameraRotation
         sceneViewWrapper.sceneView.scene?.rootNode.addNode(cameraNode)
         self.cameraNode = cameraNode
         
+        let position = combine(self.cameraNode!.transform, with: Value(x: 0, y: -50, z: 0))
         let directionNode = Node()
         directionNode.shape = .sphere
         directionNode.color = UIColor.systemTeal
-        directionNode.position = Value(x: 20, y: 25, z: 25)
+        directionNode.position = position
         sceneViewWrapper.sceneView.scene?.rootNode.addNode(directionNode)
         self.directionNode = directionNode
+        
+        svm2.x = Double(position.x)
+        svm2.y = Double(position.y)
+        svm2.z = Double(position.z)
         
         
         let hostingController = UIHostingController(rootView: sliderView)

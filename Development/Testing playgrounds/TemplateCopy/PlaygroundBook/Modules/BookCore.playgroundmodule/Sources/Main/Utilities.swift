@@ -181,3 +181,4 @@ public func sqrt(_ number: Number) -> Number {
     let result = sqrt(Double(number))
     return Number(result)
 }
+

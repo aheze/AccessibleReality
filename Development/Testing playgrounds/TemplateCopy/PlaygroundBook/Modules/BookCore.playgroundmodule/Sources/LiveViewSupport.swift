@@ -73,7 +73,7 @@ public func instantiateTwoMainView(block: @escaping ((SCNView, Value, Value) -> 
 public func instantiateThreeLiveView() -> PlaygroundLiveViewable {
     
     let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
-    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_ThreeViewController") as? TwoViewController {
+    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_ThreeViewController") as? ThreeViewController {
         return viewController
     }
     
