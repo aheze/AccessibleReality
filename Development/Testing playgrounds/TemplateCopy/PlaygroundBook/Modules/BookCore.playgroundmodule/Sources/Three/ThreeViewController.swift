@@ -68,16 +68,16 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         self.svm2 = ReadOnlySlidersViewModel()
 
         svmV.x = Double(50)
-        svmV.y = Double(45)
-        svmV.z = Double(30)
+        svmV.y = Double(40)
+        svmV.z = Double(35)
         
         svm1.x = Double(0)
         svm1.y = Double(0)
         svm1.z = Double(0)
         
-        svm2R.x = Double(50)
-        svm2R.y = Double(0)
-        svm2R.z = Double(0)
+        svm2R.x = Double(-90)
+        svm2R.y = Double(-70)
+        svm2R.z = Double(50)
         
         updatePositionStore()
 
@@ -180,11 +180,10 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         svm2.y = Double(position.y)
         svm2.z = Double(position.z)
         
+        self.addLineNodes(sceneView: sceneViewWrapper.sceneView)
         
         let hostingController = UIHostingController(rootView: sliderView)
         addChildViewController(hostingController, in: slidersReferenceView)
-        
-        self.addLineNodes(sceneView: sceneViewWrapper.sceneView)
         
         UIScrollView.appearance().alwaysBounceVertical = false
     }
@@ -220,6 +219,8 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         svm2.y = Double(position.y)
         svm2.z = Double(position.z)
         
+        self.addLineNodes(sceneView: sceneViewWrapper.sceneView)
+        
         mainCode?(cameraNode, cubeNode, directionNode)
         
         let text = PlaygroundPage.current.text
@@ -254,7 +255,41 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
             xProductLiteral: xProduct,
             yProductLiteral: yProduct,
             zProductLiteral: zProduct,
-            acosLiteral: cosineOfAngle
+            acosLiteral: cosineOfAngle,
+            showResult: { (passed, message, result) in
+                if passed {
+                    let oldColor = UIColor.yellow
+                    let newColor = UIColor.green
+                    let duration: TimeInterval = 0.8
+                    let action = SCNAction.customAction(duration: duration, action: { (node, elapsedTime) in
+                        let percentage = elapsedTime / CGFloat(duration)
+                        node.geometry?.firstMaterial?.diffuse.contents = animateColor(from: oldColor, to: newColor, percentage: percentage)
+                    })
+
+                    self.line1Node?.runAction(action)
+                    self.line2Node?.runAction(action)
+                    
+                    let text = SCNText(string: "\(result)°", extrusionDepth: 1)
+                    text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+                    
+                    let material = SCNMaterial()
+                    material.diffuse.contents = UIColor(named: "BaseGreen")
+                    text.materials = [material]
+                    
+                    if let textNode = self.textNode {
+                        textNode.geometry = text
+                        let (min, max) = textNode.boundingBox
+                        let dx = min.x + 0.5 * (max.x - min.x)
+                        let dy = min.y + 0.5 * (max.y - min.y)
+                        let dz = min.z + 0.5 * (max.z - min.z)
+                        textNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
+                    }
+                    
+                    PlaygroundPage.current.assessmentStatus = .pass(message: message)
+                } else {
+                    PlaygroundPage.current.assessmentStatus = .fail(hints: [message], solution: nil)
+                }
+            }
         )
         
         let hostingController = UIHostingController(rootView: mainView)

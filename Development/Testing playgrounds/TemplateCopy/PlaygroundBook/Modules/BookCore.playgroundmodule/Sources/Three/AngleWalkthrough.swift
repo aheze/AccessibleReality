@@ -27,6 +27,8 @@ struct AngleWalkThrough: View {
     
     var acosLiteral: String
     
+    var showResult: ((Bool, String, String) -> Void)?
+    
     /// results
     @State var vertexString = ""
     @State var position1String = ""
@@ -110,9 +112,6 @@ struct AngleWalkThrough: View {
     @State var degrees_piAnimated = false
     
     @State var degreesResultAnimated = false
-    
-    
-    var showResult: ((String) -> Void)?
     
     @State var timerCounter = 0
     @State var timerStarted = false
@@ -583,11 +582,11 @@ struct AngleWalkThrough: View {
                 { withAnimation { degrees_piAnimated = true } },
                 { withAnimation { degreesResultAnimated = true; currentCodeLine = 20 } },
                 {
-                    //                    if let hasErrorLiteral = hasErrorLiteral {
-                    //                        showResult?(false, "Hmm... not quite. \n\n\"\(hasErrorLiteral)\" might not be correct.")
-                    //                    } else {
-                    //                        showResult?(true, "Congratulations! \n\nYou got **\(distanceResult)**, which is the correct result! \n\n[**Next Page**](@next)")
-                    //                    }
+                    if let hasErrorLiteral = hasErrorLiteral {
+                        showResult?(false, "Hmm... not quite. \n\n\"\(hasErrorLiteral)\" might not be correct.", "")
+                    } else {
+                        showResult?(true, "Amazing! \n\nThe angle between the camera and the node is **\(degreesResultString)°**! \n\n[**Next Page**](@next)", degreesResultString)
+                    }
                 }
             ]
         }

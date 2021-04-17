@@ -183,30 +183,30 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
             showResult: { (passed, message, result) in
                 if passed {
                     let oldColor = UIColor.yellow
-                    let newColor = UIColor(named: "BaseGreen")!
-                    let duration: TimeInterval = 1
-                    let act0 = SCNAction.customAction(duration: duration, action: { (node, elapsedTime) in
-                        let percentage = elapsedTime / CGFloat(duration)
-                        node.geometry?.firstMaterial?.diffuse.contents = animateColor(from: newColor, to: oldColor, percentage: percentage)
-                    })
-                    let act1 = SCNAction.customAction(duration: duration, action: { (node, elapsedTime) in
+                    let newColor = UIColor.green
+                    let duration: TimeInterval = 0.8
+                    let action = SCNAction.customAction(duration: duration, action: { (node, elapsedTime) in
                         let percentage = elapsedTime / CGFloat(duration)
                         node.geometry?.firstMaterial?.diffuse.contents = animateColor(from: oldColor, to: newColor, percentage: percentage)
                     })
 
-                    let act = SCNAction.repeatForever(SCNAction.sequence([act0, act1]))
-                    self.lineNode?.runAction(act)
+                    self.lineNode?.runAction(action)
                     
-                    let text = SCNText(string: result, extrusionDepth: 1)
+                    let text = SCNText(string: "\(result)cm", extrusionDepth: 1)
                     text.font = UIFont.systemFont(ofSize: 18, weight: .medium)
                     
                     let material = SCNMaterial()
                     material.diffuse.contents = UIColor(named: "BaseGreen")
                     text.materials = [material]
                     
-                    self.textNode?.geometry = text
-                    
-                    
+                    if let textNode = self.textNode {
+                        textNode.geometry = text
+                        let (min, max) = textNode.boundingBox
+                        let dx = min.x + 0.5 * (max.x - min.x)
+                        let dy = min.y + 0.5 * (max.y - min.y)
+                        let dz = min.z + 0.5 * (max.z - min.z)
+                        textNode.pivot = SCNMatrix4MakeTranslation(dx, dy, dz)
+                    }
                     
                     PlaygroundPage.current.assessmentStatus = .pass(message: message)
                 } else {
