@@ -412,12 +412,14 @@ struct Sliders: View {
             HStack {
                 Text(min)
                     .font(.system(size: compactLayout ? 14 : 21, weight: .regular))
+                    .accessibility(hint: Text("Lower bounds of sliders"))
                     .offset(x: 50, y: 0)
                 
                 Spacer()
                 
                 Text(max)
                     .font(.system(size: compactLayout ? 14 : 21, weight: .regular))
+                    .accessibility(hint: Text("Upper bounds of sliders"))
                     .offset(x: -15, y: 0)
             }
             
@@ -432,8 +434,12 @@ struct Sliders: View {
             SlidersViewModel.didChange?()
         })
         .padding(compactLayout ? 12 : 20)
-        .background(Color(.secondarySystemBackground))
+        .background(
+            Color(.secondarySystemBackground)
+                .accessibility(label: Text("Slider card"))
+        )
         .cornerRadius(16)
+        .accessibilityElement(children: .contain)
         
     }
 }

@@ -157,9 +157,13 @@ struct InfoCard: View {
             
         }
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground))
+        .background(
+            Color(.secondarySystemBackground)
+                .accessibility(label: Text("Parameter info card"))
+        )
         .cornerRadius(16)
         .shadow(color: Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2)), radius: 5, x: 0, y: 2)
+        .accessibilityElement(children: .contain)
         
     }
 }

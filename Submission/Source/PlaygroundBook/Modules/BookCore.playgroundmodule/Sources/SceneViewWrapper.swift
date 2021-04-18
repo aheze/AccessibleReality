@@ -83,6 +83,7 @@ class SceneViewWrapper: UIView {
         resetButton.setTitleColor(.systemBlue, for: .normal)
         resetButton.backgroundColor = UIColor.systemBackground
         resetButton.layer.cornerRadius = 12
+        resetButton.accessibilityHint = "Reset the scene's perspective"
         
         resetButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
