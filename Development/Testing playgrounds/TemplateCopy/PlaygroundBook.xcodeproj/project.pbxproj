@@ -218,7 +218,7 @@
 		3CE81DCE2623EBBE003FBC66 /* Tea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tea.mp3; sourceTree = "<group>"; };
 		3CE81DDD2623EF9B003FBC66 /* Line.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Line.mp3; sourceTree = "<group>"; };
 		3CE8AAE72622C96200A3F5B9 /* MainVC+SetupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainVC+SetupInfoView.swift"; sourceTree = "<group>"; };
-		5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaygroundBook.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E086DC02051C5A7004D8D25 /* Accessible Reality.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Accessible Reality.playgroundbook"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
 		5E086DCD2051DDB8004D8D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveView.storyboard; sourceTree = "<group>"; };
 		5E086DCF2051DF0F004D8D25 /* Manifest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 		5E086DA4204F706E004D8D25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */,
+				5E086DC02051C5A7004D8D25 /* Accessible Reality.playgroundbook */,
 				5EF2F9AB2054BBF300191409 /* libBookCore.a */,
 				5E6F7E612368FB6A008CC191 /* libBookAPI.a */,
 				5E6F7E742368FF15008CC191 /* libUserModule.a */,
@@ -589,7 +589,7 @@
 			);
 			name = PlaygroundBook;
 			productName = PlaygroundBook;
-			productReference = 5E086DC02051C5A7004D8D25 /* PlaygroundBook.playgroundbook */;
+			productReference = 5E086DC02051C5A7004D8D25 /* Accessible Reality.playgroundbook */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5E6F7E602368FB6A008CC191 /* BookAPI */ = {
