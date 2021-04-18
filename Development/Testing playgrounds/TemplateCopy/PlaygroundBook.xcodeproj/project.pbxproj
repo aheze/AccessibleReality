@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C30F4C9262BB8AF009956A2 /* LiveMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30F4C8262BB8AF009956A2 /* LiveMainViewController.swift */; };
 		3C30F515262BDAE3009956A2 /* Cover.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C30F514262BDAE3009956A2 /* Cover.png */; };
+		3C30F527262BE4BC009956A2 /* Glossary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C30F526262BE4BC009956A2 /* Glossary.plist */; };
 		3C4052A02627F4E80088DCBE /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40529F2627F4E80088DCBE /* Walkthrough.swift */; };
 		3C4052AA2627F5220088DCBE /* DistanceWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */; };
 		3C5209062626610C0058F77A /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5209052626610C0058F77A /* Hint.swift */; };
@@ -177,6 +178,7 @@
 /* Begin PBXFileReference section */
 		3C30F4C8262BB8AF009956A2 /* LiveMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMainViewController.swift; sourceTree = "<group>"; };
 		3C30F514262BDAE3009956A2 /* Cover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cover.png; sourceTree = "<group>"; };
+		3C30F526262BE4BC009956A2 /* Glossary.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Glossary.plist; sourceTree = "<group>"; };
 		3C40529F2627F4E80088DCBE /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
 		3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceWalkthrough.swift; sourceTree = "<group>"; };
 		3C5209052626610C0058F77A /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				3CE81DCB2623EBBE003FBC66 /* Electro.mp3 */,
 				3CE81DCE2623EBBE003FBC66 /* Tea.mp3 */,
 				3CE81DB72623E9A0003FBC66 /* Arrived.mp3 */,
+				3C30F526262BE4BC009956A2 /* Glossary.plist */,
 			);
 			path = PrivateResources;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				3CE81DDE2623EF9B003FBC66 /* Line.mp3 in Resources */,
 				3C99271A26227B7F00F46FE5 /* Particles.sks in Resources */,
 				3CE81D8C2623CE45003FBC66 /* Calm.mp3 in Resources */,
+				3C30F527262BE4BC009956A2 /* Glossary.plist in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 				3CE81DB82623E9A0003FBC66 /* Arrived.mp3 in Resources */,

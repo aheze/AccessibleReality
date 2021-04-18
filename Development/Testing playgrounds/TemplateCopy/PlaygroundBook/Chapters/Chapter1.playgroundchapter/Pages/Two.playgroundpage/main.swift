@@ -16,28 +16,28 @@ import PlaygroundSupport
  **Lesson 2**
  # The Distance Formula (but 3D)
  
-Ah, the good old algebra days! Remember the Distance Formula? It's a really handy tool that lets you find the distance between two points. Here's what it looks like:
+Ah, the good old algebra days! Remember the Distance Formula? It lets you find the distance between two points:
  
  
  ![d=√((x₂-x₁)²+(y₂-y₁)²)](DistanceFormula2D)
  
  
-That was for 2D points. Now, to make it work for 3D, all we need to do is add on a section for the `z` coordinates.
+To make it work for 3D points, all we need to do is add a section for the `z` coordinates.
  
  ![d=√((x₂-x₁)²+(y₂-y₁)²+(z₂-z₁)²)](DistanceFormula3D)
  
- `d` will equal the distance between 2 points `(x₁, y₁, z₁)` and `(x₂, y₂, z₂)`.
+ Here, `d` will be the distance between 2 points `(x₁, y₁, z₁)` and `(x₂, y₂, z₂)`.
  
  In the completed project, we'll use this to show the user how far they are from a node. Coordinates in ARKit are *so accurate* that we can rely on them for real-life distances. For now, we'll use `cameraNode` to represent the user's device, and `cubeNode` as the node of interest.
 
- Let's make the 3D Distance Formula in Swift! We'll put it in a function so that we can reuse it easily. It will take in 2 parameters, one for the starting position and one for the ending, and `return` the resulting distance when done.
+ Let's make the 3D Distance Formula in Swift! We'll put it in a [function](glossary://function) so that we can reuse it easily. It will take in 2 [parameters](glossary://parameter), one for the starting position and one for the ending, and `return` the resulting distance when done.
  
  * callout(Built-in functions):
-     We'll use Foundation's `pow(_:_:)` function, which raises numbers to a power. For example:
+     We'll use [Foundation](glossary://Foundation)'s `pow(_:_:)` function, which raises numbers to a power. For example:
      - `pow(3, 2)` raises `3` to the power of `2` — equals `9`
      - `pow(4, 3)` raises `4` to the power of `3` — equals `64`
  
-     We also need Darwin's `sqrt(_:)` function, which takes the square root. For example:
+     We also need [Darwin](glossary://Darwin)'s `sqrt(_:)` function, which takes the square root. For example:
      - `sqrt(9)` equals `3`
      - `sqrt(16)` equals `4`
 */

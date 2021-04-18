@@ -26,7 +26,7 @@ With the introduction of Apple's ARKit and similar frameworks, it's now very eas
  **Lesson 1**
  # Positioning
  
-Let's start by making sense of ARKit's coordinate system. At its core are the 3 axes: X, Y, and Z.
+Let's start by making sense of [ARKit](glossary://ARKit)'s coordinate system. At its core are the 3 axes: X, Y, and Z.
  
  - ![Red arrow pointing right](xArrow) X is right
  - ![Green arrow pointing up](yArrow) Y is up
@@ -47,9 +47,9 @@ Let's start by making sense of ARKit's coordinate system. At its core are the 3 
  
  Sometimes we want to convert on-screen coordinates (x, y) into ARKit coordinates (x, y, z). This is especially useful when you want to position a node at where you tapped the screen. To do this, we can use "Hit-Testing."
  
- How does this work? Imagine an invisible beam of light that fires from your finger tap. This beam pierces through screen, travels into the ARKit scene, and *hits* the 3D coordinate plane. ARKit will tell you the exact point (x, y, z) where the collision happened!
+ How does this work? Imagine an invisible beam of light that fires from your finger tap. This beam pierces through screen, travels into the ARKit scene, and *hits* the 3D [coordinate plane](glossary://coordinate%20plane). ARKit will tell you the exact point (x, y, z) where the collision happened!
  
- Below, use the `hitTest(at:)` function's return value to place a node at the crosshair's point.
+ Below, use the `hitTest(at:)` function's [return value](glossary://return%20value) to place a node at the crosshair's point.
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateOneMainView { (sceneView, crosshairPoint) in
@@ -75,5 +75,5 @@ return nil
 PlaygroundPage.current.needsIndefiniteExecution = true
 //#-end-hidden-code
 /*:
-Once you've filled in the placeholder, tap **Run My Code**!
+Tap **Run My Code**!
 */

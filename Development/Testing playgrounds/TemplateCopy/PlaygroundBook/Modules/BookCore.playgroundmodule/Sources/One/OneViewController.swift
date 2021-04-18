@@ -84,9 +84,11 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
     }
     
     @IBOutlet weak var hitScrollView: UIScrollView!
+    @IBOutlet weak var coordinateView: UIView!
     @IBOutlet weak var coordinateLabel: UILabel!
     @IBOutlet weak var hitTestButton: UIButton!
     @IBOutlet weak var hitResultDownImageView: UIImageView!
+    @IBOutlet weak var hitResultView: UIView!
     @IBOutlet weak var hitResultLabel: UILabel!
     
     
@@ -163,8 +165,11 @@ public class OneViewController: UIViewController, PlaygroundLiveViewMessageHandl
         crosshairView.center = CGPoint(x: 200, y: 200)
         coordinateLabel.text = "crosshairPoint: (\(Int(crosshairView.center.x)) x, \(Int(crosshairView.center.y)) y)"
         
+        
+        coordinateView.layer.cornerRadius = 16
         hitTestButton.layer.cornerRadius = 16
         hitResultDownImageView.tintColor = .placeholderText
+        hitResultView.layer.cornerRadius = 16
         hitResultLabel.textColor = .placeholderText
         
         hitScrollView.delaysContentTouches = false
