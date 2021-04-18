@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>cameraNode</title>
+    <g id="cameraNode" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2" transform="translate(24.931251, 26.320080) rotate(-255.000000) translate(-24.931251, -26.320080) translate(2.931251, 2.820080)">
+            <polygon id="Path-5" fill="#979797" points="4.76063633e-13 30.6004794 22.34915 0.327673275 43.0946391 26.5794145"></polygon>
+            <polygon id="Path-5" fill="#6F6F6F" points="1.0658141e-13 30.6004794 29.5774029 46.6589401 43.0946391 26.5794145"></polygon>
+        </g>
+    </g>
+</svg>

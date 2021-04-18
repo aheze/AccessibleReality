@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "directionNode.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

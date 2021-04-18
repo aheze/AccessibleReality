@@ -314,7 +314,10 @@ struct Sliders: View {
             if compactLayout {
                 VStack {
                     
-                    Image(imageType)
+                    HStack {
+                        Image(imageType)
+                        Image(name)
+                    }
                     
                     Text(name)
                         .font(.system(size: 19, weight: .medium, design: .monospaced))
@@ -332,7 +335,10 @@ struct Sliders: View {
                 }
             } else {
                 HStack {
-                    Image(imageType)
+                    HStack {
+                        Image(imageType)
+                        Image(name)
+                    }
                     
                     VStack(alignment: .leading, spacing: 2) {
                         Text(name)

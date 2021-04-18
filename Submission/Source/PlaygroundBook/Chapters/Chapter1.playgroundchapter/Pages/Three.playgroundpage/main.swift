@@ -24,7 +24,7 @@ For the last lesson in this playground, we'll visit the world of angles! The dis
  
  Once again, we'll use `cameraNode` to represent the user's device, and `cubeNode` as the node. We just have one more thing to consider: the camera's `rotation`. Just like `position`, this takes in a `Value`. Try playing with the sliders in the Live View!
  
- You'll notice a blue sphere that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). It's complicated to calculate the camera's rotation, which is pretty much an angle relative to the origin, alongside the angle to `cubeNode`… Instead, we can think of the desired angle as the **angle between the sphere and node, with the [vertex](glossary://vertex) at the camera**.
+ You'll notice a blue sphere (`directionNode`) that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). It's complicated to calculate the camera's rotation, which is pretty much an angle relative to the origin, alongside the angle to `cubeNode`… Instead, we can think of the desired angle as the **angle between the sphere and node, with the [vertex](glossary://vertex) at the camera**.
  
  ![Diagram showing the camera (V), cube node (1), and sphere node (2)](AnglePositionsDiagram)
  
@@ -76,6 +76,7 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
     //#-code-completion(everything, hide)
     //#-code-completion(identifier, show, xProduct, yProduct, zProduct)
     let dotProduct = /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/
+    
     let vertexToPosition1 = distance3D(position1: vertex, position2: position1) // using our own 3D Distance Formula!
     let vertexToPosition2 = distance3D(position1: vertex, position2: position2)
 

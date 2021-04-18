@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>cubeNode</title>
+    <g id="cubeNode" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(6.000000, 4.000000)">
+            <polygon id="Rectangle-Copy" fill="#FF0000" points="-1.16935033e-13 6.98973214 16.4571429 17.2494066 16.4571429 39.9040179 -1.16935033e-13 29.6443434"></polygon>
+            <polygon id="Rectangle-Copy-3" fill="#FF2E2E" points="19.7256696 -7.30843957e-15 36 10.0494066 16.4571429 17.2754464 -1.16935033e-13 7.01577193"></polygon>
+            <polygon id="Rectangle-Copy-2" fill="#821414" transform="translate(26.228571, 24.976712) scale(-1, 1) translate(-26.228571, -24.976712) " points="16.4571429 10.0494066 36 17.2494066 36 39.9040179 16.4571429 32.7040179"></polygon>
+        </g>
+    </g>
+</svg>
