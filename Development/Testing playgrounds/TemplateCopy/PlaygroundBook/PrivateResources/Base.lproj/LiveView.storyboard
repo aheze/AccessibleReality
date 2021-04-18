@@ -3,6 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -257,12 +258,12 @@
                             <rect key="frame" x="70" y="33.333333333333329" width="100" height="61.333333333333329"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ez5-wK-rGJ">
-                                    <rect key="frame" x="38" y="0.0" width="24" height="27"/>
+                                    <rect key="frame" x="38" y="34.333333333333336" width="24" height="27"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJg-gM-Q8y">
-                                    <rect key="frame" x="20.666666666666668" y="34.999999999999993" width="58.666666666666657" height="26.333333333333336"/>
+                                    <rect key="frame" x="20.666666666666668" y="0.0" width="58.666666666666657" height="26.333333333333332"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -270,12 +271,12 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="jJg-gM-Q8y" firstAttribute="centerX" secondItem="Ezv-mX-U68" secondAttribute="centerX" id="QL1-mY-qXt"/>
-                                <constraint firstItem="ez5-wK-rGJ" firstAttribute="top" secondItem="Ezv-mX-U68" secondAttribute="top" id="RUr-jH-6iO"/>
-                                <constraint firstAttribute="bottom" secondItem="jJg-gM-Q8y" secondAttribute="bottom" id="Twp-Kd-oJV"/>
+                                <constraint firstItem="jJg-gM-Q8y" firstAttribute="top" secondItem="Ezv-mX-U68" secondAttribute="top" id="9re-i9-X0z"/>
+                                <constraint firstItem="ez5-wK-rGJ" firstAttribute="centerX" secondItem="Ezv-mX-U68" secondAttribute="centerX" id="IXM-e6-BHa"/>
+                                <constraint firstItem="ez5-wK-rGJ" firstAttribute="top" secondItem="jJg-gM-Q8y" secondAttribute="bottom" constant="8" id="Kdp-Dx-uZU"/>
+                                <constraint firstAttribute="bottom" secondItem="ez5-wK-rGJ" secondAttribute="bottom" id="LCx-2u-u2h"/>
+                                <constraint firstItem="jJg-gM-Q8y" firstAttribute="centerX" secondItem="Ezv-mX-U68" secondAttribute="centerX" id="bTk-26-rhC"/>
                                 <constraint firstAttribute="width" constant="100" id="g95-b8-HNk"/>
-                                <constraint firstItem="ez5-wK-rGJ" firstAttribute="centerX" secondItem="Ezv-mX-U68" secondAttribute="centerX" id="nTZ-SH-RKc"/>
-                                <constraint firstItem="jJg-gM-Q8y" firstAttribute="top" secondItem="ez5-wK-rGJ" secondAttribute="bottom" constant="8" id="tC1-mX-OF6"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -291,6 +292,92 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="-78.461538461538453" y="84.597156398104261"/>
+        </scene>
+        <!--Book Core Live Main View Controller-->
+        <scene sceneID="qpw-hR-Qa1">
+            <objects>
+                <viewController storyboardIdentifier="BookCore_LiveMainViewController" id="q4w-7M-e0d" customClass="BookCore_LiveMainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UIc-xe-B16">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6n-PB-jFi">
+                                <rect key="frame" x="0.0" y="710" width="390" height="134"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWd-Pa-r9X">
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MuT-bA-dm3">
+                                                <rect key="frame" x="127" y="35" width="136" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap here!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0l-ED-h5X">
+                                                        <rect key="frame" x="0.0" y="0.66666666666662877" width="98" height="28.666666666666668"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ez6-SK-D0w">
+                                                        <rect key="frame" x="106" y="1.3333333333333321" width="30" height="27.666666666666668"/>
+                                                        <color key="tintColor" name="BaseGreen"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="e03-cj-dE6"/>
+                                                            <constraint firstAttribute="height" constant="30" id="pX6-dC-a5q"/>
+                                                        </constraints>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="medium" weight="medium"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="Y0l-ED-h5X" firstAttribute="centerY" secondItem="MuT-bA-dm3" secondAttribute="centerY" id="356-Mz-GJE"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Ez6-SK-D0w" secondAttribute="trailing" id="6yg-hN-zqc"/>
+                                                    <constraint firstItem="Y0l-ED-h5X" firstAttribute="leading" secondItem="MuT-bA-dm3" secondAttribute="leading" id="9Tg-zx-nmL"/>
+                                                    <constraint firstItem="Ez6-SK-D0w" firstAttribute="leading" secondItem="Y0l-ED-h5X" secondAttribute="trailing" constant="8" id="fWC-r9-Sxs"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Ez6-SK-D0w" secondAttribute="bottom" id="n6e-zC-dqW"/>
+                                                    <constraint firstItem="Ez6-SK-D0w" firstAttribute="top" secondItem="MuT-bA-dm3" secondAttribute="top" id="xLD-2H-E0P"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="MuT-bA-dm3" firstAttribute="centerY" secondItem="UWd-Pa-r9X" secondAttribute="centerY" id="O7v-b0-Ygx"/>
+                                            <constraint firstAttribute="height" constant="100" id="cnp-8r-PpW"/>
+                                            <constraint firstItem="MuT-bA-dm3" firstAttribute="centerX" secondItem="UWd-Pa-r9X" secondAttribute="centerX" id="fF2-z3-983"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="GHb-pG-2Bf"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="UWd-Pa-r9X" firstAttribute="leading" secondItem="GHb-pG-2Bf" secondAttribute="leading" id="0cZ-TJ-rEX"/>
+                                    <constraint firstItem="GHb-pG-2Bf" firstAttribute="bottom" secondItem="UWd-Pa-r9X" secondAttribute="bottom" id="P3Z-xA-cVV"/>
+                                    <constraint firstItem="GHb-pG-2Bf" firstAttribute="trailing" secondItem="UWd-Pa-r9X" secondAttribute="trailing" id="pRU-NM-ta6"/>
+                                    <constraint firstItem="UWd-Pa-r9X" firstAttribute="top" secondItem="GHb-pG-2Bf" secondAttribute="top" id="uEV-aS-Ttk"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nI-Qa-R0G" customClass="BookCore_SceneViewWrapper">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="710"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="iHr-lu-vCu"/>
+                        <color key="backgroundColor" name="PaleGreen"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="N6n-PB-jFi" secondAttribute="bottom" id="3kX-1e-urx"/>
+                            <constraint firstItem="N6n-PB-jFi" firstAttribute="top" secondItem="8nI-Qa-R0G" secondAttribute="bottom" id="CWZ-sZ-Den"/>
+                            <constraint firstItem="N6n-PB-jFi" firstAttribute="trailing" secondItem="iHr-lu-vCu" secondAttribute="trailing" id="E1m-I9-Khf"/>
+                            <constraint firstItem="8nI-Qa-R0G" firstAttribute="top" secondItem="UIc-xe-B16" secondAttribute="top" id="G1T-CD-SOd"/>
+                            <constraint firstItem="N6n-PB-jFi" firstAttribute="leading" secondItem="iHr-lu-vCu" secondAttribute="leading" id="Hmm-kn-972"/>
+                            <constraint firstAttribute="trailing" secondItem="8nI-Qa-R0G" secondAttribute="trailing" id="XOF-Vs-3Dc"/>
+                            <constraint firstItem="8nI-Qa-R0G" firstAttribute="leading" secondItem="UIc-xe-B16" secondAttribute="leading" id="d3c-EA-qp8"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="sceneViewWrapper" destination="8nI-Qa-R0G" id="UiG-1c-ka8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OTt-Xb-zuT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655.38461538461536" y="84.597156398104261"/>
         </scene>
         <!--Book Core One View Controller-->
         <scene sceneID="77F-1h-L9Z">
@@ -564,6 +651,12 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="speaker.wave.2.fill" catalog="system" width="128" height="90"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <namedColor name="BaseGreen">
+            <color red="0.014999999664723873" green="0.67299997806549072" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="PaleGreen">
+            <color red="0.94970703125" green="1" blue="0.94970703125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

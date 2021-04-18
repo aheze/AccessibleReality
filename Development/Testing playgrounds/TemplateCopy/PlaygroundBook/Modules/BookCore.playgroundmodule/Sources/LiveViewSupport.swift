@@ -22,6 +22,16 @@ public func instantiateMainLiveView() -> PlaygroundLiveViewable {
     fatalError("instantiateMainLiveView failed")
     
 }
+public func instantiateLiveMainViewController() -> PlaygroundLiveViewable {
+    
+    let storyboard = UIStoryboard(name: "LiveView", bundle: nil)
+    if let viewController = storyboard.instantiateViewController(withIdentifier: "BookCore_LiveMainViewController") as? LiveMainViewController {
+        return viewController
+    }
+    
+    fatalError("instantiateOneLiveView failed")
+}
+
 
 public func instantiateOneLiveView() -> PlaygroundLiveViewable {
     

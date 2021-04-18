@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C30F4C9262BB8AF009956A2 /* LiveMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C30F4C8262BB8AF009956A2 /* LiveMainViewController.swift */; };
 		3C4052A02627F4E80088DCBE /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C40529F2627F4E80088DCBE /* Walkthrough.swift */; };
 		3C4052AA2627F5220088DCBE /* DistanceWalkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */; };
 		3C5209062626610C0058F77A /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5209052626610C0058F77A /* Hint.swift */; };
@@ -174,6 +175,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C30F4C8262BB8AF009956A2 /* LiveMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMainViewController.swift; sourceTree = "<group>"; };
 		3C40529F2627F4E80088DCBE /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
 		3C4052A92627F5220088DCBE /* DistanceWalkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceWalkthrough.swift; sourceTree = "<group>"; };
 		3C5209052626610C0058F77A /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 		3CA7D8AC261A9B1A00A7C3C3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				3C30F4C8262BB8AF009956A2 /* LiveMainViewController.swift */,
 				3CA7D8A6261A9B1700A7C3C3 /* MainViewController.swift */,
 				3C8D8A6B261EC4B400E896FF /* MainVC+SetupAR.swift */,
 				3C86BDC6261AB2CC00610690 /* MainVC+SetupViews.swift */,
@@ -792,6 +795,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE81CCF26236092003FBC66 /* MainVC+UpdateColors.swift in Sources */,
+				3C30F4C9262BB8AF009956A2 /* LiveMainViewController.swift in Sources */,
 				3C9A2D2126255C0200D920A0 /* Sliders.swift in Sources */,
 				3C7A2F9926227C95008799A2 /* MainVC+SetupCrosshair.swift in Sources */,
 				3CE81D1D2623A654003FBC66 /* MainVC+Accessibility.swift in Sources */,

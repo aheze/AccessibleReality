@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="32px" viewBox="0 0 36 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AngleDistanceRect</title>
+    <g id="AngleDistanceRect" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <rect id="Rectangle" fill-opacity="0.8" fill="#C87E00" x="0" y="0" width="32" height="32" rx="8"></rect>
+            <line x1="16" y1="16" x2="3.05" y2="28.95" id="Line-3" stroke="#31E056" stroke-width="2" stroke-linecap="round"></line>
+            <path d="M16,24 C16.601432,24 17.0883055,23.50358 17.0883055,22.9116945 L17.0883055,17.0883055 L22.9116945,17.0883055 C23.50358,17.0883055 24,16.601432 24,16 C24,15.398568 23.50358,14.9116945 22.9116945,14.9116945 L17.0883055,14.9116945 L17.0883055,9.08830549 C17.0883055,8.49642005 16.601432,8 16,8 C15.398568,8 14.9116945,8.49642005 14.9116945,9.08830549 L14.9116945,14.9116945 L9.08830549,14.9116945 C8.49642005,14.9116945 8,15.398568 8,16 C8,16.601432 8.49642005,17.0883055 9.08830549,17.0883055 L14.9116945,17.0883055 L14.9116945,22.9116945 C14.9116945,23.50358 15.398568,24 16,24 Z" id="􀅼" fill="#FFFFFF" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

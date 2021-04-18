@@ -30,8 +30,14 @@ class SceneViewWrapper: UIView {
         }
     }
     
+    var cameraOrbitNode: SCNNode?
+    func setCustomOrbit() {
+        cameraOrbitNode?.eulerAngles = SCNVector3(-25.degreesToRadians, -8.degreesToRadians, 0)
+    }
+    
     private func commonInit() {
         let contentView = UIView()
+        contentView.backgroundColor = .clear
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -48,8 +54,8 @@ class SceneViewWrapper: UIView {
         let cameraOrbitNode = SCNNode()
         cameraOrbitNode.addChildNode(cameraNode)
         cameraOrbitNode.eulerAngles = SCNVector3(-45.degreesToRadians, 45.degreesToRadians, 0)
-        
         scene.rootNode.addChildNode(cameraOrbitNode)
+        self.cameraOrbitNode = cameraOrbitNode
         
         let sceneView = SCNView()
         contentView.addSubview(sceneView)
