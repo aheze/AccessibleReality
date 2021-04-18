@@ -16,19 +16,17 @@ import PlaygroundSupport
  **Lesson 3**
  # Amazing Angles
  
-For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the last lesson will be very useful for tracking the user's surroundings. However, while they'll know how far they are from a node, they won't know its *direction*.
+For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the last lesson will be very useful for tracking the user's surroundings. However, while they'll know how far they are from a node, they won't know its direction.
  
  This is where angles come in. If the app showed the *angle* between the device's direction and the node, the distance would make a lot more sense.
  
  ![Diagram showing the device 30 degrees 128 cm away from a node](AngleDiagram)
  
- Once again, we'll use `cameraNode` to represent the user's device, and `cubeNode` as the node. We just have one more thing to consider: the camera's `rotation`. Just like `position`, this takes in a `Value`. Try playing with the sliders in the Live View!
- 
- You'll notice a blue sphere (`directionNode`) that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). It's complicated to calculate the camera's rotation, which is pretty much an angle relative to the origin, alongside the angle to `cubeNode`… Instead, we can think of the desired angle as the **angle between the sphere and node, with the [vertex](glossary://vertex) at the camera**.
+Try playing with the sliders in the Live View! You'll notice a blue sphere that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). We can think of the desired angle as the angle between the sphere and cube, with the [vertex](glossary://vertex) at the camera.
  
  ![Diagram showing the camera (V), cube node (1), and sphere node (2)](AnglePositionsDiagram)
  
-Once we got that down, let's use the [dot product](glossary://dot%20product) to find that angle! We can calculate this in 2 ways: by using the cosine and the line segment lengths, or with the `x` and `y` coordinates of the nodes (relative to the vertex).
+Now, let's use the [dot product](glossary://dot%20product) to find that angle! We can calculate this in 2 ways: by using the cosine and the line segment lengths, or with the `x` and `y` coordinates of the nodes (relative to the vertex).
  
  ![](DotProductsDiagram)
  
@@ -75,7 +73,7 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
     let zProduct = vector1.z * vector2.z
     //#-code-completion(everything, hide)
     //#-code-completion(identifier, show, xProduct, yProduct, zProduct)
-    let dotProduct = /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/
+    let dotProduct = /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ // X + Y + Z
     
     let vertexToPosition1 = distance3D(position1: vertex, position2: position1) // using our own 3D Distance Formula!
     let vertexToPosition2 = distance3D(position1: vertex, position2: position2)

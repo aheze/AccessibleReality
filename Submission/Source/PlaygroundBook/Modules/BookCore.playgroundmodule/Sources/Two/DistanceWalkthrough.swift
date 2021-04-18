@@ -136,7 +136,7 @@ struct WalkThrough: View {
                                 CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
                                 CodeBlock(code: "xDifference", codeColor: .black, replacedCode: xDifference),
                                 CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                                CodeBlock(animated: xValue1Animated, code: "position1.x", codeColor: .black, replacedCode: "\(x1Value)"),
+                                CodeBlock(animated: xValue1Animated, code: "position2.x", codeColor: .black, replacedCode: "\(x1Value)"),
                                 CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
                                 CodeBlock(animated: xValue2Animated, code: "\(xValueLiteral).x", codeColor: .black, replacedCode: "\(x2Value)")
                             ]
@@ -146,7 +146,7 @@ struct WalkThrough: View {
                                 CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
                                 CodeBlock(code: "yDifference", codeColor: .black, replacedCode: yDifference),
                                 CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                                CodeBlock(animated: yValue1Animated, code: "position1.y", codeColor: .black, replacedCode: "\(y1Value)"),
+                                CodeBlock(animated: yValue1Animated, code: "position2.y", codeColor: .black, replacedCode: "\(y1Value)"),
                                 CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
                                 CodeBlock(animated: yValue2Animated, code: "\(yValueLiteral).y", codeColor: .black, replacedCode: "\(y2Value)")
                             ]
@@ -156,7 +156,7 @@ struct WalkThrough: View {
                                 CodeBlock(code: "    let ", codeColor: .cMagenta, replacedCode: nil),
                                 CodeBlock(code: "zDifference", codeColor: .black, replacedCode: zDifference),
                                 CodeBlock(code: " = ", codeColor: .black, replacedCode: nil),
-                                CodeBlock(animated: zValue1Animated, code: "position1.z", codeColor: .black, replacedCode: "\(z1Value)"),
+                                CodeBlock(animated: zValue1Animated, code: "position2.z", codeColor: .black, replacedCode: "\(z1Value)"),
                                 CodeBlock(code: " - ", codeColor: .cPurple, replacedCode: nil),
                                 CodeBlock(animated: zValue2Animated, code: "\(zValueLiteral).z", codeColor: .black, replacedCode: "\(z2Value)")
                             ]
@@ -232,20 +232,20 @@ struct WalkThrough: View {
             var hasError = false
             var hasErrorLiteral: String?
             
-            let x1ValueFloat = Float(svm1.x)
-            let y1ValueFloat = Float(svm1.y)
-            let z1ValueFloat = Float(svm1.z)
+            let x1ValueFloat = Float(svm2.x)
+            let y1ValueFloat = Float(svm2.y)
+            let z1ValueFloat = Float(svm2.z)
             var x2ValueFloat = Float(0)
             var y2ValueFloat = Float(0)
             var z2ValueFloat = Float(0)
             
-            if xValueLiteral == "position2" { x2ValueFloat = Float(svm2.x) } else { hasError = true; hasErrorLiteral = xValueLiteral }
-            if yValueLiteral == "position2" { y2ValueFloat = Float(svm2.y) } else { hasError = true; hasErrorLiteral = yValueLiteral }
-            if zValueLiteral == "position2" { z2ValueFloat = Float(svm2.z) } else { hasError = true; hasErrorLiteral = zValueLiteral }
+            if xValueLiteral == "position1" { x2ValueFloat = Float(svm1.x) } else { hasError = true; hasErrorLiteral = xValueLiteral }
+            if yValueLiteral == "position1" { y2ValueFloat = Float(svm1.y) } else { hasError = true; hasErrorLiteral = yValueLiteral }
+            if zValueLiteral == "position1" { z2ValueFloat = Float(svm1.z) } else { hasError = true; hasErrorLiteral = zValueLiteral }
             
-            let xDiff = x1ValueFloat - x2ValueFloat
-            let yDiff = y1ValueFloat - y2ValueFloat
-            let zDiff = z1ValueFloat - z2ValueFloat
+            let xDiff = x2ValueFloat - x1ValueFloat
+            let yDiff = y2ValueFloat - y1ValueFloat
+            let zDiff = z2ValueFloat - z1ValueFloat
             
             self.x1Value = hasError ? "Error" : "\(Int(x1ValueFloat))"
             self.y1Value = hasError ? "Error" : "\(Int(y1ValueFloat))"

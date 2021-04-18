@@ -238,7 +238,7 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         {
             xProduct = splits[0]
             yProduct = splits[1]
-            zProduct = splits[2].replacingOccurrences(of: "/*#-end-editable-code*/", with: "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            zProduct = splits[2].replacingOccurrences(of: "/*#-end-editable-code*/ // X + Y + Z", with: "").trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         } else {
             xProduct = "xProduct"
             yProduct = "yProduct"

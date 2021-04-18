@@ -17,7 +17,7 @@ import PlaygroundSupport
  
  You’ve made it to the end of the playground — well done! Here’s the navigation app that makes use of what we learned. Tap **Run My Code** to try it out!
  
- Place nodes in real life using the [Hit-Test](glossary://Hit-Test) button, and let the app guide you with [distances](glossary://3D%20Distance%20Formula) and [angles](glossary://3D%20Angle%20Equation). See if you can navigate around them with your eyes closed.
+ Place nodes in real life using the [Hit-Test](glossary://Hit-Test) button, and use them to mark places that might be dangerous, like the top of the stairs. Then, let the app guide you with [distances](glossary://3D%20Distance%20Formula) and [angles](glossary://3D%20Angle%20Equation).
  
  * Experiment:
      ![Sideways iPad icon](MLOrientationRect) ML object detection, with [YOLO v3-Tiny](glossary://YOLO%20v3-Tiny)! Tap this icon to set the processing orientation, and the app will then announce what it detects.
@@ -27,7 +27,7 @@ import PlaygroundSupport
      ![Line on green square](LineRect) Trace the line with your finger!
 
  
- - - -
+ ---
  
 
  ## Thank you for reading!
