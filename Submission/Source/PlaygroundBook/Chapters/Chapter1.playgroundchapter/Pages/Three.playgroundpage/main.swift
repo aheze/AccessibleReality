@@ -16,17 +16,15 @@ import PlaygroundSupport
  **Lesson 3**
  # Amazing Angles
  
-For the last lesson in this playground, we'll visit the world of angles! While they might be hard to grasp, especially in 3 dimensions, we have Swift to help us out.
- 
- The distance formula, which we covered in the last lesson, will be very useful for informing the user about their surroundings. However, while they'll know how far they are from a node, they won't know its *direction*.
+For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the last lesson will be very useful tracking the user's surroundings. However, while they'll know how far they are from a node, they won't know its *direction*.
  
  This is where angles come in. If the app showed the *angle* between the device's direction and the node, the distance would make a lot more sense.
  
  ![Diagram showing the device 30 degrees 128 cm away from a node](AngleDiagram)
  
- Once again, we'll use `cameraNode` to represent the user's device, and `cubeNode` as the node. However, we have one more thing to consider: the camera's `rotation`. Just like `position`, this takes in a `Value`. Try playing with the sliders in the Live View!
+ Once again, we'll use `cameraNode` to represent the user's device, and `cubeNode` as the node. We just have one more thing to consider: the camera's `rotation`. Just like `position`, this takes in a `Value`. Try playing with the sliders in the Live View!
  
- You'll notice a blue sphere that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). It's a lot of work to calculate the camera's rotation (which is pretty much an angle relative to the origin) and also the angle to `cubeNode`… Instead, we can think of the desired angle as the **angle between the sphere and node, with the [vertex](glossary://vertex) at the camera**.
+ You'll notice a blue sphere that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). It's complicated to calculate the camera's rotation, which is pretty much an angle relative to the origin, alongside the angle to `cubeNode`… Instead, we can think of the desired angle as the **angle between the sphere and node, with the [vertex](glossary://vertex) at the camera**.
  
  ![Diagram showing the camera (V), cube node (1), and sphere node (2)](AnglePositionsDiagram)
  

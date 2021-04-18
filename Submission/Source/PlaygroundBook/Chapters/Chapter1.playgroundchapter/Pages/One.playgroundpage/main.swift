@@ -46,7 +46,7 @@ Let's start by making sense of [ARKit](glossary://ARKit)'s coordinate system. At
  
  Sometimes we want to convert on-screen coordinates (x, y) into ARKit coordinates (x, y, z). This is especially useful when you want to position a node at where you tapped the screen. To do this, we can use "Hit-Testing."
  
- How does this work? Imagine an invisible beam of light that fires from your finger tap. This beam pierces through screen, travels into the ARKit scene, and *hits* the 3D [coordinate plane](glossary://coordinate%20plane). ARKit will tell you the exact point (x, y, z) where the collision happened!
+ How does this work? Imagine an invisible beam of light that fires from your finger tap. This beam pierces through the screen, travels into the ARKit scene, and *hits* the 3D [coordinate plane](glossary://coordinate%20plane). ARKit will tell you the exact point (x, y, z) where the collision happened!
  
  Below, use the `hitTest(at:)` function's [return value](glossary://return%20value) to place a node at the crosshair's point.
 */
