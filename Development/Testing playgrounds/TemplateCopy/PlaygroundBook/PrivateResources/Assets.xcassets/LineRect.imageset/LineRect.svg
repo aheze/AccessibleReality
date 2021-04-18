@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="36px" height="32px" viewBox="0 0 36 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>LineRect</title>
-    <g id="LineRect" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle" fill-opacity="0.8" fill="#004B65" x="0" y="0" width="32" height="32" rx="8"></rect>
-        <line x1="28" y1="4" x2="4" y2="28" id="Line-3" stroke="#00FF37" stroke-width="4.6" stroke-linecap="round"></line>
-    </g>
-</svg>
