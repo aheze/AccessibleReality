@@ -19,7 +19,7 @@ Here it is: The completed app! Press **Run My Code** to check it out.
  
  - !["HT" in green square](HitTestRect) The Hit-Test button uses our code from Lesson 1
  
- - ![Plus icon with line connecting to it on blue square](AngleDistanceRect) The Distance and Angle labels are from Lessons 1 and 2
+ - ![Plus icon with line connecting to it on blue square](AngleDistanceRect) The Distance and Angle labels are from Lessons 2 and 3
  
  ## I also added some other functions :)
  
