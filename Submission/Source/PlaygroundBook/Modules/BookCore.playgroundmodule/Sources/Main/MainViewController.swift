@@ -30,6 +30,7 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         // Implement this method to receive messages sent from the process running Contents.swift.
         // This method is *required* by the PlaygroundLiveViewMessageHandler protocol.
         // Use this method to decode any messages sent as PlaygroundValue values and respond accordingly.
+        let utterance = AVSpeechUtterance(string: "asdasd")
     }
     
 
@@ -127,7 +128,6 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
         }
         
         currentOrientation = newOrientation
-        print("adsad \(orientationText)")
         
         orientationDescriptionLabel.text = "ML Orientation: \(orientationText)"
         animatingDescriptionCount += 1

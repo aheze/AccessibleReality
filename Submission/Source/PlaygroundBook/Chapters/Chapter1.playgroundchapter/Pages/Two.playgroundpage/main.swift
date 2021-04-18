@@ -40,6 +40,8 @@ To make it work for 3D points, all we need to do is add a section for the `z` co
      We also need [Darwin](glossary://Darwin)'s `sqrt(_:)` function, which takes the square root. For example:
      - `sqrt(9)` equals `3`
      - `sqrt(16)` equals `4`
+ 
+ Once you've filled in the placeholders, tap **Run My Code**!
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateTwoMainView { (sceneView, slider1Value, slider2Value) in
@@ -79,6 +81,4 @@ return (cubeNode, cameraNode)
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 //#-end-hidden-code
-/*:
-Once you've filled in the placeholders, tap **Run My Code**!
-*/
+

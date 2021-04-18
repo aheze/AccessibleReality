@@ -34,6 +34,7 @@ public class LiveMainViewController: UIViewController, PlaygroundLiveViewMessage
     }
     
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var sceneViewWrapper: SceneViewWrapper!
     
     public override func viewDidLoad() {
@@ -61,6 +62,7 @@ public class LiveMainViewController: UIViewController, PlaygroundLiveViewMessage
         
         sceneViewWrapper.sceneView.scene?.rootNode.addChildNode(textNode)
         sceneViewWrapper.setCustomOrbit()
+        sceneViewWrapper.hideGrid()
         sceneViewWrapper.positionZ = 18
         sceneViewWrapper.backgroundColor = .clear
         sceneViewWrapper.sceneView.backgroundColor = .clear
@@ -73,6 +75,8 @@ public class LiveMainViewController: UIViewController, PlaygroundLiveViewMessage
             )
         )
         textNode.runAction(action)
+        
+
     }
     
     @IBOutlet weak var colorView: UIView!

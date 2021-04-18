@@ -16,7 +16,7 @@ import PlaygroundSupport
  **Lesson 3**
  # Amazing Angles
  
-For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the last lesson will be very useful tracking the user's surroundings. However, while they'll know how far they are from a node, they won't know its *direction*.
+For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the last lesson will be very useful for tracking the user's surroundings. However, while they'll know how far they are from a node, they won't know its *direction*.
  
  This is where angles come in. If the app showed the *angle* between the device's direction and the node, the distance would make a lot more sense.
  
@@ -43,6 +43,7 @@ Once we got that down, let's use the [dot product](glossary://dot%20product) to 
      - `acos(0)` equals `1.57` radians (90°)
      - `acos(-1)` equals `3.14` radians (180°)
  
+ Once you've filled in the placeholders, tap **Run My Code**!
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateThreeMainView { (cameraNode, cubeNode, directionNode) in
@@ -93,6 +94,3 @@ let angle = angle3D(vertex: cameraNode.position, position1: cubeNode.position, p
 
 PlaygroundPage.current.needsIndefiniteExecution = true
 //#-end-hidden-code
-/*:
-Once you've filled in the placeholders, tap **Run My Code**!
-*/

@@ -35,6 +35,12 @@ class SceneViewWrapper: UIView {
         cameraOrbitNode?.eulerAngles = SCNVector3(-25.degreesToRadians, -8.degreesToRadians, 0)
     }
     
+    var origin: SCNNode?
+    func hideGrid() {
+        origin?.isHidden = true
+        resetButton?.isHidden = true
+    }
+    
     private func commonInit() {
         let contentView = UIView()
         contentView.backgroundColor = .clear
@@ -71,8 +77,10 @@ class SceneViewWrapper: UIView {
         sceneView.autoenablesDefaultLighting = true
         sceneView.allowsCameraControl = true
         
+
         let origin = Origin(length: 1, radiusRatio: 0.006, color: (x: .red, y: .green, z: .blue, origin: .black))
         sceneView.scene?.rootNode.addChildNode(origin)
+        self.origin = origin
         
         let resetButton = UIButton(type: .system)
         contentView.addSubview(resetButton)
@@ -91,6 +99,7 @@ class SceneViewWrapper: UIView {
             resetButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
         ])
         
+        self.resetButton = resetButton
         resetButton.addTarget(self, action: #selector(resetPressed), for: .touchUpInside)
         
         self.sceneView = sceneView

@@ -305,6 +305,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                                 <color key="backgroundColor" name="PaleGreen"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Completed" translatesAutoresizingMaskIntoConstraints="NO" id="Sn1-Rc-rOT">
+                                <rect key="frame" x="0.0" y="-70" width="390" height="780"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Sn1-Rc-rOT" secondAttribute="height" multiplier="1:2" id="wvf-7O-riE"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6n-PB-jFi">
                                 <rect key="frame" x="0.0" y="710" width="390" height="134"/>
                                 <subviews>
@@ -359,28 +365,34 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8nI-Qa-R0G" customClass="BookCore_SceneViewWrapper">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="710"/>
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="250"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="1w9-5G-YoW"/>
+                                    <constraint firstAttribute="width" constant="500" id="7Kc-Co-6kF"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iHr-lu-vCu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="N6n-PB-jFi" secondAttribute="bottom" id="3kX-1e-urx"/>
-                            <constraint firstItem="N6n-PB-jFi" firstAttribute="top" secondItem="8nI-Qa-R0G" secondAttribute="bottom" id="CWZ-sZ-Den"/>
                             <constraint firstItem="N6n-PB-jFi" firstAttribute="trailing" secondItem="iHr-lu-vCu" secondAttribute="trailing" id="E1m-I9-Khf"/>
                             <constraint firstItem="8nI-Qa-R0G" firstAttribute="top" secondItem="UIc-xe-B16" secondAttribute="top" id="G1T-CD-SOd"/>
                             <constraint firstItem="N6n-PB-jFi" firstAttribute="leading" secondItem="iHr-lu-vCu" secondAttribute="leading" id="Hmm-kn-972"/>
+                            <constraint firstItem="Sn1-Rc-rOT" firstAttribute="leading" secondItem="UIc-xe-B16" secondAttribute="leading" id="RfL-s9-ijm"/>
                             <constraint firstItem="cVa-eD-VL7" firstAttribute="leading" secondItem="UIc-xe-B16" secondAttribute="leading" id="Vam-iu-zpg"/>
                             <constraint firstItem="cVa-eD-VL7" firstAttribute="top" secondItem="UIc-xe-B16" secondAttribute="top" id="W1j-a9-z4G"/>
-                            <constraint firstAttribute="trailing" secondItem="8nI-Qa-R0G" secondAttribute="trailing" id="XOF-Vs-3Dc"/>
                             <constraint firstItem="8nI-Qa-R0G" firstAttribute="leading" secondItem="UIc-xe-B16" secondAttribute="leading" id="d3c-EA-qp8"/>
                             <constraint firstAttribute="bottom" secondItem="cVa-eD-VL7" secondAttribute="bottom" id="eDZ-bN-oa2"/>
+                            <constraint firstItem="N6n-PB-jFi" firstAttribute="top" secondItem="Sn1-Rc-rOT" secondAttribute="bottom" id="x5i-aV-xZW"/>
+                            <constraint firstAttribute="trailing" secondItem="Sn1-Rc-rOT" secondAttribute="trailing" id="y8c-oS-5XV"/>
                             <constraint firstAttribute="trailing" secondItem="cVa-eD-VL7" secondAttribute="trailing" id="zhD-i9-MW6"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="colorView" destination="cVa-eD-VL7" id="bov-Pn-g7Z"/>
+                        <outlet property="imageView" destination="Sn1-Rc-rOT" id="vXh-xq-OFD"/>
                         <outlet property="sceneViewWrapper" destination="8nI-Qa-R0G" id="UiG-1c-ka8"/>
                     </connections>
                 </viewController>
@@ -687,6 +699,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Completed" width="512" height="1024"/>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="ipad" catalog="system" width="109" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
