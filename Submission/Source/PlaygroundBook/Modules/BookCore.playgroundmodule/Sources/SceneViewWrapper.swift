@@ -77,7 +77,7 @@ class SceneViewWrapper: UIView {
         let resetButton = UIButton(type: .system)
         contentView.addSubview(resetButton)
         
-        resetButton.setTitle("Reset perspective", for: .normal)
+        resetButton.setTitle("Reset Perspective", for: .normal)
         resetButton.titleLabel?.font = .systemFont(ofSize: 19, weight: .medium)
         resetButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         resetButton.setTitleColor(.systemBlue, for: .normal)

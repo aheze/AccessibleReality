@@ -114,5 +114,11 @@ extension MainViewController: ARSessionDelegate, ARSCNViewDelegate {
             
             trackCurrentMarker()
         }
+        
+        framesSinceLastFingerCheck += 1
+        if framesSinceLastFingerCheck >= 5 {
+            framesSinceLastFingerCheck = 0
+            checkLineOverlap()
+        }
     }
 }

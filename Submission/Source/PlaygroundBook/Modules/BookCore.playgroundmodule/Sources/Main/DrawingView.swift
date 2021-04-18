@@ -14,7 +14,6 @@ class DrawingView: UIView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        print("began")
         if let firstTouch = touches.first {
             let location = firstTouch.location(in: self)
             checkOverlap?(location)
@@ -23,7 +22,6 @@ class DrawingView: UIView {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        print("touchesMoved")
         if let firstTouch = touches.first {
             let location = firstTouch.location(in: self)
             checkOverlap?(location)
@@ -32,7 +30,6 @@ class DrawingView: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        print("touchesEnded")
         if let firstTouch = touches.first {
             let location = firstTouch.location(in: self)
             touchUp?(location)

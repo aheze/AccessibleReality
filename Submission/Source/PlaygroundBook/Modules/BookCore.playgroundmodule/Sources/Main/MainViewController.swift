@@ -62,6 +62,8 @@ public class MainViewController: UIViewController, PlaygroundLiveViewMessageHand
     var crosshairCube: SCNBox!
     
     // MARK: Tracking interface
+    var fingerTouchedDownLocation: CGPoint?
+    var framesSinceLastFingerCheck = 0
     var lineLayer: CAShapeLayer?
     @IBOutlet var infoView: UIView!
     @IBOutlet weak var infoBorderView: UIView!

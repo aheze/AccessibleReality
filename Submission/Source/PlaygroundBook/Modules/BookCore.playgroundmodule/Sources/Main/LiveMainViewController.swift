@@ -64,6 +64,47 @@ public class LiveMainViewController: UIViewController, PlaygroundLiveViewMessage
         sceneViewWrapper.positionZ = 18
         sceneViewWrapper.backgroundColor = .clear
         sceneViewWrapper.sceneView.backgroundColor = .clear
+        
+        let action = SCNAction.repeatForever(
+            SCNAction.rotate(
+                by: .pi,
+                around: SCNVector3(0, 0.5, 0),
+                duration: 6
+            )
+        )
+        textNode.runAction(action)
+    }
+    
+    @IBOutlet weak var colorView: UIView!
+    
+    var currentColorCount = 0
+    let colors: [UIColor] = [
+        #colorLiteral(red: 1, green: 0.160998218, blue: 0, alpha: 1),
+        #colorLiteral(red: 1, green: 0.7077411882, blue: 0.001607940936, alpha: 1),
+        #colorLiteral(red: 0.9696431685, green: 1, blue: 0, alpha: 1),
+        #colorLiteral(red: 0.007977302757, green: 1, blue: 0, alpha: 1),
+        #colorLiteral(red: 0, green: 0.7879274052, blue: 1, alpha: 1),
+        #colorLiteral(red: 0, green: 0.2005294328, blue: 1, alpha: 1),
+        #colorLiteral(red: 0.629867968, green: 0, blue: 1, alpha: 1),
+        #colorLiteral(red: 1, green: 0, blue: 0.7005294328, alpha: 1),
+    ]
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateToNextColor()
+    }
+    
+    func animateToNextColor() {
+        if currentColorCount == colors.count - 1 {
+            currentColorCount = 0
+        } else {
+            currentColorCount += 1
+        }
+        let newColor = colors[currentColorCount].withAlphaComponent(0.1)
+        UIView.animate(withDuration: 3) {
+            self.colorView.backgroundColor = newColor
+        } completion: { _ in
+            self.animateToNextColor()
+        }
     }
 
 }

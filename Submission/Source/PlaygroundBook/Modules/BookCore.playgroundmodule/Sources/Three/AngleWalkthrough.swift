@@ -113,7 +113,7 @@ struct AngleWalkThrough: View {
     
     @State var timerCounter = 0
     @State var timerStarted = false
-    @State var timer = Timer.publish(every: 0.4, on: .main, in: .common)
+    @State var timer = Timer.publish(every: 0.32, on: .main, in: .common)
     @State var animationBlocks: [(() -> Void)] = []
     
     @State var currentCodeLine = 0
@@ -511,7 +511,7 @@ struct AngleWalkThrough: View {
             if angle.isNaN {
                 self.angleResultString = hasError ? "Error" : "Nan"
             } else {
-                self.angleResultString = hasError ? "Error" : "\(Int(angle.rounded()))"
+                self.angleResultString = hasError ? "Error" : String(format: "%.2f", angle)
             }
             
             let degrees = angle * 180 / .pi

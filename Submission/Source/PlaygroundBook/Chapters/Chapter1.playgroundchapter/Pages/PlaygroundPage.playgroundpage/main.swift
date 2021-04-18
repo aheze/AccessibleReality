@@ -26,9 +26,9 @@ import PlaygroundSupport
  
      ![Line on green square](LineRect) Trace the line as a guide
 
- \
  
- \
+ 
+ 
 
  ## Thank you for reading!
  I hope you enjoyed my playground and learned something new. I did, too — by making this playground, I became much more familiar with ARKit and its uses for Accessibility. I think it’s cool how with Apple’s frameworks, anyone can make AR experiences, easily. I’ll see you at WWDC21!
