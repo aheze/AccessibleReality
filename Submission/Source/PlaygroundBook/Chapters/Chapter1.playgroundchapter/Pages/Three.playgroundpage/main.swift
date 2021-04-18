@@ -16,7 +16,7 @@ import PlaygroundSupport
  **Lesson 3**
  # Amazing Angles
  
-For the last lesson in this playground, we'll visit the spectacular world of angles! While they might be hard to grasp, especially in 3 dimensions, we have Swift to help us out.
+For the last lesson in this playground, we'll visit the world of angles! While they might be hard to grasp, especially in 3 dimensions, we have Swift to help us out.
  
  The distance formula, which we covered in the last lesson, will be very useful for informing the user about their surroundings. However, while they'll know how far they are from a node, they won't know its *direction*.
  
@@ -38,9 +38,9 @@ Once we got that down, let's use the [dot product](glossary://dot%20product) to 
  
  ![](AngleEquationDiagram)
  
- …which we will now make in Swift!
+ …which we'll now make in Swift!
  
- * Note: Built-in function
+ * Note:
      We'll use [vForce](glossary://vForce)'s `acos(_:)` function, which gets the [arccos](glossary://arccos) of a number. For example:
      - `acos(0)` equals `1.57` radians (90°)
      - `acos(-1)` equals `3.14` radians (180°)
@@ -48,7 +48,7 @@ Once we got that down, let's use the [dot product](glossary://dot%20product) to 
 */
 //#-hidden-code
 PlaygroundPage.current.liveView = instantiateThreeMainView { (cameraNode, cubeNode, directionNode) in
-func distanceFormula3D(position1: Value, position2: Value) -> Number {
+func distance3D(position1: Value, position2: Value) -> Number {
     let xDifference = position1.x - position2.x
     let yDifference = position1.y - position2.y
     let zDifference = position1.z - position2.z
@@ -77,8 +77,8 @@ func angle3D(vertex: Value, position1: Value, position2: Value) -> Number {
     //#-code-completion(everything, hide)
     //#-code-completion(identifier, show, xProduct, yProduct, zProduct)
     let dotProduct = /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/ + /*#-editable-code Number*/<#T##Number#>/*#-end-editable-code*/
-    let vertexToPosition1 = distanceFormula3D(position1: vertex, position2: position1) // using our own 3D Distance Formula!
-    let vertexToPosition2 = distanceFormula3D(position1: vertex, position2: position2)
+    let vertexToPosition1 = distance3D(position1: vertex, position2: position1) // using our own 3D Distance Formula!
+    let vertexToPosition2 = distance3D(position1: vertex, position2: position2)
 
     let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
     //#-code-completion(identifier, show, cosineOfAngle)

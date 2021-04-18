@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njp-FE-CnI">
-                                <rect key="frame" x="16" y="60" width="48" height="52.333333333333343"/>
+                                <rect key="frame" x="16" y="60" width="48" height="52.666666666666657"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SBe-NB-Miy">
-                                    <rect key="frame" x="0.0" y="0.0" width="48" height="52.333333333333343"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="48" height="53"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1D8-J1-M8V">
@@ -346,7 +346,7 @@
                                     </view>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="GHb-pG-2Bf"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="UWd-Pa-r9X" firstAttribute="leading" secondItem="GHb-pG-2Bf" secondAttribute="leading" id="0cZ-TJ-rEX"/>
                                     <constraint firstItem="GHb-pG-2Bf" firstAttribute="bottom" secondItem="UWd-Pa-r9X" secondAttribute="bottom" id="P3Z-xA-cVV"/>
@@ -684,10 +684,10 @@
         <image name="speaker.wave.2.fill" catalog="system" width="128" height="90"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="BaseGreen">
-            <color red="0.015686274509803921" green="0.67450980392156867" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.016000000759959221" green="0.67500001192092896" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PaleGreen">
-            <color red="0.94901960784313721" green="1" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94900000095367432" green="1" blue="0.94900000095367432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

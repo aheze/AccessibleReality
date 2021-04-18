@@ -71,7 +71,7 @@ struct WalkThrough: View {
                     .foregroundColor(Color.green)
                     .padding(EdgeInsets(top: 20, leading: 20, bottom: 6, trailing: 20))
                 
-                HStack(spacing: 16) {
+                HStack(alignment: .top, spacing: 16) {
                     InfoCard(
                         x: svm1.x,
                         y: svm1.y,
@@ -123,7 +123,7 @@ struct WalkThrough: View {
                         CodeLineView(
                             active: currentCodeLine == 0, blocks: [
                                 CodeBlock(code: "func ", codeColor: .cMagenta, replacedCode: nil),
-                                CodeBlock(code: "distanceFormula3D", codeColor: .black, replacedCode: nil),
+                                CodeBlock(code: "distance3D", codeColor: .black, replacedCode: nil),
                                 CodeBlock(code: "(position1: ", codeColor: .black, replacedCode: nil),
                                 CodeBlock(animated: position1ParameterAnimated, code: "Value", codeColor: .cTeal, replacedCode: position1String),
                                 CodeBlock(code: ", position2: ", codeColor: .black, replacedCode: nil),

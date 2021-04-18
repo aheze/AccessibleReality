@@ -225,7 +225,7 @@ public class ThreeViewController: UIViewController, PlaygroundLiveViewMessageHan
         
         let text = PlaygroundPage.current.text
         
-        let dotProduct = text.slice(from: "let dotProduct = /*#-editable-code Number*/", to: "let vertexToPosition1 = distanceFormula3D")
+        let dotProduct = text.slice(from: "let dotProduct = /*#-editable-code Number*/", to: "let vertexToPosition1 = distance3D")
         let splits = dotProduct?.components(separatedBy: "/*#-end-editable-code*/ + /*#-editable-code Number*/") ?? []
         
         let xProduct: String

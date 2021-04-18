@@ -327,7 +327,7 @@ struct AngleWalkThrough: View {
                                 active: currentCodeLine == 15, blocks: [
                                     CodeBlock(code: "    let ", codeColor: .cMagenta),
                                     CodeBlock(code: "vertexToPosition1 = ", codeColor: .black),
-                                    CodeBlock(code: "distanceFormula3D", codeColor: .cTeal),
+                                    CodeBlock(code: "distance3D", codeColor: .cTeal),
                                     CodeBlock(code: "(position1: ", codeColor: .black),
                                     CodeBlock(animated: vertexPos1_position1Animated, code: "vertex", codeColor: .black, replacedCode: vertexString),
                                     CodeBlock(code: ", position2: ", codeColor: .black),
@@ -339,7 +339,7 @@ struct AngleWalkThrough: View {
                                 active: currentCodeLine == 16, blocks: [
                                     CodeBlock(code: "    let ", codeColor: .cMagenta),
                                     CodeBlock(code: "vertexToPosition2 = ", codeColor: .black),
-                                    CodeBlock(code: "distanceFormula3D", codeColor: .cTeal),
+                                    CodeBlock(code: "distance3D", codeColor: .cTeal),
                                     CodeBlock(code: "(position1: ", codeColor: .black),
                                     CodeBlock(animated: vertexPos2_position1Animated, code: "vertex", codeColor: .black, replacedCode: vertexString),
                                     CodeBlock(code: ", position2: ", codeColor: .black),
@@ -492,8 +492,8 @@ struct AngleWalkThrough: View {
             self.dotProductZString = hasError ? "Error" : "\(Int(zProduct.rounded()))"
             
             
-            let vertexToPosition1 = distanceFormula3D(position1: vertexValue, position2: position1Value)
-            let vertexToPosition2 = distanceFormula3D(position1: vertexValue, position2: position2Value)
+            let vertexToPosition1 = distance3D(position1: vertexValue, position2: position1Value)
+            let vertexToPosition2 = distance3D(position1: vertexValue, position2: position2Value)
             let cosineOfAngle = dotProduct / (vertexToPosition1 * vertexToPosition2)
             
             self.dotProductResult = hasError ? "Error" : "\(Int(dotProduct))"
@@ -590,7 +590,7 @@ struct AngleWalkThrough: View {
     }
 }
 
-func distanceFormula3D(position1: Value, position2: Value) -> Number {
+func distance3D(position1: Value, position2: Value) -> Number {
     let xDifference = position1.x - position2.x
     let yDifference = position1.y - position2.y
     let zDifference = position1.z - position2.z

@@ -42,7 +42,7 @@
 		<key>vertex</key>
 		<dict>
 			<key>Definition</key>
-			<string>The point where the rays meet to form an angle</string>
+			<string>The point where the line segments meet to form an angle</string>
 		</dict>
 		<key>Darwin</key>
 		<dict>

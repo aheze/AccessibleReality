@@ -32,7 +32,7 @@ To make it work for 3D points, all we need to do is add a section for the `z` co
 
  Let's make the 3D Distance Formula in Swift! We'll put it in a [function](glossary://function) so that we can reuse it easily. It will take in 2 [parameters](glossary://parameter), one for the starting position and one for the ending, and `return` the resulting distance when done.
  
- * Note: Built-in functions
+ * Note:
      We'll use [Foundation](glossary://Foundation)'s `pow(_:_:)` function, which raises numbers to a power. For example:
      - `pow(3, 2)` raises `3` to the power of `2` — equals `9`
      - `pow(4, 3)` raises `4` to the power of `3` — equals `64`
@@ -56,7 +56,7 @@ cameraNode.color = UIColor.darkGray
 cameraNode.position = slider2Value
 sceneView.scene?.addNode(cameraNode)
 //#-end-hidden-code
-func distanceFormula3D(position1: Value, position2: Value) -> Number {
+func distance3D(position1: Value, position2: Value) -> Number {
     //#-code-completion(everything, hide)
     //#-code-completion(identifier, show, position1, position2)
     let xDifference = position1.x - /*#-editable-code X coordinate*/<#T##Value#>/*#-end-editable-code*/.x
@@ -72,7 +72,7 @@ func distanceFormula3D(position1: Value, position2: Value) -> Number {
 }
     
 // Call the function here!
-let distance = distanceFormula3D(position1: cubeNode.position, position2: cameraNode.position)
+let distance = distance3D(position1: cubeNode.position, position2: cameraNode.position)
 //#-hidden-code
 return (cubeNode, cameraNode)
 }
