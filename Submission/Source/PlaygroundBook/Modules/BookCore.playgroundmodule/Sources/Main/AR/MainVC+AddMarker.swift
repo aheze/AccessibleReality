@@ -33,7 +33,6 @@ extension MainViewController {
             let box = SCNBox(width: distance, height: height, length: height, chamferRadius: 0)
             let node = SCNNode(geometry: box)
             node.name = "BoxNode"
-            node.addAudioPlayer(getAudioPlayer(filename: "Calm.mp3"))
             
             let cubeColor = color.withAlphaComponent(0.8) /// make partially transparent because it encompasses the detected object
             let colorMaterial = SCNMaterial()
