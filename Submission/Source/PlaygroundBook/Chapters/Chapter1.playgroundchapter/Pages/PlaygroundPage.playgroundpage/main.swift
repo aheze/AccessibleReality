@@ -38,7 +38,7 @@ import PlaygroundSupport
  ## Credits
  - YOLO v3-Tiny neural network by Joseph Redmon and Ali Farhadi (MIT License)
  - All other code, images, and music created by myself
- - This playground is [open-source on GitHub](https://github.com/aheze/AccessibleReality)
+
  
  ## References
  - [MathsIsFun.com](https://www.mathsisfun.com/algebra/vectors-dot-product.html)
