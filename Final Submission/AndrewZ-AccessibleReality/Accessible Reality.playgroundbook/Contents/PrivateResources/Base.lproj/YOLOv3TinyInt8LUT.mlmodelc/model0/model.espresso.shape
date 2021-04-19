@@ -1,0 +1,538 @@
+{
+  "layer_shapes" : {
+    "batchnorm_4_output" : {
+      "k" : 256,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "batchnorm_8_output" : {
+      "k" : 512,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "raw_confidence" : {
+      "k" : 2535,
+      "w" : 1,
+      "n" : 1,
+      "h" : 80
+    },
+    "batchnorm_1_output" : {
+      "k" : 32,
+      "w" : 208,
+      "n" : 1,
+      "h" : 208
+    },
+    "l0_logit_conf_sp" : {
+      "k" : 1,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l1_confprobs_sp" : {
+      "k" : 80,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_raw_rel_wh_sp" : {
+      "k" : 2,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l1_wh" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "l1_c_anchors" : {
+      "k" : 6,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "leaky_re_lu_1_output" : {
+      "k" : 16,
+      "w" : 416,
+      "n" : 1,
+      "h" : 416
+    },
+    "l1_ymap_sp_pre" : {
+      "k" : 3,
+      "w" : 676,
+      "n" : 1,
+      "h" : 85
+    },
+    "leaky_re_lu_2_output" : {
+      "k" : 32,
+      "w" : 208,
+      "n" : 1,
+      "h" : 208
+    },
+    "leaky_re_lu_4_output" : {
+      "k" : 128,
+      "w" : 52,
+      "n" : 1,
+      "h" : 52
+    },
+    "l0_xy_offset" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "l0_scores_sp" : {
+      "k" : 80,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_confprobs_transposed" : {
+      "k" : 80,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "l0_rel_wh_sp" : {
+      "k" : 2,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_raw_rel_xy_sp" : {
+      "k" : 2,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "leaky_re_lu_3_output" : {
+      "k" : 64,
+      "w" : 104,
+      "n" : 1,
+      "h" : 104
+    },
+    "leaky_re_lu_5_output" : {
+      "k" : 256,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l0_conf_tiled_sp" : {
+      "k" : 80,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_rel_xy_sp" : {
+      "k" : 2,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "batchnorm_11_output" : {
+      "k" : 256,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l1_raw_confidence" : {
+      "k" : 2028,
+      "w" : 1,
+      "n" : 1,
+      "h" : 80
+    },
+    "max_pooling2d_4_output" : {
+      "k" : 128,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l0_probs_sp" : {
+      "k" : 80,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_constant_xy" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "leaky_re_lu_6_output" : {
+      "k" : 512,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l0_rel_xy" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "l1_raw_coordinates" : {
+      "k" : 2028,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "l0_wh_pre" : {
+      "k" : 6,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_confprobs_transposed" : {
+      "k" : 80,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "l0_xy" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "l1_wh_offset" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "leaky_re_lu_7_output" : {
+      "k" : 1024,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "layer0Boxes" : {
+      "k" : 255,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "layer1Boxes" : {
+      "k" : 255,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l0_raw_coordinates_constant_in_scale" : {
+      "k" : 507,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "l0_rel_wh" : {
+      "k" : 6,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_probs_sp" : {
+      "k" : 80,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "leaky_re_lu_11_output" : {
+      "k" : 256,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l1_raw_rel_wh_sp" : {
+      "k" : 2,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "max_pooling2d_1_output" : {
+      "k" : 16,
+      "w" : 208,
+      "n" : 1,
+      "h" : 208
+    },
+    "l1_xy" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "leaky_re_lu_8_output" : {
+      "k" : 256,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_boxes_out" : {
+      "k" : 2028,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "l0_raw_confidence" : {
+      "k" : 507,
+      "w" : 1,
+      "n" : 1,
+      "h" : 80
+    },
+    "max_pooling2d_5_output" : {
+      "k" : 256,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_rel_xy" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "l0_c_anchors" : {
+      "k" : 6,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_wh_pre" : {
+      "k" : 6,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "leaky_re_lu_9_output" : {
+      "k" : 512,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_logit_conf_sp" : {
+      "k" : 1,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l1_raw_rel_xy_sp" : {
+      "k" : 2,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l1_rel_wh" : {
+      "k" : 6,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l1_conf_sp" : {
+      "k" : 1,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_conf_sp" : {
+      "k" : 1,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "l1_conf_tiled_sp" : {
+      "k" : 80,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "leaky_re_lu_10_output" : {
+      "k" : 128,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_ymap_sp" : {
+      "k" : 85,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_ymap_sp" : {
+      "k" : 85,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    },
+    "batchnorm_10_output" : {
+      "k" : 128,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_xy_offset" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "max_pooling2d_6_output" : {
+      "k" : 512,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_rel_wh_sp" : {
+      "k" : 2,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l1_constant_xy" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "l1_rel_xy_sp" : {
+      "k" : 2,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_boxes_out_transposed" : {
+      "k" : 4,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "max_pooling2d_2_output" : {
+      "k" : 32,
+      "w" : 104,
+      "n" : 1,
+      "h" : 104
+    },
+    "raw_coordinates" : {
+      "k" : 2535,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "image" : {
+      "k" : 3,
+      "w" : 416,
+      "n" : 1,
+      "h" : 416
+    },
+    "l1_scores_sp" : {
+      "k" : 80,
+      "w" : 676,
+      "n" : 1,
+      "h" : 3
+    },
+    "l0_ymap_sp_pre" : {
+      "k" : 3,
+      "w" : 169,
+      "n" : 1,
+      "h" : 85
+    },
+    "up_sampling2d_1_output" : {
+      "k" : 128,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "l0_boxes_out" : {
+      "k" : 507,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "l0_wh_offset" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "l1_boxes_out_transposed" : {
+      "k" : 4,
+      "w" : 1,
+      "n" : 1,
+      "h" : 2028
+    },
+    "l0_raw_coordinates" : {
+      "k" : 507,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "max_pooling2d_3_output" : {
+      "k" : 64,
+      "w" : 52,
+      "n" : 1,
+      "h" : 52
+    },
+    "batchnorm_5_output" : {
+      "k" : 512,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l1_raw_coordinates_constant_in_scale" : {
+      "k" : 2028,
+      "w" : 1,
+      "n" : 1,
+      "h" : 4
+    },
+    "batchnorm_2_output" : {
+      "k" : 64,
+      "w" : 104,
+      "n" : 1,
+      "h" : 104
+    },
+    "concatenate_1_output" : {
+      "k" : 384,
+      "w" : 26,
+      "n" : 1,
+      "h" : 26
+    },
+    "batchnorm_6_output" : {
+      "k" : 1024,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "l0_wh" : {
+      "k" : 2,
+      "w" : 1,
+      "n" : 1,
+      "h" : 507
+    },
+    "batchnorm_3_output" : {
+      "k" : 128,
+      "w" : 52,
+      "n" : 1,
+      "h" : 52
+    },
+    "batchnorm_7_output" : {
+      "k" : 256,
+      "w" : 13,
+      "n" : 1,
+      "h" : 13
+    },
+    "batchnorm_0_output" : {
+      "k" : 16,
+      "w" : 416,
+      "n" : 1,
+      "h" : 416
+    },
+    "l0_confprobs_sp" : {
+      "k" : 80,
+      "w" : 169,
+      "n" : 1,
+      "h" : 3
+    }
+  }
+}
