@@ -1,19 +1,19 @@
 ![Accessible Reality](GitHub/Header.png)
 
-### My WWDC21 Swift Student Challenge submission
+## My WWDC21 Swift Student Challenge submission
 I made a playground book that teaches you the basics of ARKit through interactive lessons. It covers positioning, hit-testing, and how to calculate relationships between objects. In the end, it combines all these concepts into an app: A navigation aid for those who are visually impaired.
 
-### Screenshots
+## Screenshots
 
 Intro | Positioning | Distances | Angles | Completed App
 --- | --- | --- | --- | ---
 [![](GitHub/Screenshots/Thumb-Gallery.PNG)](GitHub/Screenshots/Thumb-Gallery.PNG) | [![](GitHub/Screenshots/Thumb-Positioning.PNG)](GitHub/Screenshots/Positioning.PNG) | [![](GitHub/Screenshots/Thumb-Distance.PNG)](GitHub/Screenshots/Distance.PNG) | [![](GitHub/Screenshots/Thumb-Angle.PNG)](GitHub/Screenshots/Angle.PNG) | [![](GitHub/Screenshots/Thumb-Completed.PNG)](GitHub/Screenshots/Completed.PNG)
 [![](GitHub/Screenshots/Thumb-Intro.PNG)](GitHub/Screenshots/Intro.PNG) | [![](GitHub/Screenshots/Thumb-Positioning-run.PNG)](GitHub/Screenshots/Positioning-run.PNG) | [![](GitHub/Screenshots/Thumb-Distance-run.PNG)](GitHub/Screenshots/Distance-run.PNG) | [![](GitHub/Screenshots/Thumb-Angle-run.PNG)](GitHub/Screenshots/Angle-run.PNG) | [![](GitHub/Screenshots/Thumb-Completed-run.PNG)](GitHub/Screenshots/Completed-run.PNG)
 
-### Want to make your own playground book?
+## Want to make your own playground book?
 For me, making a playground book was much harder than a regular Xcode project. Here's some tips that I picked up along the way.
 
-#### Development
+### Development
 - Instead of dragging files into the project, create them locally (<kbd>Command</kbd> + <kbd>N</kbd>), them copy over the contents. Whenever I dragged in a file, I got a "There was a problem running this page" error.
 - Use ARKit instead of RealityKit. The camera preview works, but I was never able to see my objects in the scene.
 - Pre-compile ML models if possible. See [this article](https://heartbeat.fritz.ai/how-to-run-and-test-core-ml-models-in-swift-playgrounds-8e4b4f9cf676) for details.
@@ -22,8 +22,9 @@ For me, making a playground book was much harder than a regular Xcode project. H
 
 <img src="GitHub/RequiredCapabilities.png" height="150" alt="RequiredCapabilities (Array) at Root Key including Item 0 (String) set to `arkit`">
 
+<br>
 
-#### Storyboards
+### Storyboards
 - Every time you make changes in the storyboard, clean the project (<kbd>Shift</kbd> + <kbd>Command</kbd> + <kbd>K</kbd>), otherwise your changes won't show
 - The Assistant editor doesn't work, so you need to manually add a new editor using the ![](GitHub/NewEditor.png) buttons
 - For any views or view controllers that you put in the storyboard, make sure that the class has the `@objc(BookCore_YOURCLASSNAME)` tag. For example:
@@ -37,9 +38,9 @@ Then, in the storyboard, your custom class should look like this:
 
 Make sure the **Module** is set to `None` and **Inherit Module From Target** is unchecked.
 
+<br>
 
-
-#### Debugging
+### Debugging
 
 - To avoid the "There was a problem running this page" error, **turn on Authoring Debug Mode in the Settings app**. This gives you the full stack trace! If only I knew this earlier... I was commenting out lines of code until the error went away, AirDropping to my iPad every time. Go upvote [their answer on Stack Overflow](https://stackoverflow.com/a/67076862/14351818) *now*.
 - You can get the playground page's current text, including the user-modified code, with `PlaygroundPage.current.text`. Put the below code in `viewDidLoad` to see what it is (for testing purposes).
