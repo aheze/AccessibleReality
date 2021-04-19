@@ -22,9 +22,7 @@ For me, making a playground book was much harder than a regular Xcode project. H
 - To change the name of the playground, edit the `BuildSettings.xcconfig` file
 - You might need to add required capabilities for in the `Manifest.plist` file, for example `arkit`. [See here](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequireddevicecapabilities) for the possible values.
 
-<img src="GitHub/RequiredCapabilities.png" height="150" alt="RequiredCapabilities (Array) at Root Key including Item 0 (String) set to `arkit`">
-
-<br>
+<kbd><img src="GitHub/RequiredCapabilities.png" height="150" alt="RequiredCapabilities (Array) at Root Key including Item 0 (String) set to `arkit`"></kbd>
 
 ### Storyboards
 - Every time you make changes in the storyboard, clean the project (<kbd>Shift</kbd> + <kbd>Command</kbd> + <kbd>K</kbd>), otherwise your changes won't show
@@ -34,13 +32,10 @@ For me, making a playground book was much harder than a regular Xcode project. H
 @objc(BookCore_SceneViewWrapper)
 class SceneViewWrapper: UIView { }
 ```
-Then, in the storyboard, your custom class should look like this: 
+Then, in the storyboard, make sure **Module** is set to `None` and **Inherit Module From Target** is unchecked. Your custom class should look like this: 
 
-<img src="GitHub/CustomClass.png" width="200" alt="Custom Class set to BookCore_SceneViewWrapper, with Module None and Inherit Module From Target unchecked">
+<kbd><img src="GitHub/CustomClass.png" width="200" alt="Custom Class set to BookCore_SceneViewWrapper, with Module None and Inherit Module From Target unchecked"></kbd>
 
-Make sure the **Module** is set to `None` and **Inherit Module From Target** is unchecked.
-
-<br>
 
 ### Debugging
 - To avoid the "There was a problem running this page" error, **turn on Authoring Debug Mode in the Settings app**. This gives you the full stack trace! If only I knew this earlier... I was commenting out lines of code until the error went away, AirDropping to my iPad every time. Go upvote [their answer on Stack Overflow](https://stackoverflow.com/a/67076862/14351818) *now*.
@@ -61,8 +56,6 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
     label.text = text /// show the text
 }
 ```
-
-<br>
 
 ### Get Help
 I probably wouldn't have finished if not for these.
