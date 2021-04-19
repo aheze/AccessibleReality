@@ -48,7 +48,7 @@ public class TwoViewController: UIViewController, PlaygroundLiveViewMessageHandl
     override public func viewDidLoad() {
         super.viewDidLoad()
         isLive ? setupLiveView() : setupMainView()
-        sceneViewWrapper.positionZ = 5        
+        sceneViewWrapper.positionZ = 5
     }
     
     func setupLiveView() {
