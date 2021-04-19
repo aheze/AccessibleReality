@@ -60,7 +60,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 ```
 
 ### Get Help
-I probably wouldn't have finished if not for these.
+I probably wouldn't have finished if not for these resources.
 - [Swift Discord server](https://discord.gg/zemPCtxE)
 - [Apple Developer Forums](https://developer.apple.com/forums/)
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/swift)
