@@ -5,6 +5,8 @@ I made a playground book that teaches you the basics of ARKit through interactiv
 
 **Status:** Submitted
 
+**Try it out:** [Download link](https://github.com/aheze/AccessibleReality/releases/download/v1.0/Accessible.Reality.playgroundbook.zip)
+
 ## Screenshots
 
 Intro | Positioning | Distances | Angles | Completed App
