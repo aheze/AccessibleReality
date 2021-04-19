@@ -31,7 +31,7 @@ Let's start by making sense of [ARKit](glossary://ARKit)'s coordinate system. At
  - ![Green arrow pointing up](yArrow) Y is up
  - ![Blue arrow pointing left](zArrow) Z is left
  
- Each object is called a `Node` and contains several properties, including `position` (x, y, z). For example, here's the code for the red cube in the live view:
+ Each object is called a `Node` and contains several properties, including `position` (x, y, z). For example, here's the code for the red cube in the Live View:
  
      let cubeNode = Node()
      cubeNode.shape = .cube
@@ -46,7 +46,7 @@ Let's start by making sense of [ARKit](glossary://ARKit)'s coordinate system. At
  
  Sometimes we want to convert on-screen coordinates (x, y) into ARKit coordinates (x, y, z). To do this, we can use "Hit-Testing."
  
- How does this work? Imagine an invisible beam of light that fires from your screen, into the ARKit scene, and *hitting* the 3D [coordinate plane](glossary://coordinate%20plane). ARKit will tell you the exact point (x, y, z) where the collision happened!
+ How does this work? Imagine an invisible beam of light that fires from your screen, into the ARKit scene, and hitting the 3D [coordinate plane](glossary://coordinate%20plane). ARKit will tell you the exact point (x, y, z) where the collision happened!
  
  Below, customize how the `Node` looks, and use the `hitTest(at:)` function's [return value](glossary://return%20value) to set its position.
 */

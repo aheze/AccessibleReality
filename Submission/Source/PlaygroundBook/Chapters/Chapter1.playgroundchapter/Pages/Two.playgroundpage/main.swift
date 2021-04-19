@@ -26,7 +26,7 @@ To make it work for 3D points, all we need to do is add a section for the `z` co
  
  ![d=√((x₂-x₁)²+(y₂-y₁)²+(z₂-z₁)²)](DistanceFormula3D)
  
- In the completed project, we'll use this to show the user how far they are from a node — coordinates in ARKit are so accurate that we can rely on them for real-life distances.
+ In the completed project, we'll use this to show the user how far away they are from a node — coordinates in ARKit are so accurate that we can rely on them for real-life distances.
 
  Let's code the 3D Distance Formula in Swift! We'll put it in a [function](glossary://function) so that we can reuse it easily. It will take in 2 [parameters](glossary://parameter), one for the starting position and one for the ending, and `return` the resulting distance when done.
  

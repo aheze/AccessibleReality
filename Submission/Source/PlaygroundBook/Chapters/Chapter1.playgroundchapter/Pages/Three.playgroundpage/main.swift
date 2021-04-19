@@ -16,17 +16,17 @@ import PlaygroundSupport
  **Lesson 3**
  # Amazing Angles
  
-For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the last lesson will be very useful for tracking the user's surroundings. However, while they'll know how far they are from a node, they won't know its direction.
+For the last lesson in this playground, we'll visit the world of angles! The distance formula that we covered in the previous lesson lets the user know how far away they are from a node, but not their direction.
  
- This is where angles come in. If the app showed the *angle* between the device's direction and the node, the distance would make a lot more sense.
+ This is where angles come in. If the app showed the *angle* between the device's direction and the node, the distance would be even more useful.
  
  ![Diagram showing the device 30 degrees 128 cm away from a node](AngleDiagram)
  
-Try playing with the sliders in the Live View! You'll notice a blue sphere that sticks to the camera at a fixed distance (tap the ![Question mark icon](QuestionMark) to see the code that does this). We can think of the desired angle as the angle between the sphere and cube, with the [vertex](glossary://vertex) at the camera.
+Try playing with the sliders in the Live View! You'll notice a blue sphere that sticks to the camera at a fixed distance (tap ![Question mark icon](QuestionMark) to see the code that does this). We can think of the desired angle as the angle between the cube and sphere, with the [vertex](glossary://vertex) at the camera.
  
  ![Diagram showing the camera (V), cube node (1), and sphere node (2)](AnglePositionsDiagram)
  
-Now, let's use the [dot product](glossary://dot%20product) to find that angle! We can calculate this in 2 ways: by using the cosine and the line segment lengths, or with the `x` and `y` coordinates of the nodes (relative to the vertex).
+Now, let's use the [dot product](glossary://dot%20product) to find that angle! We can calculate this in 2 ways: by using the cosine and line segment lengths, or with the `x` and `y` coordinates of the nodes (relative to the vertex).
  
  ![](DotProductsDiagram)
  

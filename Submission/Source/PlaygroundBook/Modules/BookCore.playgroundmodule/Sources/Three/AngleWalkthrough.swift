@@ -503,7 +503,7 @@ struct AngleWalkThrough: View {
             if cosineOfAngle.isNaN {
                 self.cosineOfAngleString = hasError ? "Error" : "Nan"
             } else {
-                self.cosineOfAngleString = hasError ? "Error" : "\(Int(cosineOfAngle.rounded()))"
+                self.cosineOfAngleString = hasError ? "Error" : String(format: "%.2f", cosineOfAngle)
             }
             
             
