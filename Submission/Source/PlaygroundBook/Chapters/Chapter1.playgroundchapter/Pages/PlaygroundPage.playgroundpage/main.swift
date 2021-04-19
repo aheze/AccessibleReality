@@ -15,9 +15,9 @@ import PlaygroundSupport
  **The End**
  # The Completed App
  
- You’ve made it to the end of the playground — well done! Here’s the navigation app that makes use of what we learned. Tap **Run My Code** to try it out!
+ You’ve made it to the end of the playground — well done! Here’s the navigation-aid app that makes use of what we learned. Tap **Run My Code** to try it out!
  
- Place nodes in real life using the [Hit-Test](glossary://Hit-Test) button, and use them to mark places that might be dangerous, like the top of the stairs. Then, let the app guide you with [distances](glossary://3D%20Distance%20Formula) and [angles](glossary://3D%20Angle%20Equation).
+ Add nodes in real life using the [Hit-Test](glossary://Hit-Test) button, and use them to mark places that might be dangerous, like the top of the stairs. Then, let the app guide you with [distances](glossary://3D%20Distance%20Formula) and [angles](glossary://3D%20Angle%20Equation).
  
  * Experiment:
      ![Sideways iPad icon](MLOrientationRect) ML object detection, with [YOLO v3-Tiny](glossary://YOLO%20v3-Tiny)! Tap this icon to set the processing orientation, and the app will then announce what it detects.

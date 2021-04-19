@@ -301,7 +301,7 @@ struct WalkThrough: View {
                     if let hasErrorLiteral = hasErrorLiteral {
                         showResult?(false, "Hmm… not quite. \"\(hasErrorLiteral)\" might not be correct.", "")
                     } else {
-                        showResult?(true, "Congratulations! \n\nYou got \(distanceResult)cm, which is the correct distance! \n\n[**Next Page**](@next)", distanceResult)
+                        showResult?(true, "Congratulations! \n\nYou got **\(distanceResult)cm**, which is the correct distance! \n\n[**Next Page**](@next)", distanceResult)
                     }
                 }
             ]

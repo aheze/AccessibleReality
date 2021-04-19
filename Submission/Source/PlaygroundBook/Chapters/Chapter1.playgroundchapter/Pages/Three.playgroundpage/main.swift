@@ -26,7 +26,7 @@ Try playing with the sliders in the Live View! You'll notice a blue sphere that 
  
  ![Diagram showing the camera (V), cube node (1), and sphere node (2)](AnglePositionsDiagram)
  
-Now, let's use the [dot product](glossary://dot%20product) to find that angle! We can calculate this in 2 ways: by using the cosine and line segment lengths, or with the `x` and `y` coordinates of the nodes (relative to the vertex).
+Now, let's use the [dot product](glossary://dot%20product) to find that angle! We can calculate this in 2 ways: by using the cosine and line segment lengths, or with the `xyz` coordinates of the nodes (relative to the vertex).
  
  ![](DotProductsDiagram)
  
