@@ -15,7 +15,7 @@ Intro | Positioning | Distances | Angles | Completed App
 [![](GitHub/Screenshots/Thumb-Intro.PNG)](GitHub/Screenshots/Intro.PNG) | [![](GitHub/Screenshots/Thumb-Positioning-run.PNG)](GitHub/Screenshots/Positioning-run.PNG) | [![](GitHub/Screenshots/Thumb-Distance-run.PNG)](GitHub/Screenshots/Distance-run.PNG) | [![](GitHub/Screenshots/Thumb-Angle-run.PNG)](GitHub/Screenshots/Angle-run.PNG) | [![](GitHub/Screenshots/Thumb-Completed-run.PNG)](GitHub/Screenshots/Completed-run.PNG)
 
 ## Want to make your own playground book?
-For me, making a playground book was much harder than a regular Xcode project. Here's some tips that I picked up along the way.
+For me, making a playground book was much harder than a regular Xcode project. Here's some tips and tricks that I picked up along the way.
 
 ### Development
 - Instead of dragging files into the project, create them locally (<kbd>Command</kbd> + <kbd>N</kbd>), then copy over the contents. Whenever I dragged in a file, I got a "There was a problem running this page" error.
