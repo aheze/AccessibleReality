@@ -38,7 +38,7 @@ For me, making a playground book was much harder than a regular Xcode project. H
 @objc(BookCore_SceneViewWrapper)
 class SceneViewWrapper: UIView { }
 ```
-Then, in the storyboard, make sure **Module** is set to `None` and **Inherit Module From Target** is unchecked. Your custom class should look like this: 
+Then, in the storyboard, for the **class** put `BookCore_YOURCLASSNAME`. Make sure **Module** is set to `None` and **Inherit Module From Target** is unchecked. Your custom class should look like this: 
 
 <kbd><img src="GitHub/CustomClass.png" width="200" alt="Custom Class set to BookCore_SceneViewWrapper, with Module None and Inherit Module From Target unchecked"></kbd>
 
