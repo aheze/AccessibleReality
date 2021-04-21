@@ -1,6 +1,6 @@
 ![Accessible Reality](GitHub/Header.png)
 
-[![YouTube Link](GitHub/YouTubeVideo.png)](https://www.youtube.com/watch?v=BH2HONBJiF0)
+[![YouTube Link](GitHub/VideoThumbnail.png)](https://www.youtube.com/watch?v=BH2HONBJiF0)
 
 ## My WWDC21 Swift Student Challenge submission
 I made a playground book that teaches you the basics of ARKit through interactive lessons. It covers positioning, hit-testing, and how to calculate relationships between objects. In the end, it combines all these concepts into an app: A navigation aid for those who are visually impaired.
