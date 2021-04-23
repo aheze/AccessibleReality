@@ -18,21 +18,21 @@ Intro | Positioning | Distances | Angles | Completed App
 [![](GitHub/Screenshots/Thumb-Gallery.PNG)](GitHub/Screenshots/Thumb-Gallery.PNG) | [![](GitHub/Screenshots/Thumb-Positioning.PNG)](GitHub/Screenshots/Positioning.PNG) | [![](GitHub/Screenshots/Thumb-Distance.PNG)](GitHub/Screenshots/Distance.PNG) | [![](GitHub/Screenshots/Thumb-Angle.PNG)](GitHub/Screenshots/Angle.PNG) | [![](GitHub/Screenshots/Thumb-Completed.PNG)](GitHub/Screenshots/Completed.PNG)
 [![](GitHub/Screenshots/Thumb-Intro.PNG)](GitHub/Screenshots/Intro.PNG) | [![](GitHub/Screenshots/Thumb-Positioning-run.PNG)](GitHub/Screenshots/Positioning-run.PNG) | [![](GitHub/Screenshots/Thumb-Distance-run.PNG)](GitHub/Screenshots/Distance-run.PNG) | [![](GitHub/Screenshots/Thumb-Angle-run.PNG)](GitHub/Screenshots/Angle-run.PNG) | [![](GitHub/Screenshots/Thumb-Completed-run.PNG)](GitHub/Screenshots/Completed-run.PNG)
 
-## Want to make your own playground book?
-For me, making a playground book was much harder than a regular Xcode project. Here's some tips and tricks that I picked up along the way.
+## Tips and Tricks
+Want to make your own playground book? Here's some tips and tricks that I picked up while making mine.
 
 ### Development
 - Instead of dragging files into the project, create them locally (<kbd>Command</kbd> + <kbd>N</kbd>), then copy over the contents. Whenever I dragged in a file, I got a "There was a problem running this page" error.
 - Use ARKit instead of RealityKit. The camera preview works, but I was never able to see my objects in the scene.
 - Pre-compile ML models if possible. See [this article](https://heartbeat.fritz.ai/how-to-run-and-test-core-ml-models-in-swift-playgrounds-8e4b4f9cf676) for details.
 - To change the name of the playground, edit the `BuildSettings.xcconfig` file
-- You might need to add required capabilities for in the `Manifest.plist` file, for example `arkit`. [See here](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequireddevicecapabilities) for the possible values.
+- You might need to add required capabilities in the `Manifest.plist` file, for example `arkit`. [See here](https://developer.apple.com/documentation/bundleresources/information_property_list/uirequireddevicecapabilities) for the possible values.
 
 <kbd><img src="GitHub/RequiredCapabilities.png" height="150" alt="RequiredCapabilities (Array) at Root Key including Item 0 (String) set to `arkit`"></kbd>
 
 ### Storyboards
 - Every time you make changes in the storyboard, clean the project (<kbd>Shift</kbd> + <kbd>Command</kbd> + <kbd>K</kbd>), otherwise your changes won't show
-- The Assistant editor doesn't work, so you need to manually add a new editor using the ![](GitHub/NewEditor.png) buttons
+- The Assistant editor doesn't work, so you need to manually add a new editor using the ![](GitHub/NewEditor.png) button
 - For any views or view controllers that you put in the storyboard, make sure that the class has the `@objc(BookCore_YOURCLASSNAME)` tag. For example:
 ```swift
 @objc(BookCore_SceneViewWrapper)
