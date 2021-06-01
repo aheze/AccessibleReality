@@ -5,11 +5,11 @@
 ## My WWDC21 Swift Student Challenge submission
 I made a playground book that teaches you the basics of ARKit through interactive lessons. It covers positioning, hit-testing, and how to calculate relationships between objects. In the end, it combines all these concepts into an app: A navigation aid for those who are visually impaired.
 
-**Status:** Submitted
+**Status:** Accepted LETS GOOOOOOOOOOOOO!!!!
 
 **Try it out:** [Download link](https://github.com/aheze/AccessibleReality/releases/download/v1.0/Accessible.Reality.playgroundbook.zip)
 
-**See other 2021 submissions!** [wwdc/2021](https://github.com/wwdc/2021)
+**See other 2021 submissions!** [wwdc/2021](https://github.com/wwdc/2021) congrats everyone!
 
 ## Screenshots
 
